@@ -9,6 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  screenshot:
+  pdf:
+  printing:
 
 dev_dependencies:
   flutter_test:
