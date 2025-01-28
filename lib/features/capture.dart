@@ -8,12 +8,23 @@ import 'package:printing/printing.dart';
 import 'package:screenshot/screenshot.dart';
 
 /// スクリーンショット撮影を行う
-Future<void> captureScreenshot(BuildContext context, ScreenshotController controller) async {
+Future<void> captureScreenshot(BuildContext context, ScreenshotController controller, Widget widget) async {
   try {
     // 現在の画面をキャプチャ
     // WARNING: HTML Renderer だと以下の例外が発生する
     // DartError: Unsupported operation: toImage is not supported on the Web
-    controller.capture(delay: Duration(milliseconds: 10)).then((Uint8List? capturedImage) async {
+    controller
+        .captureFromLongWidget(
+      InheritedTheme.captureAll(
+        context,
+        Material(
+          child: widget,
+        ),
+      ),
+      delay: Duration(milliseconds: 100),
+      context: context,
+    )
+        .then((Uint8List? capturedImage) async {
       if (!context.mounted) return;
       showDialog(
         useSafeArea: false,
