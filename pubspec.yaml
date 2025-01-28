@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_native_splash:
 
 dev_dependencies:
   flutter_test:
@@ -19,3 +20,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: "assets/images/splash-logo.png"
