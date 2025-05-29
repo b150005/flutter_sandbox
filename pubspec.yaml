@@ -1,9 +1,12 @@
+# https://dart.dev/tools/pub/pubspec
 name: flutter_sandbox
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
+  # Dart SDK version
+  # https://dart.dev/get-dart/archive
   sdk: ^3.8.0
 
 dependencies:
@@ -11,9 +14,10 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
+  flutter_lints:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  pedantic_mono:
 
 flutter:
   uses-material-design: true
