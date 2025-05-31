@@ -10,6 +10,20 @@ environment:
   sdk: ^3.8.0
 
 dependencies:
+  cloud_firestore:
+  cloud_functions:
+  firebase_analytics:
+  firebase_app_check:
+  firebase_app_installations:
+  firebase_auth:
+  firebase_core:
+  firebase_crashlytics:
+  firebase_data_connect:
+  firebase_database:
+  firebase_in_app_messaging:
+  firebase_performance:
+  firebase_remote_config:
+  firebase_storage:
   flutter:
     sdk: flutter
 

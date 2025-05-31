@@ -1,0 +1,80 @@
+{
+  // IntelliSense を使用して利用可能な属性を学べます。
+  // 既存の属性の説明をホバーして表示します。
+  // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "[Native] development - debug",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "args": [
+        "--dart-define-from-file=lib/core/config/env/development.env",
+        "--enable-impeller",
+      ],
+    },
+    {
+      "name": "[Native] staging - debug",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "args": [
+        "--dart-define-from-file=lib/core/config/env/staging.env",
+        "--enable-impeller",
+      ],
+    },
+    {
+      "name": "[Native] production - debug",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "args": [
+        "--dart-define-from-file=lib/core/config/env/production.env",
+        "--enable-impeller",
+      ],
+    },
+    {
+      "name": "[Web] development - debug",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "args": [
+        "--dart-define-from-file=lib/core/config/env/development.env",
+        "--wasm",
+        "--web-port=5500",
+        "--device-id=chrome",
+      ],
+    },
+    {
+      "name": "[Web] staging - debug",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "args": [
+        "--dart-define-from-file=lib/core/config/env/staging.env",
+        "--wasm",
+        "--web-port=6600",
+        "--device-id=chrome",
+      ],
+    },
+    {
+      "name": "[Web] production - debug",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "args": [
+        "--dart-define-from-file=lib/core/config/env/production.env",
+        "--wasm",
+        "--web-port=7700",
+        "--device-id=chrome",
+      ],
+    },
+  ]
+}

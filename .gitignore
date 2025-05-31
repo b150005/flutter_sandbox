@@ -43,3 +43,14 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Firebase related
+firebase_options*.dart
+.firebaserc
+firebase.json
+google-services.json
+GoogleService-Info.plist
+
+# Environment variables
+*.env
+Env.xcconfig
