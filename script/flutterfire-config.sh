@@ -61,7 +61,6 @@ flutterfire config \
   --macos-out="macos/$CAPITALIZED_ENVIRONMENT/GoogleService-Info.plist" \
   --android-package-name="$PACKAGE_NAME" \
   --android-out="android/app/src/$ENVIRONMENT/google-services.json"
-;;
 
 echo ""
 echo "🎉 FlutterFire configuration completed!"
