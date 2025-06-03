@@ -107,7 +107,7 @@ android {
     namespace = "com.example.flutter_sandbox"
     compileSdk = flutter.compileSdkVersion
     // ndkVersion = flutter.ndkVersion
-    ndkVersion = getEnvProperty("androidNdkVersion")
+    ndkVersion = getEnvProperty("ANDROID_NDK_VERSION")
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -121,19 +121,19 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         // applicationId = "com.example.flutter_sandbox"
-        applicationId = getEnvProperty("applicationId");
+        applicationId = getEnvProperty("APP_ID");
 
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         // TIP: Firebase Authentication SDK の最小要件に合わせる
         // minSdk = flutter.minSdkVersion
-        minSdk = getEnvProperty("androidMinSdkVersion").toInt()
+        minSdk = getEnvProperty("ANDROID_MIN_SDK").toInt()
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
 
         // Specify application name
-        resValue("string", "app_name", getEnvProperty("applicationName"))
+        resValue("string", "app_name", getEnvProperty("APP_NAME"))
     }
 
     buildTypes {
@@ -155,7 +155,7 @@ tasks.register("copyGoogleServicesJson") {
     description = "Copy google-services.json based on environment"
 
     doLast {
-        val environment = getEnvProperty("appEnv")
+        val environment = getEnvProperty("APP_ENV")
         val source = file("src/$environment/google-services.json")
         val target = file("google-services.json")
 
@@ -175,7 +175,7 @@ tasks.register("copyEnvironmentResources") {
     description = "Copy res/ directory based on environment (for app icons, etc.)"
 
     doLast {
-        val environment = getEnvProperty("appEnv")
+        val environment = getEnvProperty("APP_ENV")
         val source = file("src/$environment/res")
         val target = file("src/main/res")
 

@@ -34,7 +34,7 @@ Xcode で以下のファイルを開き、環境ごとに表示する App Icon(`
 iOS: `Runner/Assets.xcassets`
 macOS: `Runner/Resources/Assets.xcassets`
 
-Xcode の Runner > TARGETS > Runner > Build Settings > Asset Catalog Compiler - Options > Primary App Icon Set Name を `AppIcon-$(capitalizedAppEnv)` に変更してください。
+Xcode の Runner > TARGETS > Runner > Build Settings > Asset Catalog Compiler - Options > Primary App Icon Set Name を `AppIcon-$(CAPITALIZED_APP_ENV)` に変更してください。
 
 #### Web
 
@@ -163,11 +163,11 @@ ${SRCROOT}/Script/env-to-xcconfig.sh
 - `ios/Runner/Info.plist`
 - `macos/Runner/Info.plist`
 
-- `Bundle display name`:, `$(applicationName)`
-- (iOS のみ)`Bundle name`: `$(applicationName)`
+- `Bundle display name`:, `$(APP_NAME)`
+- (iOS のみ)`Bundle name`: `$(APP_NAME)`
 
-Xcode の Runner > TARGETS > Runner > Build Settings > Packaging > Product Bundle Identifier を `$(bundleId)` に変更してください。
-(macOS のみ) Runner > TARGETS > Runner > Build Settings > Packaging > Product Name を `$(applicationName)` に変更してください。
+Xcode の Runner > TARGETS > Runner > Build Settings > Packaging > Product Bundle Identifier を `$(BUNDLE_ID)` に変更してください。
+(macOS のみ) Runner > TARGETS > Runner > Build Settings > Packaging > Product Name を `$(APP_NAME)` に変更してください。
 
 #### GoogleService-Info.plist のコピー
 

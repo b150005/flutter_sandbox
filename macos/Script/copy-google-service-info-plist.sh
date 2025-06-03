@@ -2,20 +2,20 @@
 
 # This script copies the appropriate Firebase configuration file based on the environment.
 
-# Check if capitalizedAppEnv is available
-if [ -z "${capitalizedAppEnv}" ]; then
-    echo "Error: Environment variable 'capitalizedAppEnv' is not set."
+# Check if CAPITALIZED_APP_ENV is available
+if [ -z "${CAPITALIZED_APP_ENV}" ]; then
+    echo "Error: Environment variable 'CAPITALIZED_APP_ENV' is not set."
     echo "Make sure the xcconfig file containing dart-define variables is properly included in the build configuration."
     echo "Expected variables should be generated from --dart-define-from-file."
     exit 1
 fi
 
 # Define source and destination paths
-SOURCE_FILE="${SRCROOT}/${capitalizedAppEnv}/GoogleService-Info.plist"
+SOURCE_FILE="${SRCROOT}/${CAPITALIZED_APP_ENV}/GoogleService-Info.plist"
 DEST_FILE="${SRCROOT}/Runner/GoogleService-Info.plist"
 
 echo "🔍 Firebase Configuration Setup:"
-echo "   Environment: ${capitalizedAppEnv}"
+echo "   Environment: ${CAPITALIZED_APP_ENV}"
 echo "   Source: ${SOURCE_FILE}"
 echo "   Destination: ${DEST_FILE}"
 
@@ -23,7 +23,7 @@ echo "   Destination: ${DEST_FILE}"
 if [ ! -f "${SOURCE_FILE}" ]; then
     echo "❌ Error: Firebase configuration file not found."
     echo "   Expected location: ${SOURCE_FILE}"
-    echo "   Please ensure the GoogleService-Info.plist file exists for the '${capitalizedAppEnv}' environment."
+    echo "   Please ensure the GoogleService-Info.plist file exists for the '${CAPITALIZED_APP_ENV}' environment."
     echo ""
     echo "   Directory structure should be:"
     echo "   ${SRCROOT}/"
@@ -45,7 +45,7 @@ fi
 
 # Copy the file
 if cp "${SOURCE_FILE}" "${DEST_FILE}"; then
-    echo "✅ Successfully copied Firebase configuration for ${capitalizedAppEnv} environment"
+    echo "✅ Successfully copied Firebase configuration for ${CAPITALIZED_APP_ENV} environment"
     echo "   ${SOURCE_FILE} -> ${DEST_FILE}"
 else
     echo "❌ Error: Failed to copy Firebase configuration file."
