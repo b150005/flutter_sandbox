@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build-web-development",
+      "type": "shell",
+      "command": "./script/prebuild-web.sh",
+      "args": [
+        "lib/core/config/env/development.env"
+      ]
+    },
+    {
+      "label": "build-web-staging",
+      "type": "shell",
+      "command": "./script/prebuild-web.sh",
+      "args": [
+        "lib/core/config/env/staging.env"
+      ]
+    },
+    {
+      "label": "build-web-production",
+      "type": "shell",
+      "command": "./script/prebuild-web.sh",
+      "args": [
+        "lib/core/config/env/production.env"
+      ]
+    },
+  ]
+}

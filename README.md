@@ -10,6 +10,48 @@ A new Flutter project.
 
 ## 🧱 Firebase の導入 + 環境別構築
 
+### アプリのアイコンを設定する
+
+#### Android
+
+`android/app/src/<environment>/res/` ディレクトリで環境ごとに表示するアイコンを設定してください。
+
+- `mipmap-hdpi`
+- `mipmap-mdpi`
+- `mipmap-xhdpi`
+- `mipmap-xxhdpi`
+- `mipmap-xxxhdpi`
+
+- `ic_launcher_background.png`
+- `ic_launcher_foreground.png`
+- `ic_launcher_monochrome.png`
+- `ic_launcher.png`
+
+#### iOS/macOS
+
+Xcode で以下のファイルを開き、環境ごとに表示する App Icon(`AppIcon-<Environment>`) を設定してください。
+
+iOS: `Runner/Assets.xcassets`
+macOS: `Runner/Resources/Assets.xcassets`
+
+Xcode の Runner > TARGETS > Runner > Build Settings > Asset Catalog Compiler - Options > Primary App Icon Set Name を `AppIcon-$(capitalizedAppEnv)` に変更してください。
+
+#### Web
+
+`lib/web/` ディレクトリに以下のアイコンを配置してください。
+
+- `favicon-<environment>.ico`
+- `icons/apple-touch-icon-<environment>.png`
+- `icons/icon-192-<environment>.png`
+- `icons/icon-192-maskable-<environment>.png`
+- `icons/icon-512-<environment>.png`
+- `icons/icon-512-maskable-<environment>.png`
+- `icons/ogp-<environment>.png`
+
+また、 [ウェブアプリマニフェスト](https://developer.mozilla.org/ja/docs/Web/Progressive_web_apps/Manifest) も環境別に配置してください。
+
+- `manifest-<environment>.json`
+
 ### Firebase プロジェクトを作成する
 
 - [Firebase コンソール](https://console.firebase.google.com/)

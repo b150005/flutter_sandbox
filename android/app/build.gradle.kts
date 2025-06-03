@@ -167,8 +167,36 @@ tasks.register("copyGoogleServicesJson") {
     }
 }
 
+// 環境ごとの res/ ディレクトリをコピーする
+tasks.register("copyEnvironmentResources") {
+    group = "android"
+    description = "Copy res/ directory based on environment (for app icons, etc.)"
+
+    doLast {
+        val environment = getEnvProperty("appEnv")
+        val source = file("src/$environment/res")
+        val target = file("src/main/res")
+
+        if (source.exists()) {
+            if (target.exists()) {
+                target.deleteRecursively()
+                println("🗑️ Deleted existing src/main/res directory")
+            }
+
+            source.copyRecursively(target, overwrite = true)
+            println("✅ Copied res/ directory from $environment environment")
+            println("   Source: ${source.absolutePath}")
+            println("   Target: ${target.absolutePath}")
+        } else {
+            println("⚠️ Warning: res/ directory not found for $environment environment")
+            println("   Expected location: ${source.absolutePath}")
+            println("   Skipping resource copy...")
+        }
+    }
+}
+
 tasks.named("preBuild") {
-    dependsOn("copyGoogleServicesJson")
+    dependsOn("copyGoogleServicesJson", "copyEnvironmentResources")
 }
 
 tasks.named("clean") {
@@ -177,6 +205,12 @@ tasks.named("clean") {
         if (targetFile.exists()) {
             targetFile.delete()
             println("🧹 Cleaned google-services.json")
+        }
+
+        val targetDir = file("src/main/res")
+        if (targetDir.exists()) {
+            targetDir.deleteRecursively()
+            println("🧹 Cleaned src/main/res directory")
         }
     }
 }

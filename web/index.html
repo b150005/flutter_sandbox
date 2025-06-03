@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -17,22 +18,66 @@
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
+
+  <!-- SEO -->
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="description" content="Flutter Sandbox for testing and development">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="flutter_sandbox">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Sandbox Dev">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon-development.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/x-icon" href="favicon-development.ico" />
 
-  <title>flutter_sandbox</title>
-  <link rel="manifest" href="manifest.json">
+  <!-- Open Graph Protocol -->
+  <meta property="og:title" content="Sandbox Dev">
+  <meta property="og:description" content="Flutter Sandbox for testing and development">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="icons/ogp-development.png">
+  <meta property="og:site_name" content="Sandbox Dev">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Sandbox Dev">
+  <meta name="twitter:description" content="Flutter Sandbox for testing and development">
+  <meta name="twitter:image" content="icons/ogp-development.png">
+
+  <!-- Web application manifest -->
+  <link rel="manifest" href="manifest-development.json">
+  <meta name="theme-color" content="{{themeColor}}">
+  <meta name="msapplication-TileColor" content="{{themeColor}}">
+
+  <script>
+    // 実行時に baseUrl を設定
+    document.addEventListener('DOMContentLoaded', function () {
+      const baseUrl = window.location.origin;
+
+      const ogUrl = document.querySelector('meta[property="og:url"]');
+      if (ogUrl) {
+        ogUrl.setAttribute('content', baseUrl);
+      }
+
+      const ogImage = document.querySelector('meta[property="og:image"]');
+      if (ogImage) {
+        const imagePath = ogImage.getAttribute('content');
+        ogImage.setAttribute('content', baseUrl + '/' + imagePath);
+      }
+
+      const twitterImage = document.querySelector('meta[name="twitter:image"]');
+      if (twitterImage) {
+        const imagePath = twitterImage.getAttribute('content');
+        twitterImage.setAttribute('content', baseUrl + '/' + imagePath);
+      }
+    });
+  </script>
 </head>
+
 <body>
-  <script src="flutter_bootstrap.js" async></script>
+  <script src="flutter_bootstrap.js" defer></script>
 </body>
+
 </html>

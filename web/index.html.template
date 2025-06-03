@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+
+  <!-- SEO -->
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="{{description}}">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="{{applicationName}}">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon-{{appEnv}}.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon-{{appEnv}}.ico" />
+
+  <!-- Open Graph Protocol -->
+  <meta property="og:title" content="{{applicationName}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="icons/ogp-{{appEnv}}.png">
+  <meta property="og:site_name" content="{{applicationName}}">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{applicationName}}">
+  <meta name="twitter:description" content="{{description}}">
+  <meta name="twitter:image" content="icons/ogp-{{appEnv}}.png">
+
+  <!-- Web application manifest -->
+  <link rel="manifest" href="manifest-{{appEnv}}.json">
+  <meta name="theme-color" content="{{themeColor}}">
+  <meta name="msapplication-TileColor" content="{{themeColor}}">
+
+  <script>
+    // 実行時に baseUrl を設定
+    document.addEventListener('DOMContentLoaded', function () {
+      const baseUrl = window.location.origin;
+
+      const ogUrl = document.querySelector('meta[property="og:url"]');
+      if (ogUrl) {
+        ogUrl.setAttribute('content', baseUrl);
+      }
+
+      const ogImage = document.querySelector('meta[property="og:image"]');
+      if (ogImage) {
+        const imagePath = ogImage.getAttribute('content');
+        ogImage.setAttribute('content', baseUrl + '/' + imagePath);
+      }
+
+      const twitterImage = document.querySelector('meta[name="twitter:image"]');
+      if (twitterImage) {
+        const imagePath = twitterImage.getAttribute('content');
+        twitterImage.setAttribute('content', baseUrl + '/' + imagePath);
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <script src="flutter_bootstrap.js" defer></script>
+</body>
+
+</html>

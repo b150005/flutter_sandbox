@@ -43,6 +43,7 @@
       "request": "launch",
       "program": "lib/main.dart",
       "flutterMode": "debug",
+      "preLaunchTask": "build-web-development",
       "args": [
         "--dart-define-from-file=lib/core/config/env/development.env",
         "--wasm",
@@ -56,6 +57,7 @@
       "request": "launch",
       "program": "lib/main.dart",
       "flutterMode": "debug",
+      "preLaunchTask": "build-web-staging",
       "args": [
         "--dart-define-from-file=lib/core/config/env/staging.env",
         "--wasm",
@@ -69,6 +71,7 @@
       "request": "launch",
       "program": "lib/main.dart",
       "flutterMode": "debug",
+      "preLaunchTask": "build-web-production",
       "args": [
         "--dart-define-from-file=lib/core/config/env/production.env",
         "--wasm",
