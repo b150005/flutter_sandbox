@@ -27,6 +27,9 @@ dependencies:
   firebase_storage:
   flutter:
     sdk: flutter
+  logger:
+  logging:
+  stack_trace:
 
 dev_dependencies:
   build_runner:
