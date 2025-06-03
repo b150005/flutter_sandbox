@@ -116,7 +116,7 @@ Learn more about using this file and next steps from the documentation:
 - `ios/Runner/Info.plist`
 - `macos/Runner/Info.plist`
 
-### .env ファイルの編集
+### 🚧 .env ファイルの編集
 
 ```txt
 placeholder=placeholder

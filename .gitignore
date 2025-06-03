@@ -54,3 +54,7 @@ GoogleService-Info.plist
 # Environment variables
 *.env
 Env.xcconfig
+
+# Code generation tools related
+*.g.dart
+*.freezed.dart
