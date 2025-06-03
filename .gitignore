@@ -46,6 +46,7 @@ app.*.map.json
 
 # Firebase related
 firebase_options*.dart
+!firebase_options.dart
 .firebaserc
 firebase.json
 google-services.json
