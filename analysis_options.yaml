@@ -1,2 +1,11 @@
+# https://dart.dev/tools/analysis
+
 # https://pub.dev/packages/pedantic_mono
 include: package:pedantic_mono/analysis_options.yaml
+
+linter:
+  rules:
+    - prefer_relative_imports
+
+formatter:
+  page_width: 80
