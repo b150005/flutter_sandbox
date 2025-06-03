@@ -1,0 +1,8 @@
+{
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.dart": "$(capture).g.dart, $(capture).freezed.dart",
+    "pubspec.yaml": "pubspec.lock, pubspec_overrides.yaml",
+    "package.json": "bun.lock"
+  }
+}
