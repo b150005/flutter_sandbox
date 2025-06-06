@@ -80,5 +80,11 @@
         "--device-id=chrome",
       ],
     },
+    {
+      "name": "Cloud Functions - debug",
+      "type": "node",
+      "request": "attach",
+      "port": 9229
+    }
   ]
 }
