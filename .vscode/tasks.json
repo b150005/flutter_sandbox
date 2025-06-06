@@ -5,6 +5,23 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "compile-cloud-functions",
+      "type": "shell",
+      "command": "bun",
+      "args": [
+        "run",
+        "build"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/firebase/functions"
+      },
+      "presentation": {
+        "showReuseMessage": false,
+        "clear": true,
+        "close": true
+      }
+    },
+    {
       "label": "pre-build-web-development",
       "type": "shell",
       "command": "${workspaceFolder}/script/prebuild-web.sh",
@@ -116,9 +133,18 @@
       }
     },
     {
+      "label": "pre-launch-native-development",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "compile-cloud-functions",
+        "firebase-emulators",
+      ]
+    },
+    {
       "label": "pre-launch-web-development",
       "dependsOrder": "sequence",
       "dependsOn": [
+        "compile-cloud-functions",
         "firebase-emulators",
         "pre-build-web-development"
       ]
@@ -128,7 +154,6 @@
       "dependsOrder": "sequence",
       "dependsOn": [
         "flutterfire-config-staging",
-        "firebase-emulators",
         "pre-build-web-staging"
       ]
     },
@@ -137,7 +162,6 @@
       "dependsOrder": "sequence",
       "dependsOn": [
         "flutterfire-config-production",
-        "firebase-emulators",
         "pre-build-web-production"
       ]
     },

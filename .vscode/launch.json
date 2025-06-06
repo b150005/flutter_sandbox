@@ -10,7 +10,7 @@
       "request": "launch",
       "program": "lib/main.dart",
       "flutterMode": "debug",
-      "preLaunchTask": "firebase-emulators",
+      "preLaunchTask": "pre-launch-native-development",
       "args": [
         "--dart-define-from-file=lib/core/config/env/development.env",
         "--enable-impeller",
@@ -22,7 +22,6 @@
       "request": "launch",
       "program": "lib/main.dart",
       "flutterMode": "debug",
-      "preLaunchTask": "firebase-emulators",
       "args": [
         "--dart-define-from-file=lib/core/config/env/staging.env",
         "--enable-impeller",
@@ -34,7 +33,6 @@
       "request": "launch",
       "program": "lib/main.dart",
       "flutterMode": "debug",
-      "preLaunchTask": "firebase-emulators",
       "args": [
         "--dart-define-from-file=lib/core/config/env/production.env",
         "--enable-impeller",
