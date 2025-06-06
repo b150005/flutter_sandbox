@@ -53,8 +53,6 @@ GoogleService-Info.plist
 firebase/data_connect/.dataconnect/schema/
 firebase/data_connect/.local/pgliteData
 firebase/local_emulator/*
-!firebase/local_emulator/.gitkeep
-
 
 # Environment variables
 *.env
