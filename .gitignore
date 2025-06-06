@@ -45,12 +45,16 @@ app.*.map.json
 /android/app/release
 
 # Firebase related
+.firebase/
 firebase_options*.dart
 !firebase_options.dart
-.firebaserc
-firebase.json
 google-services.json
 GoogleService-Info.plist
+firebase/data_connect/.dataconnect/schema/
+firebase/data_connect/.local/pgliteData
+firebase/local_emulator/*
+!firebase/local_emulator/.gitkeep
+
 
 # Environment variables
 *.env
@@ -59,3 +63,4 @@ Env.xcconfig
 # Code generation tools related
 *.g.dart
 *.freezed.dart
+lib/core/config/l10n/app_localizations*.dart

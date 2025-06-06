@@ -1,0 +1,153 @@
+{
+	"@@locale": "en",
+
+	"errorServiceTemporarilyUnavailable": "Service is temporarily unavailable. Please try again later.",
+	"@errorServiceTemporarilyUnavailable": {
+		"description": "Error shown when the service is temporarily unavailable"
+	},
+
+	"errorPleaseRestartApp": "Something went wrong. Please restart the app and try again.",
+	"@errorPleaseRestartApp": {
+		"description": "Error shown when the app needs to be restarted"
+	},
+
+	"errorInvalidEmailOrPassword": "Invalid email or password. Please try again.",
+	"@errorInvalidEmailOrPassword": {
+		"description": "Error shown when login credentials are incorrect"
+	},
+
+	"errorInvalidEmailFormat": "Please enter a valid email address.",
+	"@errorInvalidEmailFormat": {
+		"description": "Error shown when email format is invalid"
+	},
+
+	"errorAccountDisabled": "This account has been disabled. Please contact support.",
+	"@errorAccountDisabled": {
+		"description": "Error shown when user account is disabled"
+	},
+
+	"errorTooManyAttempts": "Too many unsuccessful attempts. Please try again later.",
+	"@errorTooManyAttempts": {
+		"description": "Error shown when too many login attempts have been made"
+	},
+
+	"errorAuthenticationFailed": "Authentication failed. Please try again.",
+	"@errorAuthenticationFailed": {
+		"description": "Generic error for authentication failures"
+	},
+
+	"errorGeneralPleaseRetry": "Something went wrong. Please try again.",
+	"@errorGeneralPleaseRetry": {
+		"description": "Generic error with retry suggestion"
+	},
+
+	"errorNetworkConnection": "Network connection error. Please check your internet connection.",
+	"@errorNetworkConnection": {
+		"description": "Error shown when there's no internet connection"
+	},
+
+	"errorSessionExpired": "Your session has expired. Please sign in again.",
+	"@errorSessionExpired": {
+		"description": "Error shown when user session expires"
+	},
+
+	"errorWeakPassword": "Password is too weak. Please use at least 8 characters with letters, numbers, and symbols.",
+	"@errorWeakPassword": {
+		"description": "Error shown when password doesn't meet strength requirements"
+	},
+
+	"errorEmailAlreadyInUse": "This email is already registered. Please use a different email or try to sign in.",
+	"@errorEmailAlreadyInUse": {
+		"description": "Error shown when email is already registered during signup"
+	},
+
+	"errorRequiredField": "This field is required.",
+	"@errorRequiredField": {
+		"description": "Error shown for empty required fields"
+	},
+
+	"errorPasswordsDontMatch": "Passwords don't match. Please try again.",
+	"@errorPasswordsDontMatch": {
+		"description": "Error shown when password confirmation doesn't match"
+	},
+
+	"errorServerError": "Server error. Our team has been notified and is working on it.",
+	"@errorServerError": {
+		"description": "Error shown for server-side errors"
+	},
+
+	"errorPermissionDenied": "Permission denied. You don't have access to this feature.",
+	"@errorPermissionDenied": {
+		"description": "Error shown when user doesn't have necessary permissions"
+	},
+
+	"errorFileUpload": "Failed to upload file. Please try again.",
+	"@errorFileUpload": {
+		"description": "Error shown when file upload fails"
+	},
+
+	"errorFileSize": "File size exceeds the maximum limit.",
+	"@errorFileSize": {
+		"description": "Error shown when file is too large"
+	},
+
+	"errorInvalidOperation": "This operation cannot be performed right now.",
+	"@errorInvalidOperation": {
+		"description": "Error shown when operation is invalid in current context"
+	},
+
+	"errorLocationAccess": "Could not access your location. Please check your settings.",
+	"@errorLocationAccess": {
+		"description": "Error shown when location access is denied"
+	},
+
+	"errorDataLoading": "Failed to load data. Pull down to refresh.",
+	"@errorDataLoading": {
+		"description": "Error shown when data fails to load with refresh suggestion"
+	},
+
+	"errorFormValidation": "Please check the form for errors.",
+	"@errorFormValidation": {
+		"description": "General form validation error"
+	},
+
+	"successAccountCreated": "Account created successfully! Please verify your email.",
+	"@successAccountCreated": {
+		"description": "Success message after account creation"
+	},
+
+	"successPasswordReset": "Password reset email sent. Please check your inbox.",
+	"@successPasswordReset": {
+		"description": "Success message after password reset request"
+	},
+
+	"successProfileUpdated": "Profile updated successfully.",
+	"@successProfileUpdated": {
+		"description": "Success message after profile update"
+	},
+
+	"infoDataRefreshed": "Information updated.",
+	"@infoDataRefreshed": {
+		"description": "Information message when data is refreshed"
+	},
+
+	"infoVerificationEmailSent": "Verification email sent. Please check your inbox.",
+	"@infoVerificationEmailSent": {
+		"description": "Information about verification email being sent"
+	},
+
+	"home": "Home",
+	"@home": {
+		"description": "Label for the Home tab in NavigationBar and NavigationRail"
+	},
+
+	"sample": "Sample",
+	"@sample": {
+		"description": "Label for the Sample tab in NavigationBar and NavigationRail"
+	},
+
+	"settings": "Settings",
+	"@settings": {
+		"description": "Label for the Settings tab in NavigationBar and NavigationRail"
+	}
+}

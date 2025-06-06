@@ -129,8 +129,9 @@ final class Env implements EnvField {
   final String firebaseAndroidProjectId = instance.firebaseAndroidProjectId;
 
   @override
-  @EnviedField()
-  final String firebaseAndroidDatabaseUrl = instance.firebaseAndroidDatabaseUrl;
+  @EnviedField(optional: true)
+  final String? firebaseAndroidDatabaseUrl =
+      instance.firebaseAndroidDatabaseUrl;
 
   @override
   @EnviedField()
@@ -155,16 +156,16 @@ final class Env implements EnvField {
   final String firebaseIosProjectId = instance.firebaseIosProjectId;
 
   @override
-  @EnviedField()
-  final String firebaseIosDatabaseUrl = instance.firebaseIosDatabaseUrl;
+  @EnviedField(optional: true)
+  final String? firebaseIosDatabaseUrl = instance.firebaseIosDatabaseUrl;
 
   @override
   @EnviedField()
   final String firebaseIosStorageBucket = instance.firebaseIosStorageBucket;
 
   @override
-  @EnviedField()
-  final String firebaseIosClientId = instance.firebaseIosClientId;
+  @EnviedField(optional: true)
+  final String? firebaseIosClientId = instance.firebaseIosClientId;
 
   @override
   @EnviedField()
@@ -188,16 +189,16 @@ final class Env implements EnvField {
   final String firebaseMacosProjectId = instance.firebaseMacosProjectId;
 
   @override
-  @EnviedField()
-  final String firebaseMacosDatabaseUrl = instance.firebaseMacosDatabaseUrl;
+  @EnviedField(optional: true)
+  final String? firebaseMacosDatabaseUrl = instance.firebaseMacosDatabaseUrl;
 
   @override
   @EnviedField()
   final String firebaseMacosStorageBucket = instance.firebaseMacosStorageBucket;
 
   @override
-  @EnviedField()
-  final String firebaseMacosClientId = instance.firebaseMacosClientId;
+  @EnviedField(optional: true)
+  final String? firebaseMacosClientId = instance.firebaseMacosClientId;
 
   @override
   @EnviedField()
@@ -225,8 +226,9 @@ final class Env implements EnvField {
   final String firebaseWindowsAuthDomain = instance.firebaseWindowsAuthDomain;
 
   @override
-  @EnviedField()
-  final String firebaseWindowsDatabaseUrl = instance.firebaseWindowsDatabaseUrl;
+  @EnviedField(optional: true)
+  final String? firebaseWindowsDatabaseUrl =
+      instance.firebaseWindowsDatabaseUrl;
 
   @override
   @EnviedField()
@@ -237,4 +239,19 @@ final class Env implements EnvField {
   @EnviedField()
   final String firebaseWindowsMeasurementId =
       instance.firebaseWindowsMeasurementId;
+
+  @override
+  @EnviedField()
+  final String firebaseDataConnectLocation =
+      instance.firebaseDataConnectLocation;
+
+  @override
+  @EnviedField()
+  final String firebaseDataConnectConnector =
+      instance.firebaseDataConnectConnector;
+
+  @override
+  @EnviedField()
+  final String firebaseDataConnectServiceId =
+      instance.firebaseDataConnectServiceId;
 }

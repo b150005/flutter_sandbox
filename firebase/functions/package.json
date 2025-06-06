@@ -1,0 +1,32 @@
+{
+  "name": "functions",
+  "type": "module",
+  "engines": {
+    "node": "22"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "bun run build && firebase emulators:start --only functions",
+    "shell": "bun run build && firebase functions:shell",
+    "start": "bun run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log",
+    "lint-and-format": "biome check --write --diagnostic-level=error src/*",
+    "lint-and-format:ci": "biome ci --verbose --diagnostic-level=error src/*",
+    "secretlint": "secretlint --maskSecrets --secretlintignore .gitignore '**/*'"
+  },
+  "dependencies": {
+    "firebase-admin": "latest",
+    "firebase-functions": "latest"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "latest",
+    "@secretlint/secretlint-rule-preset-recommend": "latest",
+    "firebase-functions-test": "latest",
+    "secretlint": "latest",
+    "typescript": "latest"
+  },
+  "private": true
+}

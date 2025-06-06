@@ -1,0 +1,193 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "buildConfigurations": {
+          "src/development": {
+            "projectId": "flutter-sandbox-dev-b2067",
+            "appId": "1:861523525102:android:5ba5681ab1462a7b44a2ff",
+            "fileOutput": "android/app/src/development/google-services.json"
+          },
+          "src/staging": {
+            "projectId": "flutter-sandbox-stg",
+            "appId": "1:791220592838:android:f7f01a8ab9353b7d93f7c7",
+            "fileOutput": "android/app/src/staging/google-services.json"
+          },
+          "src/production": {
+            "projectId": "flutter-sandbox-ebfb7",
+            "appId": "1:284897165171:android:a4975b96d7da24d61a8f06",
+            "fileOutput": "android/app/src/production/google-services.json"
+          }
+        }
+      },
+      "ios": {
+        "buildConfigurations": {
+          "Debug": {
+            "projectId": "flutter-sandbox-dev-b2067",
+            "appId": "1:861523525102:ios:b00055ca638b51ee44a2ff",
+            "uploadDebugSymbols": true,
+            "fileOutput": "ios/Development/GoogleService-Info.plist"
+          },
+          "Development": {
+            "projectId": "flutter-sandbox-dev-b2067",
+            "appId": "1:861523525102:ios:b00055ca638b51ee44a2ff",
+            "uploadDebugSymbols": true,
+            "fileOutput": "ios/Development/GoogleService-Info.plist"
+          },
+          "Staging": {
+            "projectId": "flutter-sandbox-stg",
+            "appId": "1:791220592838:ios:0d128e6d3b171e2e93f7c7",
+            "uploadDebugSymbols": true,
+            "fileOutput": "ios/Staging/GoogleService-Info.plist"
+          },
+          "Production": {
+            "projectId": "flutter-sandbox-ebfb7",
+            "appId": "1:284897165171:ios:210fff84cbaaffb31a8f06",
+            "uploadDebugSymbols": true,
+            "fileOutput": "ios/Production/GoogleService-Info.plist"
+          }
+        }
+      },
+      "macos": {
+        "buildConfigurations": {
+          "Debug": {
+            "projectId": "flutter-sandbox-dev-b2067",
+            "appId": "1:861523525102:ios:b00055ca638b51ee44a2ff",
+            "uploadDebugSymbols": true,
+            "fileOutput": "macos/Development/GoogleService-Info.plist"
+          },
+          "Development": {
+            "projectId": "flutter-sandbox-dev-b2067",
+            "appId": "1:861523525102:ios:b00055ca638b51ee44a2ff",
+            "uploadDebugSymbols": true,
+            "fileOutput": "macos/Development/GoogleService-Info.plist"
+          },
+          "Staging": {
+            "projectId": "flutter-sandbox-dev-b2067",
+            "appId": "1:791220592838:ios:0d128e6d3b171e2e93f7c7",
+            "uploadDebugSymbols": true,
+            "fileOutput": "macos/Staging/GoogleService-Info.plist"
+          },
+          "Production": {
+            "projectId": "flutter-sandbox-dev-b2067",
+            "appId": "1:284897165171:ios:210fff84cbaaffb31a8f06",
+            "uploadDebugSymbols": true,
+            "fileOutput": "macos/Production/GoogleService-Info.plist"
+          }
+        }
+      },
+      "dart": {
+        "lib/core/config/firebase/firebase_options_development.dart": {
+          "projectId": "flutter-sandbox-dev-b2067",
+          "configurations": {
+            "android": "1:861523525102:android:5ba5681ab1462a7b44a2ff",
+            "ios": "1:861523525102:ios:b00055ca638b51ee44a2ff",
+            "macos": "1:861523525102:ios:b00055ca638b51ee44a2ff",
+            "web": "1:861523525102:web:1d9017abae930adb44a2ff",
+            "windows": "1:861523525102:web:8d4acd3b65ac54c444a2ff"
+          }
+        },
+        "lib/core/config/firebase/firebase_options_staging.dart": {
+          "projectId": "flutter-sandbox-stg",
+          "configurations": {
+            "android": "1:791220592838:android:f7f01a8ab9353b7d93f7c7",
+            "ios": "1:791220592838:ios:0d128e6d3b171e2e93f7c7",
+            "macos": "1:791220592838:ios:0d128e6d3b171e2e93f7c7",
+            "web": "1:791220592838:web:58e6fc7e982df70393f7c7",
+            "windows": "1:791220592838:web:153acb299715cd3d93f7c7"
+          }
+        },
+        "lib/core/config/firebase/firebase_options_production.dart": {
+          "projectId": "flutter-sandbox-ebfb7",
+          "configurations": {
+            "android": "1:284897165171:android:a4975b96d7da24d61a8f06",
+            "ios": "1:284897165171:ios:210fff84cbaaffb31a8f06",
+            "macos": "1:284897165171:ios:210fff84cbaaffb31a8f06",
+            "web": "1:284897165171:web:41f614b84a33b46c1a8f06",
+            "windows": "1:284897165171:web:526e9966ab5e0a811a8f06"
+          }
+        }
+      }
+    }
+  },
+  "emulators": {
+    "dataconnect": {
+      "dataDir": "firebase/data_connect/.local/pgliteData",
+      "port": 9399
+    },
+    "auth": {
+      "port": 9099
+    },
+    "functions": {
+      "port": 5001
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "database": {
+      "port": 9000
+    },
+    "hosting": {
+      "port": 5002
+    },
+    "pubsub": {
+      "port": 8085
+    },
+    "storage": {
+      "port": 9199
+    },
+    "eventarc": {
+      "port": 9299
+    },
+    "tasks": {
+      "port": 9499
+    },
+    "ui": {
+      "enabled": true,
+      "port": 4000
+    },
+    "singleProjectMode": true
+  },
+  "dataconnect": {
+    "source": "firebase/data_connect"
+  },
+  "firestore": {
+    "database": "(default)",
+    "rules": "firebase/firestore/firestore.rules",
+    "indexes": "firebase/firestore/firestore.indexes.json"
+  },
+  "functions": [
+    {
+      "source": "firebase/functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "predeploy": [
+        "bun --prefix \"$RESOURCE_DIR\" run build"
+      ]
+    }
+  ],
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  },
+  "storage": {
+    "rules": "firebase/storage/storage.rules"
+  },
+  "remoteconfig": {
+    "template": "firebase/remote_config/remoteconfig.template.json"
+  },
+  "extensions": {},
+  "database": {
+    "rules": "firebase/database/database.rules.json"
+  }
+}

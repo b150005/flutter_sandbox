@@ -1,0 +1,12 @@
+specVersion: "v1"
+serviceId: "flutter-sandbox"
+location: "asia-northeast1"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "fdcdb"
+      cloudSql:
+        instanceId: "flutter-sandbox-fdc"
+      # schemaValidation: "COMPATIBLE"
+connectorDirs: ["./connector"]

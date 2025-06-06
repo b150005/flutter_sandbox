@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "flutter-sandbox-dev-b2067",
+    "development": "flutter-sandbox-dev-b2067",
+    "staging": "flutter-sandbox-stg",
+    "production": "flutter-sandbox-ebfb7"
+  }
+}

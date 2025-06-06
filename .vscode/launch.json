@@ -10,6 +10,7 @@
       "request": "launch",
       "program": "lib/main.dart",
       "flutterMode": "debug",
+      "preLaunchTask": "firebase-emulators",
       "args": [
         "--dart-define-from-file=lib/core/config/env/development.env",
         "--enable-impeller",
@@ -21,6 +22,7 @@
       "request": "launch",
       "program": "lib/main.dart",
       "flutterMode": "debug",
+      "preLaunchTask": "firebase-emulators",
       "args": [
         "--dart-define-from-file=lib/core/config/env/staging.env",
         "--enable-impeller",
@@ -32,6 +34,7 @@
       "request": "launch",
       "program": "lib/main.dart",
       "flutterMode": "debug",
+      "preLaunchTask": "firebase-emulators",
       "args": [
         "--dart-define-from-file=lib/core/config/env/production.env",
         "--enable-impeller",
@@ -43,7 +46,7 @@
       "request": "launch",
       "program": "lib/main.dart",
       "flutterMode": "debug",
-      "preLaunchTask": "build-web-development",
+      "preLaunchTask": "pre-launch-web-development",
       "args": [
         "--dart-define-from-file=lib/core/config/env/development.env",
         "--wasm",
@@ -57,7 +60,7 @@
       "request": "launch",
       "program": "lib/main.dart",
       "flutterMode": "debug",
-      "preLaunchTask": "build-web-staging",
+      "preLaunchTask": "pre-launch-web-staging",
       "args": [
         "--dart-define-from-file=lib/core/config/env/staging.env",
         "--wasm",
@@ -71,7 +74,7 @@
       "request": "launch",
       "program": "lib/main.dart",
       "flutterMode": "debug",
-      "preLaunchTask": "build-web-production",
+      "preLaunchTask": "pre-launch-web-production",
       "args": [
         "--dart-define-from-file=lib/core/config/env/production.env",
         "--wasm",

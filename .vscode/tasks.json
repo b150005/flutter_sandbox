@@ -1,28 +1,144 @@
+/*
+  https://code.visualstudio.com/docs/debugtest/tasks
+*/
 {
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "build-web-development",
+      "label": "pre-build-web-development",
       "type": "shell",
-      "command": "./script/prebuild-web.sh",
+      "command": "${workspaceFolder}/script/prebuild-web.sh",
       "args": [
         "lib/core/config/env/development.env"
-      ]
+      ],
+      "presentation": {
+        "showReuseMessage": false,
+        "clear": true,
+        "close": true
+      }
     },
     {
-      "label": "build-web-staging",
+      "label": "pre-build-web-staging",
       "type": "shell",
-      "command": "./script/prebuild-web.sh",
+      "command": "${workspaceFolder}/script/prebuild-web.sh",
       "args": [
         "lib/core/config/env/staging.env"
+      ],
+      "presentation": {
+        "showReuseMessage": false,
+        "clear": true,
+        "close": true
+      }
+    },
+    {
+      "label": "pre-build-web-production",
+      "type": "shell",
+      "command": "${workspaceFolder}/script/prebuild-web.sh",
+      "args": [
+        "lib/core/config/env/production.env"
+      ],
+      "presentation": {
+        "showReuseMessage": false,
+        "clear": true,
+        "close": true
+      }
+    },
+    {
+      "label": "flutterfire-config-development",
+      "type": "shell",
+      "command": "${workspaceFolder}/script/flutterfire-config.sh",
+      "args": [
+        "dev"
+      ],
+      "presentation": {
+        "showReuseMessage": false,
+        "clear": true,
+        "close": true
+      }
+    },
+    {
+      "label": "flutterfire-config-staging",
+      "type": "shell",
+      "command": "${workspaceFolder}/script/flutterfire-config.sh",
+      "args": [
+        "stg"
+      ],
+      "presentation": {
+        "showReuseMessage": false,
+        "clear": true,
+        "close": true
+      }
+    },
+    {
+      "label": "flutterfire-config-production",
+      "type": "shell",
+      "command": "${workspaceFolder}/script/flutterfire-config.sh",
+      "args": [
+        "prod"
+      ],
+      "presentation": {
+        "showReuseMessage": false,
+        "clear": true,
+        "close": true
+      }
+    },
+    {
+      "label": "firebase-emulators",
+      "type": "shell",
+      "command": "firebase",
+      "args": [
+        "emulators:start",
+        "--import",
+        "${workspaceFolder}/firebase/local_emulator",
+        "--export-on-exit",
+        "-y"
+      ],
+      "isBackground": true,
+      "presentation": {
+        "focus": true,
+        "showReuseMessage": false,
+        "panel": "dedicated",
+        "clear": true,
+        "close": true
+      },
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "."
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Starting emulators",
+          "endsPattern": "All emulators ready"
+        }
+      },
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "pre-launch-web-development",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "firebase-emulators",
+        "pre-build-web-development"
       ]
     },
     {
-      "label": "build-web-production",
-      "type": "shell",
-      "command": "./script/prebuild-web.sh",
-      "args": [
-        "lib/core/config/env/production.env"
+      "label": "pre-launch-web-staging",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "flutterfire-config-staging",
+        "firebase-emulators",
+        "pre-build-web-staging"
+      ]
+    },
+    {
+      "label": "pre-launch-web-production",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "flutterfire-config-production",
+        "firebase-emulators",
+        "pre-build-web-production"
       ]
     },
   ]
