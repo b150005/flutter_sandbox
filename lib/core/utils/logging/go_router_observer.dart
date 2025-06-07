@@ -14,21 +14,23 @@ class GoRouterObserver extends NavigatorObserver {
     // );
 
     Logger.instance.t(
-      'Route pushed: ${previousRoute?.settings.name} => ${route.settings.name}',
+      '⏩ Route pushed: ${previousRoute?.settings.name}'
+      ' => ${route.settings.name}',
     );
   }
 
   @override
   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
     Logger.instance.t(
-      'Route popped: ${route.settings.name} => ${previousRoute?.settings.name}',
+      '⏪ Route popped: ${route.settings.name}'
+      ' => ${previousRoute?.settings.name}',
     );
   }
 
   @override
   void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) {
     Logger.instance.t(
-      'Route removed:'
+      '🗑️ Route removed:'
       ' ${route.settings.name} => ${previousRoute?.settings.name}',
     );
   }
@@ -36,7 +38,7 @@ class GoRouterObserver extends NavigatorObserver {
   @override
   void didReplace({Route<dynamic>? newRoute, Route<dynamic>? oldRoute}) {
     Logger.instance.t(
-      'Route replaced:'
+      '🔄 Route replaced:'
       ' ${oldRoute?.settings.name} => ${newRoute?.settings.name}',
     );
   }
@@ -44,7 +46,7 @@ class GoRouterObserver extends NavigatorObserver {
   @override
   void didChangeTop(Route<dynamic> topRoute, Route<dynamic>? previousTopRoute) {
     Logger.instance.t(
-      'Route top changed:'
+      '🔝 Route top changed:'
       ' ${previousTopRoute?.settings.name} => ${topRoute.settings.name}',
     );
   }
@@ -55,13 +57,13 @@ class GoRouterObserver extends NavigatorObserver {
     Route<dynamic>? previousRoute,
   ) {
     Logger.instance.t(
-      'User gesture started:'
+      '👆 User gesture started:'
       ' ${previousRoute?.settings.name} => ${route.settings.name}',
     );
   }
 
   @override
   void didStopUserGesture() {
-    Logger.instance.t('User gesture stopped');
+    Logger.instance.t('✋ User gesture stopped');
   }
 }
