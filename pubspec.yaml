@@ -31,10 +31,12 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   freezed_annotation:
+  go_router:
   hooks_riverpod: ^3.0.0-dev.15
   intl:
   logger:
   logging:
+  responsive_framework:
   riverpod_annotation: ^3.0.0-dev.15
   stack_trace:
 
@@ -46,6 +48,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed:
+  go_router_builder:
   pedantic_mono:
   riverpod_generator: ^3.0.0-dev.15
   riverpod_lint: ^3.0.0-dev.15

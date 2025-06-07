@@ -1,14 +1,20 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart' hide ScaffoldMessenger;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' hide ProviderObserver;
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:stack_trace/stack_trace.dart';
 
 import 'core/config/init/app_initializer.dart';
 import 'core/config/l10n/app_localizations.dart';
+import 'core/config/policy/design.dart';
+import 'core/routing/router.dart';
 import 'core/utils/exception/app_exception.dart';
+import 'core/utils/extension/nullable.dart';
 import 'core/utils/logging/log_message.dart';
 import 'core/utils/logging/logger.dart';
 import 'core/utils/logging/provider_observer.dart';
+import 'ui/core/ui/utils/scaffold_messenger.dart';
 
 void main() {
   Chain.capture(() {
@@ -30,7 +36,7 @@ void main() {
   });
 }
 
-class App extends StatelessWidget {
+class App extends ConsumerWidget {
   const App({super.key});
 
   static const Iterable<LocalizationsDelegate<dynamic>>
@@ -43,12 +49,43 @@ class App extends StatelessWidget {
 
   static const _supportedLocales = [Locale('en', 'US'), Locale('ja', 'JP')];
 
+  static const _breakpoints = [
+    Breakpoint(start: 0, end: 480, name: MOBILE),
+    Breakpoint(start: 481, end: 768, name: TABLET),
+    Breakpoint(start: 769, end: double.infinity, name: DESKTOP),
+  ];
+
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(body: Center(child: Text('Hello World!'))),
-      localizationsDelegates: _localizationsDelegates,
-      supportedLocales: _supportedLocales,
-    );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
+
+    return DesignPolicy.shouldUseCupertino
+        ? CupertinoApp.router(
+            // FIXME: CupertinoApp.key には割り当てない?
+            key: ScaffoldMessenger.key,
+            routerConfig: router,
+            builder: (context, child) => ResponsiveBreakpoints.builder(
+              child: child.orElse(
+                const Placeholder(),
+                objectName: 'CupertinoApp.router child',
+              ),
+              breakpoints: _breakpoints,
+            ),
+            localizationsDelegates: _localizationsDelegates,
+            supportedLocales: _supportedLocales,
+          )
+        : MaterialApp.router(
+            scaffoldMessengerKey: ScaffoldMessenger.key,
+            routerConfig: router,
+            builder: (context, child) => ResponsiveBreakpoints.builder(
+              child: child.orElse(
+                const Placeholder(),
+                objectName: 'MaterialApp.router child',
+              ),
+              breakpoints: _breakpoints,
+            ),
+            localizationsDelegates: _localizationsDelegates,
+            supportedLocales: _supportedLocales,
+          );
   }
 }
