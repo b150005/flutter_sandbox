@@ -3,9 +3,18 @@
 # https://pub.dev/packages/pedantic_mono
 include: package:pedantic_mono/analysis_options.yaml
 
+analyzer:
+  plugins:
+    # https://riverpod.dev/docs/introduction/getting_started#enabling-riverpod_lintcustom_lint
+    # enable riverpod_lint
+    - custom_lint
+
 linter:
   rules:
     - prefer_relative_imports
 
 formatter:
   page_width: 80
+
+custom_lint:
+  rules:
