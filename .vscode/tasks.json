@@ -107,8 +107,7 @@
         "emulators:start",
         "--import",
         "${workspaceFolder}/firebase/local_emulator",
-        "--export-on-exit",
-        "-y"
+        "--export-on-exit"
       ],
       "isBackground": true,
       "presentation": {
