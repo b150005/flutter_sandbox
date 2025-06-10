@@ -43,6 +43,8 @@ dependencies:
 
 dev_dependencies:
   build_runner:
+  # https://pub.dev/documentation/go_router/latest/topics/Type-safe%20routes-topic.html
+  build_verify:
   custom_lint:
   envied_generator:
   flutter_lints:
