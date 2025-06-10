@@ -418,3 +418,13 @@ Xcode の Runner > TARGETS > Runner > Build Phases > New Run Script Phase で以
 - `lib/core/config/l10n/arb/app_ja.arb`
 
 `flutter gen-l10n` コマンドを実行することで、 ARB → Dart ファイルに変換されます。
+
+# 📚 参考リポジトリ
+
+- [bizz84 / starter_architecture_flutter_firebase](https://github.com/bizz84/starter_architecture_flutter_firebase)
+- [swarajkumarsingh / flutter_boilerplate_project](https://github.com/swarajkumarsingh/flutter_boilerplate_project)
+- [mrusamamuzaffar / lets_chat](https://github.com/mrusamamuzaffar/lets_chat)
+- [AkshatRai-21 / HommieChat](https://github.com/AkshatRai-21/HommieChat)
+- [julienlebren / flutter_firebase_phone_auth_riverpod](https://github.com/julienlebren/flutter_firebase_phone_auth_riverpod)
+- [fireship-io / riverpod-firebase-demo](https://github.com/fireship-io/riverpod-firebase-demo)
+- [lucavenir / go_router_riverpod](https://github.com/lucavenir/go_router_riverpod)
