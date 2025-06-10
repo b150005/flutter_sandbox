@@ -1,5 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart' as hooks;
 import 'package:hooks_riverpod/misc.dart' show ProviderBase;
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'logger.dart';
 
@@ -7,7 +8,8 @@ class ProviderObserver extends hooks.ProviderObserver {
   @override
   void didAddProvider(hooks.ProviderObserverContext context, Object? value) {
     Logger.instance.t(
-      '🚀 ${_formatProvider(context.provider)} was initialized with $value',
+      '🚀 ${_formatProvider(context.provider)} was initialized'
+      ' with ${_formatValue(value)}',
     );
   }
 
@@ -24,7 +26,7 @@ class ProviderObserver extends hooks.ProviderObserver {
   ) {
     Logger.instance.t(
       '✅ ${_formatProvider(context.provider)} updated:'
-      ' $previousValue => $newValue',
+      ' ${_formatValue(previousValue)} => ${_formatValue(newValue)}',
     );
   }
 
@@ -35,7 +37,7 @@ class ProviderObserver extends hooks.ProviderObserver {
     StackTrace stackTrace,
   ) {
     Logger.instance.t(
-      '❌ ${_formatProvider(context.provider)} threw $error at $stackTrace',
+      '❌ ${_formatProvider(context.provider)} threw $error',
       error: error,
       stackTrace: stackTrace,
     );
@@ -81,7 +83,7 @@ class ProviderObserver extends hooks.ProviderObserver {
   ) {
     Logger.instance.t(
       '❌ ${_formatInvocation(mutation.invocation)} invoked by'
-      ' ${_formatProvider(context.provider)} threw $error at $stackTrace',
+      ' ${_formatProvider(context.provider)} threw $error',
       error: error,
       stackTrace: stackTrace,
     );
@@ -94,7 +96,7 @@ class ProviderObserver extends hooks.ProviderObserver {
     return '$name [${provider.runtimeType}]';
   }
 
-  /// ログ出力ように整形された Invocation の情報を取得する
+  /// ログ出力用に整形された Invocation の情報を取得する
   static String _formatInvocation(Invocation? invocation) {
     if (invocation == null) {
       return invocation.toString();
@@ -105,4 +107,10 @@ class ProviderObserver extends hooks.ProviderObserver {
 
     return '$method($args)';
   }
+
+  /// ログ出力用に整形された Object の情報を取得する
+  static String _formatValue(Object? object) => switch (object) {
+    AsyncError(:final error) => error.runtimeType.toString(),
+    _ => object.toString(),
+  };
 }
