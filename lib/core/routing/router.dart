@@ -49,8 +49,6 @@ class Router extends _$Router {
     required GoRouterState state,
     required Ref ref,
   }) {
-    inspect(state); // DEBUG:
-
     final uri = state.uri;
     final isLoggedIn = ref.watch(currentUserProvider) != null;
 
