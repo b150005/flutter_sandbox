@@ -17,9 +17,9 @@ import 'core/utils/logging/provider_observer.dart';
 import 'ui/core/ui/utils/scaffold_messenger.dart';
 
 void main() {
-  Chain.capture(() {
+  Chain.capture(() async {
     try {
-      AppInitializer.instance.initialize();
+      await AppInitializer.instance.initialize();
 
       runApp(
         ProviderScope(observers: [ProviderObserver()], child: const App()),
