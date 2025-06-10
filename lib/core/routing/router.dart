@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart' hide ScaffoldMessenger;
@@ -9,6 +10,7 @@ import '../../data/repositories/firebase/auth/auth_repository.dart';
 import '../../ui/core/ui/adaptive_scaffold.dart';
 import '../../ui/core/ui/utils/scaffold_messenger.dart';
 import '../utils/logging/go_router_observer.dart';
+import '../utils/riverpod/provider_change_notifier.dart';
 
 part 'router.g.dart';
 part 'routes/main_stateful_shell_route_data.dart';
@@ -31,34 +33,40 @@ class Router extends _$Router {
   @override
   GoRouter build() => GoRouter(
     routes: $appRoutes,
-    redirect: (context, state) => _redirect(context, state, ref),
+    redirect: (_, state) => _redirect(state: state, ref: ref),
+    refreshListenable: ProviderChangeNotifier(
+      ref: ref,
+      provider: authRepositoryProvider,
+    ),
     initialLocation: HomeScreenRoute.path,
     observers: [GoRouterObserver()],
     // TODO(b150005): GoRouterObserver が完成したら有効化する
     // debugLogDiagnostics: kDebugMode,
     navigatorKey: rootNavigatorKey,
   );
-}
 
-FutureOr<String?> _redirect(
-  BuildContext context,
-  GoRouterState state,
-  Ref ref,
-) {
-  inspect(state); // DEBUG:
+  FutureOr<String?> _redirect({
+    required GoRouterState state,
+    required Ref ref,
+  }) {
+    inspect(state); // DEBUG:
 
-  final path = state.uri.path;
-  final isLoggedIn = ref.watch(currentUserProvider) != null;
+    final path = state.uri.path;
+    final isLoggedIn = ref.watch(currentUserProvider) != null;
 
-  if (!isLoggedIn && _requiresAuth(path)) {}
+    // TODO(b150005): 未認証ユーザが要認証画面にアクセスした際のリダイレクトの実装
+    if (_requiresAuth(path) && !isLoggedIn) {}
 
-  return null;
-}
+    // TODO(b150005): 認証済ユーザがログイン画面にアクセスした際のリダイレクトの実装
 
-bool _requiresAuth(String path) {
-  const authRequiredPaths = [FirebaseScreenRoute.path];
+    return null;
+  }
 
-  return authRequiredPaths.any(
-    (authRequiredPath) => path.startsWith(authRequiredPath),
-  );
+  bool _requiresAuth(String path) {
+    const authRequiredPaths = [FirebaseScreenRoute.path];
+
+    return authRequiredPaths.any(
+      (authRequiredPath) => path.startsWith(authRequiredPath),
+    );
+  }
 }

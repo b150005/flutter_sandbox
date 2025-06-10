@@ -16,7 +16,7 @@ FirebaseAuth firebaseAuth(Ref ref) {
   return FirebaseAuth.instance;
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 User? currentUser(Ref ref) {
   return ref.watch(firebaseAuthProvider).currentUser;
 }
