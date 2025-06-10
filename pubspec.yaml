@@ -36,6 +36,7 @@ dependencies:
   intl:
   logger:
   logging:
+  multiple_result:
   responsive_framework:
   riverpod_annotation: ^3.0.0-dev.15
   stack_trace:
