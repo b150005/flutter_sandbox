@@ -51,22 +51,22 @@ class Router extends _$Router {
   }) {
     inspect(state); // DEBUG:
 
-    final path = state.uri.path;
+    final uri = state.uri;
     final isLoggedIn = ref.watch(currentUserProvider) != null;
 
     // TODO(b150005): 未認証ユーザが要認証画面にアクセスした際のリダイレクトの実装
-    if (_requiresAuth(path) && !isLoggedIn) {}
+    if (_requiresAuth(uri) && !isLoggedIn) {}
 
     // TODO(b150005): 認証済ユーザがログイン画面にアクセスした際のリダイレクトの実装
 
     return null;
   }
 
-  bool _requiresAuth(String path) {
+  bool _requiresAuth(Uri uri) {
     const authRequiredPaths = [FirebaseScreenRoute.path];
 
     return authRequiredPaths.any(
-      (authRequiredPath) => path.startsWith(authRequiredPath),
+      (authRequiredPath) => uri.path.startsWith(authRequiredPath),
     );
   }
 }
