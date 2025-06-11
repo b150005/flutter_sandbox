@@ -24,7 +24,7 @@
     {
       "label": "pre-build-web-development",
       "type": "shell",
-      "command": "${workspaceFolder}/script/prebuild-web.sh",
+      "command": "${workspaceFolder}/scripts/prebuild-web.sh",
       "args": [
         "lib/core/config/env/development.env"
       ],
@@ -37,7 +37,7 @@
     {
       "label": "pre-build-web-staging",
       "type": "shell",
-      "command": "${workspaceFolder}/script/prebuild-web.sh",
+      "command": "${workspaceFolder}/scripts/prebuild-web.sh",
       "args": [
         "lib/core/config/env/staging.env"
       ],
@@ -50,7 +50,7 @@
     {
       "label": "pre-build-web-production",
       "type": "shell",
-      "command": "${workspaceFolder}/script/prebuild-web.sh",
+      "command": "${workspaceFolder}/scripts/prebuild-web.sh",
       "args": [
         "lib/core/config/env/production.env"
       ],
@@ -63,7 +63,7 @@
     {
       "label": "flutterfire-config-development",
       "type": "shell",
-      "command": "${workspaceFolder}/script/flutterfire-config.sh",
+      "command": "${workspaceFolder}/scripts/flutterfire-config.sh",
       "args": [
         "dev"
       ],
@@ -76,7 +76,7 @@
     {
       "label": "flutterfire-config-staging",
       "type": "shell",
-      "command": "${workspaceFolder}/script/flutterfire-config.sh",
+      "command": "${workspaceFolder}/scripts/flutterfire-config.sh",
       "args": [
         "stg"
       ],
@@ -89,7 +89,7 @@
     {
       "label": "flutterfire-config-production",
       "type": "shell",
-      "command": "${workspaceFolder}/script/flutterfire-config.sh",
+      "command": "${workspaceFolder}/scripts/flutterfire-config.sh",
       "args": [
         "prod"
       ],

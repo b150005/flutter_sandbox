@@ -61,7 +61,7 @@ Xcode の Runner > TARGETS > Runner > Build Settings > Asset Catalog Compiler - 
 - [How to Setup Flutter & Firebase with Multiple Flavors using the FlutterFire CLI](https://codewithandrea.com/articles/flutter-firebase-multiple-flavors-flutterfire-cli/)
 
 > [!NOTE]
-> `script/flutterfire-config.sh` を編集してください。
+> `scripts/flutterfire-config.sh` を編集してください。
 
 ```sh
 BASE_BUNDLE_ID=<your-bundle-id>
@@ -70,7 +70,7 @@ FIREBASE_PROJECT_ID=<your-firebase-project-id>
 ```
 
 ```sh
-% script/flutterfire-config.sh dev
+% scripts/flutterfire-config.sh dev
 🔥 Starting FlutterFire configuration for <environment> environment...
 
 i Found 5 Firebase projects. Selecting project <your-firebase-project-id>.
