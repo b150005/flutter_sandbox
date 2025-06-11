@@ -59,33 +59,18 @@ class App extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
 
-    return DesignPolicy.shouldUseCupertino
-        ? CupertinoApp.router(
-            // FIXME: CupertinoApp.key には割り当てない?
-            key: ScaffoldMessenger.key,
-            routerConfig: router,
-            builder: (context, child) => ResponsiveBreakpoints.builder(
-              child: child.orElse(
-                const Placeholder(),
-                objectName: 'CupertinoApp.router child',
-              ),
-              breakpoints: _breakpoints,
-            ),
-            localizationsDelegates: _localizationsDelegates,
-            supportedLocales: _supportedLocales,
-          )
-        : MaterialApp.router(
-            scaffoldMessengerKey: ScaffoldMessenger.key,
-            routerConfig: router,
-            builder: (context, child) => ResponsiveBreakpoints.builder(
-              child: child.orElse(
-                const Placeholder(),
-                objectName: 'MaterialApp.router child',
-              ),
-              breakpoints: _breakpoints,
-            ),
-            localizationsDelegates: _localizationsDelegates,
-            supportedLocales: _supportedLocales,
-          );
+    return MaterialApp.router(
+      scaffoldMessengerKey: ScaffoldMessenger.key,
+      routerConfig: router,
+      builder: (context, child) => ResponsiveBreakpoints.builder(
+        child: child.orElse(
+          const Placeholder(),
+          objectName: 'MaterialApp.router child',
+        ),
+        breakpoints: _breakpoints,
+      ),
+      localizationsDelegates: _localizationsDelegates,
+      supportedLocales: _supportedLocales,
+    );
   }
 }
