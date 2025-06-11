@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart' hide ScaffoldMessenger;
 import 'package:go_router/go_router.dart';
