@@ -5,6 +5,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../core/config/policy/design.dart';
 import '../../../core/utils/l10n/app_localizations.dart';
 
+class _Destination {
+  const _Destination({required this.icon, required this.label});
+
+  final Icon icon;
+  final String label;
+}
+
 class AdaptiveScaffold extends HookConsumerWidget {
   const AdaptiveScaffold({
     super.key,
@@ -17,6 +24,12 @@ class AdaptiveScaffold extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
 
+    final destinations = [
+      _Destination(icon: const Icon(Icons.home), label: l10n.home),
+      _Destination(icon: const Icon(Icons.science), label: l10n.sample),
+      _Destination(icon: const Icon(Icons.settings), label: l10n.settings),
+    ];
+
     return Scaffold(
       body: SafeArea(
         child: switch (DesignPolicy.chooseNavigationLayout(context)) {
@@ -24,20 +37,14 @@ class AdaptiveScaffold extends HookConsumerWidget {
           NavigationLayout.rail => Row(
             children: [
               NavigationRail(
-                destinations: [
-                  NavigationRailDestination(
-                    icon: const Icon(Icons.home),
-                    label: Text(l10n.home),
-                  ),
-                  NavigationRailDestination(
-                    icon: const Icon(Icons.science),
-                    label: Text(l10n.sample),
-                  ),
-                  NavigationRailDestination(
-                    icon: const Icon(Icons.settings),
-                    label: Text(l10n.settings),
-                  ),
-                ],
+                destinations: destinations
+                    .map(
+                      (destination) => NavigationRailDestination(
+                        icon: destination.icon,
+                        label: Text(destination.label),
+                      ),
+                    )
+                    .toList(),
                 selectedIndex: _navigationShell.currentIndex,
                 onDestinationSelected: (index) => _navigationShell.goBranch(
                   index,
@@ -55,20 +62,14 @@ class AdaptiveScaffold extends HookConsumerWidget {
           DesignPolicy.chooseNavigationLayout(context) == NavigationLayout.bar
           ? NavigationBar(
               selectedIndex: _navigationShell.currentIndex,
-              destinations: [
-                NavigationDestination(
-                  icon: const Icon(Icons.home),
-                  label: l10n.home,
-                ),
-                NavigationDestination(
-                  icon: const Icon(Icons.science),
-                  label: l10n.sample,
-                ),
-                NavigationDestination(
-                  icon: const Icon(Icons.settings),
-                  label: l10n.settings,
-                ),
-              ],
+              destinations: destinations
+                  .map(
+                    (destination) => NavigationDestination(
+                      icon: destination.icon,
+                      label: destination.label,
+                    ),
+                  )
+                  .toList(),
               onDestinationSelected: (index) => _navigationShell.goBranch(
                 index,
                 initialLocation: index == _navigationShell.currentIndex,
