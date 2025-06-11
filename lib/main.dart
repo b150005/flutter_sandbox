@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart' hide ProviderObserver;
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:stack_trace/stack_trace.dart';
 
-import 'core/config/init/app_initializer.dart';
+import 'core/config/initialization/app_initializer.dart';
 import 'core/config/l10n/app_localizations.dart';
 import 'core/routing/router.dart';
 import 'core/utils/exception/app_exception.dart';
