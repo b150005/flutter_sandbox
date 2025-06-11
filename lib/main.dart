@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide ScaffoldMessenger;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' hide ProviderObserver;
@@ -7,7 +6,6 @@ import 'package:stack_trace/stack_trace.dart';
 
 import 'core/config/init/app_initializer.dart';
 import 'core/config/l10n/app_localizations.dart';
-import 'core/config/policy/design.dart';
 import 'core/routing/router.dart';
 import 'core/utils/exception/app_exception.dart';
 import 'core/utils/extension/nullable.dart';
