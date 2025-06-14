@@ -7,7 +7,7 @@ import 'package:stack_trace/stack_trace.dart';
 import 'core/config/initialization/app_initializer.dart';
 import 'core/config/l10n/app_localizations.dart';
 import 'core/routing/router.dart';
-import 'core/utils/exception/app_exception.dart';
+import 'core/utils/exceptions/app_exception.dart';
 import 'core/utils/extensions/nullable.dart';
 import 'core/utils/logging/log_message.dart';
 import 'core/utils/logging/logger.dart';

@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../config/firebase/error_code.dart';
-import '../exception/app_exception.dart';
+import '../exceptions/app_exception.dart';
 import '../l10n/app_localizations.dart';
 import '../logging/logger.dart';
 

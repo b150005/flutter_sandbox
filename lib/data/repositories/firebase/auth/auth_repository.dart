@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../../core/utils/exception/app_exception.dart';
+import '../../../../core/utils/exceptions/app_exception.dart';
 import '../../../../core/utils/extensions/firebase_auth_exception.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../core/utils/logging/log_message.dart';
