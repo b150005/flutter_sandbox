@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/extension/nullable.dart';
+import '../../../../core/utils/extensions/nullable.dart';
 
 final class ScaffoldMessenger {
   const ScaffoldMessenger._();
