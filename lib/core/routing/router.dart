@@ -10,6 +10,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../data/repositories/firebase/auth/auth_repository.dart';
 import '../../ui/core/ui/adaptive_scaffold.dart';
 import '../../ui/core/ui/utils/scaffold_messenger.dart';
+import '../../ui/sample/widgets/grid_view_settings_expansion_tile.dart';
+import '../../ui/sample/widgets/sample_content_card.dart';
 import '../utils/logging/go_router_observer.dart';
 import '../utils/riverpod/provider_change_notifier.dart';
 

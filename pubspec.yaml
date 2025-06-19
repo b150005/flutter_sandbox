@@ -59,5 +59,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
   # https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#adding-your-own-localized-messages
   generate: true
+
+  assets:
+    - assets/images/
