@@ -2,7 +2,7 @@ part of '../../../core/routing/router.dart';
 
 enum SampleContent {
   firebase(
-    path: '/sample/firebase',
+    path: FirebaseScreenRoute.absolutePath,
     title: 'Firebase',
     subtitle: 'Firebase Login',
     description: 'Firebase を用いた画面を紹介します',
