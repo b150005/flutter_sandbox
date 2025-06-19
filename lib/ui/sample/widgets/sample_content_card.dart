@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/config/constants/assets.dart';
 import '../../../core/routing/router.dart';
 import '../../../core/utils/extensions/string.dart';
 import '../../core/themes/extensions/card_text_styles.dart';
@@ -19,9 +20,9 @@ class SampleContentCard extends StatelessWidget {
         children: [
           Flexible(
             child: Image.asset(
-              content.thumbnailPath ?? 'assets/images/flutter-icon.png',
+              content.thumbnailPath ?? Asset.flutterIcon.path,
               errorBuilder: (context, error, stackTrace) => Image.asset(
-                'assets/images/flutter-icon.png',
+                Asset.flutterIcon.path,
                 fit: BoxFit.cover,
                 width: double.infinity,
               ),
