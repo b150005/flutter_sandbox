@@ -56,7 +56,9 @@ class Router extends _$Router {
     final isLoggedIn = ref.watch(currentUserProvider) != null;
 
     // TODO(b150005): 未認証ユーザが要認証画面にアクセスした際のリダイレクトの実装
-    if (_requiresAuth(uri) && !isLoggedIn) {}
+    if (_requiresAuth(uri) && !isLoggedIn) {
+      return LoginScreenRoute.absolutePath;
+    }
 
     // TODO(b150005): 認証済ユーザがログイン画面にアクセスした際のリダイレクトの実装
 
@@ -64,7 +66,7 @@ class Router extends _$Router {
   }
 
   bool _requiresAuth(Uri uri) {
-    const authRequiredPaths = [FirebaseScreenRoute.path];
+    const authRequiredPaths = [FirebaseScreenRoute.absolutePath];
 
     return authRequiredPaths.any(
       (authRequiredPath) => uri.path.startsWith(authRequiredPath),
