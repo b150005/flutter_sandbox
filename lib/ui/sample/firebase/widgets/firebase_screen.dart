@@ -13,6 +13,5 @@ class FirebaseScreen extends ConsumerWidget {
   const FirebaseScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) =>
-      const Scaffold(body: SafeArea(child: Placeholder()));
+  Widget build(BuildContext context, WidgetRef ref) => const Placeholder();
 }
