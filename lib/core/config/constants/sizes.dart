@@ -1,25 +1,42 @@
 import 'package:flutter/material.dart';
 
-abstract final class Sizes {
-  const Sizes._();
+enum WindowSize {
+  min(size: Size(320, 480));
 
-  static const WindowSizes window = WindowSizes.instance;
-  static const UiSizes ui = UiSizes.instance;
+  const WindowSize({required this.size});
+
+  final Size size;
+  double get width => size.width;
+  double get height => size.height;
 }
 
-final class WindowSizes {
-  const WindowSizes._();
+/// @see [Everything you should know about 8 point grid system in UX design](https://uxplanet.org/everything-you-should-know-about-8-point-grid-system-in-ux-design-b69cb945b18d)
+enum IconSize {
+  xxs(dp: 24),
+  xs(dp: 32),
+  sm(dp: 40),
+  md(dp: 48),
+  lg(dp: 56),
+  xl(dp: 64),
+  xxl(dp: 72),
+  xxxl(dp: 80);
 
-  static const instance = WindowSizes._();
+  const IconSize({required this.dp});
 
-  static const _minSize = Size(320, 480);
-  Size get minSize => _minSize;
-  double get minWidth => _minSize.width;
-  double get minHeight => _minSize.height;
-}
+  final double dp;
 
-final class UiSizes {
-  const UiSizes._();
+  double get iconSize {
+    final baseSize = dp * 0.5;
+    return (baseSize / 8).round() * 8.0;
+  }
 
-  static const instance = UiSizes._();
+  double get borderRadius {
+    final baseRadius = dp * 0.25;
+    return (baseRadius / 4).round() * 4.0;
+  }
+
+  double get blurRadius {
+    final baseBlur = dp * 0.25;
+    return (baseBlur / 4).round() * 4.0;
+  }
 }

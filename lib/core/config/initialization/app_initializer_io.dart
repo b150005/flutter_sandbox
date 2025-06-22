@@ -15,7 +15,7 @@ final class AppInitializerImpl extends AppInitializerProtocol {
     if (WindowCapability.supportsWindowManager) {
       await windowManager.ensureInitialized();
 
-      final windowOptions = WindowOptions(minimumSize: Sizes.window.minSize);
+      final windowOptions = WindowOptions(minimumSize: WindowSize.min.size);
       await windowManager.waitUntilReadyToShow(windowOptions, () async {
         await windowManager.show();
         await windowManager.focus();
