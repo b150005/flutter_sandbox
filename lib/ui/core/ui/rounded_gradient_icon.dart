@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/config/constants/colors.dart';
 import '../../../core/config/constants/sizes.dart';
 import 'utils/gradients.dart';
 
@@ -33,7 +34,9 @@ class RoundedGradientIcon extends StatelessWidget {
         borderRadius: BorderRadius.circular(size.borderRadius),
         boxShadow: [
           BoxShadow(
-            color: colorGradients.first.withValues(alpha: 0.3),
+            color: colorGradients.first.withValues(
+              alpha: AlphaChannel.light.value,
+            ),
             blurRadius: size.blurRadius,
           ),
         ],
