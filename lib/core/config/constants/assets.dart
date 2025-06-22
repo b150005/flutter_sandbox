@@ -1,7 +1,8 @@
-enum Asset {
-  flutterIcon(path: 'assets/images/flutter-icon.png');
+enum Assets {
+  flutterIcon(path: 'assets/images/flutter-icon.png'),
+  firebase(path: 'assets/images/firebase.png');
 
-  const Asset({required this.path});
+  const Assets({required this.path});
 
   final String path;
 }

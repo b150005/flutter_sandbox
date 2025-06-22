@@ -25,9 +25,9 @@ class SampleContentCard extends ConsumerWidget {
           children: [
             Flexible(
               child: Image.asset(
-                content.thumbnailPath ?? Asset.flutterIcon.path,
+                content.thumbnailPath ?? Assets.flutterIcon.path,
                 errorBuilder: (context, error, stackTrace) => Image.asset(
-                  Asset.flutterIcon.path,
+                  Assets.flutterIcon.path,
                   fit: BoxFit.cover,
                   width: double.infinity,
                 ),
