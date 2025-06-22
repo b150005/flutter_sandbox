@@ -5,7 +5,6 @@ enum SampleContent {
     path: FirebaseScreenRoute.absolutePath,
     title: 'Firebase',
     subtitle: 'Firebase Login',
-    description: 'Firebase を用いた画面を紹介します',
   );
 
   const SampleContent({
@@ -13,14 +12,18 @@ enum SampleContent {
     required this.title,
     this.subtitle,
     this.thumbnailPath,
-    this.description,
   });
 
   final String path;
   final String title;
   final String? subtitle;
   final String? thumbnailPath;
-  final String? description;
+
+  String description(AppLocalizations l10n) {
+    return switch (this) {
+      firebase => l10n.loginScreenDescription,
+    };
+  }
 }
 
 class SampleScreenRoute extends GoRouteData with _$SampleScreenRoute {
