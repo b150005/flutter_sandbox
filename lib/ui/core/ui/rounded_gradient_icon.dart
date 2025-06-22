@@ -35,7 +35,7 @@ class RoundedGradientIcon extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: colorGradients.first.withAlpha(
-              (AlphaChannel.max * 0.3).round(),
+              (AlphaChannel.max.value * 0.3).round(),
             ),
             blurRadius: size.blurRadius,
           ),

@@ -1,5 +1,7 @@
-abstract final class AlphaChannel {
-  const AlphaChannel._();
+enum AlphaChannel {
+  max(value: 255);
 
-  static const max = 255;
+  const AlphaChannel({required this.value});
+
+  final int value;
 }
