@@ -1,5 +1,5 @@
 enum AlphaChannel {
-  transparen(value: 0),
+  transparent(value: 0),
   extraLight(value: 0.2),
   light(value: 0.4),
   medium(value: 0.6),
