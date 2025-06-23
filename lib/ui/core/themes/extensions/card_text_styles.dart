@@ -47,19 +47,18 @@ class CardTextStyles extends ThemeExtension<CardTextStyles> {
     TextStyle? titleStyle,
     TextStyle? subtitleStyle,
     TextStyle? descriptionStyle,
-  }) {
-    return CardTextStyles(
-      titleStyle: titleStyle ?? this.titleStyle,
-      subtitleStyle: subtitleStyle ?? this.subtitleStyle,
-      descriptionStyle: descriptionStyle ?? this.descriptionStyle,
-    );
-  }
+  }) => CardTextStyles(
+    titleStyle: titleStyle ?? this.titleStyle,
+    subtitleStyle: subtitleStyle ?? this.subtitleStyle,
+    descriptionStyle: descriptionStyle ?? this.descriptionStyle,
+  );
 
   @override
   CardTextStyles lerp(ThemeExtension<CardTextStyles>? other, double t) {
     if (other is! CardTextStyles) {
       return this;
     }
+
     return CardTextStyles(
       titleStyle: TextStyle.lerp(titleStyle, other.titleStyle, t),
       subtitleStyle: TextStyle.lerp(subtitleStyle, other.subtitleStyle, t),
