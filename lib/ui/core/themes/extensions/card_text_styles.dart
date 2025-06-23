@@ -43,7 +43,7 @@ class CardTextStyles extends ThemeExtension<CardTextStyles> {
   final TextStyle? descriptionStyle;
 
   @override
-  CardTextStyles copyWith({
+  ThemeExtension<CardTextStyles> copyWith({
     TextStyle? titleStyle,
     TextStyle? subtitleStyle,
     TextStyle? descriptionStyle,
@@ -54,7 +54,10 @@ class CardTextStyles extends ThemeExtension<CardTextStyles> {
   );
 
   @override
-  CardTextStyles lerp(ThemeExtension<CardTextStyles>? other, double t) {
+  ThemeExtension<CardTextStyles> lerp(
+    ThemeExtension<CardTextStyles>? other,
+    double t,
+  ) {
     if (other is! CardTextStyles) {
       return this;
     }

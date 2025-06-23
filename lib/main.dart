@@ -12,7 +12,9 @@ import 'core/utils/extensions/nullable.dart';
 import 'core/utils/logging/log_message.dart';
 import 'core/utils/logging/logger.dart';
 import 'core/utils/logging/provider_observer.dart';
+import 'ui/core/themes/extensions/button_styles.dart';
 import 'ui/core/themes/extensions/card_text_styles.dart';
+import 'ui/core/themes/extensions/input_decoration_styles.dart';
 import 'ui/core/ui/utils/scaffold_messenger.dart';
 
 void main() {
@@ -68,12 +70,20 @@ class App extends ConsumerWidget {
         ),
         breakpoints: _breakpoints,
       ),
-      theme: ThemeData.light(
-        useMaterial3: true,
-      ).copyWith(extensions: [CardTextStyles.light(context)]),
-      darkTheme: ThemeData.dark(
-        useMaterial3: true,
-      ).copyWith(extensions: [CardTextStyles.dark(context)]),
+      theme: ThemeData.light(useMaterial3: true).copyWith(
+        extensions: [
+          CardTextStyles.light(context),
+          InputDecorationStyles.light(context),
+          ButtonStyles.light(context),
+        ],
+      ),
+      darkTheme: ThemeData.dark(useMaterial3: true).copyWith(
+        extensions: [
+          CardTextStyles.dark(context),
+          InputDecorationStyles.dark(context),
+          ButtonStyles.dark(context),
+        ],
+      ),
       localizationsDelegates: _localizationsDelegates,
       supportedLocales: _supportedLocales,
     );
