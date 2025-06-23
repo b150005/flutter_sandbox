@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../core/config/constants/sizes.dart';
 import '../../../core/config/policies/design.dart';
 import '../../../core/utils/l10n/app_localizations.dart';
 
@@ -53,7 +54,12 @@ class AdaptiveScaffold extends HookConsumerWidget {
                 labelType: NavigationRailLabelType.all,
               ),
               const VerticalDivider(),
-              Expanded(child: _navigationShell),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(right: Spacing.xs.dp),
+                  child: _navigationShell,
+                ),
+              ),
             ],
           ),
         },
