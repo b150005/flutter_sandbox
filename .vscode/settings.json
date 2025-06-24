@@ -4,5 +4,8 @@
     "*.dart": "$(capture).g.dart, $(capture).freezed.dart, $(capture)_none.dart, $(capture)_io.dart, $(capture)_web.dart",
     "pubspec.yaml": "pubspec.lock, pubspec_overrides.yaml",
     "package.json": "bun.lock"
-  }
+  },
+  "dart.flutterTestAdditionalArgs": [
+    "--dart-define-from-file=lib/core/config/env/development.env"
+  ]
 }
