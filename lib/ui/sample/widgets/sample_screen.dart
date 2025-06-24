@@ -11,6 +11,7 @@ enum SampleContent {
     required this.path,
     required this.title,
     this.subtitle,
+    // ignore: unused_element_parameter
     this.thumbnailPath,
   });
 
@@ -19,7 +20,7 @@ enum SampleContent {
   final String? subtitle;
   final String? thumbnailPath;
 
-  String description(AppLocalizations l10n) {
+  String description(l10n.AppLocalizations l10n) {
     return switch (this) {
       firebase => l10n.loginScreenDescription,
     };
