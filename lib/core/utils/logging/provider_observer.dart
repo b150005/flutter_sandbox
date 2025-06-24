@@ -1,5 +1,6 @@
+import 'package:hooks_riverpod/experimental/mutation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as hooks;
-import 'package:hooks_riverpod/misc.dart' show ProviderBase;
+import 'package:hooks_riverpod/misc.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'logger.dart';
@@ -46,30 +47,33 @@ class ProviderObserver extends hooks.ProviderObserver {
   @override
   void mutationStart(
     hooks.ProviderObserverContext context,
-    hooks.MutationContext mutation,
+    Mutation<Object?> mutation,
   ) {
     Logger.instance.t(
       '▶️ ${_formatProvider(context.provider)} invoked'
-      ' ${_formatInvocation(mutation.invocation)}',
+      ' ${mutation.label}',
     );
   }
 
   @override
-  void mutationReset(hooks.ProviderObserverContext context) {
+  void mutationReset(
+    hooks.ProviderObserverContext context,
+    Mutation<Object?> mutation,
+  ) {
     Logger.instance.t(
       '🔄 ${_formatProvider(context.provider)} reset'
-      ' ${_formatInvocation(context.mutation?.invocation)}',
+      ' ${mutation.label}',
     );
   }
 
   @override
   void mutationSuccess(
     hooks.ProviderObserverContext context,
-    hooks.MutationContext mutation,
+    Mutation<Object?> mutation,
     Object? result,
   ) {
     Logger.instance.t(
-      '✅ ${_formatInvocation(mutation.invocation)} invoked by'
+      '✅ ${mutation.label} invoked by'
       ' ${_formatProvider(context.provider)} succeeded',
     );
   }
@@ -77,12 +81,12 @@ class ProviderObserver extends hooks.ProviderObserver {
   @override
   void mutationError(
     hooks.ProviderObserverContext context,
-    hooks.MutationContext mutation,
+    Mutation<Object?> mutation,
     Object error,
     StackTrace stackTrace,
   ) {
     Logger.instance.t(
-      '❌ ${_formatInvocation(mutation.invocation)} invoked by'
+      '❌ ${mutation.label} invoked by'
       ' ${_formatProvider(context.provider)} threw $error',
       error: error,
       stackTrace: stackTrace,
@@ -94,18 +98,6 @@ class ProviderObserver extends hooks.ProviderObserver {
     final name = provider.name ?? provider.toString();
 
     return '$name [${provider.runtimeType}]';
-  }
-
-  /// ログ出力用に整形された Invocation の情報を取得する
-  static String _formatInvocation(Invocation? invocation) {
-    if (invocation == null) {
-      return invocation.toString();
-    }
-
-    final method = invocation.memberName.toString();
-    final args = invocation.positionalArguments.join(', ');
-
-    return '$method($args)';
   }
 
   /// ログ出力用に整形された Object の情報を取得する
