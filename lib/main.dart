@@ -14,6 +14,7 @@ import 'core/utils/logging/logger.dart';
 import 'core/utils/logging/provider_observer.dart';
 import 'ui/core/themes/extensions/button_styles.dart';
 import 'ui/core/themes/extensions/card_text_styles.dart';
+import 'ui/core/themes/extensions/icon_button_styles.dart';
 import 'ui/core/themes/extensions/input_decoration_styles.dart';
 import 'ui/core/themes/extensions/text_styles.dart';
 import 'ui/core/ui/utils/scaffold_messenger.dart';
@@ -77,6 +78,7 @@ class App extends ConsumerWidget {
           CardTextStyles.light(context),
           InputDecorationStyles.light(context),
           ButtonStyles.light(context),
+          IconButtonStyles.light(context),
         ],
       ),
       darkTheme: ThemeData.dark(useMaterial3: true).copyWith(
@@ -85,6 +87,7 @@ class App extends ConsumerWidget {
           CardTextStyles.dark(context),
           InputDecorationStyles.dark(context),
           ButtonStyles.dark(context),
+          IconButtonStyles.dark(context),
         ],
       ),
       localizationsDelegates: _localizationsDelegates,
