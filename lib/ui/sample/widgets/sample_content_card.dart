@@ -46,7 +46,7 @@ class SampleContentCard extends ConsumerWidget {
                       context,
                     ).extension<CardTextStyles>()?.titleStyle,
                   ),
-                  if (content.subtitle.isNotNullOrEmpty)
+                  if (content.subtitle.isNotNullAndNotEmpty)
                     Text(
                       content.subtitle!,
                       style: Theme.of(
