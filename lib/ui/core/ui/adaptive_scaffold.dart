@@ -33,6 +33,7 @@ class AdaptiveScaffold extends ConsumerWidget {
 
     return Scaffold(
       body: SafeArea(
+        // FIXME: Focus Traversal で非表示中のタブ(Branch)のウィジェットが traversable である問題
         child: switch (DesignPolicy.chooseNavigationLayout(context)) {
           NavigationLayout.bar => _navigationShell,
           NavigationLayout.rail => Row(
