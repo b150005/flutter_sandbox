@@ -78,7 +78,6 @@ class App extends ConsumerWidget {
           CardTextStyles.light(context),
           InputDecorationStyles.light(context),
           ButtonStyles.light(context),
-          IconButtonStyles.light(context),
         ],
       ),
       darkTheme: ThemeData.dark(useMaterial3: true).copyWith(
@@ -87,7 +86,6 @@ class App extends ConsumerWidget {
           CardTextStyles.dark(context),
           InputDecorationStyles.dark(context),
           ButtonStyles.dark(context),
-          IconButtonStyles.dark(context),
         ],
       ),
       localizationsDelegates: _localizationsDelegates,
