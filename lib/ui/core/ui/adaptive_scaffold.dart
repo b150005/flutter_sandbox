@@ -13,7 +13,7 @@ class _Destination {
   final String label;
 }
 
-class AdaptiveScaffold extends HookConsumerWidget {
+class AdaptiveScaffold extends ConsumerWidget {
   const AdaptiveScaffold({
     super.key,
     required StatefulNavigationShell navigationShell,
