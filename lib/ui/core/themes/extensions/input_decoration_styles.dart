@@ -26,10 +26,10 @@ class InputDecorationStyles extends ThemeExtension<InputDecorationStyles> {
           ).colorScheme.onSurface.withValues(alpha: AlphaChannel.medium.value),
         ),
         labelStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface),
-        errorStyle: TextStyle(
+        errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
           color: Theme.of(context).colorScheme.error,
-          fontSize: 12,
         ),
+        errorMaxLines: errorMaxLines,
         errorBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: Theme.of(context).colorScheme.error,
@@ -82,10 +82,10 @@ class InputDecorationStyles extends ThemeExtension<InputDecorationStyles> {
           ).colorScheme.onSurface.withValues(alpha: AlphaChannel.medium.value),
         ),
         labelStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface),
-        errorStyle: TextStyle(
+        errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
           color: Theme.of(context).colorScheme.error,
-          fontSize: 12,
         ),
+        errorMaxLines: errorMaxLines,
         border: OutlineInputBorder(
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(BorderRadii.sm.value),
@@ -131,10 +131,10 @@ class InputDecorationStyles extends ThemeExtension<InputDecorationStyles> {
           ).colorScheme.onSurface.withValues(alpha: AlphaChannel.medium.value),
         ),
         labelStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface),
-        errorStyle: TextStyle(
+        errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
           color: Theme.of(context).colorScheme.error,
-          fontSize: 12,
         ),
+        errorMaxLines: errorMaxLines,
         border: UnderlineInputBorder(
           borderSide: BorderSide(
             color: Theme.of(context).colorScheme.outline,
@@ -188,10 +188,10 @@ class InputDecorationStyles extends ThemeExtension<InputDecorationStyles> {
           ).colorScheme.onSurface.withValues(alpha: AlphaChannel.medium.value),
         ),
         labelStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface),
-        errorStyle: TextStyle(
+        errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
           color: Theme.of(context).colorScheme.error,
-          fontSize: 12,
         ),
+        errorMaxLines: errorMaxLines,
         prefixIcon: Icon(
           Icons.search,
           color: Theme.of(
@@ -242,16 +242,16 @@ class InputDecorationStyles extends ThemeExtension<InputDecorationStyles> {
           color: Theme.of(
             context,
           ).colorScheme.onSurface.withValues(alpha: AlphaChannel.medium.value),
-          fontSize: 14,
+          fontSize: Theme.of(context).textTheme.labelSmall?.fontSize,
         ),
         labelStyle: TextStyle(
           color: Theme.of(context).colorScheme.onSurface,
-          fontSize: 14,
+          fontSize: Theme.of(context).textTheme.labelSmall?.fontSize,
         ),
-        errorStyle: TextStyle(
+        errorStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
           color: Theme.of(context).colorScheme.error,
-          fontSize: 11,
         ),
+        errorMaxLines: errorMaxLines,
         isDense: true,
         errorBorder: OutlineInputBorder(
           borderSide: BorderSide(
@@ -304,10 +304,10 @@ class InputDecorationStyles extends ThemeExtension<InputDecorationStyles> {
           ).colorScheme.onSurface.withValues(alpha: AlphaChannel.medium.value),
         ),
         labelStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface),
-        errorStyle: TextStyle(
+        errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
           color: Theme.of(context).colorScheme.error,
-          fontSize: 12,
         ),
+        errorMaxLines: errorMaxLines,
         errorBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: Theme.of(context).colorScheme.error,
@@ -360,10 +360,10 @@ class InputDecorationStyles extends ThemeExtension<InputDecorationStyles> {
           ).colorScheme.onSurface.withValues(alpha: AlphaChannel.medium.value),
         ),
         labelStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface),
-        errorStyle: TextStyle(
+        errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
           color: Theme.of(context).colorScheme.error,
-          fontSize: 12,
         ),
+        errorMaxLines: errorMaxLines,
         border: OutlineInputBorder(
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(BorderRadii.sm.value),
@@ -409,10 +409,10 @@ class InputDecorationStyles extends ThemeExtension<InputDecorationStyles> {
           ).colorScheme.onSurface.withValues(alpha: AlphaChannel.medium.value),
         ),
         labelStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface),
-        errorStyle: TextStyle(
+        errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
           color: Theme.of(context).colorScheme.error,
-          fontSize: 12,
         ),
+        errorMaxLines: errorMaxLines,
         border: UnderlineInputBorder(
           borderSide: BorderSide(
             color: Theme.of(context).colorScheme.outline,
@@ -466,10 +466,10 @@ class InputDecorationStyles extends ThemeExtension<InputDecorationStyles> {
           ).colorScheme.onSurface.withValues(alpha: AlphaChannel.medium.value),
         ),
         labelStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface),
-        errorStyle: TextStyle(
+        errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
           color: Theme.of(context).colorScheme.error,
-          fontSize: 12,
         ),
+        errorMaxLines: errorMaxLines,
         prefixIcon: Icon(
           Icons.search,
           color: Theme.of(
@@ -520,16 +520,16 @@ class InputDecorationStyles extends ThemeExtension<InputDecorationStyles> {
           color: Theme.of(
             context,
           ).colorScheme.onSurface.withValues(alpha: AlphaChannel.medium.value),
-          fontSize: 14,
+          fontSize: Theme.of(context).textTheme.labelSmall?.fontSize,
         ),
         labelStyle: TextStyle(
           color: Theme.of(context).colorScheme.onSurface,
-          fontSize: 14,
+          fontSize: Theme.of(context).textTheme.labelSmall?.fontSize,
         ),
-        errorStyle: TextStyle(
+        errorStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
           color: Theme.of(context).colorScheme.error,
-          fontSize: 11,
         ),
+        errorMaxLines: errorMaxLines,
         isDense: true,
         errorBorder: OutlineInputBorder(
           borderSide: BorderSide(
@@ -579,6 +579,8 @@ class InputDecorationStyles extends ThemeExtension<InputDecorationStyles> {
   final InputDecoration search;
 
   final InputDecoration compact;
+
+  static const errorMaxLines = 2;
 
   @override
   ThemeExtension<InputDecorationStyles> copyWith({
