@@ -12,19 +12,15 @@ class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => Scaffold(
-    body: SafeArea(
-      child: Center(
-        child: Column(
-          children: [
-            TextButton(onPressed: () => {}, child: const Text('go')),
-            TextButton(
-              onPressed: () => ScaffoldMessenger.showSnackBar('Hello, world!'),
-              child: const Text('Show SnackBar'),
-            ),
-          ],
+  Widget build(BuildContext context, WidgetRef ref) => Center(
+    child: Column(
+      children: [
+        TextButton(onPressed: () => {}, child: const Text('go')),
+        TextButton(
+          onPressed: () => ScaffoldMessenger.showSnackBar('Hello, world!'),
+          child: const Text('Show SnackBar'),
         ),
-      ),
+      ],
     ),
   );
 }
