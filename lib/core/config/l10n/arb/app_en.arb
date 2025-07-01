@@ -16,6 +16,14 @@
 	"@errorInvalidEmailFormat": {
 		"description": "Error shown when email format is invalid"
 	},
+	"errorPasswordContainsWhitespace": "Password cannot contain spaces.",
+	"@errorPasswordContainsWhitespace": {
+		"description": "Error shown when password contains whitespace characters"
+	},
+	"errorNonCompliantPassword": "Password must be between 8 and 4096 characters length and must contain a combination of uppercase, lowercase, and numbers.",
+	"@errorNonCompliantPassword": {
+		"description": "Error shown when password does not meet password policies"
+	},
 	"errorAccountDisabled": "This account has been disabled. Please contact support.",
 	"@errorAccountDisabled": {
 		"description": "Error shown when user account is disabled"
@@ -120,8 +128,44 @@
 	"@loginScreenDescription": {
 		"description": "Description for the Firebase page"
 	},
+	"email": "Email",
+	"@email": {
+		"description": "Email"
+	},
+	"password": "Password",
+	"@password": {
+		"description": "Password"
+	},
+	"forgotPassword": "Forgot Password?",
+	"@forgotPassword": {
+		"description": "Forgot Password?"
+	},
+	"login": "Login",
+	"@login": {
+		"description": "Login"
+	},
+	"createNewAccount": "Create new account",
+	"@createNewAccount": {
+		"description": "Create new account"
+	},
 	"settings": "Settings",
 	"@settings": {
 		"description": "Label for the Settings tab in NavigationBar and NavigationRail"
+	},
+	"info": "Info",
+	"@info": {
+		"description": "Information"
+	},
+	"success": "Success",
+	"@success": {
+		"description": "Success"
+	},
+	"warning": "Warning",
+	"@warning": {
+		"description": "Warning"
+	},
+	"error": "Error",
+	"@error": {
+		"description": "Error"
 	}
 }

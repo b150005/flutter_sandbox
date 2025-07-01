@@ -1,0 +1,55 @@
+import '../../config/constants/regexes.dart';
+import '../../config/l10n/app_localizations.dart';
+import '../extensions/string.dart';
+import '../logging/log_message.dart';
+
+abstract final class FirebaseAuthValidator {
+  const FirebaseAuthValidator._();
+
+  static const passwordMinLength = 8;
+  static const passwordMaxLength = 4096;
+
+  static String? validateEmail(
+    String? email, {
+    required AppLocalizations l10n,
+  }) {
+    if (email.isNullOrEmpty) {
+      return l10n.errorRequiredField;
+    }
+
+    if (email!.contains(Regexes.whitespace)) {
+      throw UnimplementedError(LogMessage.canEnterWhitespace);
+    }
+
+    if (!Regexes.email.hasMatch(email.trim())) {
+      return l10n.errorInvalidEmailFormat;
+    }
+
+    return null;
+  }
+
+  static String? validatePassword(
+    String? password, {
+    required AppLocalizations l10n,
+  }) {
+    if (password == null) {
+      return l10n.errorRequiredField;
+    }
+
+    if (password.contains(Regexes.whitespace)) {
+      throw UnimplementedError(LogMessage.canEnterWhitespace);
+    }
+
+    final trimmed = password.trim();
+
+    if (trimmed.length < passwordMinLength ||
+        trimmed.length > passwordMaxLength ||
+        !trimmed.contains(Regexes.uppercase) ||
+        !trimmed.contains(Regexes.lowercase) ||
+        !trimmed.contains(Regexes.number)) {
+      return l10n.errorNonCompliantPassword;
+    }
+
+    return null;
+  }
+}

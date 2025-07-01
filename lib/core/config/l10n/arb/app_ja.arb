@@ -16,6 +16,14 @@
 	"@errorInvalidEmailFormat": {
 		"description": "Error shown when email format is invalid"
 	},
+	"errorPasswordContainsWhitespace": "パスワードにスペースを含めることはできません。",
+	"@errorPasswordContainsWhitespace": {
+		"description": "Error shown when password contains whitespace characters"
+	},
+	"errorNonCompliantPassword": "パスワードは8字以上4096字以下で、大文字・小文字・数字を含める必要があります。",
+	"@errorNonCompliantPassword": {
+		"description": "Error shown when password does not meet password policies"
+	},
 	"errorAccountDisabled": "このアカウントは無効になっています。サポートにお問い合わせください。",
 	"@errorAccountDisabled": {
 		"description": "Error shown when user account is disabled"
@@ -120,8 +128,44 @@
 	"@loginScreenDescription": {
 		"description": "Description for the Firebase page"
 	},
+	"email": "メールアドレス",
+	"@email": {
+		"description": "Email"
+	},
+	"password": "パスワード",
+	"@password": {
+		"description": "Password"
+	},
+	"forgotPassword": "パスワードをお忘れの方",
+	"@forgotPassword": {
+		"description": "Forgot Password?"
+	},
+	"login": "ログイン",
+	"@login": {
+		"description": "Login"
+	},
+	"createNewAccount": "新規登録",
+	"@createNewAccount": {
+		"description": "Create new account"
+	},
 	"settings": "設定",
 	"@settings": {
 		"description": "Label for the Settings tab in NavigationBar and NavigationRail"
+	},
+	"info": "情報",
+	"@info": {
+		"description": "Information"
+	},
+	"success": "成功",
+	"@success": {
+		"description": "Success"
+	},
+	"warning": "警告",
+	"@warning": {
+		"description": "Warning"
+	},
+	"error": "エラー",
+	"@error": {
+		"description": "Error"
 	}
 }

@@ -419,6 +419,16 @@ Xcode の Runner > TARGETS > Runner > Build Phases > New Run Script Phase で以
 
 `flutter gen-l10n` コマンドを実行することで、 ARB → Dart ファイルに変換されます。
 
+# ✅ テスト
+
+## 🧪 単体テスト・ウィジェットテスト
+
+`test/unit`, `test/widget` 配下にテストコードを配置してください。
+
+## 🔗 統合テスト
+
+`test/integration/` 配下にテストコードを配置してください。
+
 # 📚 参考リポジトリ
 
 - [bizz84 / starter_architecture_flutter_firebase](https://github.com/bizz84/starter_architecture_flutter_firebase)

@@ -37,6 +37,10 @@ sealed class AppException with _$AppException implements Exception {
   const factory AppException.insufficientStorage(String message) =
       InsufficientStorage;
 
+  const factory AppException.cancelledByDebounce([
+    @Default(LogMessage.cancelledByDebounce) String message,
+  ]) = CancelledByDebounce;
+
   const factory AppException.unknown([
     @Default(LogMessage.internalError) String message,
   ]) = Unknown;

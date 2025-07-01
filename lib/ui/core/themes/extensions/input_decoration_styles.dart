@@ -580,7 +580,7 @@ class InputDecorationStyles extends ThemeExtension<InputDecorationStyles> {
 
   final InputDecoration compact;
 
-  static const errorMaxLines = 2;
+  static const errorMaxLines = 3;
 
   @override
   ThemeExtension<InputDecorationStyles> copyWith({
