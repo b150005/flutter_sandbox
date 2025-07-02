@@ -124,9 +124,9 @@
 	"@login": {
 		"description": "Login"
 	},
-	"createNewAccount": "新規登録",
-	"@createNewAccount": {
-		"description": "Create new account"
+	"signUp": "新規登録",
+	"@signUp": {
+		"description": "Sign Up"
 	},
 	"settings": "設定",
 	"@settings": {

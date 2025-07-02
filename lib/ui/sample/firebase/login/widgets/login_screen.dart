@@ -29,10 +29,10 @@ class LoginScreen extends ConsumerWidget {
             ),
             const LoginForm(),
             OutlinedButton(
-              key: WidgetKeys.createNewAccount,
+              key: WidgetKeys.signUp,
               onPressed: () {},
               style: OutlinedButton.styleFrom(minimumSize: ButtonSize.lg.size),
-              child: Text(l10n.createNewAccount),
+              child: Text(l10n.signUp),
             ),
           ],
         ),
