@@ -31,7 +31,7 @@ class LoginScreen extends ConsumerWidget {
             OutlinedButton(
               key: WidgetKeys.createNewAccount,
               onPressed: () {},
-              style: OutlinedButton.styleFrom(fixedSize: ButtonSize.md.size),
+              style: OutlinedButton.styleFrom(minimumSize: ButtonSize.lg.size),
               child: Text(l10n.createNewAccount),
             ),
           ],
