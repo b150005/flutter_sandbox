@@ -14,7 +14,7 @@ abstract final class FirebaseAuthValidator {
     required AppLocalizations l10n,
   }) {
     if (email.isNullOrEmpty) {
-      return l10n.errorRequiredField;
+      return l10n.requiredField;
     }
 
     if (email!.contains(Regexes.whitespace)) {
@@ -22,7 +22,7 @@ abstract final class FirebaseAuthValidator {
     }
 
     if (!Regexes.email.hasMatch(email.trim())) {
-      return l10n.errorInvalidEmailFormat;
+      return l10n.invalidEmailFormat;
     }
 
     return null;
@@ -33,7 +33,7 @@ abstract final class FirebaseAuthValidator {
     required AppLocalizations l10n,
   }) {
     if (password == null) {
-      return l10n.errorRequiredField;
+      return l10n.requiredField;
     }
 
     if (password.contains(Regexes.whitespace)) {
@@ -47,7 +47,7 @@ abstract final class FirebaseAuthValidator {
         !trimmed.contains(Regexes.uppercase) ||
         !trimmed.contains(Regexes.lowercase) ||
         !trimmed.contains(Regexes.number)) {
-      return l10n.errorNonCompliantPassword;
+      return l10n.nonCompliantPassword;
     }
 
     return null;

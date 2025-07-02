@@ -1,120 +1,100 @@
 {
 	"@@locale": "en",
-	"errorServiceTemporarilyUnavailable": "Service is temporarily unavailable. Please try again later.",
-	"@errorServiceTemporarilyUnavailable": {
+	"serviceTemporarilyUnavailable": "Service is temporarily unavailable. Please try again later.",
+	"@serviceTemporarilyUnavailable": {
 		"description": "Error shown when the service is temporarily unavailable"
 	},
-	"errorPleaseRestartApp": "Something went wrong. Please restart the app and try again.",
-	"@errorPleaseRestartApp": {
+	"restartApp": "Something went wrong. Please restart the app and try again.",
+	"@restartApp": {
 		"description": "Error shown when the app needs to be restarted"
 	},
-	"errorInvalidEmailOrPassword": "Invalid email or password. Please try again.",
-	"@errorInvalidEmailOrPassword": {
+	"invalidEmailOrPassword": "Invalid email or password. Please try again.",
+	"@invalidEmailOrPassword": {
 		"description": "Error shown when login credentials are incorrect"
 	},
-	"errorInvalidEmailFormat": "Please enter a valid email address.",
-	"@errorInvalidEmailFormat": {
+	"invalidEmailFormat": "Please enter a valid email address.",
+	"@invalidEmailFormat": {
 		"description": "Error shown when email format is invalid"
 	},
-	"errorPasswordContainsWhitespace": "Password cannot contain spaces.",
-	"@errorPasswordContainsWhitespace": {
-		"description": "Error shown when password contains whitespace characters"
-	},
-	"errorNonCompliantPassword": "Password must be between 8 and 4096 characters length and must contain a combination of uppercase, lowercase, and numbers.",
-	"@errorNonCompliantPassword": {
+	"nonCompliantPassword": "Password must be between 8 and 4096 characters length and must contain a combination of uppercase, lowercase, and numbers.",
+	"@nonCompliantPassword": {
 		"description": "Error shown when password does not meet password policies"
 	},
-	"errorAccountDisabled": "This account has been disabled. Please contact support.",
-	"@errorAccountDisabled": {
+	"weakPassword": "Password must comply with our password policy.",
+	"@weakPassword": {
+		"description": "Error shown when password doesn't comply with password policy"
+	},
+	"accountDisabled": "This account has been disabled. Please contact support.",
+	"@accountDisabled": {
 		"description": "Error shown when user account is disabled"
 	},
-	"errorTooManyAttempts": "Too many unsuccessful attempts. Please try again later.",
-	"@errorTooManyAttempts": {
+	"tooManyAttempts": "Too many unsuccessful attempts. Please try again later.",
+	"@tooManyAttempts": {
 		"description": "Error shown when too many login attempts have been made"
 	},
-	"errorAuthenticationFailed": "Authentication failed. Please try again.",
-	"@errorAuthenticationFailed": {
+	"authenticationFailed": "Authentication failed. Please try again.",
+	"@authenticationFailed": {
 		"description": "Generic error for authentication failures"
 	},
-	"errorGeneralPleaseRetry": "Something went wrong. Please try again.",
-	"@errorGeneralPleaseRetry": {
+	"tryAgain": "Something went wrong. Please try again.",
+	"@tryAgain": {
 		"description": "Generic error with retry suggestion"
 	},
-	"errorNetworkConnection": "Network connection error. Please check your internet connection.",
-	"@errorNetworkConnection": {
+	"networkConnectionError": "Network connection error. Please check your internet connection.",
+	"@networkConnectionError": {
 		"description": "Error shown when there's no internet connection"
 	},
-	"errorSessionExpired": "Your session has expired. Please sign in again.",
-	"@errorSessionExpired": {
+	"sessionExpired": "Your session has expired. Please sign in again.",
+	"@sessionExpired": {
 		"description": "Error shown when user session expires"
 	},
-	"errorWeakPassword": "Password is too weak. Please use at least 8 characters with letters, numbers, and symbols.",
-	"@errorWeakPassword": {
-		"description": "Error shown when password doesn't meet strength requirements"
-	},
-	"errorEmailAlreadyInUse": "This email is already registered. Please use a different email or try to sign in.",
-	"@errorEmailAlreadyInUse": {
+	"registeredEmail": "This email is already registered. Please use a different email or try to sign in.",
+	"@registeredEmail": {
 		"description": "Error shown when email is already registered during signup"
 	},
-	"errorRequiredField": "This field is required.",
-	"@errorRequiredField": {
+	"requiredField": "This field is required.",
+	"@requiredField": {
 		"description": "Error shown for empty required fields"
 	},
-	"errorPasswordsDontMatch": "Passwords don't match. Please try again.",
-	"@errorPasswordsDontMatch": {
-		"description": "Error shown when password confirmation doesn't match"
-	},
-	"errorServerError": "Server error. Our team has been notified and is working on it.",
-	"@errorServerError": {
+	"internalServerError": "Internal server error. Our team has been notified and is working on it.",
+	"@internalServerError": {
 		"description": "Error shown for server-side errors"
 	},
-	"errorPermissionDenied": "Permission denied. You don't have access to this feature.",
-	"@errorPermissionDenied": {
+	"permissionDenied": "Permission denied. You don't have access to this feature.",
+	"@permissionDenied": {
 		"description": "Error shown when user doesn't have necessary permissions"
 	},
-	"errorFileUpload": "Failed to upload file. Please try again.",
-	"@errorFileUpload": {
+	"fileUploadError": "Failed to upload file. Please try again.",
+	"@fileUploadError": {
 		"description": "Error shown when file upload fails"
 	},
-	"errorFileSize": "File size exceeds the maximum limit.",
-	"@errorFileSize": {
+	"fileTooLarge": "File size exceeds the maximum limit.",
+	"@fileTooLarge": {
 		"description": "Error shown when file is too large"
 	},
-	"errorInvalidOperation": "This operation cannot be performed right now.",
-	"@errorInvalidOperation": {
+	"invalidOperation": "This operation cannot be performed right now.",
+	"@invalidOperation": {
 		"description": "Error shown when operation is invalid in current context"
 	},
-	"errorLocationAccess": "Could not access your location. Please check your settings.",
-	"@errorLocationAccess": {
-		"description": "Error shown when location access is denied"
-	},
-	"errorDataLoading": "Failed to load data. Pull down to refresh.",
-	"@errorDataLoading": {
+	"loadingError": "Failed to load data. Pull down to refresh.",
+	"@loadingError": {
 		"description": "Error shown when data fails to load with refresh suggestion"
 	},
-	"errorFormValidation": "Please check the form for errors.",
-	"@errorFormValidation": {
+	"invalidFormInput": "Please check the form for errors.",
+	"@invalidFormInput": {
 		"description": "General form validation error"
 	},
-	"successAccountCreated": "Account created successfully! Please verify your email.",
-	"@successAccountCreated": {
+	"accountRegistered": "Account created successfully! Please verify your email.",
+	"@accountRegistered": {
 		"description": "Success message after account creation"
 	},
-	"successPasswordReset": "Password reset email sent. Please check your inbox.",
-	"@successPasswordReset": {
+	"passwordResetEmailSent": "Password reset email sent. Please check your inbox.",
+	"@passwordResetEmailSent": {
 		"description": "Success message after password reset request"
 	},
-	"successProfileUpdated": "Profile updated successfully.",
-	"@successProfileUpdated": {
+	"profileUpdated": "Profile updated successfully.",
+	"@profileUpdated": {
 		"description": "Success message after profile update"
-	},
-	"infoDataRefreshed": "Information updated.",
-	"@infoDataRefreshed": {
-		"description": "Information message when data is refreshed"
-	},
-	"infoVerificationEmailSent": "Verification email sent. Please check your inbox.",
-	"@infoVerificationEmailSent": {
-		"description": "Information about verification email being sent"
 	},
 	"home": "Home",
 	"@home": {

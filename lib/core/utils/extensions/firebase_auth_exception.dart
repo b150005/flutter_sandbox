@@ -1,44 +1,43 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../config/firebase/error_code.dart';
+import '../../config/firebase/firebase_error_code.dart';
+import '../../config/l10n/app_localizations.dart';
 import '../exceptions/app_exception.dart';
-import '../l10n/app_localizations.dart';
 import '../logging/logger.dart';
 
 extension FirebaseAuthExceptionExtension on FirebaseAuthException {
-  AppException toAppException(Ref ref) {
-    final l10n = ref.read(appLocalizationsProvider);
-
+  AppException toAppException(AppLocalizations l10n) {
     switch (code) {
-      case ErrorCode.invalidEmail:
-        return AppException.badRequest(l10n.errorInvalidEmailFormat);
-      case ErrorCode.emailAlreadyInUse:
-        return AppException.conflict(l10n.errorEmailAlreadyInUse);
-      case ErrorCode.userDisabled:
-        return AppException.forbidden(l10n.errorAccountDisabled);
-      case ErrorCode.userNotFound:
-        return AppException.notFound(l10n.errorInvalidEmailOrPassword);
-      case ErrorCode.weakPassword:
-        return AppException.upgradeRequired(l10n.errorWeakPassword);
-      case ErrorCode.wrongPassword:
-        return AppException.unauthorized(l10n.errorInvalidEmailOrPassword);
-      case ErrorCode.tooManyRequests:
-        return AppException.tooManyRequests(l10n.errorTooManyAttempts);
-      case ErrorCode.userTokenExpired:
-        return AppException.unauthorized(l10n.errorSessionExpired);
-      case ErrorCode.networkRequestFailed:
-        return AppException.serviceUnavailable(l10n.errorNetworkConnection);
-      case ErrorCode.invalidLoginCredentials || ErrorCode.invalidCredential:
-        return AppException.unauthorized(l10n.errorAuthenticationFailed);
-      case ErrorCode.operationNotAllowed:
-        return AppException.forbidden(l10n.errorAuthenticationFailed);
+      case FirebaseErrorCode.invalidEmail:
+        return AppException.badRequest(l10n.invalidEmailFormat);
+      case FirebaseErrorCode.emailAlreadyInUse:
+        return AppException.conflict(l10n.registeredEmail);
+      case FirebaseErrorCode.userDisabled:
+        return AppException.forbidden(l10n.accountDisabled);
+      case FirebaseErrorCode.userNotFound:
+        return AppException.notFound(l10n.authenticationFailed);
+      case FirebaseErrorCode.weakPassword:
+        return AppException.upgradeRequired(l10n.weakPassword);
+      case FirebaseErrorCode.wrongPassword:
+        return AppException.unauthorized(l10n.invalidEmailOrPassword);
+      case FirebaseErrorCode.tooManyRequests:
+        return AppException.tooManyRequests(l10n.tooManyAttempts);
+      case FirebaseErrorCode.userTokenExpired:
+        return AppException.unauthorized(l10n.sessionExpired);
+      case FirebaseErrorCode.networkRequestFailed:
+        return AppException.serviceUnavailable(l10n.networkConnectionError);
+      case FirebaseErrorCode.invalidLoginCredentials ||
+          FirebaseErrorCode.invalidCredential:
+        return AppException.unauthorized(l10n.authenticationFailed);
+      case FirebaseErrorCode.operationNotAllowed:
+        return AppException.forbidden(l10n.authenticationFailed);
       default:
         Logger.instance.w(message);
 
-        return AppException.unknown(l10n.errorAuthenticationFailed);
+        return AppException.unknown(l10n.authenticationFailed);
     }
   }
 
-  String toLocalizedMessage(Ref ref) => toAppException(ref).message;
+  String toLocalizedMessage(AppLocalizations l10n) =>
+      toAppException(l10n).message;
 }

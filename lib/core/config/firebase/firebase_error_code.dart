@@ -1,6 +1,6 @@
 /// FirebaseException のエラーコード
-final class ErrorCode {
-  const ErrorCode._();
+final class FirebaseErrorCode {
+  const FirebaseErrorCode._();
 
   /// メールアドレスの形式が不正である
   static const invalidEmail = 'invalid-email';

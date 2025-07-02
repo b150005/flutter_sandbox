@@ -40,9 +40,7 @@ class AuthRepository extends _$AuthRepository {
 
       final l10n = ref.read(appLocalizationsProvider);
 
-      throw AppException.serviceUnavailable(
-        l10n.errorServiceTemporarilyUnavailable,
-      );
+      throw AppException.serviceUnavailable(l10n.serviceTemporarilyUnavailable);
     }
   }
 
@@ -60,7 +58,9 @@ class AuthRepository extends _$AuthRepository {
     } on FirebaseAuthException catch (error, stackTrace) {
       Logger.instance.e(error.message, error: error, stackTrace: stackTrace);
 
-      return Result.error(error.toAppException(ref));
+      final l10n = ref.read(appLocalizationsProvider);
+
+      return Result.error(error.toAppException(l10n));
     } on Exception catch (error, stackTrace) {
       Logger.instance.e(
         LogMessage.unhandledError,
