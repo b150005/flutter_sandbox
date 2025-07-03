@@ -17,10 +17,11 @@ class LoginForm extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final errorMessage = useState<String?>(null);
+
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
 
-    final errorMessage = useState<String?>(null);
     final isLoading = useState<bool>(false);
 
     final l10n = ref.watch(appLocalizationsProvider);
