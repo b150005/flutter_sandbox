@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide ScaffoldMessenger;
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -28,6 +29,7 @@ part '../../ui/sample/widgets/sample_screen.dart';
 part '../../ui/sample/firebase/widgets/firebase_screen.dart';
 part '../../ui/settings/widgets/settings_screen.dart';
 part '../../ui/sample/firebase/login/widgets/login_screen.dart';
+part '../../ui/sample/firebase/signup/widgets/sign_up_screen.dart';
 
 @Riverpod(keepAlive: true)
 class Router extends _$Router {
@@ -49,8 +51,7 @@ class Router extends _$Router {
     ),
     initialLocation: HomeScreenRoute.path,
     observers: [GoRouterObserver()],
-    // TODO(b150005): GoRouterObserver が完成したら有効化する
-    // debugLogDiagnostics: kDebugMode,
+    debugLogDiagnostics: kDebugMode,
     navigatorKey: rootNavigatorKey,
   );
 
