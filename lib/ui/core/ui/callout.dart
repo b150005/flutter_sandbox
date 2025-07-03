@@ -76,7 +76,7 @@ class Callout extends StatelessWidget {
                 message,
                 style: Theme.of(context)
                     .extension<TextStyles>()
-                    ?.emphasisLargeStyle
+                    ?.emphasisBodyLargeStyle
                     ?.copyWith(color: type.foregroundColor),
               ),
             ),
