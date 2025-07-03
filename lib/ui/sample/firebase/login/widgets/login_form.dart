@@ -3,14 +3,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/config/constants/sizes.dart';
-import '../../../../../core/config/constants/text_input_formatters.dart';
 import '../../../../../core/config/constants/widget_keys.dart';
-import '../../../../../core/utils/authentications/firebase_auth_validator.dart';
 import '../../../../../core/utils/extensions/string.dart';
 import '../../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../../data/repositories/firebase/auth/auth_repository.dart';
-import '../../../../core/themes/extensions/input_decoration_styles.dart';
 import '../../../../core/ui/callout.dart';
+import '../../../../core/ui/email_text_form_field.dart';
+import '../../../../core/ui/password_text_form_field.dart';
 
 class LoginForm extends HookConsumerWidget {
   const LoginForm({super.key});
@@ -37,38 +36,13 @@ class LoginForm extends HookConsumerWidget {
               type: CalloutType.error,
               onDismiss: () => errorMessage.value = null,
             ),
-          TextFormField(
-            key: WidgetKeys.email,
+          EmailTextFormField(
             controller: emailController,
-            decoration: Theme.of(context)
-                .extension<InputDecorationStyles>()
-                ?.outlined
-                .copyWith(hintText: l10n.email),
-            keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
-            autocorrect: false,
-            validator: (email) =>
-                FirebaseAuthValidator.validateEmail(email, l10n: l10n),
-            inputFormatters: [TextInputFormatters.noWhitespace],
-            autovalidateMode: AutovalidateMode.onUserInteraction,
           ),
-          TextFormField(
-            key: WidgetKeys.password,
+          PasswordTextFormField(
             controller: passwordController,
-            decoration: Theme.of(context)
-                .extension<InputDecorationStyles>()
-                ?.outlined
-                .copyWith(hintText: l10n.password),
-            keyboardType: TextInputType.visiblePassword,
             textInputAction: TextInputAction.done,
-            obscureText: true,
-            autocorrect: false,
-            enableSuggestions: false,
-            maxLength: FirebaseAuthValidator.passwordMaxLength,
-            validator: (password) =>
-                FirebaseAuthValidator.validatePassword(password, l10n: l10n),
-            inputFormatters: [TextInputFormatters.noWhitespace],
-            autovalidateMode: AutovalidateMode.onUserInteraction,
           ),
           Align(
             alignment: Alignment.centerRight,
