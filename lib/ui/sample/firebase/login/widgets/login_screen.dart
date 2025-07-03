@@ -30,7 +30,7 @@ class LoginScreen extends ConsumerWidget {
             const LoginForm(),
             OutlinedButton(
               key: WidgetKeys.signUp,
-              onPressed: () {},
+              onPressed: () => context.go(SignUpScreenRoute.absolutePath),
               style: OutlinedButton.styleFrom(minimumSize: ButtonSize.lg.size),
               child: Text(l10n.signUp),
             ),

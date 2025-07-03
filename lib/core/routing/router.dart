@@ -74,10 +74,14 @@ class Router extends _$Router {
   }
 
   bool _requiresAuth(Uri uri) {
+    const authExcludedPaths = [SignUpScreenRoute.absolutePath];
     const authRequiredPaths = [FirebaseScreenRoute.absolutePath];
 
-    return authRequiredPaths.any(
-      (authRequiredPath) => uri.path.startsWith(authRequiredPath),
-    );
+    return !authExcludedPaths.any(
+          (authExcludedPath) => uri.path == authExcludedPath,
+        ) &&
+        authRequiredPaths.any(
+          (authRequiredPath) => uri.path.startsWith(authRequiredPath),
+        );
   }
 }

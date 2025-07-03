@@ -24,6 +24,10 @@ part of '../router.dart';
                   path: LoginScreenRoute.path,
                   name: LoginScreenRoute.path,
                 ),
+                TypedGoRoute<SignUpScreenRoute>(
+                  path: SignUpScreenRoute.path,
+                  name: SignUpScreenRoute.path,
+                ),
               ],
             ),
           ],
