@@ -105,6 +105,10 @@ final class Env implements EnvField {
 
   @override
   @EnviedField()
+  final String firebaseWebDatabaseUrl = instance.firebaseWebDatabaseUrl;
+
+  @override
+  @EnviedField()
   final String firebaseWebStorageBucket = instance.firebaseWebStorageBucket;
 
   @override

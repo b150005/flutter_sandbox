@@ -13,6 +13,7 @@ abstract interface class EnvField {
   abstract final String firebaseWebMessagingSenderId;
   abstract final String firebaseWebProjectId;
   abstract final String firebaseWebAuthDomain;
+  abstract final String firebaseWebDatabaseUrl;
   abstract final String firebaseWebStorageBucket;
   abstract final String firebaseWebMeasurementId;
   abstract final String firebaseAndroidApiKey;

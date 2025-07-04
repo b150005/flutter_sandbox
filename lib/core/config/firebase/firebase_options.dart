@@ -48,6 +48,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: Env.instance.firebaseWebMessagingSenderId,
     projectId: Env.instance.firebaseWebProjectId,
     authDomain: Env.instance.firebaseWebAuthDomain,
+    databaseURL: Env.instance.firebaseWebDatabaseUrl,
     storageBucket: Env.instance.firebaseWebStorageBucket,
     measurementId: Env.instance.firebaseWebMeasurementId,
   );
