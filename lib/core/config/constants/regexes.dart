@@ -1,10 +1,13 @@
-abstract final class Regexes {
-  const Regexes._();
+enum Regexes {
+  email(r'^[^@]+@[^@]+\.[^@]{2,}$'),
+  whitespace(r'\s'),
+  uppercase(r'[A-Z]'),
+  lowercase(r'[a-z]'),
+  digit(r'[0-9]');
 
-  static final email = RegExp(r'^[^@]+@[^@]+\.[^@]{2,}$');
+  const Regexes(this.source);
 
-  static final whitespace = RegExp(r'\s');
-  static final uppercase = RegExp(r'[A-Z]');
-  static final lowercase = RegExp(r'[a-z]');
-  static final number = RegExp(r'[0-9]');
+  final String source;
+
+  RegExp get regExp => RegExp(source);
 }

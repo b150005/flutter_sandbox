@@ -6,6 +6,6 @@ abstract final class TextInputFormatters {
   const TextInputFormatters._();
 
   static final noWhitespace = FilteringTextInputFormatter.deny(
-    Regexes.whitespace,
+    Regexes.whitespace.regExp,
   );
 }
