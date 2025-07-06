@@ -12,14 +12,10 @@ import '../../../../core/utils/logging/logger.dart';
 part 'auth_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-FirebaseAuth firebaseAuth(Ref ref) {
-  return FirebaseAuth.instance;
-}
+FirebaseAuth firebaseAuth(Ref ref) => FirebaseAuth.instance;
 
 @Riverpod(keepAlive: true)
-User? currentUser(Ref ref) {
-  return ref.watch(firebaseAuthProvider).currentUser;
-}
+User? currentUser(Ref ref) => ref.watch(firebaseAuthProvider).currentUser;
 
 @riverpod
 class AuthRepository extends _$AuthRepository {
@@ -78,14 +74,14 @@ class AuthRepository extends _$AuthRepository {
   Future<Result<UserCredential, AppException>> createUserWithEmailAndPassword({
     required String email,
     required String password,
-  }) {
+  }) => _executeWithFirebaseAuth(() {
     final auth = ref.read(firebaseAuthProvider);
 
-    return _executeWithFirebaseAuth(
-      () =>
-          auth.createUserWithEmailAndPassword(email: email, password: password),
+    return auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
     );
-  }
+  });
 
   /// メールアドレスとパスワードを用いてサインインを行う
   ///
@@ -93,11 +89,9 @@ class AuthRepository extends _$AuthRepository {
   Future<Result<UserCredential, AppException>> signInWithEmailAndPassword({
     required String email,
     required String password,
-  }) {
+  }) => _executeWithFirebaseAuth(() {
     final auth = ref.read(firebaseAuthProvider);
 
-    return _executeWithFirebaseAuth(
-      () => auth.signInWithEmailAndPassword(email: email, password: password),
-    );
-  }
+    return auth.signInWithEmailAndPassword(email: email, password: password);
+  });
 }
