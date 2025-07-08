@@ -76,6 +76,14 @@ final class Env implements EnvField {
 
   @override
   @EnviedField()
+  final String origin = instance.origin;
+
+  @override
+  @EnviedField()
+  final String host = instance.host;
+
+  @override
+  @EnviedField()
   final String webDescription = instance.webDescription;
 
   @override

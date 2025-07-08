@@ -1,0 +1,26 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "L9ZR4679P5.com.example.flutterSandbox.development",
+          "L9ZR4679P5.com.example.flutterSandbox.staging",
+          "L9ZR4679P5.com.example.flutterSandbox"
+        ],
+        "components": [
+          {
+            "/": "/*",
+            "comment": "Matches all paths and opens all URLs from this domain in the app across development, staging, and production environments."
+          }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "L9ZR4679P5.com.example.flutterSandbox.development",
+      "L9ZR4679P5.com.example.flutterSandbox.staging",
+      "L9ZR4679P5.com.example.flutterSandbox"
+    ]
+  }
+}

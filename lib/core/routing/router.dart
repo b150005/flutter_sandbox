@@ -9,15 +9,18 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../data/repositories/firebase/auth/auth_repository.dart';
+import '../../ui/core/themes/extensions/text_styles.dart';
 import '../../ui/core/ui/adaptive_scaffold.dart';
 import '../../ui/core/ui/utils/scaffold_messenger.dart';
 import '../../ui/sample/firebase/login/widgets/login_form.dart';
+import '../../ui/sample/firebase/signup/widgets/sign_up_form.dart';
 import '../../ui/sample/widgets/grid_view_settings_expansion_tile.dart';
 import '../../ui/sample/widgets/sample_content_card.dart';
 import '../config/constants/assets.dart';
 import '../config/constants/sizes.dart';
 import '../config/constants/widget_keys.dart';
 import '../config/l10n/app_localizations.dart' as l10n;
+import '../utils/exceptions/app_exception.dart';
 import '../utils/l10n/app_localizations.dart';
 import '../utils/logging/go_router_observer.dart';
 import '../utils/riverpod/provider_change_notifier.dart';
@@ -30,6 +33,7 @@ part '../../ui/sample/firebase/widgets/firebase_screen.dart';
 part '../../ui/settings/widgets/settings_screen.dart';
 part '../../ui/sample/firebase/login/widgets/login_screen.dart';
 part '../../ui/sample/firebase/signup/widgets/sign_up_screen.dart';
+part '../../ui/sample/firebase/signup/email-sent/widgets/email_sent_screen.dart';
 
 @Riverpod(keepAlive: true)
 class Router extends _$Router {
@@ -74,14 +78,14 @@ class Router extends _$Router {
   }
 
   bool _requiresAuth(Uri uri) {
-    const authExcludedPaths = [SignUpScreenRoute.absolutePath];
-    const authRequiredPaths = [FirebaseScreenRoute.absolutePath];
+    const authExcludedPaths = [
+      SignUpScreenRoute.absolutePath,
+      EmailSentScreenRoute.absolutePath,
+    ];
 
-    return !authExcludedPaths.any(
+    return uri.path.startsWith(FirebaseScreenRoute.absolutePath) &&
+        !authExcludedPaths.any(
           (authExcludedPath) => uri.path == authExcludedPath,
-        ) &&
-        authRequiredPaths.any(
-          (authRequiredPath) => uri.path.startsWith(authRequiredPath),
         );
   }
 }

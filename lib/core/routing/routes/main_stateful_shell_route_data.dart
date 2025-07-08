@@ -27,6 +27,12 @@ part of '../router.dart';
                 TypedGoRoute<SignUpScreenRoute>(
                   path: SignUpScreenRoute.path,
                   name: SignUpScreenRoute.path,
+                  routes: [
+                    TypedGoRoute<EmailSentScreenRoute>(
+                      path: EmailSentScreenRoute.path,
+                      name: EmailSentScreenRoute.path,
+                    ),
+                  ],
                 ),
               ],
             ),

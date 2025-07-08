@@ -96,6 +96,14 @@
 	"@profileUpdated": {
 		"description": "Success message after profile update"
 	},
+	"sharedPreferencesKeyNotFound": "指定されたデータが見つかりませんでした。",
+	"@sharedPreferencesKeyNotFound": {
+		"description": "Error message shown when a value for the specified SharedPreferences key is not found."
+	},
+	"signInWithEmailLinkSuccessfully": "サインインに成功しました。アカウントの作成を完了するため、パスワードを設定してください。",
+	"@signInWithEmailLinkSuccessfully": {
+		"description": "Message shown when sign-in with email link succeeds"
+	},
 	"home": "ホーム",
 	"@home": {
 		"description": "Label for the Home tab in NavigationBar and NavigationRail"
@@ -127,6 +135,22 @@
 	"signUp": "新規登録",
 	"@signUp": {
 		"description": "Sign Up"
+	},
+	"signUpDescription": "Sandbox を始める前に、アカウントを作成しましょう。",
+	"@signUpDescription": {
+		"description": "Description text displayed on the sign up screen to encourage users to create an account"
+	},
+	"alreadyHaveAccount": "すでにアカウントをお持ちですか?",
+	"@alreadyHaveAccount": {
+		"description": "Text asking if user already has an account, typically followed by a sign in link"
+	},
+	"sentSignUpVerificationEmail": "認証メールを送信しました。メールに記載された認証 URL からユーザー登録を完了してください。",
+	"@sentSignUpVerificationEmail": {
+		"description": "Message shown after sending a verification email, instructing the user to complete registration via the link in the email."
+	},
+	"invalidVerificationEmailLink": "認証リンクが無効または期限切れです。再度認証メールを送信してやり直してください。",
+	"@invalidVerificationEmailLink": {
+		"description": "Error message shown when the email link is invalid or expired during sign-in with email link."
 	},
 	"settings": "設定",
 	"@settings": {

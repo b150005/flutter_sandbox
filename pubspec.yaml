@@ -30,6 +30,8 @@ dependencies:
   flutter_hooks:
   flutter_localizations:
     sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
   freezed_annotation:
   go_router:
   hooks_riverpod: ^3.0.0-dev.16
@@ -39,6 +41,7 @@ dependencies:
   multiple_result:
   responsive_framework:
   riverpod_annotation: ^3.0.0-dev.16
+  shared_preferences:
   stack_trace:
   window_manager:
 

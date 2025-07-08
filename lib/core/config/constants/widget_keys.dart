@@ -4,6 +4,7 @@ abstract final class WidgetKeys {
   const WidgetKeys._();
 
   static final loginForm = LabeledGlobalKey<FormState>('loginForm');
+  static final signUpForm = LabeledGlobalKey<FormState>('signUpForm');
 
   static const ValueKey<String> email = ValueKey('email');
   static const ValueKey<String> password = ValueKey('password');

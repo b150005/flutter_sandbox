@@ -96,6 +96,14 @@
 	"@profileUpdated": {
 		"description": "Success message after profile update"
 	},
+	"sharedPreferencesKeyNotFound": "The specified data could not be found.",
+	"@sharedPreferencesKeyNotFound": {
+		"description": "Error message shown when a value for the specified SharedPreferences key is not found."
+	},
+	"signInWithEmailLinkSuccessfully": "You're signed in successfully. Now, set your password to finish your accountr setup.",
+	"@signInWithEmailLinkSuccessfully": {
+		"description": "Message shown when sign-in with email link succeeds"
+	},
 	"home": "Home",
 	"@home": {
 		"description": "Label for the Home tab in NavigationBar and NavigationRail"
@@ -127,6 +135,22 @@
 	"signUp": "Sign Up",
 	"@signUp": {
 		"description": "Sign Up"
+	},
+	"signUpDescription": "Create an account and verify your details to dive into Sandbox.",
+	"@signUpDescription": {
+		"description": "Description text displayed on the sign up screen to encourage users to create an account"
+	},
+	"alreadyHaveAccount": "Have an account already?",
+	"@alreadyHaveAccount": {
+		"description": "Text asking if user already has an account, typically followed by a sign in link"
+	},
+	"sentSignUpVerificationEmail": "A verification email has been sent. Please complete your registration by clicking the verification URL in the email.",
+	"@sentSignUpVerificationEmail": {
+		"description": "Message shown after sending a verification email, instructing the user to complete registration via the link in the email."
+	},
+	"invalidVerificationEmailLink": "This verification link is invalid or has expired. Please request a new verification email.",
+	"@invalidVerificationEmailLink": {
+		"description": "Error message shown when the email link is invalid or expired during sign-in with email link."
 	},
 	"settings": "Settings",
 	"@settings": {

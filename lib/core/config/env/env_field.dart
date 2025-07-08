@@ -6,6 +6,8 @@ abstract interface class EnvField {
   abstract final String appId;
   abstract final String androidNdkVersion;
   abstract final String androidMinSdk;
+  abstract final String origin;
+  abstract final String host;
   abstract final String webDescription;
   abstract final String themeColor;
   abstract final String firebaseWebApiKey;

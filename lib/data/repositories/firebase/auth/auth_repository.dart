@@ -1,13 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../../../core/config/env/env.dart';
 import '../../../../core/utils/exceptions/app_exception.dart';
 import '../../../../core/utils/extensions/firebase_auth_exception.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../core/utils/logging/log_message.dart';
 import '../../../../core/utils/logging/logger.dart';
+import '../../shared_preferences/shared_preferences_repository.dart';
 
 part 'auth_repository.g.dart';
 
@@ -67,6 +70,64 @@ class AuthRepository extends _$AuthRepository {
       return const Result.error(AppException.unknown());
     }
   }
+
+  /// メールリンク認証の URL が記載されたメールを送信する
+  ///
+  /// @see [Authenticate with Firebase Using Email Links](https://firebase.google.com/docs/auth/flutter/email-link-auth)
+  /// @see [Passing State in Email Actions](https://firebase.google.com/docs/auth/flutter/passing-state-in-email-actions)
+  Future<Result<void, AppException>> sendSignInLinkToEmail({
+    required String email,
+  }) => _executeWithFirebaseAuth(() async {
+    final auth = ref.read(firebaseAuthProvider);
+
+    final actionCodeSettings = ActionCodeSettings(
+      androidPackageName: Env.instance.appId,
+      handleCodeInApp: true,
+      iOSBundleId: Env.instance.bundleId,
+      // TODO(b150005): プラットフォームごとに以下の対応を実施する
+      // @see https://docs.flutter.dev/ui/navigation/deep-linking
+      // @see https://codewithandrea.com/articles/flutter-deep-links/
+      // Web: 特になし
+      // iOS/Android: Universal Links, App Linksの設定ファイルをホスティング
+      // macOS/Windows: カスタムURLスキーマを設定(macOS: Info.plist, Windows: msix_config)
+      url: kIsDev && kDebugMode && kIsWeb
+          ? 'http://localhost:5500'
+          : Env.instance.origin,
+    );
+
+    await auth.sendSignInLinkToEmail(
+      email: email,
+      actionCodeSettings: actionCodeSettings,
+    );
+
+    await ref
+        .read(sharedPreferencesRepositoryProvider)
+        .setString(SharedPreferencesKeys.emailForSignIn.name, email);
+  });
+
+  /// メールリンク認証を用いてサインインを行う
+  ///
+  /// @see [Complete sign in with the email link](https://firebase.google.com/docs/auth/flutter/email-link-auth#complete_sign_in_with_the_email_link)
+  Future<Result<UserCredential, AppException>> signInWithEmailLink({
+    required String emailLink,
+  }) => _executeWithFirebaseAuth(() async {
+    final auth = ref.read(firebaseAuthProvider);
+    final l10n = ref.read(appLocalizationsProvider);
+
+    if (!auth.isSignInWithEmailLink(emailLink)) {
+      throw AppException.badRequest(l10n.invalidVerificationEmailLink);
+    }
+
+    final email = await ref
+        .read(sharedPreferencesRepositoryProvider)
+        .getString(SharedPreferencesKeys.emailForSignIn.name);
+
+    if (email == null) {
+      throw AppException.notFound(l10n.sharedPreferencesKeyNotFound);
+    }
+
+    return auth.signInWithEmailLink(email: email, emailLink: emailLink);
+  });
 
   /// メールアドレスとパスワードを用いてユーザを作成する
   ///
