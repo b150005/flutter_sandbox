@@ -42,6 +42,7 @@
       "name": "[Web] development - debug",
       "type": "dart",
       "request": "launch",
+      "deviceId": "chrome",
       "program": "lib/main.dart",
       "flutterMode": "debug",
       "preLaunchTask": "pre-launch-web-development",
@@ -49,13 +50,13 @@
         "--dart-define-from-file=lib/core/config/env/development.env",
         "--wasm",
         "--web-port=5500",
-        "--device-id=chrome",
       ],
     },
     {
       "name": "[Web] staging - debug",
       "type": "dart",
       "request": "launch",
+      "deviceId": "chrome",
       "program": "lib/main.dart",
       "flutterMode": "debug",
       "preLaunchTask": "pre-launch-web-staging",
@@ -63,13 +64,13 @@
         "--dart-define-from-file=lib/core/config/env/staging.env",
         "--wasm",
         "--web-port=6600",
-        "--device-id=chrome",
       ],
     },
     {
       "name": "[Web] production - debug",
       "type": "dart",
       "request": "launch",
+      "deviceId": "chrome",
       "program": "lib/main.dart",
       "flutterMode": "debug",
       "preLaunchTask": "pre-launch-web-production",
@@ -77,14 +78,13 @@
         "--dart-define-from-file=lib/core/config/env/production.env",
         "--wasm",
         "--web-port=7700",
-        "--device-id=chrome",
       ],
     },
     {
       "name": "Cloud Functions - debug",
       "type": "node",
       "request": "attach",
-      "port": 9229
+      "port": 9229,
     }
   ]
 }
