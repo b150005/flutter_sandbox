@@ -11,6 +11,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../data/repositories/firebase/auth/auth_repository.dart';
 import '../../ui/core/themes/extensions/text_styles.dart';
 import '../../ui/core/ui/layouts/adaptive_scaffold.dart';
+import '../../ui/core/ui/layouts/scrollable_container.dart';
 import '../../ui/core/ui/utils/scaffold_messenger.dart';
 import '../../ui/sample/firebase/login/widgets/login_form.dart';
 import '../../ui/sample/firebase/signup/widgets/sign_up_form.dart';

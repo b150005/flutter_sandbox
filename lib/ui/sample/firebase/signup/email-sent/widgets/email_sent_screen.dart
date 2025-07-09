@@ -16,20 +16,17 @@ class EmailSentScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
 
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.all(Spacing.sm.dp),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          spacing: Spacing.xxxl.dp,
-          children: [
-            SizedBox(
-              width: IconSize.xxxl.dp,
-              child: Image.asset(Assets.firebase.path),
-            ),
-            Text(l10n.sentSignUpVerificationEmail),
-          ],
-        ),
+    return ScrollableContainer(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        spacing: Spacing.xxxl.dp,
+        children: [
+          SizedBox(
+            width: IconSize.xxxl.dp,
+            child: Image.asset(Assets.firebase.path),
+          ),
+          Text(l10n.sentSignUpVerificationEmail),
+        ],
       ),
     );
   }
