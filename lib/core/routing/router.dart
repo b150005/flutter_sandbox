@@ -20,7 +20,6 @@ import '../config/constants/assets.dart';
 import '../config/constants/sizes.dart';
 import '../config/constants/widget_keys.dart';
 import '../config/l10n/app_localizations.dart' as l10n;
-import '../utils/exceptions/app_exception.dart';
 import '../utils/l10n/app_localizations.dart';
 import '../utils/logging/go_router_observer.dart';
 import '../utils/riverpod/provider_change_notifier.dart';
