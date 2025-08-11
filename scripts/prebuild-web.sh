@@ -5,8 +5,12 @@
 set -e
 
 ENVIRONMENT_FILE="$1"
-OUTPUT_FILE="web/index.html"
-TEMPLATE_FILE="web/index.html.template"
+DOCUMENT="web/index.html"
+DOCUMENT_TEMPLATE="web/index.html.template"
+AASA="web/.well-known/apple-app-site-association"
+AASA_TEMPLATE="web/.well-known/apple-app-site-association.template"
+ASSETLINKS="web/.well-known/assetlinks.json"
+ASSETLINKS_TEMPLATE="web/.well-known/assetlinks.json.template"
 
 if [[ -z "$ENVIRONMENT_FILE" ]]; then
   echo "❌ Error: No environment file specified."
@@ -19,16 +23,26 @@ if [[ ! -f "$ENVIRONMENT_FILE" ]]; then
   exit 1
 fi
 
-if [[ ! -f "$TEMPLATE_FILE" ]]; then
-  echo "❌ Template file not found: $TEMPLATE_FILE"
+if [[ ! -f "$DOCUMENT_TEMPLATE" ]]; then
+  echo "❌ Template file not found: $DOCUMENT_TEMPLATE"
+  exit 1
+fi
+
+if [[ ! -f "$AASA_TEMPLATE" ]]; then
+  echo "❌ Apple App Site Association template file not found: $AASA_TEMPLATE"
+  exit 1
+fi
+
+if [[ ! -f "$ASSETLINKS_TEMPLATE" ]]; then
+  echo "❌ Android App Links template file not found: $ASSETLINKS_TEMPLATE"
   exit 1
 fi
 
 echo "🔍 Processing environment file for Web: $ENVIRONMENT_FILE"
-echo "📄 Template: $TEMPLATE_FILE"
-echo "📄 Output: $OUTPUT_FILE"
 
-cp "$TEMPLATE_FILE" "$OUTPUT_FILE"
+cp "$DOCUMENT_TEMPLATE" "$DOCUMENT"
+cp "$AASA_TEMPLATE" "$AASA"
+cp "$ASSETLINKS_TEMPLATE" "$ASSETLINKS"
 
 # 一時ファイルを使って環境変数を保存
 temp_env_file=$(mktemp)
@@ -108,19 +122,32 @@ while IFS='|' read -r key value; do
     escaped_value=$(printf '%s\n' "$value" | sed 's/[[\.*^$()+?{|]/\\&/g')
 
     # テンプレート内の {{key}} を値で置換
-    if sed -i.bak "s|{{$key}}|$escaped_value|g" "$OUTPUT_FILE" 2>/dev/null; then
-      # macOS対応（.bakファイルを削除）
-      rm -f "$OUTPUT_FILE.bak"
+    if sed -i.bak "s|{{$key}}|$escaped_value|g" "$DOCUMENT" 2>/dev/null; then
+      rm -f "$DOCUMENT.bak"
     else
-      # Linux対応
-      sed -i "s|{{$key}}|$escaped_value|g" "$OUTPUT_FILE"
+      sed -i "s|{{$key}}|$escaped_value|g" "$DOCUMENT"
     fi
+
+    if sed -i.bak "s|{{$key}}|$escaped_value|g" "$AASA" 2>/dev/null; then
+      rm -f "$AASA.bak"
+    else
+      sed -i "s|{{$key}}|$escaped_value|g" "$AASA"
+    fi
+
+    if sed -i.bak "s|{{$key}}|$escaped_value|g" "$ASSETLINKS" 2>/dev/null; then
+      rm -f "$ASSETLINKS.bak"
+    else
+      sed -i "s|{{$key}}|$escaped_value|g" "$ASSETLINKS"
+    fi
+
     echo "   🔄 Replaced {{$key}}"
   fi
 done < "$temp_env_file"
 
 echo ""
 echo "✅ Web build completed successfully!"
-echo "🎯 Generated file: $OUTPUT_FILE"
+echo "🎯 Generated file: $DOCUMENT"
+echo "🎯 Generated file: $AASA"
+echo "🎯 Generated file: $ASSETLINKS"
 echo ""
 echo "💡 Tip: You can now run 'flutter run -d chrome' to start your web app."

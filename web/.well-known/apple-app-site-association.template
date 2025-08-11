@@ -3,7 +3,7 @@
     "details": [
       {
         "appIDs": [
-          "L9ZR4679P5.com.example.flutterSandbox.development"
+          "{{TEAM_ID}}.{{BUNDLE_ID}}"
         ],
         "components": [
           {
@@ -16,7 +16,7 @@
   },
   "webcredentials": {
     "apps": [
-      "L9ZR4679P5.com.example.flutterSandbox.development"
+      "{{TEAM_ID}}.{{BUNDLE_ID}}"
     ]
   }
 }

@@ -42,10 +42,14 @@ post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_macos_build_settings(target)
 
-    # Fix deployment target conflicts caused by Firebase/CocoaPods dependencies
-    # https://stackoverflow.com/questions/74843052/macosx-deployment-target-keeps-reverting-to-old-values
     target.build_configurations.each do |config|
+      # Fix deployment target conflicts caused by Firebase/CocoaPods dependencies
+      # https://stackoverflow.com/questions/74843052/macosx-deployment-target-keeps-reverting-to-old-values
       config.build_settings['MACOSX_DEPLOYMENT_TARGET'] = MACOS_DEPLOYMENT_TARGET
+
+      # Fix 'no such module' errors for CocoaPods dependencies on macOS
+      # https://stackoverflow.com/questions/77453413/xcode-no-such-module-error-on-all-cocoapods-pods-in-mac-m1
+      config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
     end
   end
 end

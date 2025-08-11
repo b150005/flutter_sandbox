@@ -12,6 +12,7 @@ environment:
 dependencies:
   cloud_firestore:
   cloud_functions:
+  cupertino_icons:
   envied:
   firebase_analytics:
   firebase_app_check:
@@ -34,13 +35,13 @@ dependencies:
     sdk: flutter
   freezed_annotation:
   go_router:
-  hooks_riverpod: ^3.0.0-dev.16
+  hooks_riverpod: ^3.0.0-dev.17
   intl:
   logger:
   logging:
   multiple_result:
   responsive_framework:
-  riverpod_annotation: ^3.0.0-dev.16
+  riverpod_annotation: ^3.0.0-dev.17
   shared_preferences:
   stack_trace:
   window_manager:
@@ -56,12 +57,18 @@ dev_dependencies:
     sdk: flutter
   freezed:
   go_router_builder:
+    # go_router_builder が source_gen の ^3.0.0 に非対応である問題の workaround
+    # https://github.com/flutter/flutter/issues/170832
+    git:
+      url: https://github.com/koji-1009/packages.git
+      path: packages/go_router_builder
+      ref: feat/element2
   integration_test:
     sdk: flutter
   mockito:
   pedantic_mono:
-  riverpod_generator: ^3.0.0-dev.16
-  riverpod_lint: ^3.0.0-dev.16
+  riverpod_generator: ^3.0.0-dev.17
+  riverpod_lint: ^3.0.0-dev.17
 
 flutter:
   uses-material-design: true

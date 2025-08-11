@@ -134,6 +134,9 @@ android {
 
         // Specify application name
         resValue("string", "app_name", getEnvProperty("APP_NAME"))
+
+        // Specify application host
+        resValue("string", "host", getEnvProperty("HOST"))
     }
 
     buildTypes {

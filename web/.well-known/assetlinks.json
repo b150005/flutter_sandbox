@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.example.flutterSandbox.development",
+      "sha256_cert_fingerprints": [
+        "DE:EA:31:CF:A3:86:6E:96:A9:BA:23:FE:41:B0:70:48:81:D5:45:CB:13:FA:27:4B:D1:26:B4:45:FD:D5:7A:F0"
+      ]
+    }
+  }
+]
