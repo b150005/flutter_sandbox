@@ -1,4 +1,5 @@
 import 'package:envied/envied.dart';
+import 'package:flutter/foundation.dart';
 
 import 'env_field.dart';
 
@@ -60,6 +61,10 @@ final class Env implements EnvField {
 
   @override
   @EnviedField()
+  final String teamId = instance.teamId;
+
+  @override
+  @EnviedField()
   final String bundleId = instance.bundleId;
 
   @override
@@ -76,11 +81,13 @@ final class Env implements EnvField {
 
   @override
   @EnviedField()
-  final String origin = instance.origin;
+  final String sha256CertFingerprints = instance.sha256CertFingerprints;
 
   @override
   @EnviedField()
-  final String host = instance.host;
+  final String origin = kIsDev && kDebugMode && kIsWeb
+      ? 'http://localhost:5500'
+      : instance.origin;
 
   @override
   @EnviedField()
@@ -89,6 +96,12 @@ final class Env implements EnvField {
   @override
   @EnviedField()
   final String themeColor = instance.themeColor;
+
+  @override
+  @EnviedField()
+  final String host = kIsDev && kDebugMode && kIsWeb
+      ? 'localhost:5500'
+      : instance.host;
 
   @override
   @EnviedField()
@@ -266,4 +279,12 @@ final class Env implements EnvField {
   @EnviedField()
   final String firebaseDataConnectServiceId =
       instance.firebaseDataConnectServiceId;
+
+  @override
+  @EnviedField()
+  final String recaptchaSiteKey = instance.recaptchaSiteKey;
+
+  @override
+  @EnviedField()
+  final String recaptchaSecretKey = instance.recaptchaSecretKey;
 }

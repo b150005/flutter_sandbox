@@ -56,9 +56,13 @@ firebase/local_emulator/*
 
 # Environment variables
 *.env
+!sample.env
 Env.xcconfig
 
 # Code generation tools related
 *.g.dart
 *.freezed.dart
 lib/core/config/l10n/app_localizations*.dart
+
+# Ignore generated credentials from google-github-actions/auth
+gha-creds-*.json

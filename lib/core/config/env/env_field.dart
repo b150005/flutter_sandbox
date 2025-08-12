@@ -2,14 +2,16 @@ abstract interface class EnvField {
   abstract final String appEnv;
   abstract final String capitalizedAppEnv;
   abstract final String appName;
+  abstract final String teamId;
   abstract final String bundleId;
   abstract final String appId;
   abstract final String androidNdkVersion;
   abstract final String androidMinSdk;
+  abstract final String sha256CertFingerprints;
   abstract final String origin;
-  abstract final String host;
   abstract final String webDescription;
   abstract final String themeColor;
+  abstract final String host;
   abstract final String firebaseWebApiKey;
   abstract final String firebaseWebAppId;
   abstract final String firebaseWebMessagingSenderId;
@@ -51,4 +53,6 @@ abstract interface class EnvField {
   abstract final String firebaseDataConnectLocation;
   abstract final String firebaseDataConnectConnector;
   abstract final String firebaseDataConnectServiceId;
+  abstract final String recaptchaSiteKey;
+  abstract final String recaptchaSecretKey;
 }
