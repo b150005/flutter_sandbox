@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
@@ -92,6 +95,8 @@ abstract class AppInitializerProtocol {
           '✅ Firebase Local Emulator Suite'
           ' connections established successfully!',
         );
+
+        _initializeErrorHandlers();
       } on Exception catch (error, stackTrace) {
         Logger.instance.e(
           '❌ Firebase Local Emulator connection failed'
@@ -113,5 +118,31 @@ abstract class AppInitializerProtocol {
         );
       }
     }
+  }
+
+  /// @see [Configure crash handlers](https://firebase.google.com/docs/crashlytics/get-started?platform=flutter#configure-crash-handlers)
+  /// @see [Handling errors in Flutter](https://docs.flutter.dev/testing/errors)
+  void _initializeErrorHandlers() {
+    FlutterError.onError = (flutterErrorDetails) {
+      FlutterError.presentError(flutterErrorDetails);
+
+      FirebaseCrashlytics.instance.recordFlutterFatalError(flutterErrorDetails);
+
+      if (kReleaseMode) {
+        exit(1);
+      }
+    };
+
+    PlatformDispatcher.instance.onError = (error, stackTrace) {
+      Logger.instance.e(
+        error.toString(),
+        error: error,
+        stackTrace: stackTrace,
+        logsAnalyticsEvent: false,
+        logsCrashlyticsMessage: false,
+      );
+
+      return true;
+    };
   }
 }
