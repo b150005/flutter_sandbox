@@ -233,7 +233,7 @@ class Logger extends logger.Logger {
   /// Firebase Crashlytics にエラーを記録する
   Future<void> _recordCrashlyticsError(
     dynamic exception,
-    StackTrace? stack, {
+    StackTrace? stackTrace, {
     dynamic reason,
     Iterable<Object> information = const [],
     bool? printDetails,
@@ -243,22 +243,14 @@ class Logger extends logger.Logger {
       return;
     }
 
-    try {
-      return FirebaseCrashlytics.instance.recordError(
-        exception,
-        stack,
-        reason: reason,
-        information: information,
-        printDetails: printDetails,
-        fatal: fatal,
-      );
-    } on Exception catch (error, stackTrace) {
-      super.e(
-        'Failed to record crashlytics error: $exception',
-        error: error,
-        stackTrace: stackTrace,
-      );
-    }
+    await FirebaseCrashlytics.instance.recordError(
+      exception,
+      stackTrace,
+      reason: reason,
+      information: information,
+      printDetails: printDetails,
+      fatal: fatal,
+    );
   }
 
   /// Firebase Crashlytics にログを送信する
@@ -267,15 +259,7 @@ class Logger extends logger.Logger {
       return;
     }
 
-    try {
-      return FirebaseCrashlytics.instance.log(message.toString());
-    } on Exception catch (error, stackTrace) {
-      super.w(
-        'Failed to send crashlytics log: $message',
-        error: error,
-        stackTrace: stackTrace,
-      );
-    }
+    await FirebaseCrashlytics.instance.log(message.toString());
   }
 
   /// スタックチェーンからスタックトレースを取得する
