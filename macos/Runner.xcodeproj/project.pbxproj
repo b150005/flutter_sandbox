@@ -234,12 +234,12 @@
 			buildConfigurationList = 33CC10FB2044A3C60003C045 /* Build configuration list for PBXNativeTarget "Runner" */;
 			buildPhases = (
 				EFB5D29154AE1169A146B29B /* [CP] Check Pods Manifest.lock */,
-				14F03D6E2DEAEC7A0098A65A /* ShellScript */,
+				14F03D6E2DEAEC7A0098A65A /* Run Script */,
 				33CC10E92044A3C60003C045 /* Sources */,
 				33CC10EA2044A3C60003C045 /* Frameworks */,
 				33CC10EB2044A3C60003C045 /* Resources */,
 				33CC110E2044A8840003C045 /* Bundle Framework */,
-				3399D490228B24CF009A79C7 /* ShellScript */,
+				3399D490228B24CF009A79C7 /* Run Script */,
 				D3738CCA889F090F55B2B4B2 /* FlutterFire: "flutterfire bundle-service-file" */,
 				CF00D14BBA336DFA466CEFCE /* FlutterFire: "flutterfire upload-crashlytics-symbols" */,
 				DAE0756762092D31FD1630CE /* [CP] Embed Pods Frameworks */,
@@ -325,24 +325,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		14F03D6E2DEAEC7A0098A65A /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/bin/sh \"${SRCROOT}/Script/copy-google-service-info-plist.sh\"\n";
-		};
-		3399D490228B24CF009A79C7 /* ShellScript */ = {
+		14F03D6E2DEAEC7A0098A65A /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -352,6 +335,26 @@
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh \"${SRCROOT}/Script/copy-google-service-info-plist.sh\"\n";
+		};
+		3399D490228B24CF009A79C7 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -404,6 +407,7 @@
 		};
 		CF00D14BBA336DFA466CEFCE /* FlutterFire: "flutterfire upload-crashlytics-symbols" */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 12;
 			files = (
 			);
@@ -422,6 +426,7 @@
 		};
 		D3738CCA889F090F55B2B4B2 /* FlutterFire: "flutterfire bundle-service-file" */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
