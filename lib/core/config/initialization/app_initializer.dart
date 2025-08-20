@@ -12,6 +12,7 @@ import 'package:flutter/foundation.dart';
 import '../../../data/services/firebase/dataconnect/firebase_data_connect.dart';
 import '../../utils/exceptions/app_exception.dart';
 import '../../utils/logging/logger.dart';
+import '../capabilities/package_capability.dart';
 import '../env/env.dart';
 
 import '../firebase/firebase_options.dart';
@@ -64,27 +65,33 @@ abstract class AppInitializerProtocol {
       try {
         const host = 'localhost';
 
-        FirebaseDataConnect.instance.dataConnect.useDataConnectEmulator(
-          host,
-          _Firebase.dataConnect.port,
-        );
+        if (PackageCapability.supportsDataConnect) {
+          FirebaseDataConnect.instance.dataConnect.useDataConnectEmulator(
+            host,
+            _Firebase.dataConnect.port,
+          );
+        }
 
         await FirebaseAuth.instance.useAuthEmulator(host, _Firebase.auth.port);
 
-        FirebaseFunctions.instance.useFunctionsEmulator(
-          host,
-          _Firebase.cloudFunctions.port,
-        );
+        if (PackageCapability.supportsCloudFunctions) {
+          FirebaseFunctions.instance.useFunctionsEmulator(
+            host,
+            _Firebase.cloudFunctions.port,
+          );
+        }
 
         FirebaseFirestore.instance.useFirestoreEmulator(
           host,
           _Firebase.firestore.port,
         );
 
-        FirebaseDatabase.instance.useDatabaseEmulator(
-          host,
-          _Firebase.realtimeDatabase.port,
-        );
+        if (PackageCapability.supportsFirebaseRealtimeDatabase) {
+          FirebaseDatabase.instance.useDatabaseEmulator(
+            host,
+            _Firebase.realtimeDatabase.port,
+          );
+        }
 
         await FirebaseStorage.instance.useStorageEmulator(
           host,
@@ -126,7 +133,11 @@ abstract class AppInitializerProtocol {
     FlutterError.onError = (flutterErrorDetails) {
       FlutterError.presentError(flutterErrorDetails);
 
-      FirebaseCrashlytics.instance.recordFlutterFatalError(flutterErrorDetails);
+      if (PackageCapability.supportsFirebaseCrashlytics) {
+        FirebaseCrashlytics.instance.recordFlutterFatalError(
+          flutterErrorDetails,
+        );
+      }
 
       if (kReleaseMode) {
         exit(1);

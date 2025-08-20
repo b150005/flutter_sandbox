@@ -5,6 +5,7 @@ import 'package:logger/logger.dart' as logger;
 import 'package:logging/logging.dart' as logging;
 import 'package:stack_trace/stack_trace.dart';
 
+import '../../config/capabilities/package_capability.dart';
 import '../../config/env/env.dart';
 import 'log_level_converter.dart';
 import 'log_output.dart';
@@ -23,6 +24,7 @@ import 'log_printer.dart';
 ///   - `fatal`: [開発・運用者向け] 即時対応が必要な、重大なエラー情報
 ///
 /// @warning Firebase Analytics, Crashlytics に情報を送信する場合は `info` レベル以上を使用してください。
+/// @warning Firebase Analytics, Crashlytics に非対応のプラットフォームではロギングのみ実行されます。
 ///
 /// @see [Flutter アプリケーションでの効果的なログ出力](https://zenn.dev/honda9135/articles/181ea0d490c073)
 class Logger extends logger.Logger {
@@ -57,7 +59,7 @@ class Logger extends logger.Logger {
     bool? personalizationStorageConsentGranted,
     bool? securityStorageConsentGranted,
   }) async {
-    if (Firebase.apps.isEmpty) {
+    if (Firebase.apps.isEmpty || !PackageCapability.supportsFirebaseAnalytics) {
       return this;
     }
 
@@ -88,7 +90,7 @@ class Logger extends logger.Logger {
   ///
   /// @see [Configure Analytics data collection and usage](https://firebase.google.com/docs/analytics/configure-data-collection)
   Future<Logger> analyticsCollectionEnabled({required bool enabled}) async {
-    if (Firebase.apps.isEmpty) {
+    if (Firebase.apps.isEmpty || !PackageCapability.supportsFirebaseAnalytics) {
       return this;
     }
 
@@ -109,7 +111,7 @@ class Logger extends logger.Logger {
   ///
   /// @see [Set a user ID](https://firebase.google.com/docs/analytics/userid)
   Future<Logger> userId(String? id) async {
-    if (Firebase.apps.isEmpty) {
+    if (Firebase.apps.isEmpty || !PackageCapability.supportsFirebaseAnalytics) {
       return this;
     }
 
@@ -132,7 +134,7 @@ class Logger extends logger.Logger {
   Future<Logger> defaultEventParameters(
     Map<String, Object?>? defaultParameters,
   ) async {
-    if (Firebase.apps.isEmpty) {
+    if (Firebase.apps.isEmpty || !PackageCapability.supportsFirebaseAnalytics) {
       return this;
     }
 
@@ -155,7 +157,9 @@ class Logger extends logger.Logger {
   ///
   /// @see [Set user properties](https://firebase.google.com/docs/analytics/user-properties?platform=flutter)
   Future<Logger> userProperty(Map<String, String?> properties) async {
-    if (Firebase.apps.isEmpty || properties.isEmpty) {
+    if (Firebase.apps.isEmpty ||
+        properties.isEmpty ||
+        !PackageCapability.supportsFirebaseAnalytics) {
       return this;
     }
 
@@ -184,7 +188,7 @@ class Logger extends logger.Logger {
     Map<String, Object>? parameters,
     AnalyticsCallOptions? callOptions,
   ) async {
-    if (Firebase.apps.isEmpty) {
+    if (Firebase.apps.isEmpty || !PackageCapability.supportsFirebaseAnalytics) {
       return;
     }
 
@@ -212,7 +216,7 @@ class Logger extends logger.Logger {
     String name, {
     Map<String, String>? parameters,
   }) async {
-    if (Firebase.apps.isEmpty) {
+    if (Firebase.apps.isEmpty || !PackageCapability.supportsFirebaseAnalytics) {
       return;
     }
 
@@ -239,7 +243,8 @@ class Logger extends logger.Logger {
     bool? printDetails,
     bool fatal = false,
   }) async {
-    if (Firebase.apps.isEmpty) {
+    if (Firebase.apps.isEmpty ||
+        !PackageCapability.supportsFirebaseCrashlytics) {
       return;
     }
 
@@ -255,7 +260,8 @@ class Logger extends logger.Logger {
 
   /// Firebase Crashlytics にログを送信する
   Future<void> _logCrashlyticsMessage(dynamic message) async {
-    if (Firebase.apps.isEmpty) {
+    if (Firebase.apps.isEmpty ||
+        !PackageCapability.supportsFirebaseCrashlytics) {
       return;
     }
 

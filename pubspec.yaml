@@ -14,6 +14,7 @@ dependencies:
   cloud_functions:
   cupertino_icons:
   envied:
+  firebase_ai:
   firebase_analytics:
   firebase_app_check:
   firebase_app_installations:

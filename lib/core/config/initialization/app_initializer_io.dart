@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
-import '../capabilities/window_capability.dart';
+import '../capabilities/package_capability.dart';
 import '../constants/window_size.dart';
 import 'app_initializer.dart';
 
@@ -12,7 +12,7 @@ final class AppInitializerImpl extends AppInitializerProtocol {
 
     await super.initializeFirebaseApp();
 
-    if (WindowCapability.supportsWindowManager) {
+    if (PackageCapability.supportsWindowManager) {
       await windowManager.ensureInitialized();
 
       final windowOptions = WindowOptions(minimumSize: WindowSize.min.size);
