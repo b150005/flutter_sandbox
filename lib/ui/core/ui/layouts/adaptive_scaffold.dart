@@ -32,6 +32,11 @@ class AdaptiveScaffold extends ConsumerWidget {
     ];
 
     return Scaffold(
+      appBar: switch (DesignPolicy.chooseNavigationLayout(context)) {
+        // TODO(b150005): AppBar のグローバルな状態管理
+        NavigationLayout.bar => AppBar(),
+        _ => null,
+      },
       body: SafeArea(
         // FIXME: Focus Traversal で非表示中のタブ(Branch)のウィジェットが traversable である問題
         child: switch (DesignPolicy.chooseNavigationLayout(context)) {
