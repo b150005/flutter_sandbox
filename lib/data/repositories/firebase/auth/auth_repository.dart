@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../core/config/env/env.dart';
+import '../../../../core/routing/router.dart';
 import '../../../../core/utils/exceptions/app_exception.dart';
 import '../../../../core/utils/extensions/firebase_auth_exception.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
@@ -90,9 +90,7 @@ class AuthRepository extends _$AuthRepository {
       // Web: 特になし
       // iOS/Android: Universal Links, App Linksの設定ファイルをホスティング
       // macOS/Windows: カスタムURLスキーマを設定(macOS: Info.plist, Windows: msix_config)
-      url: kIsDev && kDebugMode && kIsWeb
-          ? 'http://localhost:5500'
-          : Env.instance.origin,
+      url: Env.instance.origin + VerifyEmailScreenRoute.absolutePath,
     );
 
     await auth.sendSignInLinkToEmail(

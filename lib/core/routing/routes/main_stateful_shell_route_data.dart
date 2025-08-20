@@ -32,6 +32,10 @@ part of '../router.dart';
                       path: EmailSentScreenRoute.path,
                       name: EmailSentScreenRoute.path,
                     ),
+                    TypedGoRoute<VerifyEmailScreenRoute>(
+                      path: VerifyEmailScreenRoute.path,
+                      name: VerifyEmailScreenRoute.path,
+                    ),
                   ],
                 ),
               ],

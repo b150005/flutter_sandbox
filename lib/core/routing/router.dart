@@ -21,6 +21,7 @@ import '../config/constants/assets.dart';
 import '../config/constants/sizes.dart';
 import '../config/constants/widget_keys.dart';
 import '../config/l10n/app_localizations.dart' as l10n;
+import '../utils/exceptions/app_exception.dart';
 import '../utils/l10n/app_localizations.dart';
 import '../utils/logging/go_router_observer.dart';
 import '../utils/riverpod/provider_change_notifier.dart';
@@ -34,6 +35,7 @@ part '../../ui/settings/widgets/settings_screen.dart';
 part '../../ui/sample/firebase/login/widgets/login_screen.dart';
 part '../../ui/sample/firebase/signup/widgets/sign_up_screen.dart';
 part '../../ui/sample/firebase/signup/email-sent/widgets/email_sent_screen.dart';
+part '../../ui/sample/firebase/signup/verify-email/widgets/verify_email_screen.dart';
 
 @Riverpod(keepAlive: true)
 class Router extends _$Router {
@@ -70,7 +72,7 @@ class Router extends _$Router {
       return LoginScreenRoute.absolutePath;
     }
 
-    if (uri.path == LoginScreenRoute.absolutePath) {
+    if (uri.path == LoginScreenRoute.absolutePath && isLoggedIn) {
       return FirebaseScreenRoute.absolutePath;
     }
 
@@ -79,8 +81,10 @@ class Router extends _$Router {
 
   bool _requiresAuth(Uri uri) {
     const authExcludedPaths = [
+      LoginScreenRoute.absolutePath,
       SignUpScreenRoute.absolutePath,
       EmailSentScreenRoute.absolutePath,
+      VerifyEmailScreenRoute.absolutePath,
     ];
 
     return uri.path.startsWith(FirebaseScreenRoute.absolutePath) &&
