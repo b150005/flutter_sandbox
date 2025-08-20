@@ -42,32 +42,32 @@ class SignUpForm extends HookConsumerWidget {
           ),
           FilledButton(
             key: WidgetKeys.signUp,
-            onPressed: () async {
-              if (isLoading.value) {
-                return;
-              }
+            onPressed: isLoading.value
+                ? null
+                : () async {
+                    isLoading.value = true;
 
-              isLoading.value = true;
+                    if (!WidgetKeys.signUpForm.currentState!.validate()) {
+                      isLoading.value = false;
+                      return;
+                    }
 
-              if (!WidgetKeys.signUpForm.currentState!.validate()) {
-                isLoading.value = false;
-                return;
-              }
+                    final result = await ref
+                        .read(authRepositoryProvider.notifier)
+                        .sendSignInLinkToEmail(
+                          email: emailController.text.trim(),
+                        );
 
-              final result = await ref
-                  .read(authRepositoryProvider.notifier)
-                  .sendSignInLinkToEmail(email: emailController.text.trim());
+                    result.whenError(
+                      (exception) => errorMessage.value = exception.message,
+                    );
 
-              result.whenError(
-                (exception) => errorMessage.value = exception.message,
-              );
+                    if (result.isSuccess() && context.mounted) {
+                      context.go(EmailSentScreenRoute.absolutePath);
+                    }
 
-              isLoading.value = false;
-
-              if (result.isSuccess() && context.mounted) {
-                context.go(EmailSentScreenRoute.absolutePath);
-              }
-            },
+                    isLoading.value = false;
+                  },
             style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
             child: isLoading.value
                 ? const CircularProgressIndicator.adaptive()
