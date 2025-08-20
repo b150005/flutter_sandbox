@@ -8,8 +8,6 @@ class FirebaseDataConnect {
 
   data_connect.FirebaseDataConnect dataConnect;
 
-  static final Env _env = Env.instance;
-
   static final instance = FirebaseDataConnect(
     dataConnect: data_connect.FirebaseDataConnect.instanceFor(
       connectorConfig: connectorConfig,
@@ -17,8 +15,8 @@ class FirebaseDataConnect {
   );
 
   static final connectorConfig = data_connect.ConnectorConfig(
-    _env.firebaseDataConnectLocation,
-    _env.firebaseDataConnectConnector,
-    _env.firebaseDataConnectServiceId,
+    Env.instance.firebaseDataConnectLocation,
+    Env.instance.firebaseDataConnectConnector,
+    Env.instance.firebaseDataConnectServiceId,
   );
 }
