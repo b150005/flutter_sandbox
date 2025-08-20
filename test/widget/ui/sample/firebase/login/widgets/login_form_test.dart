@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sandbox/core/config/constants/sizes.dart';
+import 'package:flutter_sandbox/core/config/constants/button_size.dart';
 import 'package:flutter_sandbox/core/config/constants/text_input_formatters.dart';
 import 'package:flutter_sandbox/core/config/constants/widget_keys.dart';
 import 'package:flutter_sandbox/core/config/l10n/app_localizations.dart'

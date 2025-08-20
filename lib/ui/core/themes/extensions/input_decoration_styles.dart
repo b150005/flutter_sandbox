@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/config/constants/border.dart';
-import '../../../../core/config/constants/colors.dart';
-import '../../../../core/config/constants/sizes.dart';
+import '../../../../core/config/constants/alpha_channel.dart';
+import '../../../../core/config/constants/border_radii.dart';
+import '../../../../core/config/constants/border_width.dart';
+import '../../../../core/config/constants/icon_size.dart';
+import '../../../../core/config/constants/spacing.dart';
 
 @immutable
 class InputDecorationStyles extends ThemeExtension<InputDecorationStyles> {

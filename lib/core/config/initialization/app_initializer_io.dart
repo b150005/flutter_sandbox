@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
-import '../capabilities/window.dart';
-import '../constants/sizes.dart';
+import '../capabilities/window_capability.dart';
+import '../constants/window_size.dart';
 import 'app_initializer.dart';
 
 final class AppInitializerImpl extends AppInitializerProtocol {

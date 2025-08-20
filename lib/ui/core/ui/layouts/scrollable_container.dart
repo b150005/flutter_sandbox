@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/config/constants/sizes.dart';
+import '../../../../core/config/constants/spacing.dart';
 
 class ScrollableContainer extends StatelessWidget {
   const ScrollableContainer({super.key, this.child});

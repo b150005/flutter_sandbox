@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/config/constants/colors.dart';
+import '../../../../core/config/constants/alpha_channel.dart';
 
 @immutable
 class TextStyles extends ThemeExtension<TextStyles> {

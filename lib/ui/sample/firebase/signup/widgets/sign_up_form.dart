@@ -3,7 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../core/config/constants/sizes.dart';
+import '../../../../../core/config/constants/button_size.dart';
+import '../../../../../core/config/constants/spacing.dart';
 import '../../../../../core/config/constants/widget_keys.dart';
 import '../../../../../core/routing/router.dart';
 import '../../../../../core/utils/extensions/string.dart';

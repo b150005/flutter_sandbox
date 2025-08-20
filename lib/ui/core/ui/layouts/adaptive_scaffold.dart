@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/config/constants/sizes.dart';
-import '../../../../core/config/policies/design.dart';
+import '../../../../core/config/constants/spacing.dart';
+import '../../../../core/config/policies/design_policy.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
 
 class _Destination {

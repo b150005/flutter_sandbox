@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/config/constants/border.dart';
-import '../../../core/config/constants/sizes.dart';
+import '../../../core/config/constants/border_radii.dart';
+import '../../../core/config/constants/icon_size.dart';
+import '../../../core/config/constants/spacing.dart';
 import '../../../core/config/l10n/app_localizations.dart';
 import '../themes/extensions/text_styles.dart';
 
