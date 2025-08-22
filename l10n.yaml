@@ -2,6 +2,3 @@
 
 arb-dir: lib/core/config/l10n/arb
 output-dir: lib/core/config/l10n
-# package:flutter_gen を使用しない
-# https://docs.flutter.dev/release/breaking-changes/flutter-generate-i10n-source
-synthetic-package: false
