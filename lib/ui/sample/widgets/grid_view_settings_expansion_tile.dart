@@ -61,8 +61,8 @@ class GridViewSettingsExpansionTile<T> extends StatelessWidget {
         .map(
           (option) => _GridViewSettingsListTile(
             option: option,
-            onControllerChanged: this.onControllerChanged,
-            onPrimaryChanged: this.onPrimaryChanged,
+            onControllerChanged: onControllerChanged,
+            onPrimaryChanged: onPrimaryChanged,
           ),
         )
         .toList(),
