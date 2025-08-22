@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -80,6 +81,10 @@ class AuthRepository extends _$AuthRepository {
   }) => _executeWithFirebaseAuth(() async {
     final auth = ref.read(firebaseAuthProvider);
 
+    final origin = kIsDev && kDebugMode && kIsWeb
+        ? 'http://localhost:5500'
+        : Env.instance.origin;
+
     final actionCodeSettings = ActionCodeSettings(
       androidPackageName: Env.instance.appId,
       handleCodeInApp: true,
@@ -90,7 +95,7 @@ class AuthRepository extends _$AuthRepository {
       // Web: 特になし
       // iOS/Android: Universal Links, App Linksの設定ファイルをホスティング
       // macOS/Windows: カスタムURLスキーマを設定(macOS: Info.plist, Windows: msix_config)
-      url: Env.instance.origin + VerifyEmailScreenRoute.absolutePath,
+      url: origin + VerifyEmailScreenRoute.absolutePath,
     );
 
     await auth.sendSignInLinkToEmail(

@@ -85,9 +85,7 @@ final class Env implements EnvField {
 
   @override
   @EnviedField()
-  final String origin = kIsDev && kDebugMode && kIsWeb
-      ? 'http://localhost:5500'
-      : instance.origin;
+  final String origin = instance.origin;
 
   @override
   @EnviedField()
