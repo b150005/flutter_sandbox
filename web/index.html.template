@@ -36,7 +36,7 @@
   <meta property="og:title" content="{{APP_NAME}}">
   <meta property="og:description" content="{{WEB_DESCRIPTION}}">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://example.com">
+  <meta property="og:url" content="{{ORIGIN}}">
   <meta property="og:image" content="icons/ogp-{{APP_ENV}}.png">
   <meta property="og:site_name" content="{{APP_NAME}}">
 
@@ -50,6 +50,11 @@
   <link rel="manifest" href="manifest-{{APP_ENV}}.json">
   <meta name="theme-color" content="{{THEME_COLOR}}">
   <meta name="msapplication-TileColor" content="{{THEME_COLOR}}">
+
+  <!-- Enable multi-threading for WebAssembly(https://docs.flutter.dev/platform-integration/web/wasm) -->
+  <!--  -->
+  <meta http-equiv="Cross-Origin-Embedder-Policy" content="credentialless">
+  <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
 
   <script>
     // 実行時に baseUrl を設定
