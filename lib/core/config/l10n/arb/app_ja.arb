@@ -116,6 +116,10 @@
 	"@loginScreenDescription": {
 		"description": "Description for the Firebase page"
 	},
+	"localStorageScreenDescription": "Local Storage 機能のデモ画面です。",
+	"@localStorageScreenDescription": {
+		"description": "Description for the Local Storage page"
+	},
 	"email": "メールアドレス",
 	"@email": {
 		"description": "Email"

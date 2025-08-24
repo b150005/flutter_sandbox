@@ -40,6 +40,10 @@ part of '../router.dart';
                 ),
               ],
             ),
+            TypedGoRoute<LocalStorageScreenRoute>(
+              path: LocalStorageScreenRoute.path,
+              name: LocalStorageScreenRoute.path,
+            ),
           ],
         ),
       ],

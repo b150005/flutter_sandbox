@@ -5,6 +5,11 @@ enum SampleContent {
     path: FirebaseScreenRoute.absolutePath,
     title: 'Firebase',
     subtitle: 'Firebase Login',
+  ),
+  localStorage(
+    path: LocalStorageScreenRoute.absolutePath,
+    title: 'Local Storage',
+    subtitle: 'Local Storage Sandbox',
   );
 
   const SampleContent({
@@ -23,6 +28,7 @@ enum SampleContent {
   String description(l10n.AppLocalizations l10n) {
     return switch (this) {
       firebase => l10n.loginScreenDescription,
+      localStorage => l10n.localStorageScreenDescription,
     };
   }
 }

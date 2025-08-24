@@ -116,6 +116,10 @@
 	"@loginScreenDescription": {
 		"description": "Description for the Firebase page"
 	},
+	"localStorageScreenDescription": "A comprehensive demo screen showcasing local storages.",
+	"@localStorageScreenDescription": {
+		"description": "Description for the Local Storage page"
+	},
 	"email": "Email",
 	"@email": {
 		"description": "Email"
