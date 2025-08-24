@@ -66,3 +66,10 @@ lib/core/config/l10n/app_localizations*.dart
 
 # Ignore generated credentials from google-github-actions/auth
 gha-creds-*.json
+
+# AI development assistants
+.serena/
+.claude/
+
+# Flutter DevTools configuration
+devtools_options.yaml
