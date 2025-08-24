@@ -39,7 +39,20 @@
       ],
     },
     {
-      "name": "[Web] development - debug",
+      "name": "[Web] development - debug(CanvasKit)",
+      "type": "dart",
+      "request": "launch",
+      "deviceId": "chrome",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "preLaunchTask": "pre-launch-web-development",
+      "args": [
+        "--dart-define-from-file=lib/core/config/env/development.env",
+        "--web-port=5500",
+      ],
+    },
+    {
+      "name": "[Web] development - debug(SKWasm)",
       "type": "dart",
       "request": "launch",
       "deviceId": "chrome",
