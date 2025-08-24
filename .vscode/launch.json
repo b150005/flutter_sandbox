@@ -48,6 +48,8 @@
       "preLaunchTask": "pre-launch-web-development",
       "args": [
         "--dart-define-from-file=lib/core/config/env/development.env",
+        "--web-header=Cross-Origin-Embedder-Policy=credentialless",
+        "--web-header=Cross-Origin-Opener-Policy=same-origin",
         "--web-port=5500",
       ],
     },
@@ -62,6 +64,8 @@
       "args": [
         "--dart-define-from-file=lib/core/config/env/development.env",
         "--wasm",
+        "--web-header=Cross-Origin-Embedder-Policy=credentialless",
+        "--web-header=Cross-Origin-Opener-Policy=same-origin",
         "--web-port=5500",
       ],
     },
@@ -76,6 +80,8 @@
       "args": [
         "--dart-define-from-file=lib/core/config/env/staging.env",
         "--wasm",
+        "--web-header=Cross-Origin-Embedder-Policy=credentialless",
+        "--web-header=Cross-Origin-Opener-Policy=same-origin",
         "--web-port=6600",
       ],
     },
@@ -90,6 +96,8 @@
       "args": [
         "--dart-define-from-file=lib/core/config/env/production.env",
         "--wasm",
+        "--web-header=Cross-Origin-Embedder-Policy=credentialless",
+        "--web-header=Cross-Origin-Opener-Policy=same-origin",
         "--web-port=7700",
       ],
     },

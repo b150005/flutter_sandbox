@@ -51,11 +51,6 @@
   <meta name="theme-color" content="{{THEME_COLOR}}">
   <meta name="msapplication-TileColor" content="{{THEME_COLOR}}">
 
-  <!-- Enable multi-threading for WebAssembly(https://docs.flutter.dev/platform-integration/web/wasm) -->
-  <!--  -->
-  <meta http-equiv="Cross-Origin-Embedder-Policy" content="credentialless">
-  <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
-
   <script>
     // 実行時に baseUrl を設定
     document.addEventListener('DOMContentLoaded', function () {
