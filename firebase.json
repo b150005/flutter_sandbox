@@ -194,6 +194,12 @@
         ]
       }
     ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
     "frameworksBackend": {
       "region": "asia-east1"
     }
