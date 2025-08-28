@@ -1,7 +1,7 @@
 part of '../../../../core/routing/router.dart';
 
 class FirebaseScreenRoute extends GoRouteData with _$FirebaseScreenRoute {
-  static const path = 'firebase';
+  static const path = '/firebase';
   static const absolutePath = '/sample/firebase';
 
   @override

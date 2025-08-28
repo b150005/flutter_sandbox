@@ -1,7 +1,7 @@
 part of '../../../../../../core/routing/router.dart';
 
 class EmailSentScreenRoute extends GoRouteData with _$EmailSentScreenRoute {
-  static const path = 'email-sent';
+  static const path = '/email-sent';
   static const absolutePath = '/sample/firebase/signup/email-sent';
 
   @override
