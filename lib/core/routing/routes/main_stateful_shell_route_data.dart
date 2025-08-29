@@ -1,9 +1,9 @@
 part of '../router.dart';
 
 @TypedStatefulShellRoute<MainStatefulShellRouteData>(
-  branches: [
+  branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
     TypedStatefulShellBranch<HomeStatefulShellBranchData>(
-      routes: [
+      routes: <TypedRoute<RouteData>>[
         TypedGoRoute<HomeScreenRoute>(
           path: HomeScreenRoute.path,
           name: HomeScreenRoute.path,
@@ -11,15 +11,15 @@ part of '../router.dart';
       ],
     ),
     TypedStatefulShellBranch<SampleStatefulShellBranchData>(
-      routes: [
+      routes: <TypedRoute<RouteData>>[
         TypedGoRoute<SampleScreenRoute>(
           path: SampleScreenRoute.path,
           name: SampleScreenRoute.path,
-          routes: [
+          routes: <TypedRoute<RouteData>>[
             TypedGoRoute<FirebaseScreenRoute>(
               path: FirebaseScreenRoute.path,
               name: FirebaseScreenRoute.path,
-              routes: [
+              routes: <TypedRoute<RouteData>>[
                 TypedGoRoute<LoginScreenRoute>(
                   path: LoginScreenRoute.path,
                   name: LoginScreenRoute.path,
@@ -27,7 +27,7 @@ part of '../router.dart';
                 TypedGoRoute<SignUpScreenRoute>(
                   path: SignUpScreenRoute.path,
                   name: SignUpScreenRoute.path,
-                  routes: [
+                  routes: <TypedRoute<RouteData>>[
                     TypedGoRoute<EmailSentScreenRoute>(
                       path: EmailSentScreenRoute.path,
                       name: EmailSentScreenRoute.path,
@@ -49,7 +49,7 @@ part of '../router.dart';
       ],
     ),
     TypedStatefulShellBranch<SettingsStatefulShellBranchData>(
-      routes: [
+      routes: <TypedRoute<RouteData>>[
         TypedGoRoute<SettingsScreenRoute>(
           path: SettingsScreenRoute.path,
           name: SettingsScreenRoute.path,
