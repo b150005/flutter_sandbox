@@ -22,6 +22,21 @@
       }
     },
     {
+      "label": "run-build-runner",
+      "type": "shell",
+      "command": "dart",
+      "args": [
+        "run",
+        "build_runner",
+        "build",
+        "-d",
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+      }
+    },
+    {
       "label": "pre-build-web-development",
       "type": "shell",
       "command": "${workspaceFolder}/scripts/prebuild-web.sh",
@@ -136,6 +151,7 @@
       "dependsOrder": "sequence",
       "dependsOn": [
         "compile-cloud-functions",
+        "run-build-runner",
         "firebase-emulators",
       ]
     },
@@ -144,6 +160,7 @@
       "dependsOrder": "sequence",
       "dependsOn": [
         "compile-cloud-functions",
+        "run-build-runner",
         "firebase-emulators",
         "pre-build-web-development"
       ]
@@ -153,6 +170,7 @@
       "dependsOrder": "sequence",
       "dependsOn": [
         "flutterfire-config-staging",
+        "run-build-runner",
         "pre-build-web-staging"
       ]
     },
@@ -161,6 +179,7 @@
       "dependsOrder": "sequence",
       "dependsOn": [
         "flutterfire-config-production",
+        "run-build-runner",
         "pre-build-web-production"
       ]
     },
