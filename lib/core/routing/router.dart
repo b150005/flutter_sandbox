@@ -22,7 +22,6 @@ import '../config/constants/spacing.dart';
 import '../config/constants/widget_keys.dart';
 import '../config/l10n/app_localizations.dart' as l10n;
 import '../utils/exceptions/app_exception.dart';
-import '../utils/extensions/num.dart';
 import '../utils/l10n/app_localizations.dart';
 import '../utils/logging/go_router_observer.dart';
 import '../utils/riverpod/provider_change_notifier.dart';
@@ -43,10 +42,6 @@ part '../../ui/settings/widgets/settings_screen.dart';
 class Router extends _$Router {
   static final rootNavigatorKey = GlobalKey<NavigatorState>(
     debugLabel: 'GoRouter Navigator',
-  );
-
-  static final shellRouteNavigatorKey = GlobalKey<NavigatorState>(
-    debugLabel: 'StatefulShellRoute Navigator',
   );
 
   @override

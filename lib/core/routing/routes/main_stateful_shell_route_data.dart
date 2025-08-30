@@ -60,7 +60,9 @@ part of '../router.dart';
 )
 class MainStatefulShellRouteData extends StatefulShellRouteData {
   static final GlobalKey<NavigatorState> $navigatorKey =
-      Router.shellRouteNavigatorKey;
+      GlobalKey<NavigatorState>(
+        debugLabel: 'StatefulShellRoute Navigator',
+      );
 
   @override
   Widget builder(
