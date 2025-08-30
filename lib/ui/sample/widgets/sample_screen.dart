@@ -44,9 +44,11 @@ class SampleScreenRoute extends GoRouteData with _$SampleScreenRoute {
 class SampleScreen extends HookConsumerWidget {
   const SampleScreen({super.key});
 
+  static const double maxCrossAxisExtent = 480;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) => GridView.extent(
-    maxCrossAxisExtent: 300.hardcoded.toDouble(),
+    maxCrossAxisExtent: maxCrossAxisExtent,
     children: SampleContent.values
         .map((content) => SampleContentCard(content: content))
         .toList(),
