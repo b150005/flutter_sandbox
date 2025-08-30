@@ -11,11 +11,18 @@ class PasswordTextFormField extends HookConsumerWidget {
   const PasswordTextFormField({
     super.key = WidgetKeys.password,
     this.controller,
+    this.hintText,
     this.textInputAction,
+    this.validator,
   });
 
   final TextEditingController? controller;
+
   final TextInputAction? textInputAction;
+
+  final String? hintText;
+
+  final String? Function(String? password)? validator;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,15 +34,17 @@ class PasswordTextFormField extends HookConsumerWidget {
       decoration: Theme.of(context)
           .extension<InputDecorationStyles>()
           ?.outlined
-          .copyWith(hintText: l10n.password),
+          .copyWith(hintText: hintText ?? l10n.password),
       keyboardType: TextInputType.visiblePassword,
       textInputAction: textInputAction,
       obscureText: true,
       autocorrect: false,
       enableSuggestions: false,
       maxLength: FirebaseAuthValidator.passwordMaxLength,
-      validator: (password) =>
-          FirebaseAuthValidator.validatePassword(password, l10n: l10n),
+      validator:
+          validator ??
+          (password) =>
+              FirebaseAuthValidator.validatePassword(password, l10n: l10n),
       inputFormatters: [TextInputFormatters.noWhitespace],
       autovalidateMode: AutovalidateMode.onUserInteraction,
     );
