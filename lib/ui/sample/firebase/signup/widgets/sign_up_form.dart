@@ -48,7 +48,8 @@ class SignUpForm extends HookConsumerWidget {
                 : () async {
                     isLoading.value = true;
 
-                    if (!WidgetKeys.signUpForm.currentState!.validate()) {
+                    if (WidgetKeys.signUpForm.currentState == null ||
+                        !WidgetKeys.signUpForm.currentState!.validate()) {
                       isLoading.value = false;
                       return;
                     }

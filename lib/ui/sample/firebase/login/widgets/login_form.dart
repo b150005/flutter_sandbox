@@ -64,7 +64,8 @@ class LoginForm extends HookConsumerWidget {
 
               isLoading.value = true;
 
-              if (!WidgetKeys.loginForm.currentState!.validate()) {
+              if (WidgetKeys.loginForm.currentState == null ||
+                  !WidgetKeys.loginForm.currentState!.validate()) {
                 isLoading.value = false;
                 return;
               }
