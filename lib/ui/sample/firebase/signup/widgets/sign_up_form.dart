@@ -60,13 +60,11 @@ class SignUpForm extends HookConsumerWidget {
                           email: emailController.text.trim(),
                         );
 
-                    result.whenError(
-                      (exception) => errorMessage.value = exception.message,
-                    );
-
-                    if (result.isSuccess() && context.mounted) {
-                      context.go(EmailSentScreenRoute.absolutePath);
-                    }
+                    result.when((_) {
+                      if (context.mounted) {
+                        context.go(EmailSentScreenRoute.absolutePath);
+                      }
+                    }, (exception) => errorMessage.value = exception.message);
 
                     isLoading.value = false;
                   },

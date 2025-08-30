@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/config/constants/button_size.dart';
 import '../../../../../core/config/constants/spacing.dart';
 import '../../../../../core/config/constants/widget_keys.dart';
+import '../../../../../core/routing/router.dart';
 import '../../../../../core/utils/extensions/string.dart';
 import '../../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../../data/repositories/firebase/auth/auth_repository.dart';
@@ -77,9 +79,11 @@ class LoginForm extends HookConsumerWidget {
                     password: passwordController.text.trim(),
                   );
 
-              result.whenError(
-                (exception) => errorMessage.value = exception.message,
-              );
+              result.when((_) {
+                if (context.mounted) {
+                  context.go(FirebaseScreenRoute.absolutePath);
+                }
+              }, (exception) => errorMessage.value = exception.message);
 
               isLoading.value = false;
             },
