@@ -22,6 +22,8 @@ class VerifyEmailScreen extends HookConsumerWidget {
 
     final errorMessage = useState<String?>(null);
 
+    final email = useState<String?>(null);
+
     final authRepository = ref.watch(authRepositoryProvider.notifier);
     final l10n = ref.watch(appLocalizationsProvider);
 
@@ -30,7 +32,10 @@ class VerifyEmailScreen extends HookConsumerWidget {
           .signInWithEmailLink(emailLink: emailLink.toString())
           .then(
             (result) => result.when(
-              (_) => screenState.value = _EmailVerificationState.success,
+              (credential) {
+                email.value = credential.user?.email;
+                screenState.value = _EmailVerificationState.success;
+              },
               (appException) {
                 errorMessage.value = appException.message;
 
@@ -58,6 +63,7 @@ class VerifyEmailScreen extends HookConsumerWidget {
           children: [
             Icon(Icons.check, size: IconSize.lg.iconSize),
             Text(l10n.signInWithEmailLinkSuccessfully),
+            if (email.value != null) PasswordSetupForm(email: email.value!),
           ],
         ),
       ),
@@ -76,7 +82,7 @@ class VerifyEmailScreen extends HookConsumerWidget {
           children: [
             Icon(Icons.warning_amber_outlined, size: IconSize.lg.iconSize),
             Text(errorMessage.value!),
-            // TODO(b150005): Form の作成
+            // TODO(b150005): メールアドレスを検証する Form の作成
           ],
         ),
       ),

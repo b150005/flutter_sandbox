@@ -98,7 +98,7 @@
 	},
 	"sharedPreferencesKeyNotFound": "The specified data could not be found.",
 	"@sharedPreferencesKeyNotFound": {
-		"description": "Error message shown when a value for the specified SharedPreferences key is not found."
+		"description": "Error message shown when a value for the specified SharedPreferences key is not found"
 	},
 	"signInWithEmailLinkSuccessfully": "You're signed in successfully. Now, set your password to finish your accountr setup.",
 	"@signInWithEmailLinkSuccessfully": {
@@ -112,7 +112,7 @@
 	"@sample": {
 		"description": "Label for the Sample tab in NavigationBar and NavigationRail"
 	},
-	"loginScreenDescription": "A comprehensive demo screen showcasing Firebase services.",
+	"loginScreenDescription": "A comprehensive demo screen showcasing Firebase services",
 	"@loginScreenDescription": {
 		"description": "Description for the Firebase page"
 	},
@@ -150,11 +150,43 @@
 	},
 	"sentSignUpVerificationEmail": "A verification email has been sent. Please complete your registration by clicking the verification URL in the email.",
 	"@sentSignUpVerificationEmail": {
-		"description": "Message shown after sending a verification email, instructing the user to complete registration via the link in the email."
+		"description": "Message shown after sending a verification email, instructing the user to complete registration via the link in the email"
 	},
 	"invalidVerificationEmailLink": "This verification link is invalid or has expired. Please request a new verification email.",
 	"@invalidVerificationEmailLink": {
-		"description": "Error message shown when the email link is invalid or expired during sign-in with email link."
+		"description": "Error message shown when the email link is invalid or expired during sign-in with email link"
+	},
+	"confirmPassword": "Confirm password",
+	"@confirmPassword": {
+		"description": "Hint text for passowrd confirmation field"
+	},
+	"passwordMismatch": "Passwords do not match.",
+	"@passwordMismatch": {
+		"description": "Error message shown when password and confirm password fields do not match"
+	},
+	"passwordMinLength": "Minimum 8 characters",
+	"@passwordMinLength": {
+		"description": "Password requirement message indicating the minimum character length"
+	},
+	"passwordMaxLength": "Maximum 4096 characters",
+	"@passwordMaxLength": {
+		"description": "Password requirement message indicating the maximum character length"
+	},
+	"atLeastOneUppercaseCharacter": "At least one UPPERCASE character",
+	"@atLeastOneUppercaseCharacter": {
+		"description": "Password requirement message for uppercase letter validation"
+	},
+	"atLeastOneLowercaseCharacter": "At least one lowercase character",
+	"@atLeastOneLowercaseCharacter": {
+		"description": "Password requirement message for lowercase letter validation"
+	},
+	"atLeastOneDigit": "At least one digit",
+	"@atLeastOneDigit": {
+		"description": "Password requirement message for numeric character validation"
+	},
+	"setUpPassword": "Set up Password",
+	"@setUpPassword": {
+		"description": "Set up Password"
 	},
 	"settings": "Settings",
 	"@settings": {

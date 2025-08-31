@@ -40,12 +40,48 @@ abstract final class FirebaseAuthValidator {
       throw UnimplementedError(LogMessage.canEnterWhitespace);
     }
 
-    if (password.trim().length < passwordMinLength ||
-        password.length > passwordMaxLength ||
-        !password.contains(Regexes.uppercase.regExp) ||
-        !password.contains(Regexes.lowercase.regExp) ||
-        !password.contains(Regexes.digit.regExp)) {
+    if (!satisfiesMinLength(password) ||
+        !satisfiesMaxLength(password) ||
+        !hasUppercase(password) ||
+        !hasLowercase(password) ||
+        !hasDigit(password)) {
       return l10n.nonCompliantPassword;
+    }
+
+    return null;
+  }
+
+  static bool satisfiesMinLength(String password) =>
+      password.trim().length >= passwordMinLength;
+
+  static bool satisfiesMaxLength(String password) =>
+      password.length <= passwordMaxLength;
+
+  static bool hasUppercase(String password) =>
+      password.contains(Regexes.uppercase.regExp);
+
+  static bool hasLowercase(String password) =>
+      password.contains(Regexes.lowercase.regExp);
+
+  static bool hasDigit(String password) =>
+      password.contains(Regexes.digit.regExp);
+
+  static String? validateConfirmPassword(
+    String? confirmPassword, {
+    required String password,
+    required AppLocalizations l10n,
+  }) {
+    if (password.isEmpty || confirmPassword.isNullOrEmpty) {
+      return l10n.requiredField;
+    }
+
+    if (password.contains(Regexes.whitespace.regExp) ||
+        confirmPassword!.contains(Regexes.whitespace.regExp)) {
+      throw UnimplementedError(LogMessage.canEnterWhitespace);
+    }
+
+    if (password != confirmPassword) {
+      return l10n.passwordMismatch;
     }
 
     return null;

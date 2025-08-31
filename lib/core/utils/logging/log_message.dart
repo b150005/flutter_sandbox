@@ -9,6 +9,8 @@ final class LogMessage {
 
   static const internalError = '❌ Internal error occurred';
 
+  static const invalidArgument = '❌ Invalid argument passed';
+
   static const canEnterWhitespace = '⚠️ Whitespace can be entered';
 
   static const cancelledByDebounce = '⛔️ Cancelled by debounce';

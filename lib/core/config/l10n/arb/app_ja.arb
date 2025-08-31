@@ -98,7 +98,7 @@
 	},
 	"sharedPreferencesKeyNotFound": "指定されたデータが見つかりませんでした。",
 	"@sharedPreferencesKeyNotFound": {
-		"description": "Error message shown when a value for the specified SharedPreferences key is not found."
+		"description": "Error message shown when a value for the specified SharedPreferences key is not found"
 	},
 	"signInWithEmailLinkSuccessfully": "サインインに成功しました。アカウントの作成を完了するため、パスワードを設定してください。",
 	"@signInWithEmailLinkSuccessfully": {
@@ -150,11 +150,43 @@
 	},
 	"sentSignUpVerificationEmail": "認証メールを送信しました。メールに記載された認証 URL からユーザー登録を完了してください。",
 	"@sentSignUpVerificationEmail": {
-		"description": "Message shown after sending a verification email, instructing the user to complete registration via the link in the email."
+		"description": "Message shown after sending a verification email, instructing the user to complete registration via the link in the email"
 	},
 	"invalidVerificationEmailLink": "認証リンクが無効または期限切れです。再度認証メールを送信してやり直してください。",
 	"@invalidVerificationEmailLink": {
-		"description": "Error message shown when the email link is invalid or expired during sign-in with email link."
+		"description": "Error message shown when the email link is invalid or expired during sign-in with email link"
+	},
+	"confirmPassword": "パスワード(確認)",
+	"@confirmPassword": {
+		"description": "Hint text for passowrd confirmation field"
+	},
+	"passwordMismatch": "パスワードが一致しません。",
+	"@passwordMismatch": {
+		"description": "Error message shown when password and confirm password fields do not match"
+	},
+	"passwordMinLength": "8字以上にしてください",
+	"@passwordMinLength": {
+		"description": "Password requirement message indicating the minimum character length"
+	},
+	"passwordMaxLength": "4096字以下にしてください",
+	"@passwordMaxLength": {
+		"description": "Password requirement message indicating the maximum character length"
+	},
+	"atLeastOneUppercaseCharacter": "大文字を含めてください",
+	"@atLeastOneUppercaseCharacter": {
+		"description": "Password requirement message for uppercase letter validation"
+	},
+	"atLeastOneLowercaseCharacter": "小文字を含めてください",
+	"@atLeastOneLowercaseCharacter": {
+		"description": "Password requirement message for lowercase letter validation"
+	},
+	"atLeastOneDigit": "数字を含めてください",
+	"@atLeastOneDigit": {
+		"description": "Password requirement message for numeric character validation"
+	},
+	"setUpPassword": "パスワードを設定",
+	"@setUpPassword": {
+		"description": "Set up Password"
 	},
 	"settings": "設定",
 	"@settings": {
