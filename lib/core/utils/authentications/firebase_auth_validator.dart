@@ -21,7 +21,7 @@ abstract final class FirebaseAuthValidator {
       throw UnimplementedError(LogMessage.canEnterWhitespace);
     }
 
-    if (!Regexes.email.regExp.hasMatch(email.trim())) {
+    if (!Regexes.email.regExp.hasMatch(email)) {
       return l10n.invalidEmailFormat;
     }
 
@@ -40,13 +40,11 @@ abstract final class FirebaseAuthValidator {
       throw UnimplementedError(LogMessage.canEnterWhitespace);
     }
 
-    final trimmed = password.trim();
-
-    if (trimmed.length < passwordMinLength ||
-        trimmed.length > passwordMaxLength ||
-        !trimmed.contains(Regexes.uppercase.regExp) ||
-        !trimmed.contains(Regexes.lowercase.regExp) ||
-        !trimmed.contains(Regexes.digit.regExp)) {
+    if (password.trim().length < passwordMinLength ||
+        password.length > passwordMaxLength ||
+        !password.contains(Regexes.uppercase.regExp) ||
+        !password.contains(Regexes.lowercase.regExp) ||
+        !password.contains(Regexes.digit.regExp)) {
       return l10n.nonCompliantPassword;
     }
 
