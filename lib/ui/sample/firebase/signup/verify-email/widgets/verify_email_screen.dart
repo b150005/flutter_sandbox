@@ -67,15 +67,6 @@ class VerifyEmailScreen extends HookConsumerWidget {
           ],
         ),
       ),
-      _EmailVerificationState.invalidLink => ScrollableContainer(
-        child: Column(
-          spacing: Spacing.xxxl.dp,
-          children: [
-            Icon(Icons.error_outlined, size: IconSize.lg.iconSize),
-            Text(errorMessage.value!),
-          ],
-        ),
-      ),
       _EmailVerificationState.emailNotFound => ScrollableContainer(
         child: Column(
           spacing: Spacing.xxxl.dp,
@@ -86,16 +77,15 @@ class VerifyEmailScreen extends HookConsumerWidget {
           ],
         ),
       ),
-      _EmailVerificationState.serviceUnavailable => ScrollableContainer(
-        child: Column(
-          spacing: Spacing.xxxl.dp,
-          children: const [Placeholder()],
-        ),
-      ),
+      _EmailVerificationState.invalidLink ||
+      _EmailVerificationState.serviceUnavailable ||
       _EmailVerificationState.unknown => ScrollableContainer(
         child: Column(
           spacing: Spacing.xxxl.dp,
-          children: const [Placeholder()],
+          children: [
+            Icon(Icons.error_outlined, size: IconSize.lg.iconSize),
+            Text(errorMessage.value!),
+          ],
         ),
       ),
     };
