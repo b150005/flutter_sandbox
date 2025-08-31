@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../config/firebase/firebase_error_code.dart';
 import '../../config/l10n/app_localizations.dart';
 import '../exceptions/app_exception.dart';
+import '../logging/log_message.dart';
 import '../logging/logger.dart';
 
 extension FirebaseAuthExceptionExtension on FirebaseAuthException {
@@ -29,9 +30,12 @@ extension FirebaseAuthExceptionExtension on FirebaseAuthException {
       case FirebaseErrorCode.invalidLoginCredentials ||
           FirebaseErrorCode.invalidCredential:
         return AppException.unauthorized(l10n.authenticationFailed);
+      case FirebaseErrorCode.invalidActionCode:
+        return AppException.badRequest(l10n.authenticationFailed);
       case FirebaseErrorCode.operationNotAllowed:
         return AppException.forbidden(l10n.authenticationFailed);
       default:
+        Logger.instance.w(LogMessage.unimplementedCode(code));
         Logger.instance.w(message);
 
         return AppException.unknown(l10n.authenticationFailed);

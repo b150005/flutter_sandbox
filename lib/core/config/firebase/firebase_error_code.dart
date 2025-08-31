@@ -37,6 +37,8 @@ final class FirebaseErrorCode {
   /// @see [invalidCredential]
   static const invalidLoginCredentials = 'INVALID_LOGIN_CREDENTIALS';
 
+  static const invalidActionCode = 'invalid-action-code';
+
   /// Firebase プロジェクトで有効化されていない認証方式である
   static const operationNotAllowed = 'operation-not-allowed';
 }

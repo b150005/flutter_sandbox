@@ -16,4 +16,7 @@ final class LogMessage {
   static const cancelledByDebounce = '⛔️ Cancelled by debounce';
 
   static String nullObject(String objectName) => '⚠️ $objectName is null';
+
+  static String unimplementedCode(String code) =>
+      '⚠️ Unimplemented Firebase Auth error code: $code';
 }
