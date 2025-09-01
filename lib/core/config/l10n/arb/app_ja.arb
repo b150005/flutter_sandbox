@@ -172,12 +172,12 @@
 	"@passwordMaxLength": {
 		"description": "Password requirement message indicating the maximum character length"
 	},
-	"atLeastOneUppercaseCharacter": "大文字を含めてください",
-	"@atLeastOneUppercaseCharacter": {
+	"atLeastOneUppercaseLetter": "大文字を含めてください",
+	"@atLeastOneUppercaseLetter": {
 		"description": "Password requirement message for uppercase letter validation"
 	},
-	"atLeastOneLowercaseCharacter": "小文字を含めてください",
-	"@atLeastOneLowercaseCharacter": {
+	"atLeastOneLowercaseLetter": "小文字を含めてください",
+	"@atLeastOneLowercaseLetter": {
 		"description": "Password requirement message for lowercase letter validation"
 	},
 	"atLeastOneDigit": "数字を含めてください",

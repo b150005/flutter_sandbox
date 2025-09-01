@@ -120,11 +120,11 @@ class PasswordSetupForm extends HookConsumerWidget {
               ),
               StatusIndicator(
                 isValid: hasUppercase.value,
-                message: l10n.atLeastOneUppercaseCharacter,
+                message: l10n.atLeastOneUppercaseLetter,
               ),
               StatusIndicator(
                 isValid: hasLowercase.value,
-                message: l10n.atLeastOneLowercaseCharacter,
+                message: l10n.atLeastOneLowercaseLetter,
               ),
               StatusIndicator(
                 isValid: hasDigit.value,

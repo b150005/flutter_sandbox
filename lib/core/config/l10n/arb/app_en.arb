@@ -172,12 +172,12 @@
 	"@passwordMaxLength": {
 		"description": "Password requirement message indicating the maximum character length"
 	},
-	"atLeastOneUppercaseCharacter": "At least one UPPERCASE character",
-	"@atLeastOneUppercaseCharacter": {
+	"atLeastOneUppercaseLetter": "At least one UPPERCASE letter",
+	"@atLeastOneUppercaseLetter": {
 		"description": "Password requirement message for uppercase letter validation"
 	},
-	"atLeastOneLowercaseCharacter": "At least one lowercase character",
-	"@atLeastOneLowercaseCharacter": {
+	"atLeastOneLowercaseLetter": "At least one lowercase letter",
+	"@atLeastOneLowercaseLetter": {
 		"description": "Password requirement message for lowercase letter validation"
 	},
 	"atLeastOneDigit": "At least one digit",
