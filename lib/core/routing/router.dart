@@ -9,6 +9,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../data/repositories/firebase/auth/auth_repository.dart';
 import '../../ui/core/themes/extensions/text_styles.dart';
+import '../../ui/core/ui/email_verification_form.dart';
 import '../../ui/core/ui/layouts/adaptive_scaffold.dart';
 import '../../ui/core/ui/layouts/scrollable_container.dart';
 import '../../ui/core/ui/password_setup_form.dart';

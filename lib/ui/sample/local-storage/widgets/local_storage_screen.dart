@@ -1,7 +1,7 @@
 part of '../../../../core/routing/router.dart';
 
 class LocalStorageScreenRoute extends GoRouteData
-    with _$LocalStorageScreenRoute {
+    with $LocalStorageScreenRoute {
   static const path = '/local-storage';
   static const absolutePath = '/sample/local-storage';
 

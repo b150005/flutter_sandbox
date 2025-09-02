@@ -8,6 +8,9 @@ abstract final class WidgetKeys {
   static final passwordSetupForm = LabeledGlobalKey<FormState>(
     'passwordSetupForm',
   );
+  static final emailVerificationForm = LabeledGlobalKey<FormState>(
+    'emailVerificationForm',
+  );
 
   static const ValueKey<String> email = ValueKey('email');
   static const ValueKey<String> password = ValueKey('password');
@@ -16,4 +19,5 @@ abstract final class WidgetKeys {
   static const ValueKey<String> signUp = ValueKey('signUp');
   static const ValueKey<String> confirmPassword = ValueKey('confirmPassword');
   static const ValueKey<String> setupPassword = ValueKey('setupPassword');
+  static const ValueKey<String> verifyEmail = ValueKey('verifyEmail');
 }

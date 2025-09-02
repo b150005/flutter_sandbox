@@ -1,6 +1,6 @@
 part of '../../../core/routing/router.dart';
 
-class HomeScreenRoute extends GoRouteData with _$HomeScreenRoute {
+class HomeScreenRoute extends GoRouteData with $HomeScreenRoute {
   static const path = '/';
 
   @override

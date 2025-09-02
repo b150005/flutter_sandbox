@@ -1,6 +1,6 @@
 part of '../../../core/routing/router.dart';
 
-class SettingsScreenRoute extends GoRouteData with _$SettingsScreenRoute {
+class SettingsScreenRoute extends GoRouteData with $SettingsScreenRoute {
   static const path = '/settings';
 
   @override

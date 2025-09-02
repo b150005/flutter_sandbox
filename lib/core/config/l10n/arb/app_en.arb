@@ -188,6 +188,10 @@
 	"@setUpPassword": {
 		"description": "Set up Password"
 	},
+	"verifyEmail": "Verify Email",
+	"@verifyEmail": {
+		"description": "Verify Email"
+	},
 	"settings": "Settings",
 	"@settings": {
 		"description": "Label for the Settings tab in NavigationBar and NavigationRail"

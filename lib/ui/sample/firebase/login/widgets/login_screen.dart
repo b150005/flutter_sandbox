@@ -1,6 +1,6 @@
 part of '../../../../../core/routing/router.dart';
 
-class LoginScreenRoute extends GoRouteData with _$LoginScreenRoute {
+class LoginScreenRoute extends GoRouteData with $LoginScreenRoute {
   static const path = '/login';
   static const absolutePath = '/sample/firebase/login';
 

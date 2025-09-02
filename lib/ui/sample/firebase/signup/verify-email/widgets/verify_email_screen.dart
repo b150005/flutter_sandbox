@@ -1,6 +1,6 @@
 part of '../../../../../../core/routing/router.dart';
 
-class VerifyEmailScreenRoute extends GoRouteData with _$VerifyEmailScreenRoute {
+class VerifyEmailScreenRoute extends GoRouteData with $VerifyEmailScreenRoute {
   static const path = '/verify-email';
   static const absolutePath = '/sample/firebase/signup/verify-email';
 
@@ -73,7 +73,13 @@ class VerifyEmailScreen extends HookConsumerWidget {
           children: [
             Icon(Icons.warning_amber_outlined, size: IconSize.lg.iconSize),
             Text(errorMessage.value!),
-            // TODO(b150005): メールアドレスを検証する Form の作成
+            EmailVerificationForm(
+              emailLink: emailLink,
+              onSuccess: (credential) {
+                email.value = credential.user?.email;
+                screenState.value = _EmailVerificationState.success;
+              },
+            ),
           ],
         ),
       ),

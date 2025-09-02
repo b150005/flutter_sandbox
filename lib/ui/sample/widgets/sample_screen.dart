@@ -33,7 +33,7 @@ enum SampleContent {
   }
 }
 
-class SampleScreenRoute extends GoRouteData with _$SampleScreenRoute {
+class SampleScreenRoute extends GoRouteData with $SampleScreenRoute {
   static const path = '/sample';
 
   @override
