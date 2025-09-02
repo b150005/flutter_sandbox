@@ -135,18 +135,26 @@ class AuthRepository extends _$AuthRepository {
     );
   });
 
-  /// メールアドレスとパスワードを用いてユーザを作成する
+  /// 既存ユーザにパスワード認証を追加する
   ///
-  /// @see [Create a user](https://firebase.google.com/docs/auth/flutter/manage-users#create_a_user)
-  Future<Result<UserCredential, AppException>> createUserWithEmailAndPassword({
+  /// @see [Link auth provider credentials to a user account](https://firebase.google.com/docs/auth/flutter/account-linking#link_auth_provider_credentials_to_a_user_account)
+  Future<Result<UserCredential, AppException>>
+  linkWithPasswordAuthenticationCredential({
     required String email,
     required String password,
   }) => _executeWithFirebaseAuth(() {
     final auth = ref.read(firebaseAuthProvider);
+    final l10n = ref.read(appLocalizationsProvider);
 
-    return auth.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
+    if (auth.currentUser == null) {
+      throw AppException.badRequest(l10n.authenticationFailed);
+    }
+
+    return auth.currentUser!.linkWithCredential(
+      EmailAuthProvider.credential(
+        email: email,
+        password: password,
+      ),
     );
   });
 

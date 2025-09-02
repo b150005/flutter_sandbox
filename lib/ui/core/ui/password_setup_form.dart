@@ -148,7 +148,7 @@ class PasswordSetupForm extends HookConsumerWidget {
 
                     await ref
                         .read(authRepositoryProvider.notifier)
-                        .createUserWithEmailAndPassword(
+                        .linkWithPasswordAuthenticationCredential(
                           email: email.trim(),
                           password: passwordController.text.trim(),
                         )
