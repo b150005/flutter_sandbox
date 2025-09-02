@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/config/constants/button_size.dart';
+import '../../../core/config/constants/spacing.dart';
 import '../../../core/config/constants/widget_keys.dart';
 import '../../../core/utils/authentications/firebase_auth_validator.dart';
 import '../../../core/utils/extensions/string.dart';
@@ -41,6 +42,7 @@ class EmailVerificationForm extends HookConsumerWidget {
     return Form(
       key: WidgetKeys.emailVerificationForm,
       child: Column(
+        spacing: Spacing.sm.dp,
         children: [
           if (errorMessage.value.isNotNullAndNotEmpty)
             Callout(
