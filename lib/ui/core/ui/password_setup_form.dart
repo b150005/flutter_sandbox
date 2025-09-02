@@ -146,18 +146,20 @@ class PasswordSetupForm extends HookConsumerWidget {
                       return;
                     }
 
-                    final result = await ref
+                    await ref
                         .read(authRepositoryProvider.notifier)
                         .createUserWithEmailAndPassword(
                           email: email.trim(),
                           password: passwordController.text.trim(),
+                        )
+                        .then(
+                          (result) => result.when(
+                            (credential) =>
+                                context.go(FirebaseScreenRoute.absolutePath),
+                            (appException) =>
+                                errorMessage.value = appException.message,
+                          ),
                         );
-
-                    result.when((_) {
-                      if (context.mounted) {
-                        context.go(FirebaseScreenRoute.absolutePath);
-                      }
-                    }, (exception) => errorMessage.value = exception.message);
 
                     isLoading.value = false;
                   },
