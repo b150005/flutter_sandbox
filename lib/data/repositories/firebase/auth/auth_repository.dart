@@ -112,12 +112,12 @@ class AuthRepository extends _$AuthRepository {
   ///
   /// @see [Complete sign in with the email link](https://firebase.google.com/docs/auth/flutter/email-link-auth#complete_sign_in_with_the_email_link)
   Future<Result<UserCredential, AppException>> signInWithEmailLink({
-    required String emailLink,
+    required Uri emailLink,
   }) => _executeWithFirebaseAuth(() async {
     final auth = ref.read(firebaseAuthProvider);
     final l10n = ref.read(appLocalizationsProvider);
 
-    if (!auth.isSignInWithEmailLink(emailLink)) {
+    if (!auth.isSignInWithEmailLink(emailLink.toString())) {
       throw AppException.badRequest(l10n.invalidVerificationEmailLink);
     }
 
@@ -129,7 +129,10 @@ class AuthRepository extends _$AuthRepository {
       throw AppException.notFound(l10n.sharedPreferencesKeyNotFound);
     }
 
-    return auth.signInWithEmailLink(email: email, emailLink: emailLink);
+    return auth.signInWithEmailLink(
+      email: email,
+      emailLink: emailLink.toString(),
+    );
   });
 
   /// メールアドレスとパスワードを用いてユーザを作成する

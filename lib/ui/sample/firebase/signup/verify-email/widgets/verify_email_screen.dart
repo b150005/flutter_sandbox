@@ -29,7 +29,7 @@ class VerifyEmailScreen extends HookConsumerWidget {
 
     useEffect(() {
       authRepository
-          .signInWithEmailLink(emailLink: emailLink.toString())
+          .signInWithEmailLink(emailLink: emailLink)
           .then(
             (result) => result.when(
               (credential) {
