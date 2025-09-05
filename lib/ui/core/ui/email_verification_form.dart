@@ -89,7 +89,7 @@ class EmailVerificationForm extends HookConsumerWidget {
                           ),
                         );
 
-                    isLoading.value = true;
+                    isLoading.value = false;
                   },
             style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
             child: isLoading.value
