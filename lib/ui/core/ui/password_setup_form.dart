@@ -38,7 +38,7 @@ class PasswordSetupForm extends HookConsumerWidget {
       l10n: l10n,
     );
 
-    if (email.isTrimmedEmpty || emailValidationMessage.isNotNullOrNotEmpty) {
+    if (email.isTrimmedEmpty || emailValidationMessage.isNotNullAndNotEmpty) {
       throw ArgumentError(LogMessage.invalidArgument, 'email');
     }
 
