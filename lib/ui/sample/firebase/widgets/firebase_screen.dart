@@ -13,5 +13,7 @@ class FirebaseScreen extends ConsumerWidget {
   const FirebaseScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => const Placeholder();
+  Widget build(BuildContext context, WidgetRef ref) => const Center(
+    child: SignOutIconButton(),
+  );
 }

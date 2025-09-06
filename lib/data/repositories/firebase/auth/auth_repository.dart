@@ -18,9 +18,6 @@ part 'auth_repository.g.dart';
 @Riverpod(keepAlive: true)
 FirebaseAuth firebaseAuth(Ref ref) => FirebaseAuth.instance;
 
-@Riverpod(keepAlive: true)
-User? currentUser(Ref ref) => ref.watch(firebaseAuthProvider).currentUser;
-
 @riverpod
 class AuthRepository extends _$AuthRepository {
   /// Firebase Authentication の認証状態を取得する
@@ -168,5 +165,14 @@ class AuthRepository extends _$AuthRepository {
     final auth = ref.read(firebaseAuthProvider);
 
     return auth.signInWithEmailAndPassword(email: email, password: password);
+  });
+
+  /// サインアウトする
+  ///
+  /// @see [Next steps](https://firebase.google.com/docs/auth/flutter/email-link-auth#next_steps)
+  Future<Result<void, AppException>> signOut() => _executeWithFirebaseAuth(() {
+    final auth = ref.read(firebaseAuthProvider);
+
+    return auth.signOut();
   });
 }

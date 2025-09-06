@@ -13,6 +13,7 @@ import '../../ui/core/ui/email_verification_form.dart';
 import '../../ui/core/ui/layouts/adaptive_scaffold.dart';
 import '../../ui/core/ui/layouts/scrollable_container.dart';
 import '../../ui/core/ui/password_setup_form.dart';
+import '../../ui/core/ui/sign_out_icon_button.dart';
 import '../../ui/core/ui/utils/scaffold_messenger.dart';
 import '../../ui/sample/firebase/login/widgets/login_form.dart';
 import '../../ui/sample/firebase/signup/widgets/sign_up_form.dart';
@@ -65,7 +66,9 @@ class Router extends _$Router {
     required Ref ref,
   }) {
     final uri = state.uri;
-    final isLoggedIn = ref.watch(currentUserProvider) != null;
+
+    final firebaseAuth = ref.watch(firebaseAuthProvider);
+    final isLoggedIn = firebaseAuth.currentUser != null;
 
     if (_requiresAuth(uri) && !isLoggedIn) {
       return LoginScreenRoute.absolutePath;
