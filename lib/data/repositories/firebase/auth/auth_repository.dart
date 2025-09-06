@@ -134,10 +134,8 @@ class AuthRepository extends _$AuthRepository {
 
   /// 既存ユーザにパスワード認証を追加する
   ///
-  /// @see [Link auth provider credentials to a user account](https://firebase.google.com/docs/auth/flutter/account-linking#link_auth_provider_credentials_to_a_user_account)
-  Future<Result<UserCredential, AppException>>
-  linkWithPasswordAuthenticationCredential({
-    required String email,
+  /// @see [Set a user's password](https://firebase.google.com/docs/auth/flutter/manage-users#set_a_users_password)
+  Future<Result<void, AppException>> updatePassword({
     required String password,
   }) => _executeWithFirebaseAuth(() {
     final auth = ref.read(firebaseAuthProvider);
@@ -147,12 +145,7 @@ class AuthRepository extends _$AuthRepository {
       throw AppException.badRequest(l10n.authenticationFailed);
     }
 
-    return auth.currentUser!.linkWithCredential(
-      EmailAuthProvider.credential(
-        email: email,
-        password: password,
-      ),
-    );
+    return auth.currentUser!.updatePassword(password);
   });
 
   /// メールアドレスとパスワードを用いてサインインを行う

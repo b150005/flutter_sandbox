@@ -22,8 +22,6 @@ class VerifyEmailScreen extends HookConsumerWidget {
 
     final errorMessage = useState<String?>(null);
 
-    final email = useState<String?>(null);
-
     final authRepository = ref.watch(authRepositoryProvider.notifier);
     final l10n = ref.watch(appLocalizationsProvider);
 
@@ -33,7 +31,6 @@ class VerifyEmailScreen extends HookConsumerWidget {
           .then(
             (result) => result.when(
               (credential) {
-                email.value = credential.user?.email;
                 screenState.value = _EmailVerificationState.success;
               },
               (appException) {
@@ -63,7 +60,7 @@ class VerifyEmailScreen extends HookConsumerWidget {
           children: [
             Icon(Icons.check, size: IconSize.lg.iconSize),
             Text(l10n.signInWithEmailLinkSuccessfully),
-            if (email.value != null) PasswordSetupForm(email: email.value!),
+            const PasswordSetupForm(),
           ],
         ),
       ),
@@ -76,7 +73,6 @@ class VerifyEmailScreen extends HookConsumerWidget {
             EmailVerificationForm(
               emailLink: emailLink,
               onSuccess: (credential) {
-                email.value = credential.user?.email;
                 screenState.value = _EmailVerificationState.success;
               },
             ),

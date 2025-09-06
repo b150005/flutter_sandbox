@@ -11,7 +11,6 @@ import '../../../core/routing/router.dart';
 import '../../../core/utils/authentications/firebase_auth_validator.dart';
 import '../../../core/utils/extensions/string.dart';
 import '../../../core/utils/l10n/app_localizations.dart';
-import '../../../core/utils/logging/log_message.dart';
 import '../../../data/repositories/firebase/auth/auth_repository.dart';
 import 'callout.dart';
 import 'password_text_form_field.dart';
@@ -19,28 +18,15 @@ import 'status_indicator.dart';
 
 @Preview(name: 'Password Setup Form')
 Widget passwordSetupForm() => const ProviderScope(
-  child: PasswordSetupForm(
-    email: 'test@example.com',
-  ),
+  child: PasswordSetupForm(),
 );
 
 class PasswordSetupForm extends HookConsumerWidget {
-  const PasswordSetupForm({super.key, required this.email});
-
-  final String email;
+  const PasswordSetupForm({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
-
-    final emailValidationMessage = FirebaseAuthValidator.validateEmail(
-      email,
-      l10n: l10n,
-    );
-
-    if (email.isTrimmedEmpty || emailValidationMessage.isNotNullAndNotEmpty) {
-      throw ArgumentError(LogMessage.invalidArgument, 'email');
-    }
 
     final errorMessage = useState<String?>(null);
 
@@ -148,14 +134,12 @@ class PasswordSetupForm extends HookConsumerWidget {
 
                     await ref
                         .read(authRepositoryProvider.notifier)
-                        .linkWithPasswordAuthenticationCredential(
-                          email: email.trim(),
+                        .updatePassword(
                           password: passwordController.text.trim(),
                         )
                         .then(
                           (result) => result.when(
-                            (credential) =>
-                                context.go(FirebaseScreenRoute.absolutePath),
+                            (_) => context.go(FirebaseScreenRoute.absolutePath),
                             (appException) =>
                                 errorMessage.value = appException.message,
                           ),
