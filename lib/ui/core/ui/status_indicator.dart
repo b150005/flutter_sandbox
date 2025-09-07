@@ -5,6 +5,15 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import '../../../core/config/constants/app_colors.dart';
 import '../../../core/config/constants/spacing.dart';
 
+@Preview(name: 'Status Indicator')
+Widget statusIndicator() => Column(
+  spacing: Spacing.sm.dp,
+  children: const [
+    StatusIndicator(isValid: true, message: 'valid'),
+    StatusIndicator(isValid: false, message: 'invalid'),
+  ],
+);
+
 class StatusIndicator extends HookWidget {
   const StatusIndicator({
     super.key,
@@ -56,31 +65,6 @@ class StatusIndicator extends HookWidget {
               color: color,
             ),
           ),
-        ),
-      ],
-    );
-  }
-}
-
-@Preview(name: 'Status Indicator')
-Widget statusIndicator() => const _StatusIndicatorPreview();
-
-class _StatusIndicatorPreview extends HookWidget {
-  const _StatusIndicatorPreview();
-
-  @override
-  Widget build(BuildContext context) {
-    final isValid = useState<bool>(false);
-
-    return Column(
-      children: [
-        StatusIndicator(
-          isValid: isValid.value,
-          message: isValid.value ? 'Success' : 'Failed',
-        ),
-        ElevatedButton(
-          onPressed: () => isValid.value = !isValid.value,
-          child: const Text('Toggle'),
         ),
       ],
     );
