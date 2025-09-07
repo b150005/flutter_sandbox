@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/config/constants/border_radii.dart';
 import '../../../core/config/constants/icon_size.dart';
 import '../../../core/config/constants/spacing.dart';
+import '../../../core/config/constants/widget_keys.dart';
 import '../../../core/config/l10n/app_localizations.dart';
 import '../themes/extensions/text_styles.dart';
 
@@ -59,6 +60,7 @@ class Callout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
+    key: WidgetKeys.callout,
     padding: EdgeInsets.all(Spacing.sm.dp),
     decoration: BoxDecoration(
       color: type.backgroundColor,
@@ -71,9 +73,15 @@ class Callout extends StatelessWidget {
         Row(
           spacing: Spacing.xs.dp,
           children: [
-            Icon(type.icon, size: IconSize.sm.iconSize, color: type.iconColor),
+            Icon(
+              key: WidgetKeys.icon,
+              type.icon,
+              size: IconSize.sm.iconSize,
+              color: type.iconColor,
+            ),
             Expanded(
               child: Text(
+                key: WidgetKeys.message,
                 message,
                 style: Theme.of(context)
                     .extension<TextStyles>()
@@ -83,6 +91,7 @@ class Callout extends StatelessWidget {
             ),
             if (canDismiss) ...[
               IconButton(
+                key: WidgetKeys.dismiss,
                 onPressed: onDismiss?.call,
                 icon: Icon(
                   Icons.close,

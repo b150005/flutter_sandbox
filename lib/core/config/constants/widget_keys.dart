@@ -12,6 +12,10 @@ abstract final class WidgetKeys {
     'emailVerificationForm',
   );
 
+  static const ValueKey<String> callout = ValueKey('callout');
+  static const ValueKey<String> icon = ValueKey('icon');
+  static const ValueKey<String> message = ValueKey('message');
+  static const ValueKey<String> dismiss = ValueKey('dismiss');
   static const ValueKey<String> email = ValueKey('email');
   static const ValueKey<String> password = ValueKey('password');
   static const ValueKey<String> forgotPassword = ValueKey('forgotPassword');
