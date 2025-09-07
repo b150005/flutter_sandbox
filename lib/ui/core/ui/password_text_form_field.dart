@@ -9,7 +9,7 @@ import '../themes/extensions/input_decoration_styles.dart';
 
 class PasswordTextFormField extends HookConsumerWidget {
   const PasswordTextFormField({
-    super.key = WidgetKeys.password,
+    super.key,
     this.controller,
     this.hintText,
     this.textInputAction,
@@ -32,7 +32,7 @@ class PasswordTextFormField extends HookConsumerWidget {
     final l10n = ref.watch(appLocalizationsProvider);
 
     return TextFormField(
-      key: key,
+      key: WidgetKeys.password,
       controller: controller,
       decoration: Theme.of(context)
           .extension<InputDecorationStyles>()

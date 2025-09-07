@@ -9,7 +9,7 @@ import '../themes/extensions/input_decoration_styles.dart';
 
 class EmailTextFormField extends HookConsumerWidget {
   const EmailTextFormField({
-    super.key = WidgetKeys.email,
+    super.key,
     this.controller,
     this.textInputAction,
   });
@@ -22,7 +22,7 @@ class EmailTextFormField extends HookConsumerWidget {
     final l10n = ref.watch(appLocalizationsProvider);
 
     return TextFormField(
-      key: key,
+      key: WidgetKeys.email,
       controller: controller,
       decoration: Theme.of(context)
           .extension<InputDecorationStyles>()
