@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../data/repositories/firebase/auth/auth_repository.dart';
+import '../../../../data/repositories/firebase/auth/auth_repository.dart';
 
 class SignOutIconButton extends ConsumerWidget {
   const SignOutIconButton({super.key});

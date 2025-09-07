@@ -4,17 +4,17 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/config/constants/button_size.dart';
-import '../../../core/config/constants/spacing.dart';
-import '../../../core/config/constants/widget_keys.dart';
-import '../../../core/routing/router.dart';
-import '../../../core/utils/authentications/firebase_auth_validator.dart';
-import '../../../core/utils/extensions/string.dart';
-import '../../../core/utils/l10n/app_localizations.dart';
-import '../../../data/repositories/firebase/auth/auth_repository.dart';
-import 'callout.dart';
-import 'password_text_form_field.dart';
-import 'status_indicator.dart';
+import '../../../../core/config/constants/button_size.dart';
+import '../../../../core/config/constants/spacing.dart';
+import '../../../../core/config/constants/widget_keys.dart';
+import '../../../../core/routing/router.dart';
+import '../../../../core/utils/authentications/firebase_auth_validator.dart';
+import '../../../../core/utils/extensions/string.dart';
+import '../../../../core/utils/l10n/app_localizations.dart';
+import '../../../../data/repositories/firebase/auth/auth_repository.dart';
+import '../callout.dart';
+import '../password_text_form_field.dart';
+import '../status_indicator.dart';
 
 @Preview(name: 'Password Setup Form')
 Widget passwordSetupForm() => const ProviderScope(

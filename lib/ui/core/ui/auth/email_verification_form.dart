@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/config/constants/button_size.dart';
-import '../../../core/config/constants/spacing.dart';
-import '../../../core/config/constants/widget_keys.dart';
-import '../../../core/utils/authentications/firebase_auth_validator.dart';
-import '../../../core/utils/extensions/string.dart';
-import '../../../core/utils/l10n/app_localizations.dart';
-import '../../../data/repositories/firebase/auth/auth_repository.dart';
-import '../../../data/repositories/shared_preferences/shared_preferences_repository.dart';
-import 'callout.dart';
-import 'email_text_form_field.dart';
+import '../../../../core/config/constants/button_size.dart';
+import '../../../../core/config/constants/spacing.dart';
+import '../../../../core/config/constants/widget_keys.dart';
+import '../../../../core/utils/authentications/firebase_auth_validator.dart';
+import '../../../../core/utils/extensions/string.dart';
+import '../../../../core/utils/l10n/app_localizations.dart';
+import '../../../../data/repositories/firebase/auth/auth_repository.dart';
+import '../../../../data/repositories/shared_preferences/shared_preferences_repository.dart';
+import '../callout.dart';
+import '../email_text_form_field.dart';
 
 class EmailVerificationForm extends HookConsumerWidget {
   const EmailVerificationForm({
