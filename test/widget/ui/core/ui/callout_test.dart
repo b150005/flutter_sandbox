@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sandbox/core/config/constants/widget_keys.dart';
 import 'package:flutter_sandbox/ui/core/ui/callout.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../testing/utils/widget_key_finder.dart';
+
 void main() {
-  Widget callout({
+  Widget calloutApp({
     required String message,
     CalloutType type = CalloutType.info,
     bool canDismiss = true,
@@ -23,50 +24,51 @@ void main() {
     ),
   );
 
-  final iconKeyFinder = find.byKey(WidgetKeys.icon);
-  final messageKeyFinder = find.byKey(WidgetKeys.message);
-  final dismissKeyFinder = find.byKey(WidgetKeys.dismiss);
-
   const message = 'test message';
 
   group('🎨 UI elements', () {
     testWidgets(
-      'Callout has an icon, message, and dismiss button'
+      'Callout should have an icon, message, and dismiss button.'
       ' when canDismiss is true.',
       (tester) async {
-        await tester.pumpWidget(callout(message: message));
+        await tester.pumpWidget(calloutApp(message: message));
 
-        expect(iconKeyFinder, findsOneWidget);
-        expect(messageKeyFinder, findsOneWidget);
-        expect(dismissKeyFinder, findsOneWidget);
+        expect(WidgetKeyFinder.icon, findsOneWidget);
+        expect(WidgetKeyFinder.message, findsOneWidget);
+        expect(WidgetKeyFinder.dismiss, findsOneWidget);
       },
     );
 
-    testWidgets('Callout has an icon and message when canDismiss is false.', (
-      tester,
-    ) async {
-      await tester.pumpWidget(callout(message: message, canDismiss: false));
+    testWidgets(
+      'Callout should have an icon and message when canDismiss is false.',
+      (
+        tester,
+      ) async {
+        await tester.pumpWidget(
+          calloutApp(message: message, canDismiss: false),
+        );
 
-      expect(iconKeyFinder, findsOneWidget);
-      expect(messageKeyFinder, findsOneWidget);
-      expect(dismissKeyFinder, findsNothing);
-    });
+        expect(WidgetKeyFinder.icon, findsOneWidget);
+        expect(WidgetKeyFinder.message, findsOneWidget);
+        expect(WidgetKeyFinder.dismiss, findsNothing);
+      },
+    );
   });
 
   group('👆 User interaction', () {
     testWidgets(
-      'onDismiss is called when dismiss button is tapped.',
+      'onDismiss should be called when dismiss button is tapped.',
       (tester) async {
         var dismissed = false;
 
         await tester.pumpWidget(
-          callout(
+          calloutApp(
             message: message,
             onDismiss: () => dismissed = true,
           ),
         );
 
-        await tester.tap(dismissKeyFinder);
+        await tester.tap(WidgetKeyFinder.dismiss);
 
         expect(dismissed, isTrue);
       },
@@ -74,10 +76,12 @@ void main() {
   });
 
   group('⚠️ Error handling', () {
-    testWidgets('No error occurs when onDismiss is null', (tester) async {
-      await tester.pumpWidget(callout(message: message));
+    testWidgets('No error should occurs when onDismiss is null.', (
+      tester,
+    ) async {
+      await tester.pumpWidget(calloutApp(message: message));
 
-      await tester.tap(dismissKeyFinder);
+      await tester.tap(WidgetKeyFinder.dismiss);
       await tester.pump();
     });
   });
