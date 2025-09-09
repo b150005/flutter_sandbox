@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_sandbox/core/config/constants/widget_keys.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+@visibleForTesting
 class WidgetKeyFinder {
   const WidgetKeyFinder._();
 
