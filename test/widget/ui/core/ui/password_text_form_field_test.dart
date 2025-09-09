@@ -1,0 +1,165 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_sandbox/core/config/constants/text_input_formatters.dart';
+import 'package:flutter_sandbox/core/utils/authentications/firebase_auth_validator.dart';
+import 'package:flutter_sandbox/ui/core/themes/extensions/input_decoration_styles.dart';
+import 'package:flutter_sandbox/ui/core/ui/password_text_form_field.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../../../testing/utils/app_localization_utils.dart';
+import '../../../../../testing/utils/widget_key_finder.dart';
+
+void main() {
+  Widget passwordTextFormFieldApp({
+    TextEditingController? controller,
+    String? hintText,
+    TextInputAction? textInputAction,
+    void Function(String password)? onChanged,
+    String? Function(String? password)? validator,
+  }) => ProviderScope(
+    child: MaterialApp(
+      builder: (context, child) => Theme(
+        data: ThemeData.light(
+          useMaterial3: true,
+        ).copyWith(extensions: [InputDecorationStyles.light(context)]),
+        child: child!,
+      ),
+      home: Scaffold(
+        body: PasswordTextFormField(
+          controller: controller,
+          hintText: hintText,
+          textInputAction: textInputAction,
+          onChanged: onChanged,
+          validator: validator,
+        ),
+      ),
+    ),
+  );
+
+  const invalidPassword = 'invalidPassword';
+  const validPassword = 'validPassw0rd';
+
+  TextFormField findPasswordTextFormField(WidgetTester tester) =>
+      tester.widget<TextFormField>(WidgetKeyFinder.password);
+
+  TextField findPasswordTextField(WidgetTester tester) =>
+      tester.widget<TextField>(
+        find.descendant(
+          of: WidgetKeyFinder.password,
+          matching: find.byType(TextField),
+        ),
+      );
+
+  group('🎨 UI elements', () {
+    testWidgets(
+      'PasswordTextFormField should have a password TextFormField.',
+      (tester) async {
+        await tester.pumpWidget(passwordTextFormFieldApp());
+
+        expect(WidgetKeyFinder.password, findsOneWidget);
+        expect(find.byType(TextFormField), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'Password textfield should have correct properties with default values.',
+      (tester) async {
+        await tester.pumpWidget(passwordTextFormFieldApp());
+
+        final l10n = AppLocalizationUtils.readL10n(tester);
+
+        final passwordTextFormField = findPasswordTextFormField(tester);
+        final passwordTextField = findPasswordTextField(tester);
+
+        expect(passwordTextFormField.controller, isNull);
+        expect(passwordTextField.decoration?.hintText, l10n.password);
+        expect(passwordTextField.keyboardType, TextInputType.visiblePassword);
+        expect(passwordTextField.textInputAction, isNull);
+        expect(passwordTextField.obscureText, isTrue);
+        expect(passwordTextField.autocorrect, isFalse);
+        expect(passwordTextField.enableSuggestions, isFalse);
+        expect(
+          passwordTextField.maxLength,
+          FirebaseAuthValidator.passwordMaxLength,
+        );
+        expect(passwordTextField.inputFormatters, [
+          TextInputFormatters.noWhitespace,
+        ]);
+        expect(
+          passwordTextFormField.autovalidateMode,
+          AutovalidateMode.onUserInteraction,
+        );
+      },
+    );
+
+    testWidgets(
+      'Password textfield should have correct properties'
+      ' when parameters are provided.',
+      (tester) async {
+        final textEditingController = TextEditingController();
+        const hintText = 'hint';
+        const textInputAction = TextInputAction.done;
+
+        await tester.pumpWidget(
+          passwordTextFormFieldApp(
+            controller: textEditingController,
+            hintText: hintText,
+            textInputAction: textInputAction,
+          ),
+        );
+
+        final passwordTextFormField = findPasswordTextFormField(tester);
+        final passwordTextField = findPasswordTextField(tester);
+
+        expect(passwordTextFormField.controller, textEditingController);
+        expect(passwordTextField.decoration?.hintText, hintText);
+        expect(passwordTextField.textInputAction, textInputAction);
+      },
+    );
+  });
+
+  group('🔍 Input validation', () {
+    testWidgets(
+      'Password textfield should display error message for invalid input.',
+      (tester) async {
+        await tester.pumpWidget(passwordTextFormFieldApp());
+
+        var passwordTextField = findPasswordTextField(tester);
+
+        expect(passwordTextField.controller?.text, isEmpty);
+        expect(passwordTextField.decoration?.errorText, isNull);
+
+        await tester.enterText(WidgetKeyFinder.password, invalidPassword);
+        await tester.pump();
+
+        passwordTextField = findPasswordTextField(tester);
+
+        expect(passwordTextField.controller?.text, invalidPassword);
+        expect(passwordTextField.decoration?.errorText, isNotNull);
+
+        await tester.enterText(WidgetKeyFinder.password, validPassword);
+        await tester.pump();
+
+        passwordTextField = findPasswordTextField(tester);
+
+        expect(passwordTextField.controller?.text, validPassword);
+        expect(passwordTextField.decoration?.errorText, isNull);
+      },
+    );
+  });
+
+  group('♻️ Input formatting', () {
+    testWidgets('Password textfield should not allow whitespace input.', (
+      tester,
+    ) async {
+      await tester.pumpWidget(passwordTextFormFieldApp());
+
+      await tester.enterText(WidgetKeyFinder.password, ' ');
+      await tester.pump();
+
+      final passwordTextField = findPasswordTextField(tester);
+
+      expect(passwordTextField.controller?.text, isEmpty);
+    });
+  });
+}
