@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sandbox/core/config/constants/button_size.dart';
 import 'package:flutter_sandbox/core/utils/exceptions/app_exception.dart';
+import 'package:flutter_sandbox/ui/core/ui/email_text_form_field.dart';
+import 'package:flutter_sandbox/ui/core/ui/password_text_form_field.dart';
 import 'package:flutter_sandbox/ui/sample/firebase/login/widgets/login_form.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -53,9 +55,9 @@ void main() {
         expect(WidgetKeyFinder.loginForm, findsOneWidget);
         expect(find.byType(Form), findsOneWidget);
 
-        expect(WidgetKeyFinder.email, findsOneWidget);
+        expect(find.byType(EmailTextFormField), findsOneWidget);
 
-        expect(WidgetKeyFinder.password, findsOneWidget);
+        expect(find.byType(PasswordTextFormField), findsOneWidget);
 
         expect(WidgetKeyFinder.forgotPassword, findsOneWidget);
         expect(
