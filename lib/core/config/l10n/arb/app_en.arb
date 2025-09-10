@@ -100,7 +100,7 @@
 	"@sharedPreferencesKeyNotFound": {
 		"description": "Error message shown when a value for the specified SharedPreferences key is not found"
 	},
-	"signInWithEmailLinkSuccessfully": "You're signed in successfully. Now, set your password to finish your accountr setup.",
+	"signInWithEmailLinkSuccessfully": "You're signed in successfully. Now, set your password to finish your account setup.",
 	"@signInWithEmailLinkSuccessfully": {
 		"description": "Message shown when sign-in with email link succeeds"
 	},
@@ -158,7 +158,7 @@
 	},
 	"confirmPassword": "Confirm password",
 	"@confirmPassword": {
-		"description": "Hint text for passowrd confirmation field"
+		"description": "Hint text for password confirmation field"
 	},
 	"passwordMismatch": "Passwords do not match.",
 	"@passwordMismatch": {

@@ -112,7 +112,7 @@ void main() {
   group('👆 User interaction', () {
     testWidgets(
       'Navigation bar/rail and other elements should be grouped'
-      ' in the same forcus traversal order',
+      ' in the same focus traversal order',
       (tester) async {},
     );
   });

@@ -158,7 +158,7 @@
 	},
 	"confirmPassword": "パスワード(確認)",
 	"@confirmPassword": {
-		"description": "Hint text for passowrd confirmation field"
+		"description": "Hint text for password confirmation field"
 	},
 	"passwordMismatch": "パスワードが一致しません。",
 	"@passwordMismatch": {
