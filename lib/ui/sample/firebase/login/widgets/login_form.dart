@@ -85,9 +85,8 @@ class LoginForm extends HookConsumerWidget {
                       (appException) =>
                           errorMessage.value = appException.message,
                     ),
-                  );
-
-              isLoading.value = false;
+                  )
+                  .whenComplete(() => isLoading.value = false);
             },
             style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
             child: isLoading.value
