@@ -22,6 +22,7 @@ extension FirebaseAuthExceptionExtension on FirebaseAuthException {
       case FirebaseErrorCode.wrongPassword:
         return AppException.unauthorized(l10n.invalidEmailOrPassword);
       case FirebaseErrorCode.tooManyRequests:
+      case FirebaseErrorCode.quotaExceeded:
         return AppException.tooManyRequests(l10n.tooManyAttempts);
       case FirebaseErrorCode.userTokenExpired:
         return AppException.unauthorized(l10n.sessionExpired);

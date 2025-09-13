@@ -37,7 +37,11 @@ final class FirebaseErrorCode {
   /// @see [invalidCredential]
   static const invalidLoginCredentials = 'INVALID_LOGIN_CREDENTIALS';
 
+  /// アクションコードが無効である
   static const invalidActionCode = 'invalid-action-code';
+
+  /// 利用上限に達した
+  static const quotaExceeded = 'quota-exceeded';
 
   /// Firebase プロジェクトで有効化されていない認証方式である
   static const operationNotAllowed = 'operation-not-allowed';
