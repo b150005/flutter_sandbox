@@ -90,7 +90,9 @@ class LoginForm extends HookConsumerWidget {
             },
             style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
             child: isLoading.value
-                ? const CircularProgressIndicator.adaptive()
+                ? CircularProgressIndicator.adaptive(
+                    backgroundColor: Theme.of(context).colorScheme.onPrimary,
+                  )
                 : Text(l10n.login),
           ),
         ],
