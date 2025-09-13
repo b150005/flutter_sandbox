@@ -28,7 +28,7 @@
 	"@accountDisabled": {
 		"description": "Error shown when user account is disabled"
 	},
-	"tooManyAttempts": "ログイン試行回数が多すぎます。後でもう一度お試しください。",
+	"tooManyAttempts": "ログイン試行回数を超過しました。後でもう一度お試しください。",
 	"@tooManyAttempts": {
 		"description": "Error shown when too many login attempts have been made"
 	},
