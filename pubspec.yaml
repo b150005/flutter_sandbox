@@ -19,6 +19,7 @@ dependencies:
   firebase_app_check:
   firebase_app_installations:
   firebase_auth:
+  firebase_auth_mocks:
   firebase_core:
   firebase_crashlytics:
   firebase_data_connect:
@@ -35,14 +36,15 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   freezed_annotation:
+  google_sign_in_mocks:
   go_router:
-  hooks_riverpod: ^3.0.0-dev.17
+  hooks_riverpod:
   intl:
   logger:
   logging:
   multiple_result:
   responsive_framework:
-  riverpod_annotation: ^3.0.0-dev.17
+  riverpod_annotation:
   shared_preferences:
   stack_trace:
   window_manager:
@@ -62,8 +64,8 @@ dev_dependencies:
     sdk: flutter
   mockito:
   pedantic_mono: ^1.33.0
-  riverpod_generator: ^3.0.0-dev.17
-  riverpod_lint: ^3.0.0-dev.17
+  riverpod_generator:
+  riverpod_lint:
 
 flutter:
   uses-material-design: true
