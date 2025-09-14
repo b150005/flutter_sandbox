@@ -8,8 +8,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../data/repositories/firebase/auth/auth_repository.dart';
+import '../../data/repositories/shared_preferences/shared_preferences_repository.dart';
 import '../../ui/core/themes/extensions/text_styles.dart';
-import '../../ui/core/ui/auth/email_verification_form.dart';
+import '../../ui/core/ui/auth/email_input_form.dart';
 import '../../ui/core/ui/auth/password_setup_form.dart';
 import '../../ui/core/ui/auth/sign_out_icon_button.dart';
 import '../../ui/core/ui/callout.dart';

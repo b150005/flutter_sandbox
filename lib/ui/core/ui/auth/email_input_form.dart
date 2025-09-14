@@ -1,28 +1,28 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:multiple_result/multiple_result.dart';
 
 import '../../../../core/config/constants/button_size.dart';
 import '../../../../core/config/constants/spacing.dart';
 import '../../../../core/config/constants/widget_keys.dart';
 import '../../../../core/utils/authentications/firebase_auth_validator.dart';
+import '../../../../core/utils/exceptions/app_exception.dart';
 import '../../../../core/utils/extensions/string.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
-import '../../../../data/repositories/firebase/auth/auth_repository.dart';
-import '../../../../data/repositories/shared_preferences/shared_preferences_repository.dart';
 import '../callout.dart';
 import '../email_text_form_field.dart';
 
-class EmailVerificationForm extends HookConsumerWidget {
-  const EmailVerificationForm({
+class EmailInputForm<T> extends HookConsumerWidget {
+  const EmailInputForm({
     super.key,
-    required this.emailLink,
+    required this.onSubmit,
     required this.onSuccess,
   });
 
-  final Uri emailLink;
-  final void Function(UserCredential credential) onSuccess;
+  final Future<Result<T, AppException>> Function(String email) onSubmit;
+
+  final void Function(T result) onSuccess;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,11 +31,6 @@ class EmailVerificationForm extends HookConsumerWidget {
     final errorMessage = useState<String?>(null);
 
     final emailController = useTextEditingController();
-
-    final sharedPreferencesRepository = ref.watch(
-      sharedPreferencesRepositoryProvider,
-    );
-    final authRepository = ref.watch(authRepositoryProvider.notifier);
 
     final isLoading = useState<bool>(false);
 
@@ -71,15 +66,7 @@ class EmailVerificationForm extends HookConsumerWidget {
                       return;
                     }
 
-                    await sharedPreferencesRepository.setString(
-                      SharedPreferencesKeys.emailForSignIn.name,
-                      emailController.text,
-                    );
-
-                    await authRepository
-                        .signInWithEmailLink(
-                          emailLink: emailLink,
-                        )
+                    await onSubmit(emailController.text)
                         .then(
                           (result) => result.when(
                             onSuccess,
@@ -92,8 +79,10 @@ class EmailVerificationForm extends HookConsumerWidget {
                   },
             style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
             child: isLoading.value
-                ? const CircularProgressIndicator.adaptive()
-                : Text(l10n.verifyEmail),
+                ? CircularProgressIndicator.adaptive(
+                    backgroundColor: Theme.of(context).colorScheme.onPrimary,
+                  )
+                : Text(l10n.submit),
           ),
         ],
       ),

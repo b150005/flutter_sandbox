@@ -132,6 +132,14 @@
 	"@forgotPassword": {
 		"description": "Forgot Password?"
 	},
+	"enterEmailForPasswordReset": "登録したメールアドレスにパスワードリセット用のリンクを送信します。",
+	"@enterEmailForPasswordReset": {
+		"description": "Description text displayed on forgot password screen"
+	},
+	"submit": "送信",
+	"@submit": {
+		"description": "Submit"
+	},
 	"login": "ログイン",
 	"@login": {
 		"description": "Login"

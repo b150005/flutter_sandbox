@@ -23,6 +23,9 @@ class VerifyEmailScreen extends HookConsumerWidget {
     final errorMessage = useState<String?>(null);
 
     final authRepository = ref.watch(authRepositoryProvider.notifier);
+    final sharedPreferencesRepository = ref.watch(
+      sharedPreferencesRepositoryProvider,
+    );
     final l10n = ref.watch(appLocalizationsProvider);
 
     useEffect(() {
@@ -76,8 +79,15 @@ class VerifyEmailScreen extends HookConsumerWidget {
               type: CalloutType.warning,
               onDismiss: () => errorMessage.value = null,
             ),
-            EmailVerificationForm(
-              emailLink: emailLink,
+            EmailInputForm(
+              onSubmit: (email) async {
+                await sharedPreferencesRepository.setString(
+                  SharedPreferencesKeys.emailForSignIn.name,
+                  email,
+                );
+
+                return authRepository.signInWithEmailLink(emailLink: emailLink);
+              },
               onSuccess: (credential) {
                 screenState.value = _EmailVerificationState.success;
               },
