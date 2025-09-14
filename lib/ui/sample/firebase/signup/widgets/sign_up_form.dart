@@ -54,19 +54,20 @@ class SignUpForm extends HookConsumerWidget {
                       return;
                     }
 
-                    final result = await ref
+                    await ref
                         .read(authRepositoryProvider.notifier)
                         .sendSignInLinkToEmail(
                           email: emailController.text.trim(),
-                        );
-
-                    result.when((_) {
-                      if (context.mounted) {
-                        context.go(EmailSentScreenRoute.absolutePath);
-                      }
-                    }, (exception) => errorMessage.value = exception.message);
-
-                    isLoading.value = false;
+                        )
+                        .then(
+                          (result) => result.when(
+                            (_) =>
+                                context.go(EmailSentScreenRoute.absolutePath),
+                            (appException) =>
+                                errorMessage.value = appException.message,
+                          ),
+                        )
+                        .whenComplete(() => isLoading.value = false);
                   },
             style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
             child: isLoading.value
