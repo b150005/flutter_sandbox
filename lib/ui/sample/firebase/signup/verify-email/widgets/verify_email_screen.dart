@@ -58,8 +58,11 @@ class VerifyEmailScreen extends HookConsumerWidget {
         child: Column(
           spacing: Spacing.xxxl.dp,
           children: [
-            Icon(Icons.check, size: IconSize.lg.iconSize),
-            Text(l10n.signInWithEmailLinkSuccessfully),
+            Callout(
+              l10n.signInWithEmailLinkSuccessfully,
+              type: CalloutType.success,
+              canDismiss: false,
+            ),
             const PasswordSetupForm(),
           ],
         ),
@@ -68,8 +71,11 @@ class VerifyEmailScreen extends HookConsumerWidget {
         child: Column(
           spacing: Spacing.xxxl.dp,
           children: [
-            Icon(Icons.warning_amber_outlined, size: IconSize.lg.iconSize),
-            Text(errorMessage.value!),
+            Callout(
+              errorMessage.value!,
+              type: CalloutType.warning,
+              onDismiss: () => errorMessage.value = null,
+            ),
             EmailVerificationForm(
               emailLink: emailLink,
               onSuccess: (credential) {
@@ -82,12 +88,10 @@ class VerifyEmailScreen extends HookConsumerWidget {
       _EmailVerificationState.invalidLink ||
       _EmailVerificationState.serviceUnavailable ||
       _EmailVerificationState.unknown => ScrollableContainer(
-        child: Column(
-          spacing: Spacing.xxxl.dp,
-          children: [
-            Icon(Icons.error_outlined, size: IconSize.lg.iconSize),
-            Text(errorMessage.value!),
-          ],
+        child: Callout(
+          errorMessage.value!,
+          type: CalloutType.error,
+          canDismiss: false,
         ),
       ),
     };
