@@ -36,8 +36,8 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   freezed_annotation:
-  google_sign_in_mocks:
   go_router:
+  google_sign_in_mocks:
   hooks_riverpod:
   intl:
   logger:
