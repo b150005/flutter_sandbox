@@ -51,9 +51,8 @@ class LoginForm extends HookConsumerWidget {
             alignment: Alignment.centerRight,
             child: TextButton(
               key: WidgetKeys.forgotPassword,
-              onPressed: () {
-                // TODO(b150005): パスワードリセットの実装
-              },
+              onPressed: () =>
+                  context.go(ForgotPasswordScreenRoute.absolutePath),
               child: Text(l10n.forgotPassword),
             ),
           ),

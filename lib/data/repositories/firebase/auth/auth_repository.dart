@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -11,6 +10,7 @@ import '../../../../core/utils/extensions/firebase_auth_exception.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../core/utils/logging/log_message.dart';
 import '../../../../core/utils/logging/logger.dart';
+import '../../../../core/utils/url/origin_resolver.dart';
 import '../../shared_preferences/shared_preferences_repository.dart';
 
 part 'auth_repository.g.dart';
@@ -78,31 +78,21 @@ class AuthRepository extends _$AuthRepository {
   }) => _executeWithFirebaseAuth(() async {
     final auth = ref.read(firebaseAuthProvider);
 
-    final origin = kIsDev && kDebugMode && kIsWeb
-        ? 'http://localhost:5500'
-        : Env.instance.origin;
-
     final actionCodeSettings = ActionCodeSettings(
       androidPackageName: Env.instance.appId,
       handleCodeInApp: true,
       iOSBundleId: Env.instance.bundleId,
-      // TODO(b150005): プラットフォームごとに以下の対応を実施する
-      // @see https://docs.flutter.dev/ui/navigation/deep-linking
-      // @see https://codewithandrea.com/articles/flutter-deep-links/
-      // Web: 特になし
-      // iOS/Android: Universal Links, App Linksの設定ファイルをホスティング
-      // macOS/Windows: カスタムURLスキーマを設定(macOS: Info.plist, Windows: msix_config)
-      url: origin + VerifyEmailScreenRoute.absolutePath,
-    );
-
-    await auth.sendSignInLinkToEmail(
-      email: email,
-      actionCodeSettings: actionCodeSettings,
+      url: OriginResolver.current + VerifyEmailScreenRoute.absolutePath,
     );
 
     await ref
         .read(sharedPreferencesRepositoryProvider)
         .setString(SharedPreferencesKeys.emailForSignIn.name, email);
+
+    await auth.sendSignInLinkToEmail(
+      email: email,
+      actionCodeSettings: actionCodeSettings,
+    );
   });
 
   /// メールリンク認証を用いてサインインを行う
@@ -158,6 +148,23 @@ class AuthRepository extends _$AuthRepository {
     final auth = ref.read(firebaseAuthProvider);
 
     return auth.signInWithEmailAndPassword(email: email, password: password);
+  });
+
+  /// パスワード再設定のメールを送信する
+  ///
+  /// @see [Send a password reset email](https://firebase.google.com/docs/auth/flutter/manage-users#send_a_password_reset_email)
+  Future<Result<void, AppException>> sendPasswordResetEmail({
+    required String email,
+  }) => _executeWithFirebaseAuth(() async {
+    final auth = ref.read(firebaseAuthProvider);
+
+    await ref
+        .read(sharedPreferencesRepositoryProvider)
+        .setString(SharedPreferencesKeys.emailForSignIn.name, email);
+
+    return auth.sendPasswordResetEmail(
+      email: email,
+    );
   });
 
   /// サインアウトする

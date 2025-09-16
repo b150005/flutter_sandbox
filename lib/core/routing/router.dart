@@ -33,6 +33,7 @@ import '../utils/riverpod/provider_change_notifier.dart';
 
 part '../../ui/home/widgets/home_screen.dart';
 part '../../ui/sample/firebase/login/widgets/login_screen.dart';
+part '../../ui/sample/firebase/forgot-password/widgets/forgot_password_screen.dart';
 part '../../ui/sample/firebase/signup/email-sent/widgets/email_sent_screen.dart';
 part '../../ui/sample/firebase/signup/verify-email/widgets/verify_email_screen.dart';
 part '../../ui/sample/firebase/signup/widgets/sign_up_screen.dart';
@@ -86,6 +87,7 @@ class Router extends _$Router {
   bool _requiresAuth(Uri uri) {
     const authExcludedPaths = [
       LoginScreenRoute.absolutePath,
+      ForgotPasswordScreenRoute.absolutePath,
       SignUpScreenRoute.absolutePath,
       EmailSentScreenRoute.absolutePath,
       VerifyEmailScreenRoute.absolutePath,
