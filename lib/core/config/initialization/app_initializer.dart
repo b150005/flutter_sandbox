@@ -57,7 +57,7 @@ abstract class AppInitializerProtocol {
       options: DefaultFirebaseOptions.currentPlatform,
     );
 
-    if (kIsDev && kDebugMode) {
+    if (kDebugModeInDev) {
       Logger.instance.d(
         '🚀 Starting Firebase Local Emulator Suite connection ...',
       );

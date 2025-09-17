@@ -11,7 +11,7 @@ class OriginResolver {
       'http://localhost:$localDevelopmentServerPort';
 
   static String get current =>
-      isLocalWebDevelopment ? localDevelopmentOrigin : Env.instance.origin;
+      _isLocalWebDevelopment ? localDevelopmentOrigin : Env.instance.origin;
 
-  static bool get isLocalWebDevelopment => kIsDev && kDebugMode && kIsWeb;
+  static bool get _isLocalWebDevelopment => kDebugModeInDev && kIsWeb;
 }

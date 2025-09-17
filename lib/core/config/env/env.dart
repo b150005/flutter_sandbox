@@ -14,6 +14,8 @@ bool get kIsStg => Env.instance.appEnv == Env.staging;
 /// Production 環境かどうか
 bool get kIsProd => Env.instance.appEnv == Env.production;
 
+bool get kDebugModeInDev => kIsDev && kDebugMode;
+
 @Envied(
   path: 'lib/core/config/env/development.env',
   name: 'Development',
@@ -97,9 +99,7 @@ final class Env implements EnvField {
 
   @override
   @EnviedField()
-  final String host = kIsDev && kDebugMode && kIsWeb
-      ? 'localhost:5500'
-      : instance.host;
+  final String host = instance.host;
 
   @override
   @EnviedField()
