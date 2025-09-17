@@ -408,6 +408,34 @@ Xcode の Runner > TARGETS > Runner > Build Phases > New Run Script Phase で以
 - `ios/Podfile`
 - `macos/Podfile`
 
+## 🔨 トラブルシューティング
+
+ビルドに失敗する場合、以下のコマンドの実行を検討してください。
+
+| プラットフォーム | コマンド | 用途 | 補足 |
+| --- | --- | --- | --- |
+| 共通 | `flutter clean` | ビルド・キャッシュのクリア | `build/`, `.dart_tool/` ディレクトリが削除される |
+| ^ | `flutter pub cache repair` | パッケージキャッシュの再構築 | - |
+| ^ | `flutter pub upgrade` | パッケージのバージョンアップ | - |
+| iOS | `pod deintegrate` | CocoaPods のクリーンアップ | - |
+| ^ | `pod cache clean --all` | Pod キャッシュのクリア | - |
+| ^ | `pod update` | Pod パッケージのバージョンアップ | - |
+| Android | `./android/gradlew -p android clean` | Gradle キャッシュのクリア | - |
+
+## 💚 CI/CD(GitHub Actions)
+
+- [Configure Workload Identity Federation with deployment pipelines](https://cloud.google.com/iam/docs/workload-identity-federation-with-deployment-pipelines)
+- [Best practices for using Workload Identity Federation](https://cloud.google.com/iam/docs/best-practices-for-using-workload-identity-federation)
+- [OpenID Connect reference](https://docs.github.com/ja/actions/reference/openid-connect-reference)
+- [Google Cloud Platform での OpenID Connect の構成](https://docs.github.com/ja/actions/how-tos/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-google-cloud-platform)
+- [Firebase へのデプロイを GitHub Actions & Workload Identity によって自動化する](https://zenn.dev/cloud_ace/articles/firebase-deploy-automation-github-actions)
+
+### 🚀 デプロイ
+
+| プラットフォーム | コマンド |
+| --- | --- |
+| Web | 1. `scripts/flutterfire-config.sh {short_env}`<br />2. `scripts/prebuild-web.sh lib/core/config/env/{environment}.env`<br />3. `flutter build web --release --wasm --dart-define-from-file=lib/core/config/env/{environment}.env`<br />4. `firebase -P <project_id> deploy --only hosting` |
+
 ## 🌐 l10n
 
 - [Internationalizing Flutter apps](https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization)
