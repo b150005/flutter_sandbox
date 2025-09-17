@@ -47,10 +47,14 @@ class SampleScreen extends HookConsumerWidget {
   static const double maxCrossAxisExtent = 480;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => GridView.extent(
-    maxCrossAxisExtent: maxCrossAxisExtent,
-    children: SampleContent.values
-        .map((content) => SampleContentCard(content: content))
-        .toList(),
-  );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final contents = ref.watch(sampleContentsProvider);
+
+    return GridView.extent(
+      maxCrossAxisExtent: maxCrossAxisExtent,
+      children: contents
+          .map((content) => ContentCard(content: content))
+          .toList(),
+    );
+  }
 }
