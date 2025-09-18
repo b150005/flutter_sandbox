@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'logger.dart';
 
-class ProviderObserver extends hooks.ProviderObserver {
+final class ProviderObserver extends hooks.ProviderObserver {
   @override
   void didAddProvider(hooks.ProviderObserverContext context, Object? value) {
     Logger.instance.t(
