@@ -132,7 +132,7 @@
 	"@forgotPassword": {
 		"description": "Forgot Password?"
 	},
-	"enterEmailForPasswordReset": "We'll send you a link to the email addresss you signed up with.",
+	"enterEmailForPasswordReset": "We'll send you a link to the email address you signed up with.",
 	"@enterEmailForPasswordReset": {
 		"description": "Description text displayed on forgot password screen"
 	},
