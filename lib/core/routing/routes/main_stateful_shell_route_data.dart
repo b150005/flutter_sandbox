@@ -42,6 +42,14 @@ part of '../router.dart';
                     ),
                   ],
                 ),
+                TypedGoRoute<AuthScreenRoute>(
+                  path: AuthScreenRoute.path,
+                  name: AuthScreenRoute.path,
+                ),
+                TypedGoRoute<DataConnectScreenRoute>(
+                  path: DataConnectScreenRoute.path,
+                  name: DataConnectScreenRoute.path,
+                ),
               ],
             ),
             TypedGoRoute<LocalStorageScreenRoute>(

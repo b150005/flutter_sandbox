@@ -200,6 +200,14 @@
 	"@verifyEmail": {
 		"description": "Verify Email"
 	},
+	"authScreenDescription": "Firebase Auth のデモ画面です。",
+	"@authScreenDescription": {
+		"description": "Description for the Auth page"
+	},
+	"dataConnectScreenDescription": "Firebase Data Connect のデモ画面です。",
+	"@dataConnectScreenDescription": {
+		"description": "Description for the Data Connect page"
+	},
 	"settings": "設定",
 	"@settings": {
 		"description": "Label for the Settings tab in NavigationBar and NavigationRail"

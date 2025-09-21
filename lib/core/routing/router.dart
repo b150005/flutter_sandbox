@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide ScaffoldMessenger;
+import 'package:flutter/widget_previews.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -18,6 +19,7 @@ import '../../ui/core/ui/layouts/adaptive_scaffold.dart';
 import '../../ui/core/ui/layouts/scrollable_container.dart';
 import '../../ui/core/ui/utils/scaffold_messenger.dart';
 import '../../ui/sample/firebase/login/widgets/login_form.dart';
+import '../../ui/sample/firebase/providers/firebase_contents_provider.dart';
 import '../../ui/sample/firebase/signup/widgets/sign_up_form.dart';
 import '../../ui/sample/providers/sample_contents_provider.dart';
 import '../../ui/sample/widgets/content_card.dart';
@@ -33,6 +35,8 @@ import '../utils/logging/go_router_observer.dart';
 import '../utils/riverpod/provider_change_notifier.dart';
 
 part '../../ui/home/widgets/home_screen.dart';
+part '../../ui/sample/firebase/auth/widgets/auth_screen.dart';
+part '../../ui/sample/firebase/data-connect/widgets/data_connect_screen.dart';
 part '../../ui/sample/firebase/login/widgets/login_screen.dart';
 part '../../ui/sample/firebase/forgot-password/widgets/forgot_password_screen.dart';
 part '../../ui/sample/firebase/signup/email-sent/widgets/email_sent_screen.dart';

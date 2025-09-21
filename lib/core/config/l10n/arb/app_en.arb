@@ -112,7 +112,7 @@
 	"@sample": {
 		"description": "Label for the Sample tab in NavigationBar and NavigationRail"
 	},
-	"loginScreenDescription": "A comprehensive demo screen showcasing Firebase services",
+	"loginScreenDescription": "A comprehensive demo screen showcasing Firebase services.",
 	"@loginScreenDescription": {
 		"description": "Description for the Firebase page"
 	},
@@ -199,6 +199,14 @@
 	"verifyEmail": "Verify Email",
 	"@verifyEmail": {
 		"description": "Verify Email"
+	},
+	"authScreenDescription": "A comprehensive demo screen showcasing Firebase Auth.",
+	"@authScreenDescription": {
+		"description": "Description for the Auth page"
+	},
+	"dataConnectScreenDescription": "A comprehensive demo screen showcasing Firebase Data Connect.",
+	"@dataConnectScreenDescription": {
+		"description": "Description for the Data Connect page"
 	},
 	"settings": "Settings",
 	"@settings": {

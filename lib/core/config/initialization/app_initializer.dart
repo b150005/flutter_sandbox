@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -55,6 +56,16 @@ abstract class AppInitializerProtocol {
   Future<void> initializeFirebaseApp() async {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
+    );
+
+    await FirebaseAppCheck.instance.activate(
+      webProvider: ReCaptchaV3Provider(Env.instance.recaptchaSiteKey),
+      androidProvider: kDebugModeInDev
+          ? AndroidProvider.debug
+          : AndroidProvider.playIntegrity,
+      appleProvider: kDebugModeInDev
+          ? AppleProvider.debug
+          : AppleProvider.appAttest,
     );
 
     if (kDebugModeInDev) {

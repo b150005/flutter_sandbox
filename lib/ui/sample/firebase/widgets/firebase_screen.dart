@@ -13,7 +13,18 @@ class FirebaseScreen extends ConsumerWidget {
   const FirebaseScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => const Center(
-    child: SignOutIconButton(),
-  );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final contents = ref.watch(firebaseContentsProvider);
+
+    return Column(
+      children: [
+        GridView.extent(
+          maxCrossAxisExtent: GridDimensions.maxCrossAxisExtent,
+          children: contents
+              .map((content) => ContentCard(content: content))
+              .toList(),
+        ),
+      ],
+    );
+  }
 }
