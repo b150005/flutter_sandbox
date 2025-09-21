@@ -21,7 +21,6 @@ List<Content> sampleContents(Ref ref) {
       path: LocalStorageScreenRoute.absolutePath,
       title: 'Local Storage',
       description: l10n.localStorageScreenDescription,
-      // TODO(b150005): subtitle の修正
       subtitle: 'Local Storage Sandbox',
     ),
   ];
