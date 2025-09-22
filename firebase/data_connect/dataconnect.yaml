@@ -1,12 +1,44 @@
+# The top-level Firebase Data Connect YAML file.
+# docs: https://firebase.google.com/docs/data-connect/configuration-reference
+
+# The Firebase Data Connect API version to target.
+# Optional. Defaults to the latest version.
 specVersion: "v1"
+
+# The ID of the Firebase Data Connect service resource.
+# Required.
 serviceId: "flutter-sandbox"
+
+# The location of the Firebase Data Connect service.
+# Required.
 location: "asia-northeast1"
+
+# Required.
 schema:
+  # Relative path to directory for schema definitions.
+  # Recursively loads all .gql files in this directory.
+  # Optional. If not present, defaults to ./schema.
   source: "./schema"
+  # Datasource connection information.
+  # Required.
   datasource:
+    # Required.
     postgresql:
+      # The name of the PostgreSQL database.
+      # Required.
       database: "fdcdb"
       cloudSql:
+        # The ID of the CloudSQL instance resource.
+        # Required.
         instanceId: "flutter-sandbox-fdc"
-      # schemaValidation: "COMPATIBLE"
+        # Schema validation mode for schema migrations.
+        # Defaults to unspecified/commented out, meaning you are prompted to
+        # review all changes during migration.
+        # If desired, uncomment and indicate one of "STRICT" or "COMPATIBLE".
+        schemaValidation: "STRICT"
+
+# Required.
+# Relative paths to directories for connector definitions.
+# Recursively loads all .gql files in the listed directories.
+# All directories specified MUST contain a connector.yaml file.
 connectorDirs: ["./connector"]
