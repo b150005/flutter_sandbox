@@ -59,13 +59,13 @@ abstract class AppInitializerProtocol {
     );
 
     await FirebaseAppCheck.instance.activate(
-      webProvider: ReCaptchaV3Provider(Env.instance.recaptchaSiteKey),
-      androidProvider: kDebugModeInDev
-          ? AndroidProvider.debug
-          : AndroidProvider.playIntegrity,
-      appleProvider: kDebugModeInDev
-          ? AppleProvider.debug
-          : AppleProvider.appAttest,
+      providerWeb: ReCaptchaV3Provider(Env.instance.recaptchaSiteKey),
+      providerAndroid: kDebugModeInDev
+          ? const AndroidDebugProvider(debugToken: 'Android Debug Provider')
+          : const AndroidPlayIntegrityProvider(),
+      providerApple: kDebugModeInDev
+          ? const AppleDebugProvider(debugToken: 'Apple Debug Provider')
+          : const AppleAppAttestWithDeviceCheckFallbackProvider(),
     );
 
     if (kDebugModeInDev) {
