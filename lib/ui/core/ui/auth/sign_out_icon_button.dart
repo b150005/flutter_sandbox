@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widget_previews.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../data/repositories/firebase/auth/auth_repository.dart';
+
+@Preview(name: 'Sign Out Icon Button')
+Widget signOutIconButton() => const ProviderScope(child: SignOutIconButton());
 
 class SignOutIconButton extends ConsumerWidget {
   const SignOutIconButton({super.key});

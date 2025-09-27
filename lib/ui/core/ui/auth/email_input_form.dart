@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widget_previews.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:multiple_result/multiple_result.dart';
@@ -12,6 +13,14 @@ import '../../../../core/utils/extensions/string.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
 import '../callout.dart';
 import '../email_text_form_field.dart';
+
+@Preview(name: 'Email Input Form')
+Widget emailInputForm() => ProviderScope(
+  child: EmailInputForm<void>(
+    onSubmit: (email) async => const Result.success(null),
+    onSuccess: (_) {},
+  ),
+);
 
 class EmailInputForm<T> extends HookConsumerWidget {
   const EmailInputForm({

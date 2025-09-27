@@ -1,8 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widget_previews.dart';
 
 import '../../../core/config/constants/alpha_channel.dart';
 import '../../../core/config/constants/icon_size.dart';
 import 'utils/gradients.dart';
+
+@Preview(name: 'RoundedGradientIcon')
+Widget roundedGradientIcon() => const Column(
+  spacing: 8,
+  children: [
+    RoundedGradientIcon(
+      icon: Icons.home_rounded,
+      primaryColor: Colors.blue,
+    ),
+    RoundedGradientIcon(
+      icon: Icons.favorite_rounded,
+      primaryColor: Colors.red,
+      gradients: Gradients.analogous,
+    ),
+    RoundedGradientIcon(
+      icon: Icons.notifications_rounded,
+      primaryColor: Colors.yellow,
+      gradients: Gradients.monochromatic,
+    ),
+    RoundedGradientIcon(
+      icon: Icons.shopping_cart_rounded,
+      primaryColor: Colors.green,
+      gradients: Gradients.vibrant,
+    ),
+    RoundedGradientIcon(
+      icon: Icons.settings_rounded,
+      primaryColor: Colors.grey,
+    ),
+  ],
+);
 
 class RoundedGradientIcon extends StatelessWidget {
   const RoundedGradientIcon({
