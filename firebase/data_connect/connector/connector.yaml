@@ -1,1 +1,16 @@
+# The connector-level YAML file.
+# docs: https://firebase.google.com/docs/data-connect/configuration-reference
+
+# Required. The connector name of the Firebase Data Connect connector resource.
 connectorId: default
+
+# Optional. If not specified, no generated libraries (i.e. type-safe SDKs) will be generated.
+generate:
+  # Optional.
+  dartSdk:
+    # Path to the directory that will be updated with the latest generated
+    # Dart SDK.
+    # Required.
+    outputDir: ../../../lib/data/services/firebase/dataconnect/generated
+      # Name of the package to be created.
+    package: dataconnect_generated
