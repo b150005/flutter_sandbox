@@ -133,7 +133,7 @@ void main() {
 
         await tester.pump();
 
-        final loginButton = findLoginButton(tester);
+        // final loginButton = findLoginButton(tester);
 
         // FIXME(b150005): ローディング UI が表示されることを検証
         // expect(loginButton.child, isA<CircularProgressIndicator>());
@@ -156,7 +156,7 @@ void main() {
       (tester) async {
         await tester.pumpWidget(loginFormApp());
 
-        final l10n = AppLocalizationUtils.readL10n(tester);
+        // final l10n = AppLocalizationUtils.readL10n(tester);
 
         expect(find.byType(Callout), findsNothing);
 
