@@ -7,11 +7,14 @@ extension NullSafetyExtension<T> on T? {
   /// `null` の場合はデフォルト値を返す
   T orElse(
     T fallback, {
-    required String objectName,
+    String? objectName,
     logger.Level level = logger.Level.warning,
   }) {
     if (this == null) {
-      Logger.instance.custom(LogMessage.nullObject(objectName), level: level);
+      if (objectName != null) {
+        Logger.instance.custom(LogMessage.nullObject(objectName), level: level);
+      }
+
       return fallback;
     }
 
@@ -21,11 +24,14 @@ extension NullSafetyExtension<T> on T? {
   /// `null` でない場合のみ操作を実行する
   void ifNotNull(
     void Function(T) operation, {
-    required String objectName,
+    String? objectName,
     logger.Level level = logger.Level.warning,
   }) {
     if (this == null) {
-      Logger.instance.custom(LogMessage.nullObject(objectName), level: level);
+      if (objectName != null) {
+        Logger.instance.custom(LogMessage.nullObject(objectName), level: level);
+      }
+
       return;
     }
 
