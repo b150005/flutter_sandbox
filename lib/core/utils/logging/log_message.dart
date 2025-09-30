@@ -19,4 +19,6 @@ final class LogMessage {
 
   static String unimplementedCode(String code) =>
       '⚠️ Unimplemented Firebase Auth error code: $code';
+
+  static String failedToFetch(Uri uri) => 'Data fetch failed: ${uri.path}';
 }
