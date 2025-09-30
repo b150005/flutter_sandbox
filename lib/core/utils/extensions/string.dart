@@ -1,3 +1,5 @@
+import 'nullable.dart';
+
 extension HardcodedString on String {
   @Deprecated('TODO: Replace hardcoded string with AppLocalizations')
   String get hardcoded => this;
@@ -10,6 +12,9 @@ extension NullableString on String? {
   bool get isTrimmedNotNullAndNotEmpty =>
       this != null && this!.trim().isNotEmpty;
   bool get isTrimmedNullOrEmpty => this == null || this!.trim().isEmpty;
+
+  String orNullString({String? objectName}) =>
+      orElse('null', objectName: objectName);
 }
 
 extension EmptyString on String {
