@@ -30,7 +30,7 @@
 	},
 	"tooManyAttempts": "Too many unsuccessful attempts. Please try again later.",
 	"@tooManyAttempts": {
-		"description": "Error shown when too many login attempts have been made"
+		"description": "Error shown when too many sign-in attempts have been made"
 	},
 	"authenticationFailed": "Authentication failed. Please try again.",
 	"@authenticationFailed": {
@@ -112,8 +112,8 @@
 	"@sample": {
 		"description": "Label for the Sample tab in NavigationBar and NavigationRail"
 	},
-	"loginScreenDescription": "A comprehensive demo screen showcasing Firebase services.",
-	"@loginScreenDescription": {
+	"signInScreenDescription": "A comprehensive demo screen showcasing Firebase services.",
+	"@signInScreenDescription": {
 		"description": "Description for the Firebase page"
 	},
 	"localStorageScreenDescription": "A comprehensive demo screen showcasing local storages.",
@@ -140,9 +140,9 @@
 	"@submit": {
 		"description": "Submit"
 	},
-	"login": "Login",
-	"@login": {
-		"description": "Login"
+	"signIn": "Sign In",
+	"@signIn": {
+		"description": "Sign In"
 	},
 	"signUp": "Sign Up",
 	"@signUp": {
@@ -203,6 +203,34 @@
 	"authScreenDescription": "A comprehensive demo screen showcasing Firebase Auth.",
 	"@authScreenDescription": {
 		"description": "Description for the Auth page"
+	},
+	"displayName": "Display Name",
+	"@displayName": {
+		"description": "Display Name"
+	},
+	"phoneNumber": "Phone Number",
+	"@phoneNumber": {
+		"description": "Phone Number"
+	},
+	"photoURL": "Photo URL",
+	"@photoURL": {
+		"description": "Photo URL"
+	},
+	"uid": "UID",
+	"@uid": {
+		"description": "UID"
+	},
+	"refreshToken": "Refresh Token",
+	"@refreshToken": {
+		"description": "Refresh Token"
+	},
+	"createdAt": "Created at",
+	"@createdAt": {
+		"description": "Created at"
+	},
+	"lastSignInAt": "Last sign in at",
+	"@lastSignInAt": {
+		"description": "Last sign in at"
 	},
 	"dataConnectScreenDescription": "A comprehensive demo screen showcasing Firebase Data Connect.",
 	"@dataConnectScreenDescription": {

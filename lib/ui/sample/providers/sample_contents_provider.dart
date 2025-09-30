@@ -14,8 +14,8 @@ List<Content> sampleContents(Ref ref) {
     Content(
       path: FirebaseScreenRoute.absolutePath,
       title: 'Firebase',
-      description: l10n.loginScreenDescription,
-      subtitle: 'Firebase Login',
+      description: l10n.signInScreenDescription,
+      subtitle: 'Firebase Sign-In',
     ),
     Content(
       path: LocalStorageScreenRoute.absolutePath,

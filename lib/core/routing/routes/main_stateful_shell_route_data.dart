@@ -20,9 +20,9 @@ part of '../router.dart';
               path: FirebaseScreenRoute.path,
               name: FirebaseScreenRoute.path,
               routes: <TypedRoute<RouteData>>[
-                TypedGoRoute<LoginScreenRoute>(
-                  path: LoginScreenRoute.path,
-                  name: LoginScreenRoute.path,
+                TypedGoRoute<SignInScreenRoute>(
+                  path: SignInScreenRoute.path,
+                  name: SignInScreenRoute.path,
                 ),
                 TypedGoRoute<ForgotPasswordScreenRoute>(
                   path: ForgotPasswordScreenRoute.path,

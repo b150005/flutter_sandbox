@@ -4,7 +4,7 @@ import 'package:flutter_sandbox/core/config/constants/button_size.dart';
 import 'package:flutter_sandbox/ui/core/ui/callout.dart';
 import 'package:flutter_sandbox/ui/core/ui/email_text_form_field.dart';
 import 'package:flutter_sandbox/ui/core/ui/password_text_form_field.dart';
-import 'package:flutter_sandbox/ui/sample/firebase/login/widgets/login_form.dart';
+import 'package:flutter_sandbox/ui/sample/firebase/sign-in/widgets/sign_in_form.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -15,11 +15,11 @@ import '../../../../../../../testing/utils/app_localization_utils.dart';
 import '../../../../../../../testing/utils/widget_key_finder.dart';
 
 void main() {
-  Widget loginFormApp({List<Override> overrides = const []}) => ProviderScope(
+  Widget signInFormApp({List<Override> overrides = const []}) => ProviderScope(
     overrides: overrides,
     child: const MaterialApp(
       home: Scaffold(
-        body: LoginForm(),
+        body: SignInForm(),
       ),
     ),
   );
@@ -39,19 +39,19 @@ void main() {
         ),
       );
 
-  FilledButton findLoginButton(WidgetTester tester) =>
-      tester.widget<FilledButton>(WidgetKeyFinder.login);
+  FilledButton findSignInButton(WidgetTester tester) =>
+      tester.widget<FilledButton>(WidgetKeyFinder.signIn);
 
   group('🎨 UI elements', () {
     testWidgets(
-      'LoginForm should have an email & password textfield,'
-      ' a password forgot link and a login button.',
+      'SignInForm should have an email & password textfield,'
+      ' a password forgot link and a Sign-in button.',
       (tester) async {
-        await tester.pumpWidget(loginFormApp());
+        await tester.pumpWidget(signInFormApp());
 
         final l10n = AppLocalizationUtils.readL10n(tester);
 
-        expect(WidgetKeyFinder.loginForm, findsOneWidget);
+        expect(WidgetKeyFinder.signInForm, findsOneWidget);
         expect(find.byType(Form), findsOneWidget);
 
         expect(find.byType(EmailTextFormField), findsOneWidget);
@@ -64,15 +64,15 @@ void main() {
           findsOneWidget,
         );
 
-        expect(WidgetKeyFinder.login, findsOneWidget);
-        expect(find.widgetWithText(FilledButton, l10n.login), findsOneWidget);
+        expect(WidgetKeyFinder.signIn, findsOneWidget);
+        expect(find.widgetWithText(FilledButton, l10n.signIn), findsOneWidget);
       },
     );
 
     testWidgets('Email textfield should have correct properties.', (
       tester,
     ) async {
-      await tester.pumpWidget(loginFormApp());
+      await tester.pumpWidget(signInFormApp());
 
       final emailTextField = findEmailTextField(tester);
 
@@ -82,21 +82,23 @@ void main() {
     testWidgets('Password textfield should have correct properties.', (
       tester,
     ) async {
-      await tester.pumpWidget(loginFormApp());
+      await tester.pumpWidget(signInFormApp());
 
       final passwordTextField = findPasswordTextField(tester);
 
       expect(passwordTextField.textInputAction, TextInputAction.done);
     });
 
-    testWidgets('Login button should have correct properties.', (tester) async {
-      await tester.pumpWidget(loginFormApp());
+    testWidgets('Sign-in button should have correct properties.', (
+      tester,
+    ) async {
+      await tester.pumpWidget(signInFormApp());
 
-      final loginButton = findLoginButton(tester);
+      final signInButton = findSignInButton(tester);
 
-      expect(loginButton.enabled, isTrue);
+      expect(signInButton.enabled, isTrue);
       expect(
-        loginButton.style?.fixedSize,
+        signInButton.style?.fixedSize,
         WidgetStatePropertyAll(ButtonSize.lg.fullWidth),
       );
     });
@@ -106,7 +108,7 @@ void main() {
       ' and should be hided after that.',
       (tester) async {
         await tester.pumpWidget(
-          loginFormApp(
+          signInFormApp(
             overrides: [
               FirebaseAuthTestUtils.mockFirebaseAuthProvider(
                 mockUser: MockUser(email: TestUser.valid.email),
@@ -129,18 +131,18 @@ void main() {
 
         await tester.pump();
 
-        await tester.tap(WidgetKeyFinder.login);
+        await tester.tap(WidgetKeyFinder.signIn);
 
         await tester.pump();
 
-        // final loginButton = findLoginButton(tester);
+        // final signInButton = findSignInButton(tester);
 
         // FIXME(b150005): ローディング UI が表示されることを検証
-        // expect(loginButton.child, isA<CircularProgressIndicator>());
+        // expect(signInButton.child, isA<CircularProgressIndicator>());
 
         await tester.pumpAndSettle();
 
-        expect(find.widgetWithText(FilledButton, l10n.login), findsOneWidget);
+        expect(find.widgetWithText(FilledButton, l10n.signIn), findsOneWidget);
       },
     );
   });
@@ -154,7 +156,7 @@ void main() {
       'Error message should be properly displayed on Callout'
       ' when authentication failed for wrong credentials.',
       (tester) async {
-        await tester.pumpWidget(loginFormApp());
+        await tester.pumpWidget(signInFormApp());
 
         // final l10n = AppLocalizationUtils.readL10n(tester);
 
@@ -171,7 +173,7 @@ void main() {
 
         await tester.pump();
 
-        await tester.tap(WidgetKeyFinder.login);
+        await tester.tap(WidgetKeyFinder.signIn);
 
         await tester.pumpAndSettle();
 
@@ -199,7 +201,7 @@ void main() {
 
   group('⚡️ Performance', () {
     testWidgets(
-      'Only one login request is executed when login button is tapped'
+      'Only one sign-in request is executed when sign-in button is tapped'
       ' multiple times.',
       (tester) async {},
     );

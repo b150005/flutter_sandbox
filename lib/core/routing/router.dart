@@ -13,13 +13,12 @@ import '../../data/repositories/shared_preferences/shared_preferences_repository
 import '../../ui/core/themes/extensions/text_styles.dart';
 import '../../ui/core/ui/auth/email_input_form.dart';
 import '../../ui/core/ui/auth/password_setup_form.dart';
-import '../../ui/core/ui/auth/sign_out_icon_button.dart';
 import '../../ui/core/ui/callout.dart';
 import '../../ui/core/ui/layouts/adaptive_scaffold.dart';
 import '../../ui/core/ui/layouts/scrollable_container.dart';
 import '../../ui/core/ui/utils/scaffold_messenger.dart';
-import '../../ui/sample/firebase/login/widgets/login_form.dart';
 import '../../ui/sample/firebase/providers/firebase_contents_provider.dart';
+import '../../ui/sample/firebase/sign-in/widgets/sign_in_form.dart';
 import '../../ui/sample/firebase/signup/widgets/sign_up_form.dart';
 import '../../ui/sample/providers/sample_contents_provider.dart';
 import '../../ui/sample/widgets/content_card.dart';
@@ -37,8 +36,8 @@ import '../utils/riverpod/provider_change_notifier.dart';
 part '../../ui/home/widgets/home_screen.dart';
 part '../../ui/sample/firebase/auth/widgets/auth_screen.dart';
 part '../../ui/sample/firebase/data-connect/widgets/data_connect_screen.dart';
-part '../../ui/sample/firebase/login/widgets/login_screen.dart';
 part '../../ui/sample/firebase/forgot-password/widgets/forgot_password_screen.dart';
+part '../../ui/sample/firebase/sign-in/widgets/sign_in_screen.dart';
 part '../../ui/sample/firebase/signup/email-sent/widgets/email_sent_screen.dart';
 part '../../ui/sample/firebase/signup/verify-email/widgets/verify_email_screen.dart';
 part '../../ui/sample/firebase/signup/widgets/sign_up_screen.dart';
@@ -79,10 +78,10 @@ class Router extends _$Router {
     final isLoggedIn = firebaseAuth.currentUser != null;
 
     if (_requiresAuth(uri) && !isLoggedIn) {
-      return LoginScreenRoute.absolutePath;
+      return SignInScreenRoute.absolutePath;
     }
 
-    if (uri.path == LoginScreenRoute.absolutePath && isLoggedIn) {
+    if (uri.path == SignInScreenRoute.absolutePath && isLoggedIn) {
       return FirebaseScreenRoute.absolutePath;
     }
 
@@ -91,7 +90,7 @@ class Router extends _$Router {
 
   bool _requiresAuth(Uri uri) {
     const authExcludedPaths = [
-      LoginScreenRoute.absolutePath,
+      SignInScreenRoute.absolutePath,
       ForgotPasswordScreenRoute.absolutePath,
       SignUpScreenRoute.absolutePath,
       EmailSentScreenRoute.absolutePath,

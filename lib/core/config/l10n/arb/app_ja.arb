@@ -28,9 +28,9 @@
 	"@accountDisabled": {
 		"description": "Error shown when user account is disabled"
 	},
-	"tooManyAttempts": "ログイン試行回数を超過しました。後でもう一度お試しください。",
+	"tooManyAttempts": "サインイン試行回数を超過しました。後でもう一度お試しください。",
 	"@tooManyAttempts": {
-		"description": "Error shown when too many login attempts have been made"
+		"description": "Error shown when too many sign-in attempts have been made"
 	},
 	"authenticationFailed": "認証に失敗しました。もう一度お試しください。",
 	"@authenticationFailed": {
@@ -112,8 +112,8 @@
 	"@sample": {
 		"description": "Label for the Sample tab in NavigationBar and NavigationRail"
 	},
-	"loginScreenDescription": "Firebase の各機能を統合したデモ画面です。",
-	"@loginScreenDescription": {
+	"signInScreenDescription": "Firebase の各機能を統合したデモ画面です。",
+	"@signInScreenDescription": {
 		"description": "Description for the Firebase page"
 	},
 	"localStorageScreenDescription": "Local Storage 機能のデモ画面です。",
@@ -140,9 +140,9 @@
 	"@submit": {
 		"description": "Submit"
 	},
-	"login": "ログイン",
-	"@login": {
-		"description": "Login"
+	"signIn": "サインイン",
+	"@signIn": {
+		"description": "Sign In"
 	},
 	"signUp": "新規登録",
 	"@signUp": {
@@ -203,6 +203,34 @@
 	"authScreenDescription": "Firebase Auth のデモ画面です。",
 	"@authScreenDescription": {
 		"description": "Description for the Auth page"
+	},
+	"displayName": "表示名",
+	"@displayName": {
+		"description": "Display Name"
+	},
+	"phoneNumber": "電話番号",
+	"@phoneNumber": {
+		"description": "Phone Number"
+	},
+	"photoURL": "画像URL",
+	"@photoURL": {
+		"description": "Photo URL"
+	},
+	"uid": "UID",
+	"@uid": {
+		"description": "UID"
+	},
+	"refreshToken": "リフレッシュトークン",
+	"@refreshToken": {
+		"description": "Refresh Token"
+	},
+	"createdAt": "作成日時",
+	"@createdAt": {
+		"description": "Created at"
+	},
+	"lastSignInAt": "最終サインイン日時",
+	"@lastSignInAt": {
+		"description": "Last sign in at"
 	},
 	"dataConnectScreenDescription": "Firebase Data Connect のデモ画面です。",
 	"@dataConnectScreenDescription": {

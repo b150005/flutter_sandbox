@@ -1,16 +1,16 @@
 part of '../../../../../core/routing/router.dart';
 
-class LoginScreenRoute extends GoRouteData with $LoginScreenRoute {
+class SignInScreenRoute extends GoRouteData with $SignInScreenRoute {
   static const path = '/login';
   static const absolutePath = '/sample/firebase/login';
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      const LoginScreen();
+      const SignInScreen();
 }
 
-class LoginScreen extends ConsumerWidget {
-  const LoginScreen({super.key});
+class SignInScreen extends ConsumerWidget {
+  const SignInScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,7 +25,7 @@ class LoginScreen extends ConsumerWidget {
             width: IconSize.xxxl.dp,
             child: Image.asset(Assets.firebase.path),
           ),
-          const LoginForm(),
+          const SignInForm(),
           OutlinedButton(
             key: WidgetKeys.signUp,
             onPressed: () => context.go(SignUpScreenRoute.absolutePath),

@@ -14,8 +14,8 @@ import '../../../../core/ui/callout.dart';
 import '../../../../core/ui/email_text_form_field.dart';
 import '../../../../core/ui/password_text_form_field.dart';
 
-class LoginForm extends HookConsumerWidget {
-  const LoginForm({super.key});
+class SignInForm extends HookConsumerWidget {
+  const SignInForm({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,7 +29,7 @@ class LoginForm extends HookConsumerWidget {
     final l10n = ref.watch(appLocalizationsProvider);
 
     return Form(
-      key: WidgetKeys.loginForm,
+      key: WidgetKeys.signInForm,
       child: Column(
         spacing: Spacing.sm.dp,
         children: [
@@ -57,7 +57,7 @@ class LoginForm extends HookConsumerWidget {
             ),
           ),
           FilledButton(
-            key: WidgetKeys.login,
+            key: WidgetKeys.signIn,
             onPressed: () async {
               if (isLoading.value) {
                 return;
@@ -65,8 +65,8 @@ class LoginForm extends HookConsumerWidget {
 
               isLoading.value = true;
 
-              if (WidgetKeys.loginForm.currentState == null ||
-                  !WidgetKeys.loginForm.currentState!.validate()) {
+              if (WidgetKeys.signInForm.currentState == null ||
+                  !WidgetKeys.signInForm.currentState!.validate()) {
                 isLoading.value = false;
                 return;
               }
@@ -92,7 +92,7 @@ class LoginForm extends HookConsumerWidget {
                 ? CircularProgressIndicator.adaptive(
                     backgroundColor: Theme.of(context).colorScheme.onPrimary,
                   )
-                : Text(l10n.login),
+                : Text(l10n.signIn),
           ),
         ],
       ),

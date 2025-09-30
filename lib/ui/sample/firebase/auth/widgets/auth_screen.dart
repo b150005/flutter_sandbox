@@ -1,8 +1,5 @@
 part of '../../../../../core/routing/router.dart';
 
-@Preview(name: 'Auth Screen')
-Widget authScreen() => const ProviderScope(child: AuthScreen());
-
 class AuthScreenRoute extends GoRouteData with $AuthScreenRoute {
   static const path = '/auth';
   static const absolutePath = '/sample/firebase/auth';
@@ -17,10 +14,13 @@ class AuthScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
+    final firebaseAuth = ref.watch(firebaseAuthProvider);
+    final currentUser = firebaseAuth.currentUser;
 
-    return const ScrollableContainer(
+    return ScrollableContainer(
       child: Column(
-        children: [Placeholder()],
+        spacing: Spacing.sm.dp,
+        children: [Text(currentUser?.uid ?? 'null')],
       ),
     );
   }
