@@ -1,8 +1,5 @@
 part of '../../../../../core/routing/router.dart';
 
-@Preview(name: 'Data Connect Screen')
-Widget dataConnectScreen() => const ProviderScope(child: DataConnectScreen());
-
 class DataConnectScreenRoute extends GoRouteData with $DataConnectScreenRoute {
   static const path = '/data-connect';
   static const absolutePath = '/sample/firebase/data-connect';
