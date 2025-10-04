@@ -232,6 +232,42 @@
 	"@lastSignInAt": {
 		"description": "Last sign in at"
 	},
+	"anonymousUser": "Anonymous user",
+	"@anonymousUser": {
+		"description": "Anonymous user"
+	},
+	"emailVerification": "Email verification",
+	"@emailVerification": {
+		"description": "Email verification"
+	},
+	"signInProvider": "Sign-in Provider",
+	"@signInProvider": {
+		"description": "Sign-in Provider"
+	},
+	"signInSecondFactor": "Sign-in second factor",
+	"@signInSecondFactor": {
+		"description": "Sign-in second factor"
+	},
+	"authenticatedAt": "Authenticated at",
+	"@authenticatedAt": {
+		"description": "Authenticated at"
+	},
+	"idToken": "ID token",
+	"@idToken": {
+		"description": "ID token"
+	},
+	"payloadClaims": "Payload claims",
+	"@payloadClaims": {
+		"description": "Payload claims"
+	},
+	"issuedAt": "Issued at",
+	"@issuedAt": {
+		"description": "Issued at"
+	},
+	"expiredAt": "Expired at",
+	"@expiredAt": {
+		"description": "Expired at"
+	},
 	"dataConnectScreenDescription": "A comprehensive demo screen showcasing Firebase Data Connect.",
 	"@dataConnectScreenDescription": {
 		"description": "Description for the Data Connect page"

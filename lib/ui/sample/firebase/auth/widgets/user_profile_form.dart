@@ -2,11 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widget_previews.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/config/constants/icon_size.dart';
 import '../../../../../core/config/constants/spacing.dart';
 import '../../../../../core/config/constants/widget_keys.dart';
+import '../../../../../core/utils/extensions/async_snapshot.dart';
 import '../../../../../core/utils/extensions/bool.dart';
 import '../../../../../core/utils/extensions/string.dart';
 import '../../../../../core/utils/l10n/app_localizations.dart';
@@ -14,7 +16,6 @@ import '../../../../../core/utils/logging/log_message.dart';
 import '../../../../../core/utils/logging/logger.dart';
 import '../../../../../data/repositories/firebase/auth/auth_repository.dart';
 import '../../../../core/themes/extensions/input_decoration_styles.dart';
-import '../../../../core/themes/extensions/text_styles.dart';
 
 @Preview(name: 'User Profile Form')
 Widget userProfileForm() => ProviderScope(
@@ -62,6 +63,18 @@ Widget userProfileForm() => ProviderScope(
             DateTime.utc(2004).millisecondsSinceEpoch,
             DateTime.utc(2005).millisecondsSinceEpoch,
           ),
+          idTokenAuthTime: DateTime.utc(2006),
+          idTokenExp: DateTime.utc(2007),
+          customClaim: {
+            'sub': 'user-123',
+            'email': 'test@example.com',
+            'email_verified': true,
+            'name': 'John Doe',
+            'picture': 'https://picsum.photos/200',
+            'exp': 1704603600,
+            'iat': 1704600000,
+            'auth_time': 1704599999,
+          },
         ),
       ),
     ),
@@ -74,7 +87,6 @@ Widget userProfileForm() => ProviderScope(
             useMaterial3: true,
           ).copyWith(
             extensions: [
-              TextStyles.light(context),
               InputDecorationStyles.light(context),
             ],
           ),
@@ -83,7 +95,6 @@ Widget userProfileForm() => ProviderScope(
             useMaterial3: true,
           ).copyWith(
             extensions: [
-              TextStyles.dark(context),
               InputDecorationStyles.dark(context),
             ],
           ),
@@ -101,6 +112,11 @@ class UserProfileForm extends HookConsumerWidget {
     final currentUser = firebaseAuth.currentUser;
 
     final l10n = ref.watch(appLocalizationsProvider);
+
+    final idTokenResultFuture = useMemoized(
+      () => currentUser?.getIdTokenResult(),
+    );
+    final idTokenResultAsyncSnapshot = useFuture(idTokenResultFuture);
 
     return Form(
       key: WidgetKeys.userProfileForm,
@@ -163,7 +179,7 @@ class UserProfileForm extends HookConsumerWidget {
               ),
               TextFormField(
                 initialValue: (currentUser?.uid).orNullString(
-                  // objectName: 'currentUser?.uid',
+                  objectName: 'currentUser?.uid',
                 ),
                 decoration: Theme.of(context)
                     .extension<InputDecorationStyles>()
@@ -183,14 +199,14 @@ class UserProfileForm extends HookConsumerWidget {
                 spacing: Spacing.sm.dp,
                 children: [
                   Text(
-                    'User anonymous'.hardcoded,
+                    l10n.anonymousUser,
                     style: Theme.of(
                       context,
-                    ).extension<TextStyles>()?.emphasisLabelLargeStyle,
+                    ).textTheme.labelLarge,
                   ),
                   Switch.adaptive(
                     value: (currentUser?.isAnonymous).orFalse(
-                      // objectName: 'currentUser?.isAnonymous',
+                      objectName: 'currentUser?.isAnonymous',
                     ),
                     onChanged: null,
                   ),
@@ -200,14 +216,14 @@ class UserProfileForm extends HookConsumerWidget {
                 spacing: Spacing.sm.dp,
                 children: [
                   Text(
-                    'Email address verified'.hardcoded,
+                    l10n.emailVerification,
                     style: Theme.of(
                       context,
-                    ).extension<TextStyles>()?.emphasisLabelLargeStyle,
+                    ).textTheme.labelLarge,
                   ),
                   Switch.adaptive(
                     value: (currentUser?.emailVerified).orFalse(
-                      // objectName: 'currentUser?.emailVerified',
+                      objectName: 'currentUser?.emailVerified',
                     ),
                     onChanged: null,
                   ),
@@ -215,7 +231,7 @@ class UserProfileForm extends HookConsumerWidget {
               ),
               TextFormField(
                 initialValue: (currentUser?.refreshToken).orNullString(
-                  // objectName: 'currentUser?.refreshToken',
+                  objectName: 'currentUser?.refreshToken',
                 ),
                 decoration: Theme.of(context)
                     .extension<InputDecorationStyles>()
@@ -228,8 +244,8 @@ class UserProfileForm extends HookConsumerWidget {
               TextFormField(
                 initialValue: (currentUser?.metadata.creationTime.toString())
                     .orNullString(
-                      // objectName:
-                      //     'currentUser?.metadata.creationTime.toString()',
+                      objectName:
+                          'currentUser?.metadata.creationTime.toString()',
                     ),
                 decoration: Theme.of(context)
                     .extension<InputDecorationStyles>()
@@ -242,8 +258,8 @@ class UserProfileForm extends HookConsumerWidget {
               TextFormField(
                 initialValue: (currentUser?.metadata.lastSignInTime.toString())
                     .orNullString(
-                      // objectName:
-                      //     'currentUser?.metadata.creationTime.toString()',
+                      objectName:
+                          'currentUser?.metadata.creationTime.toString()',
                     ),
                 decoration: Theme.of(context)
                     .extension<InputDecorationStyles>()
@@ -252,6 +268,106 @@ class UserProfileForm extends HookConsumerWidget {
                       labelText: l10n.lastSignInAt,
                     ),
                 readOnly: true,
+              ),
+              idTokenResultAsyncSnapshot.when(
+                loading: () => CircularProgressIndicator.adaptive(
+                  backgroundColor: Theme.of(context).colorScheme.onPrimary,
+                ),
+                error: (error, stackTrace) {
+                  Logger.instance.e(
+                    LogMessage.unhandledError,
+                    error: error,
+                    stackTrace: stackTrace,
+                  );
+
+                  return const Placeholder();
+                },
+                data: (idTokenResult) => Column(
+                  spacing: Spacing.sm.dp,
+                  children: [
+                    TextFormField(
+                      initialValue: (idTokenResult?.signInProvider?.toString())
+                          .orNullString(
+                            objectName:
+                                'idTokenResult?.signInProvider?.toString()',
+                          ),
+                      decoration: Theme.of(context)
+                          .extension<InputDecorationStyles>()
+                          ?.outlined
+                          .copyWith(labelText: l10n.signInProvider),
+                      readOnly: true,
+                    ),
+                    TextFormField(
+                      initialValue: (idTokenResult?.signInSecondFactor?.toString())
+                          .orNullString(
+                            objectName:
+                                'idTokenResult?.signInSecondFactor?.toString()',
+                          ),
+                      decoration: Theme.of(context)
+                          .extension<InputDecorationStyles>()
+                          ?.outlined
+                          .copyWith(labelText: l10n.signInSecondFactor),
+                      readOnly: true,
+                    ),
+                    TextFormField(
+                      initialValue: (idTokenResult?.authTime?.toString())
+                          .orNullString(
+                            objectName: 'idTokenResult?.authTime?.toString()',
+                          ),
+                      decoration: Theme.of(context)
+                          .extension<InputDecorationStyles>()
+                          ?.outlined
+                          .copyWith(labelText: l10n.authenticatedAt),
+                      readOnly: true,
+                    ),
+                    TextFormField(
+                      initialValue: (idTokenResult?.token?.toString())
+                          .orNullString(
+                            objectName: 'idTokenResult?.token?.toString()',
+                          ),
+                      decoration: Theme.of(context)
+                          .extension<InputDecorationStyles>()
+                          ?.outlined
+                          .copyWith(labelText: l10n.idToken),
+                      readOnly: true,
+                    ),
+                    TextFormField(
+                      initialValue: (idTokenResult?.claims?.toString())
+                          .orNullString(
+                            objectName: 'idTokenResult?.claims?.toString()',
+                          ),
+                      decoration: Theme.of(context)
+                          .extension<InputDecorationStyles>()
+                          ?.outlined
+                          .copyWith(labelText: l10n.payloadClaims),
+                      readOnly: true,
+                    ),
+                    TextFormField(
+                      initialValue: (idTokenResult?.issuedAtTime?.toString())
+                          .orNullString(
+                            objectName:
+                                'idTokenResult?.issuedAtTime?.toString()',
+                          ),
+                      decoration: Theme.of(context)
+                          .extension<InputDecorationStyles>()
+                          ?.outlined
+                          .copyWith(labelText: l10n.issuedAt),
+                      readOnly: true,
+                    ),
+                    TextFormField(
+                      initialValue: (idTokenResult?.expirationTime?.toString())
+                          .orNullString(
+                            objectName:
+                                'idTokenResult?.expirationTime?.toString()',
+                          ),
+                      decoration: Theme.of(context)
+                          .extension<InputDecorationStyles>()
+                          ?.outlined
+                          .copyWith(labelText: l10n.expiredAt),
+                      readOnly: true,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

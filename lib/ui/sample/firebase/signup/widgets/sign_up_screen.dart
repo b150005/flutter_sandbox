@@ -24,7 +24,7 @@ class SignUpScreen extends HookConsumerWidget {
             l10n.signUp,
             style: Theme.of(
               context,
-            ).extension<TextStyles>()?.emphasisHeadlineLargeStyle,
+            ).textTheme.headlineLarge,
           ),
           Text(l10n.signUpDescription),
           const SignUpForm(),

@@ -232,6 +232,42 @@
 	"@lastSignInAt": {
 		"description": "Last sign in at"
 	},
+	"anonymousUser": "匿名ユーザ",
+	"@anonymousUser": {
+		"description": "Anonymous user"
+	},
+	"emailVerification": "メール認証",
+	"@emailVerification": {
+		"description": "Email verification"
+	},
+	"signInProvider": "サインインプロバイダ",
+	"@signInProvider": {
+		"description": "Sign-in Provider"
+	},
+	"signInSecondFactor": "追加認証要素(MFA)",
+	"@signInSecondFactor": {
+		"description": "Sign-in second factor"
+	},
+	"authenticatedAt": "認証日時",
+	"@authenticatedAt": {
+		"description": "Authenticated at"
+	},
+	"idToken": "IDトークン",
+	"@idToken": {
+		"description": "ID token"
+	},
+	"payloadClaims": "Payload claims",
+	"@payloadClaims": {
+		"description": "Payload claims"
+	},
+	"issuedAt": "発行日時",
+	"@issuedAt": {
+		"description": "Issued at"
+	},
+	"expiredAt": "有効期限",
+	"@expiredAt": {
+		"description": "Expired at"
+	},
 	"dataConnectScreenDescription": "Firebase Data Connect のデモ画面です。",
 	"@dataConnectScreenDescription": {
 		"description": "Description for the Data Connect page"
