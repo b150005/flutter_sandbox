@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../core/config/constants/app_colors.dart';
 import '../../../core/config/constants/spacing.dart';
+import '../../../core/utils/extensions/string.dart';
 
 @Preview(name: 'Status Indicator')
 Widget statusIndicator() => Column(
@@ -18,12 +19,12 @@ class StatusIndicator extends HookWidget {
   const StatusIndicator({
     super.key,
     required this.isValid,
-    required this.message,
+    this.message,
   });
 
   final bool isValid;
 
-  final String message;
+  final String? message;
 
   @override
   Widget build(BuildContext context) {
@@ -48,19 +49,25 @@ class StatusIndicator extends HookWidget {
 
     final color = isValid ? AppColors.success : AppColors.failed;
 
+    final icon = Transform.scale(
+      scale: scale,
+      child: Icon(
+        isValid ? Icons.check_circle_rounded : Icons.cancel_rounded,
+        color: color,
+      ),
+    );
+
+    if (message.isNullOrEmpty) {
+      return icon;
+    }
+
     return Row(
       spacing: Spacing.xs.dp,
       children: [
-        Transform.scale(
-          scale: scale,
-          child: Icon(
-            isValid ? Icons.check_circle_rounded : Icons.cancel_rounded,
-            color: color,
-          ),
-        ),
+        icon,
         Flexible(
           child: Text(
-            message,
+            message!,
             style: TextStyle(
               color: color,
             ),
