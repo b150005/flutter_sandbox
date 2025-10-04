@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import '../../../core/config/constants/assets.dart';
 import '../../../core/utils/extensions/string.dart';
 import '../../../domain/models/content.dart';
-import '../../core/themes/extensions/card_text_styles.dart';
 
 class ContentCard extends StatelessWidget {
   const ContentCard({super.key, required this.content});
@@ -37,23 +36,14 @@ class ContentCard extends StatelessWidget {
               children: [
                 Text(
                   content.title,
-                  style: Theme.of(
-                    context,
-                  ).extension<CardTextStyles>()?.titleStyle,
                 ),
                 if (content.subtitle.isNotNullAndNotEmpty)
                   Text(
                     content.subtitle!,
-                    style: Theme.of(
-                      context,
-                    ).extension<CardTextStyles>()?.subtitleStyle,
                     overflow: TextOverflow.ellipsis,
                   ),
                 Text(
                   content.description,
-                  style: Theme.of(
-                    context,
-                  ).extension<CardTextStyles>()?.descriptionStyle,
                   overflow: TextOverflow.ellipsis,
                 ),
               ],

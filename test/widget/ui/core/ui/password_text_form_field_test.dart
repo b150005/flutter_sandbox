@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sandbox/core/config/constants/text_input_formatters.dart';
 import 'package:flutter_sandbox/core/utils/authentications/firebase_auth_validator.dart';
-import 'package:flutter_sandbox/ui/core/themes/extensions/input_decoration_styles.dart';
 import 'package:flutter_sandbox/ui/core/ui/password_text_form_field.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -21,7 +20,7 @@ void main() {
       builder: (context, child) => Theme(
         data: ThemeData.light(
           useMaterial3: true,
-        ).copyWith(extensions: [InputDecorationStyles.light(context)]),
+        ).copyWith(extensions: []),
         child: child!,
       ),
       home: Scaffold(

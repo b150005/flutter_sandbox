@@ -6,7 +6,6 @@ import '../../../core/config/constants/text_input_formatters.dart';
 import '../../../core/config/constants/widget_keys.dart';
 import '../../../core/utils/authentications/firebase_auth_validator.dart';
 import '../../../core/utils/l10n/app_localizations.dart';
-import '../themes/extensions/input_decoration_styles.dart';
 
 @Preview(name: 'PasswordTextFormField')
 Widget passwordTextFormField() =>
@@ -39,10 +38,7 @@ class PasswordTextFormField extends HookConsumerWidget {
     return TextFormField(
       key: WidgetKeys.password,
       controller: controller,
-      decoration: Theme.of(context)
-          .extension<InputDecorationStyles>()
-          ?.outlined
-          .copyWith(hintText: hintText ?? l10n.password),
+      decoration: InputDecoration(hintText: hintText ?? l10n.password),
       keyboardType: TextInputType.visiblePassword,
       textInputAction: textInputAction,
       obscureText: true,

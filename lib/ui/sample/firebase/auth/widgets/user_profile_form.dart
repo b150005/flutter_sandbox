@@ -15,7 +15,6 @@ import '../../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../../core/utils/logging/log_message.dart';
 import '../../../../../core/utils/logging/logger.dart';
 import '../../../../../data/repositories/firebase/auth/auth_repository.dart';
-import '../../../../core/themes/extensions/input_decoration_styles.dart';
 
 @Preview(name: 'User Profile Form')
 Widget userProfileForm() => ProviderScope(
@@ -86,17 +85,13 @@ Widget userProfileForm() => ProviderScope(
           ThemeData.light(
             useMaterial3: true,
           ).copyWith(
-            extensions: [
-              InputDecorationStyles.light(context),
-            ],
+            extensions: [],
           ),
       darkTheme:
           ThemeData.dark(
             useMaterial3: true,
           ).copyWith(
-            extensions: [
-              InputDecorationStyles.dark(context),
-            ],
+            extensions: [],
           ),
       debugShowCheckedModeBanner: false,
     ),
@@ -143,50 +138,33 @@ class UserProfileForm extends HookConsumerWidget {
             children: [
               TextFormField(
                 initialValue: currentUser?.displayName,
-                decoration: Theme.of(context)
-                    .extension<InputDecorationStyles>()
-                    ?.outlined
-                    .copyWith(
-                      labelText: l10n.displayName,
-                    ),
+                decoration: InputDecoration(labelText: l10n.displayName),
               ),
               TextFormField(
                 initialValue: currentUser?.email,
-                decoration: Theme.of(context)
-                    .extension<InputDecorationStyles>()
-                    ?.outlined
-                    .copyWith(
-                      labelText: l10n.email,
-                    ),
+                decoration: InputDecoration(
+                  labelText: l10n.email,
+                ),
               ),
               TextFormField(
                 initialValue: currentUser?.phoneNumber,
-                decoration: Theme.of(context)
-                    .extension<InputDecorationStyles>()
-                    ?.outlined
-                    .copyWith(
-                      labelText: l10n.phoneNumber,
-                    ),
+                decoration: InputDecoration(
+                  labelText: l10n.phoneNumber,
+                ),
               ),
               TextFormField(
                 initialValue: currentUser?.photoURL,
-                decoration: Theme.of(context)
-                    .extension<InputDecorationStyles>()
-                    ?.outlined
-                    .copyWith(
-                      labelText: l10n.photoURL,
-                    ),
+                decoration: InputDecoration(
+                  labelText: l10n.photoURL,
+                ),
               ),
               TextFormField(
                 initialValue: (currentUser?.uid).orNullString(
                   objectName: 'currentUser?.uid',
                 ),
-                decoration: Theme.of(context)
-                    .extension<InputDecorationStyles>()
-                    ?.outlined
-                    .copyWith(
-                      labelText: l10n.uid,
-                    ),
+                decoration: InputDecoration(
+                  labelText: l10n.uid,
+                ),
                 readOnly: true,
               ),
             ],
@@ -233,12 +211,9 @@ class UserProfileForm extends HookConsumerWidget {
                 initialValue: (currentUser?.refreshToken).orNullString(
                   objectName: 'currentUser?.refreshToken',
                 ),
-                decoration: Theme.of(context)
-                    .extension<InputDecorationStyles>()
-                    ?.outlined
-                    .copyWith(
-                      labelText: l10n.refreshToken,
-                    ),
+                decoration: InputDecoration(
+                  labelText: l10n.refreshToken,
+                ),
                 readOnly: true,
               ),
               TextFormField(
@@ -247,12 +222,9 @@ class UserProfileForm extends HookConsumerWidget {
                       objectName:
                           'currentUser?.metadata.creationTime.toString()',
                     ),
-                decoration: Theme.of(context)
-                    .extension<InputDecorationStyles>()
-                    ?.outlined
-                    .copyWith(
-                      labelText: l10n.createdAt,
-                    ),
+                decoration: InputDecoration(
+                  labelText: l10n.createdAt,
+                ),
                 readOnly: true,
               ),
               TextFormField(
@@ -261,12 +233,9 @@ class UserProfileForm extends HookConsumerWidget {
                       objectName:
                           'currentUser?.metadata.creationTime.toString()',
                     ),
-                decoration: Theme.of(context)
-                    .extension<InputDecorationStyles>()
-                    ?.outlined
-                    .copyWith(
-                      labelText: l10n.lastSignInAt,
-                    ),
+                decoration: InputDecoration(
+                  labelText: l10n.lastSignInAt,
+                ),
                 readOnly: true,
               ),
               idTokenResultAsyncSnapshot.when(
@@ -291,10 +260,9 @@ class UserProfileForm extends HookConsumerWidget {
                             objectName:
                                 'idTokenResult?.signInProvider?.toString()',
                           ),
-                      decoration: Theme.of(context)
-                          .extension<InputDecorationStyles>()
-                          ?.outlined
-                          .copyWith(labelText: l10n.signInProvider),
+                      decoration: InputDecoration(
+                        labelText: l10n.signInProvider,
+                      ),
                       readOnly: true,
                     ),
                     TextFormField(
@@ -303,10 +271,9 @@ class UserProfileForm extends HookConsumerWidget {
                             objectName:
                                 'idTokenResult?.signInSecondFactor?.toString()',
                           ),
-                      decoration: Theme.of(context)
-                          .extension<InputDecorationStyles>()
-                          ?.outlined
-                          .copyWith(labelText: l10n.signInSecondFactor),
+                      decoration: InputDecoration(
+                        labelText: l10n.signInSecondFactor,
+                      ),
                       readOnly: true,
                     ),
                     TextFormField(
@@ -314,10 +281,9 @@ class UserProfileForm extends HookConsumerWidget {
                           .orNullString(
                             objectName: 'idTokenResult?.authTime?.toString()',
                           ),
-                      decoration: Theme.of(context)
-                          .extension<InputDecorationStyles>()
-                          ?.outlined
-                          .copyWith(labelText: l10n.authenticatedAt),
+                      decoration: InputDecoration(
+                        labelText: l10n.authenticatedAt,
+                      ),
                       readOnly: true,
                     ),
                     TextFormField(
@@ -325,10 +291,7 @@ class UserProfileForm extends HookConsumerWidget {
                           .orNullString(
                             objectName: 'idTokenResult?.token?.toString()',
                           ),
-                      decoration: Theme.of(context)
-                          .extension<InputDecorationStyles>()
-                          ?.outlined
-                          .copyWith(labelText: l10n.idToken),
+                      decoration: InputDecoration(labelText: l10n.idToken),
                       readOnly: true,
                     ),
                     TextFormField(
@@ -336,10 +299,9 @@ class UserProfileForm extends HookConsumerWidget {
                           .orNullString(
                             objectName: 'idTokenResult?.claims?.toString()',
                           ),
-                      decoration: Theme.of(context)
-                          .extension<InputDecorationStyles>()
-                          ?.outlined
-                          .copyWith(labelText: l10n.payloadClaims),
+                      decoration: InputDecoration(
+                        labelText: l10n.payloadClaims,
+                      ),
                       readOnly: true,
                     ),
                     TextFormField(
@@ -348,10 +310,7 @@ class UserProfileForm extends HookConsumerWidget {
                             objectName:
                                 'idTokenResult?.issuedAtTime?.toString()',
                           ),
-                      decoration: Theme.of(context)
-                          .extension<InputDecorationStyles>()
-                          ?.outlined
-                          .copyWith(labelText: l10n.issuedAt),
+                      decoration: InputDecoration(labelText: l10n.issuedAt),
                       readOnly: true,
                     ),
                     TextFormField(
@@ -360,10 +319,7 @@ class UserProfileForm extends HookConsumerWidget {
                             objectName:
                                 'idTokenResult?.expirationTime?.toString()',
                           ),
-                      decoration: Theme.of(context)
-                          .extension<InputDecorationStyles>()
-                          ?.outlined
-                          .copyWith(labelText: l10n.expiredAt),
+                      decoration: InputDecoration(labelText: l10n.expiredAt),
                       readOnly: true,
                     ),
                   ],
