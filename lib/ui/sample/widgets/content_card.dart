@@ -27,7 +27,7 @@ class ContentCard extends StatelessWidget {
   Widget build(BuildContext context) => Card(
     clipBehavior: Clip.antiAlias,
     child: InkWell(
-      onTap: () => context.go(content.path),
+      onTap: kPreviewMode ? () {} : () => context.go(content.path),
       child: Column(
         children: [
           Flexible(
