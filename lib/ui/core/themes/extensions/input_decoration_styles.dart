@@ -1,10 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widget_previews.dart';
 
 import '../../../../core/config/constants/alpha_channel.dart';
 import '../../../../core/config/constants/border_radii.dart';
 import '../../../../core/config/constants/border_width.dart';
 import '../../../../core/config/constants/icon_size.dart';
 import '../../../../core/config/constants/spacing.dart';
+
+@Preview(name: 'Input Decoration Styles')
+Widget inputDecorationStyles() => Padding(
+  padding: const EdgeInsets.all(8),
+  child: Builder(
+    builder: (context) => Column(
+      spacing: Spacing.sm.dp,
+      children: [
+        TextFormField(
+          initialValue: 'outlined',
+          decoration: InputDecorationStyles.light(
+            context,
+          ).outlined.copyWith(labelText: 'outlined'),
+          readOnly: true,
+        ),
+        TextFormField(
+          initialValue: 'filled',
+          decoration: InputDecorationStyles.light(
+            context,
+          ).filled.copyWith(labelText: 'filled'),
+          readOnly: true,
+        ),
+        TextFormField(
+          initialValue: 'underlined',
+          decoration: InputDecorationStyles.light(
+            context,
+          ).underlined.copyWith(labelText: 'underlined'),
+          readOnly: true,
+        ),
+        TextFormField(
+          initialValue: 'search',
+          decoration: InputDecorationStyles.light(
+            context,
+          ).search.copyWith(labelText: 'search'),
+          readOnly: true,
+        ),
+        TextFormField(
+          initialValue: 'compact',
+          decoration: InputDecorationStyles.light(
+            context,
+          ).compact.copyWith(labelText: 'compact'),
+          readOnly: true,
+        ),
+      ],
+    ),
+  ),
+);
 
 @immutable
 class InputDecorationStyles extends ThemeExtension<InputDecorationStyles> {
