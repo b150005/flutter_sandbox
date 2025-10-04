@@ -15,6 +15,7 @@ import '../../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../../core/utils/logging/log_message.dart';
 import '../../../../../core/utils/logging/logger.dart';
 import '../../../../../data/repositories/firebase/auth/auth_repository.dart';
+import '../../../../core/ui/status_indicator.dart';
 
 @Preview(name: 'User Profile Form')
 Widget userProfileForm() => ProviderScope(
@@ -182,11 +183,10 @@ class UserProfileForm extends HookConsumerWidget {
                       context,
                     ).textTheme.labelLarge,
                   ),
-                  Switch.adaptive(
-                    value: (currentUser?.isAnonymous).orFalse(
+                  StatusIndicator(
+                    isValid: (currentUser?.isAnonymous).orFalse(
                       objectName: 'currentUser?.isAnonymous',
                     ),
-                    onChanged: null,
                   ),
                 ],
               ),
@@ -199,11 +199,10 @@ class UserProfileForm extends HookConsumerWidget {
                       context,
                     ).textTheme.labelLarge,
                   ),
-                  Switch.adaptive(
-                    value: (currentUser?.emailVerified).orFalse(
+                  StatusIndicator(
+                    isValid: (currentUser?.emailVerified).orFalse(
                       objectName: 'currentUser?.emailVerified',
                     ),
-                    onChanged: null,
                   ),
                 ],
               ),
