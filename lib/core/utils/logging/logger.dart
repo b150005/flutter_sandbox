@@ -44,7 +44,7 @@ class Logger extends logger.Logger {
       dateTimeFormat: logger.DateTimeFormat.none,
     ),
     output: LogOutput(),
-    level: kIsProd ? logger.Level.info : null,
+    level: !kPreviewMode && kIsProd ? logger.Level.info : null,
   );
 
   /// データ収集に関するユーザの同意ステータスを設定する

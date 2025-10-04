@@ -5,13 +5,10 @@ import 'env_field.dart';
 
 part 'env.g.dart';
 
-/// Development 環境かどうか
+bool get kPreviewMode => const String.fromEnvironment(Env.appEnvKey).isEmpty;
+
 bool get kIsDev => Env.instance.appEnv == Env.development;
-
-/// Staging 環境かどうか
 bool get kIsStg => Env.instance.appEnv == Env.staging;
-
-/// Production 環境かどうか
 bool get kIsProd => Env.instance.appEnv == Env.production;
 
 bool get kDebugModeInDev => kIsDev && kDebugMode;
