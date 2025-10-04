@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widget_previews.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/config/constants/text_input_formatters.dart';
@@ -35,13 +36,26 @@ class PasswordTextFormField extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
 
+    final obscureText = useState<bool>(true);
+
     return TextFormField(
       key: WidgetKeys.password,
       controller: controller,
-      decoration: InputDecoration(hintText: hintText ?? l10n.password),
+      decoration: InputDecoration(
+        hintText: hintText ?? l10n.password,
+        suffixIcon: IconButton(
+          key: WidgetKeys.togglePasswordVisibility,
+          onPressed: () => obscureText.value = !obscureText.value,
+          icon: Icon(
+            obscureText.value
+                ? Icons.visibility_rounded
+                : Icons.visibility_off_rounded,
+          ),
+        ),
+      ),
       keyboardType: TextInputType.visiblePassword,
       textInputAction: textInputAction,
-      obscureText: true,
+      obscureText: obscureText.value,
       autocorrect: false,
       enableSuggestions: false,
       maxLength: FirebaseAuthValidator.passwordMaxLength,

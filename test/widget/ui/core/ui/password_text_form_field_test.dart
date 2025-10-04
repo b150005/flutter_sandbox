@@ -17,12 +17,6 @@ void main() {
     String? Function(String? password)? validator,
   }) => ProviderScope(
     child: MaterialApp(
-      builder: (context, child) => Theme(
-        data: ThemeData.light(
-          useMaterial3: true,
-        ).copyWith(extensions: []),
-        child: child!,
-      ),
       home: Scaffold(
         body: PasswordTextFormField(
           controller: controller,
@@ -51,12 +45,14 @@ void main() {
 
   group('🎨 UI elements', () {
     testWidgets(
-      'PasswordTextFormField should have a password TextFormField.',
+      'PasswordTextFormField should have a password TextFormField'
+      ' and a visibility toggle IconButton.',
       (tester) async {
         await tester.pumpWidget(passwordTextFormFieldApp());
 
         expect(WidgetKeyFinder.password, findsOneWidget);
         expect(find.byType(TextFormField), findsOneWidget);
+        expect(WidgetKeyFinder.togglePasswordVisibility, findsOneWidget);
       },
     );
 
@@ -74,7 +70,6 @@ void main() {
         expect(passwordTextField.decoration?.hintText, l10n.password);
         expect(passwordTextField.keyboardType, TextInputType.visiblePassword);
         expect(passwordTextField.textInputAction, isNull);
-        expect(passwordTextField.obscureText, isTrue);
         expect(passwordTextField.autocorrect, isFalse);
         expect(passwordTextField.enableSuggestions, isFalse);
         expect(
@@ -113,6 +108,30 @@ void main() {
         expect(passwordTextFormField.controller, textEditingController);
         expect(passwordTextField.decoration?.hintText, hintText);
         expect(passwordTextField.textInputAction, textInputAction);
+      },
+    );
+
+    testWidgets(
+      'Password visibility toggle button should change state'
+      ' when tapped.',
+      (tester) async {
+        await tester.pumpWidget(passwordTextFormFieldApp());
+
+        var passwordTextField = findPasswordTextField(tester);
+        var icon = tester.widget<Icon>(find.byType(Icon));
+
+        expect(passwordTextField.obscureText, isTrue);
+        expect(icon.icon, Icons.visibility_rounded);
+
+        await tester.tap(WidgetKeyFinder.togglePasswordVisibility);
+
+        await tester.pump();
+
+        passwordTextField = findPasswordTextField(tester);
+        icon = tester.widget<Icon>(find.byType(Icon));
+
+        expect(passwordTextField.obscureText, isFalse);
+        expect(icon.icon, Icons.visibility_off_rounded);
       },
     );
   });

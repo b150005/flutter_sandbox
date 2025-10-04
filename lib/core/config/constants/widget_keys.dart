@@ -19,6 +19,9 @@ abstract final class WidgetKeys {
   static const ValueKey<String> dismiss = ValueKey('dismiss');
   static const ValueKey<String> email = ValueKey('email');
   static const ValueKey<String> password = ValueKey('password');
+  static const ValueKey<String> togglePasswordVisibility = ValueKey(
+    'togglePasswordVisibility',
+  );
   static const ValueKey<String> forgotPassword = ValueKey('forgotPassword');
   static const ValueKey<String> signIn = ValueKey('signIn');
   static const ValueKey<String> signUp = ValueKey('signUp');
