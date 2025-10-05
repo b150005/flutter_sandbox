@@ -24,7 +24,7 @@ class ContentCard extends StatelessWidget {
   final Content content;
 
   @override
-  Widget build(BuildContext context) => Card(
+  Widget build(BuildContext context) => Card.outlined(
     clipBehavior: Clip.antiAlias,
     child: InkWell(
       onTap: kPreviewMode ? () {} : () => context.go(content.path),
@@ -49,9 +49,10 @@ class ContentCard extends StatelessWidget {
                   ),
           ),
           Padding(
-            padding: EdgeInsets.all(Spacing.xs.dp),
+            padding: EdgeInsets.all(Spacing.sm.dp),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
+              spacing: Spacing.xxs.dp,
               children: [
                 Text(
                   content.title,
@@ -60,12 +61,12 @@ class ContentCard extends StatelessWidget {
                 if (content.subtitle.isNotNullAndNotEmpty)
                   Text(
                     content.subtitle!,
-                    style: Theme.of(context).textTheme.bodyMedium,
+                    style: Theme.of(context).textTheme.bodySmall,
                     overflow: TextOverflow.ellipsis,
                   ),
                 Text(
                   content.description,
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: Theme.of(context).textTheme.bodyMedium,
                   overflow: TextOverflow.ellipsis,
                 ),
               ],
