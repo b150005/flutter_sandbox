@@ -13,6 +13,7 @@ import '../../../../../data/repositories/firebase/auth/auth_repository.dart';
 import '../../../../core/ui/callout.dart';
 import '../../../../core/ui/email_text_form_field.dart';
 
+@immutable
 class SignUpForm extends HookConsumerWidget {
   const SignUpForm({super.key});
 

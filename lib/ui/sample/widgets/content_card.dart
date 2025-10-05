@@ -18,6 +18,7 @@ Widget contentCard() => const ContentCard(
   ),
 );
 
+@immutable
 class ContentCard extends StatelessWidget {
   const ContentCard({super.key, required this.content});
 

@@ -9,6 +9,7 @@ class DataConnectScreenRoute extends GoRouteData with $DataConnectScreenRoute {
       const DataConnectScreen();
 }
 
+@immutable
 class DataConnectScreen extends ConsumerWidget {
   const DataConnectScreen({super.key});
 

@@ -14,6 +14,7 @@ import '../../../../core/ui/callout.dart';
 import '../../../../core/ui/email_text_form_field.dart';
 import '../../../../core/ui/password_text_form_field.dart';
 
+@immutable
 class SignInForm extends HookConsumerWidget {
   const SignInForm({super.key});
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/config/constants/spacing.dart';
 
+@immutable
 class ScrollableContainer extends StatelessWidget {
   const ScrollableContainer({super.key, this.child});
 

@@ -55,6 +55,7 @@ enum CalloutType {
   Color get foregroundColor => color.shade900;
 }
 
+@immutable
 class Callout extends StatelessWidget {
   const Callout(
     this.message, {

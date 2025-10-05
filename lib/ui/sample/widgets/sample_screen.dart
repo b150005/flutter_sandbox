@@ -8,6 +8,7 @@ class SampleScreenRoute extends GoRouteData with $SampleScreenRoute {
       const SampleScreen();
 }
 
+@immutable
 class SampleScreen extends HookConsumerWidget {
   const SampleScreen({super.key});
 

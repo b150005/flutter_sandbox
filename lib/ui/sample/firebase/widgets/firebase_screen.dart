@@ -9,6 +9,7 @@ class FirebaseScreenRoute extends GoRouteData with $FirebaseScreenRoute {
       const FirebaseScreen();
 }
 
+@immutable
 class FirebaseScreen extends ConsumerWidget {
   const FirebaseScreen({super.key});
 

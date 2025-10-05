@@ -9,6 +9,7 @@ class SignInScreenRoute extends GoRouteData with $SignInScreenRoute {
       const SignInScreen();
 }
 
+@immutable
 class SignInScreen extends ConsumerWidget {
   const SignInScreen({super.key});
 

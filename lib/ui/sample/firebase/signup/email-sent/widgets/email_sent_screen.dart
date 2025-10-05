@@ -9,6 +9,7 @@ class EmailSentScreenRoute extends GoRouteData with $EmailSentScreenRoute {
       const EmailSentScreen();
 }
 
+@immutable
 class EmailSentScreen extends ConsumerWidget {
   const EmailSentScreen({super.key});
 

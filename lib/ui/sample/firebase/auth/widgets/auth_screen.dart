@@ -8,6 +8,7 @@ class AuthScreenRoute extends GoRouteData with $AuthScreenRoute {
   Widget build(BuildContext context, GoRouterState state) => const AuthScreen();
 }
 
+@immutable
 class AuthScreen extends ConsumerWidget {
   const AuthScreen({super.key});
 

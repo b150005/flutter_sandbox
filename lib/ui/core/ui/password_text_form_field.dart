@@ -12,6 +12,7 @@ import '../../../core/utils/l10n/app_localizations.dart';
 Widget passwordTextFormField() =>
     const ProviderScope(child: PasswordTextFormField());
 
+@immutable
 class PasswordTextFormField extends HookConsumerWidget {
   const PasswordTextFormField({
     super.key,

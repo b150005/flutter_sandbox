@@ -10,6 +10,7 @@ class ForgotPasswordScreenRoute extends GoRouteData
       const ForgotPasswordScreen();
 }
 
+@immutable
 class ForgotPasswordScreen extends ConsumerWidget {
   const ForgotPasswordScreen({super.key});
 

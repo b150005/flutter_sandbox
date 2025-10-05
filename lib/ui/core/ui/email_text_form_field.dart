@@ -10,6 +10,7 @@ import '../../../core/utils/l10n/app_localizations.dart';
 @Preview(name: 'Email Text Form Field')
 Widget emailTextFormField() => const ProviderScope(child: EmailTextFormField());
 
+@immutable
 class EmailTextFormField extends HookConsumerWidget {
   const EmailTextFormField({
     super.key,

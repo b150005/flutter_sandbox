@@ -7,6 +7,7 @@ class HomeScreenRoute extends GoRouteData with $HomeScreenRoute {
   Widget build(BuildContext context, GoRouterState state) => const HomeScreen();
 }
 
+@immutable
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 

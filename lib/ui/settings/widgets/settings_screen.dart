@@ -8,6 +8,7 @@ class SettingsScreenRoute extends GoRouteData with $SettingsScreenRoute {
       const SettingsScreen();
 }
 
+@immutable
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 

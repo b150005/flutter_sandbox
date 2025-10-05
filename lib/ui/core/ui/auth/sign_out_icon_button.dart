@@ -7,6 +7,7 @@ import '../../../../data/repositories/firebase/auth/auth_repository.dart';
 @Preview(name: 'Sign Out Icon Button')
 Widget signOutIconButton() => const ProviderScope(child: SignOutIconButton());
 
+@immutable
 class SignOutIconButton extends ConsumerWidget {
   const SignOutIconButton({super.key});
 

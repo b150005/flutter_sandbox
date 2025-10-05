@@ -10,6 +10,7 @@ class LocalStorageScreenRoute extends GoRouteData
       const LocalStorageScreen();
 }
 
+@immutable
 class LocalStorageScreen extends ConsumerWidget {
   const LocalStorageScreen({super.key});
 

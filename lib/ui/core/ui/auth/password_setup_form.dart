@@ -21,6 +21,7 @@ Widget passwordSetupForm() => const ProviderScope(
   child: PasswordSetupForm(),
 );
 
+@immutable
 class PasswordSetupForm extends HookConsumerWidget {
   const PasswordSetupForm({super.key});
 

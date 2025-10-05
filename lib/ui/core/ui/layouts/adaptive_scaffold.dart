@@ -6,6 +6,7 @@ import '../../../../core/config/constants/spacing.dart';
 import '../../../../core/config/policies/design_policy.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
 
+@immutable
 class _Destination {
   const _Destination({required this.icon, required this.label});
 
@@ -13,6 +14,7 @@ class _Destination {
   final String label;
 }
 
+@immutable
 class AdaptiveScaffold extends ConsumerWidget {
   const AdaptiveScaffold({
     super.key,

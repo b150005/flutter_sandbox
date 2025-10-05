@@ -34,6 +34,7 @@ void main() {
   });
 }
 
+@immutable
 class App extends ConsumerWidget {
   const App({super.key});
 

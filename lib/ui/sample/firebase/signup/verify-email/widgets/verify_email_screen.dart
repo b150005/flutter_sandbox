@@ -9,6 +9,7 @@ class VerifyEmailScreenRoute extends GoRouteData with $VerifyEmailScreenRoute {
       VerifyEmailScreen(emailLink: state.uri);
 }
 
+@immutable
 class VerifyEmailScreen extends HookConsumerWidget {
   const VerifyEmailScreen({super.key, required this.emailLink});
 
