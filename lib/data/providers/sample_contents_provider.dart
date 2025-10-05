@@ -1,8 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../core/routing/router.dart';
-import '../../../core/utils/l10n/app_localizations.dart';
-import '../../../domain/models/content.dart';
+import '../../core/routing/router.dart';
+import '../../core/utils/l10n/app_localizations.dart';
+import '../../domain/models/content.dart';
 
 part 'sample_contents_provider.g.dart';
 
