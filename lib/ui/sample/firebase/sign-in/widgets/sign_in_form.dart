@@ -7,6 +7,7 @@ import '../../../../../core/config/constants/button_size.dart';
 import '../../../../../core/config/constants/spacing.dart';
 import '../../../../../core/config/constants/widget_keys.dart';
 import '../../../../../core/routing/router.dart';
+import '../../../../../core/utils/extensions/build_context.dart';
 import '../../../../../core/utils/extensions/string.dart';
 import '../../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../../data/repositories/firebase/auth/auth_repository.dart';
@@ -91,7 +92,7 @@ class SignInForm extends HookConsumerWidget {
             style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
             child: isLoading.value
                 ? CircularProgressIndicator.adaptive(
-                    backgroundColor: Theme.of(context).colorScheme.onPrimary,
+                    backgroundColor: context.colorScheme.onPrimary,
                   )
                 : Text(l10n.signIn),
           ),

@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
+import '../../utils/extensions/build_context.dart';
+
 enum NavigationLayout { bar, rail }
 
 final class DesignPolicy {
@@ -13,12 +15,12 @@ final class DesignPolicy {
   };
 
   static NavigationLayout chooseNavigationLayout(BuildContext context) =>
-      switch (ResponsiveBreakpoints.of(context).breakpoint.name) {
+      switch (context.breakpoint.name) {
         null || MOBILE => NavigationLayout.bar,
         TABLET || DESKTOP => NavigationLayout.rail,
         _ => throw UnsupportedError(
           'Unsupported breakpoint:'
-          ' ${ResponsiveBreakpoints.of(context).breakpoint}',
+          ' ${context.breakpoint}',
         ),
       };
 }

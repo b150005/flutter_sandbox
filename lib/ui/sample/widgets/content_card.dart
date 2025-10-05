@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/config/constants/assets.dart';
 import '../../../core/config/constants/spacing.dart';
 import '../../../core/config/env/env.dart';
+import '../../../core/utils/extensions/build_context.dart';
 import '../../../core/utils/extensions/string.dart';
 import '../../../domain/models/content.dart';
 
@@ -57,17 +58,17 @@ class ContentCard extends StatelessWidget {
               children: [
                 Text(
                   content.title,
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: context.textTheme.titleLarge,
                 ),
                 if (content.subtitle.isNotNullAndNotEmpty)
                   Text(
                     content.subtitle!,
-                    style: Theme.of(context).textTheme.bodySmall,
+                    style: context.textTheme.bodySmall,
                     overflow: TextOverflow.ellipsis,
                   ),
                 Text(
                   content.description,
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: context.textTheme.bodyMedium,
                   overflow: TextOverflow.ellipsis,
                 ),
               ],

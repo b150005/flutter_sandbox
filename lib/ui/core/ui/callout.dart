@@ -6,6 +6,7 @@ import '../../../core/config/constants/icon_size.dart';
 import '../../../core/config/constants/spacing.dart';
 import '../../../core/config/constants/widget_keys.dart';
 import '../../../core/config/l10n/app_localizations.dart';
+import '../../../core/utils/extensions/build_context.dart';
 
 @Preview(name: 'Callout')
 Widget callout() => Column(
@@ -101,9 +102,9 @@ class Callout extends StatelessWidget {
               child: Text(
                 key: WidgetKeys.message,
                 message,
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyLarge?.copyWith(color: type.foregroundColor),
+                style: context.textTheme.bodyLarge?.copyWith(
+                  color: type.foregroundColor,
+                ),
               ),
             ),
             if (canDismiss) ...[

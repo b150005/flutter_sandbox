@@ -9,6 +9,7 @@ import '../../../../core/config/constants/spacing.dart';
 import '../../../../core/config/constants/widget_keys.dart';
 import '../../../../core/utils/authentications/firebase_auth_validator.dart';
 import '../../../../core/utils/exceptions/app_exception.dart';
+import '../../../../core/utils/extensions/build_context.dart';
 import '../../../../core/utils/extensions/string.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
 import '../callout.dart';
@@ -89,7 +90,7 @@ class EmailInputForm<T> extends HookConsumerWidget {
             style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
             child: isLoading.value
                 ? CircularProgressIndicator.adaptive(
-                    backgroundColor: Theme.of(context).colorScheme.onPrimary,
+                    backgroundColor: context.colorScheme.onPrimary,
                   )
                 : Text(l10n.submit),
           ),

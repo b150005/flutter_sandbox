@@ -27,6 +27,7 @@ import '../config/constants/icon_size.dart';
 import '../config/constants/spacing.dart';
 import '../config/constants/widget_keys.dart';
 import '../utils/exceptions/app_exception.dart';
+import '../utils/extensions/build_context.dart';
 import '../utils/l10n/app_localizations.dart';
 import '../utils/logging/go_router_observer.dart';
 import '../utils/riverpod/provider_change_notifier.dart';
