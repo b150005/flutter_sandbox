@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widget_previews.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../core/config/constants/app_colors.dart';
 import '../../../core/config/constants/spacing.dart';
+import '../../../core/utils/extensions/build_context.dart';
 import '../../../core/utils/extensions/string.dart';
 
 @Preview(name: 'Status Indicator')
@@ -47,7 +47,9 @@ class StatusIndicator extends HookWidget {
       ),
     );
 
-    final color = isValid ? AppColors.success : AppColors.failed;
+    final color = isValid
+        ? context.statusColors.successContainer
+        : context.statusColors.failedContainer;
 
     final icon = Transform.scale(
       scale: scale,
