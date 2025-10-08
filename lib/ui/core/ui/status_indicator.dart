@@ -49,7 +49,7 @@ class StatusIndicator extends HookWidget {
 
     final color = isValid
         ? context.statusColors.successContainer
-        : context.statusColors.failedContainer;
+        : context.statusColors.failed;
 
     final icon = Transform.scale(
       scale: scale,
