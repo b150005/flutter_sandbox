@@ -63,6 +63,7 @@ Env.xcconfig
 *.g.dart
 *.freezed.dart
 lib/core/config/l10n/app_localizations*.dart
+lib/data/services/firebase/dataconnect/generated/*
 
 # Ignore generated credentials from google-github-actions/auth
 gha-creds-*.json
@@ -70,6 +71,7 @@ gha-creds-*.json
 # AI development assistants
 .serena/
 .claude/
+claudedocs/
 
 # Flutter DevTools configuration
 devtools_options.yaml
