@@ -50,9 +50,9 @@ class App extends ConsumerWidget {
   static const _supportedLocales = [Locale('en', 'US'), Locale('ja', 'JP')];
 
   static const _breakpoints = [
-    Breakpoint(start: 0, end: 480, name: MOBILE),
-    Breakpoint(start: 481, end: 768, name: TABLET),
-    Breakpoint(start: 769, end: double.infinity, name: DESKTOP),
+    Breakpoint(start: 0, end: 767, name: MOBILE),
+    Breakpoint(start: 768, end: 1023, name: TABLET),
+    Breakpoint(start: 1024, end: double.infinity, name: DESKTOP),
   ];
 
   @override
