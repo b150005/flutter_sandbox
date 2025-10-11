@@ -19,8 +19,7 @@ final class DesignPolicy {
         null || MOBILE => NavigationLayout.bar,
         TABLET || DESKTOP => NavigationLayout.rail,
         _ => throw UnsupportedError(
-          'Unsupported breakpoint:'
-          ' ${context.breakpoint}',
+          'Unsupported breakpoint: ${context.breakpoint}',
         ),
       };
 }
