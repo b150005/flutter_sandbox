@@ -39,17 +39,17 @@ void main() {
 class App extends ConsumerWidget {
   const App({super.key});
 
-  static const Iterable<LocalizationsDelegate<dynamic>>
-  _localizationsDelegates = [
-    AppLocalizations.delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+  static const Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
-  static const _supportedLocales = [Locale('en', 'US'), Locale('ja', 'JP')];
+  static const supportedLocales = [Locale('en', 'US'), Locale('ja', 'JP')];
 
-  static const _breakpoints = [
+  static const breakpoints = [
     Breakpoint(start: 0, end: 767, name: MOBILE),
     Breakpoint(start: 768, end: 1023, name: TABLET),
     Breakpoint(start: 1024, end: double.infinity, name: DESKTOP),
@@ -67,7 +67,7 @@ class App extends ConsumerWidget {
           const Placeholder(),
           objectName: 'MaterialApp.router child',
         ),
-        breakpoints: _breakpoints,
+        breakpoints: breakpoints,
       ),
       theme: ThemeData.light(useMaterial3: true).copyWith(
         extensions: [StatusColors.fromSeed()],
@@ -75,8 +75,8 @@ class App extends ConsumerWidget {
       darkTheme: ThemeData.dark(useMaterial3: true).copyWith(
         extensions: [StatusColors.fromSeed(brightness: Brightness.dark)],
       ),
-      localizationsDelegates: _localizationsDelegates,
-      supportedLocales: _supportedLocales,
+      localizationsDelegates: localizationsDelegates,
+      supportedLocales: supportedLocales,
     );
   }
 }
