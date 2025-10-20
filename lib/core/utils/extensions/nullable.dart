@@ -4,7 +4,6 @@ import '../logging/log_message.dart';
 import '../logging/logger.dart';
 
 extension NullSafetyExtension<T> on T? {
-  /// `null` の場合はデフォルト値を返す
   T orElse(
     T fallback, {
     String? objectName,
@@ -21,7 +20,6 @@ extension NullSafetyExtension<T> on T? {
     return this!;
   }
 
-  /// `null` でない場合のみ操作を実行する
   void ifNotNull(
     void Function(T) operation, {
     String? objectName,
@@ -36,5 +34,20 @@ extension NullSafetyExtension<T> on T? {
     }
 
     operation(this as T);
+  }
+
+  String orNullString({
+    String? objectName,
+    logger.Level level = logger.Level.warning,
+  }) {
+    if (this == null) {
+      if (objectName != null) {
+        Logger.instance.custom(LogMessage.nullObject(objectName), level: level);
+      }
+
+      return 'null';
+    }
+
+    return toString();
   }
 }
