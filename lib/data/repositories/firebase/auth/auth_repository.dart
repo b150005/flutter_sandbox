@@ -113,7 +113,7 @@ class AuthRepository extends _$AuthRepository {
         .getString(SharedPreferencesKeys.emailForSignIn.name);
 
     if (email == null) {
-      throw AppException.notFound(l10n.sharedPreferencesKeyNotFound);
+      throw AppException.notFound(l10n.notFound);
     }
 
     return auth.signInWithEmailLink(

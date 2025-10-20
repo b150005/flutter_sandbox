@@ -67,7 +67,6 @@ class VerifyEmailScreen extends HookConsumerWidget {
             Callout(
               l10n.signInWithEmailLinkSuccessfully,
               type: CalloutType.success,
-              canDismiss: false,
             ),
             const PasswordSetupForm(),
           ],
@@ -104,7 +103,6 @@ class VerifyEmailScreen extends HookConsumerWidget {
         child: Callout(
           errorMessage.value!,
           type: CalloutType.error,
-          canDismiss: false,
         ),
       ),
     };

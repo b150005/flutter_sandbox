@@ -9,7 +9,6 @@ void main() {
   Widget calloutApp({
     required String message,
     CalloutType type = CalloutType.info,
-    bool canDismiss = true,
     VoidCallback? onDismiss,
   }) => ProviderScope(
     child: MaterialApp(
@@ -17,7 +16,6 @@ void main() {
         body: Callout(
           message,
           type: type,
-          canDismiss: canDismiss,
           onDismiss: onDismiss,
         ),
       ),
@@ -40,12 +38,12 @@ void main() {
     );
 
     testWidgets(
-      'Callout should have an icon and message when canDismiss is false.',
+      'Callout should have an icon and message when onDismiss is null.',
       (
         tester,
       ) async {
         await tester.pumpWidget(
-          calloutApp(message: message, canDismiss: false),
+          calloutApp(message: message),
         );
 
         expect(WidgetKeyFinder.icon, findsOneWidget);
@@ -75,16 +73,7 @@ void main() {
     );
   });
 
-  group('⚠️ Error handling', () {
-    testWidgets('No error should occurs when onDismiss is null.', (
-      tester,
-    ) async {
-      await tester.pumpWidget(calloutApp(message: message));
-
-      await tester.tap(WidgetKeyFinder.dismiss);
-      await tester.pump();
-    });
-  });
+  group('⚠️ Error handling', () {});
 
   group('♿️ Accessibility', () {});
 

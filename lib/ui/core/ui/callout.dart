@@ -62,7 +62,6 @@ class Callout extends StatelessWidget {
     this.message, {
     super.key,
     this.type = CalloutType.info,
-    this.canDismiss = true,
     this.onDismiss,
     this.child,
   });
@@ -70,8 +69,6 @@ class Callout extends StatelessWidget {
   final String message;
 
   final CalloutType type;
-
-  final bool canDismiss;
 
   final VoidCallback? onDismiss;
 
@@ -107,17 +104,16 @@ class Callout extends StatelessWidget {
                 ),
               ),
             ),
-            if (canDismiss) ...[
+            if (onDismiss != null)
               IconButton(
                 key: WidgetKeys.dismiss,
-                onPressed: onDismiss?.call,
+                onPressed: onDismiss!.call,
                 icon: Icon(
                   Icons.close,
                   color: type.iconColor,
                   size: IconSize.lg.iconSize,
                 ),
               ),
-            ],
           ],
         ),
         ?child,
