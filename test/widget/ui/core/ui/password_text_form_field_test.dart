@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sandbox/core/config/constants/text_input_formatters.dart';
 import 'package:flutter_sandbox/core/utils/authentications/firebase_auth_validator.dart';
+import 'package:flutter_sandbox/ui/core/ui/label.dart';
 import 'package:flutter_sandbox/ui/core/ui/password_text_form_field.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -20,7 +21,7 @@ void main() {
       home: Scaffold(
         body: PasswordTextFormField(
           controller: controller,
-          hintText: hintText,
+          labelText: hintText,
           textInputAction: textInputAction,
           onChanged: onChanged,
           validator: validator,
@@ -45,11 +46,12 @@ void main() {
 
   group('🎨 UI elements', () {
     testWidgets(
-      'PasswordTextFormField should have a password TextFormField'
+      'PasswordTextFormField should have a label, a password TextFormField,'
       ' and a visibility toggle IconButton.',
       (tester) async {
         await tester.pumpWidget(passwordTextFormFieldApp());
 
+        expect(find.byType(Label), findsOneWidget);
         expect(WidgetKeyFinder.password, findsOneWidget);
         expect(find.byType(TextFormField), findsOneWidget);
         expect(WidgetKeyFinder.togglePasswordVisibility, findsOneWidget);
@@ -62,6 +64,10 @@ void main() {
         await tester.pumpWidget(passwordTextFormFieldApp());
 
         final l10n = AppLocalizationUtils.readL10n(tester);
+
+        final label = tester.widget<Label>(find.byType(Label));
+
+        expect(label.text, l10n.password);
 
         final passwordTextFormField = findPasswordTextFormField(tester);
         final passwordTextField = findPasswordTextField(tester);

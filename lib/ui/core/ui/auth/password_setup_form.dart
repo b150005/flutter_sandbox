@@ -59,7 +59,7 @@ class PasswordSetupForm extends HookConsumerWidget {
     return Form(
       key: WidgetKeys.passwordSetupForm,
       child: Column(
-        spacing: Spacing.sm.dp,
+        spacing: Spacing.xxs.dp,
         children: [
           if (errorMessage.value.isNotNullAndNotEmpty)
             Callout(
@@ -69,6 +69,7 @@ class PasswordSetupForm extends HookConsumerWidget {
             ),
           PasswordTextFormField(
             controller: passwordController,
+            labelText: l10n.password,
             textInputAction: TextInputAction.next,
             onChanged: (password) {
               satisfiesMinLength.value =
@@ -86,7 +87,7 @@ class PasswordSetupForm extends HookConsumerWidget {
           ),
           PasswordTextFormField(
             key: WidgetKeys.confirmPassword,
-            hintText: l10n.confirmPassword,
+            labelText: l10n.confirmPassword,
             textInputAction: TextInputAction.done,
             validator: (confirmPassword) =>
                 FirebaseAuthValidator.validateConfirmPassword(

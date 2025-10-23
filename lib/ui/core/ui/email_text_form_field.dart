@@ -5,9 +5,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../core/config/constants/text_input_formatters.dart';
 import '../../../core/config/constants/widget_keys.dart';
 import '../../../core/utils/authentications/firebase_auth_validator.dart';
+import '../../../core/utils/extensions/build_context.dart';
 import '../../../core/utils/l10n/app_localizations.dart';
+import 'label.dart';
 
-@Preview(name: 'Email Text Form Field')
+@Preview(name: 'EmailTextFormField')
 Widget emailTextFormField() => const ProviderScope(child: EmailTextFormField());
 
 @immutable
@@ -21,21 +23,28 @@ class EmailTextFormField extends HookConsumerWidget {
   final TextEditingController? controller;
   final TextInputAction? textInputAction;
 
+  static const exampleEmailAddress = 'user@example.com';
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
 
-    return TextFormField(
-      key: WidgetKeys.email,
-      controller: controller,
-      decoration: InputDecoration(hintText: l10n.email),
-      keyboardType: TextInputType.emailAddress,
-      textInputAction: textInputAction,
-      autocorrect: false,
-      validator: (email) =>
-          FirebaseAuthValidator.validateEmail(email, l10n: l10n),
-      inputFormatters: [TextInputFormatters.noWhitespace],
-      autovalidateMode: AutovalidateMode.onUserInteraction,
+    return Label(
+      l10n.email,
+      child: TextFormField(
+        key: WidgetKeys.email,
+        controller: controller,
+        decoration: context.outlinedInputDecoration.copyWith(
+          hintText: exampleEmailAddress,
+        ),
+        keyboardType: TextInputType.emailAddress,
+        textInputAction: textInputAction,
+        autocorrect: false,
+        validator: (email) =>
+            FirebaseAuthValidator.validateEmail(email, l10n: l10n),
+        inputFormatters: [TextInputFormatters.noWhitespace],
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+      ),
     );
   }
 }

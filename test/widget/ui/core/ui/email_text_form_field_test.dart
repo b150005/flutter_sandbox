@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sandbox/core/config/constants/text_input_formatters.dart';
 import 'package:flutter_sandbox/ui/core/ui/email_text_form_field.dart';
+import 'package:flutter_sandbox/ui/core/ui/label.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -42,11 +43,13 @@ void main() {
   );
 
   group('🎨 UI elements', () {
-    testWidgets('EmailTextFormField should have an email TextFormField.', (
+    testWidgets('EmailTextFormField should have a label'
+        ' and an email TextFormField.', (
       tester,
     ) async {
       await tester.pumpWidget(emailTextFormFieldApp());
 
+      expect(find.byType(Label), findsOneWidget);
       expect(WidgetKeyFinder.email, findsOneWidget);
       expect(find.byType(TextFormField), findsOneWidget);
     });
@@ -60,11 +63,18 @@ void main() {
 
         final l10n = AppLocalizationUtils.readL10n(tester);
 
+        final label = tester.widget<Label>(find.byType(Label));
+
+        expect(label.text, l10n.email);
+
         final emailTextFormField = findEmailTextFormField(tester);
         final emailTextField = findEmailTextField(tester);
 
         expect(emailTextFormField.controller, isNull);
-        expect(emailTextField.decoration?.hintText, l10n.email);
+        expect(
+          emailTextField.decoration?.hintText,
+          EmailTextFormField.exampleEmailAddress,
+        );
         expect(emailTextField.keyboardType, TextInputType.emailAddress);
         expect(emailTextField.textInputAction, isNull);
         expect(emailTextField.autocorrect, isFalse);

@@ -6,7 +6,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../core/config/constants/text_input_formatters.dart';
 import '../../../core/config/constants/widget_keys.dart';
 import '../../../core/utils/authentications/firebase_auth_validator.dart';
+import '../../../core/utils/extensions/build_context.dart';
 import '../../../core/utils/l10n/app_localizations.dart';
+import 'label.dart';
 
 @Preview(name: 'PasswordTextFormField')
 Widget passwordTextFormField() =>
@@ -17,7 +19,7 @@ class PasswordTextFormField extends HookConsumerWidget {
   const PasswordTextFormField({
     super.key,
     this.controller,
-    this.hintText,
+    this.labelText,
     this.textInputAction,
     this.onChanged,
     this.validator,
@@ -25,7 +27,7 @@ class PasswordTextFormField extends HookConsumerWidget {
 
   final TextEditingController? controller;
 
-  final String? hintText;
+  final String? labelText;
 
   final TextInputAction? textInputAction;
 
@@ -39,34 +41,39 @@ class PasswordTextFormField extends HookConsumerWidget {
 
     final obscureText = useState<bool>(true);
 
-    return TextFormField(
-      key: WidgetKeys.password,
-      controller: controller,
-      decoration: InputDecoration(
-        hintText: hintText ?? l10n.password,
-        suffixIcon: IconButton(
-          key: WidgetKeys.togglePasswordVisibility,
-          onPressed: () => obscureText.value = !obscureText.value,
-          icon: Icon(
-            obscureText.value
-                ? Icons.visibility_rounded
-                : Icons.visibility_off_rounded,
+    final label = labelText ?? l10n.password;
+
+    return Label(
+      label,
+      child: TextFormField(
+        key: WidgetKeys.password,
+        controller: controller,
+        decoration: context.outlinedInputDecoration.copyWith(
+          hintText: label,
+          suffixIcon: IconButton(
+            key: WidgetKeys.togglePasswordVisibility,
+            onPressed: () => obscureText.value = !obscureText.value,
+            icon: Icon(
+              obscureText.value
+                  ? Icons.visibility_rounded
+                  : Icons.visibility_off_rounded,
+            ),
           ),
         ),
+        keyboardType: TextInputType.visiblePassword,
+        textInputAction: textInputAction,
+        obscureText: obscureText.value,
+        autocorrect: false,
+        enableSuggestions: false,
+        maxLength: FirebaseAuthValidator.passwordMaxLength,
+        onChanged: onChanged,
+        validator:
+            validator ??
+            (password) =>
+                FirebaseAuthValidator.validatePassword(password, l10n: l10n),
+        inputFormatters: [TextInputFormatters.noWhitespace],
+        autovalidateMode: AutovalidateMode.onUserInteraction,
       ),
-      keyboardType: TextInputType.visiblePassword,
-      textInputAction: textInputAction,
-      obscureText: obscureText.value,
-      autocorrect: false,
-      enableSuggestions: false,
-      maxLength: FirebaseAuthValidator.passwordMaxLength,
-      onChanged: onChanged,
-      validator:
-          validator ??
-          (password) =>
-              FirebaseAuthValidator.validatePassword(password, l10n: l10n),
-      inputFormatters: [TextInputFormatters.noWhitespace],
-      autovalidateMode: AutovalidateMode.onUserInteraction,
     );
   }
 }

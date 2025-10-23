@@ -3,6 +3,7 @@ import 'package:flutter/widget_previews.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import '../../../ui/core/themes/extensions/status_colors.dart';
+import '../../config/constants/border_radii.dart';
 import '../../config/constants/spacing.dart';
 import 'theme_data.dart';
 
@@ -210,8 +211,15 @@ extension BuildContextExtension on BuildContext {
 
   TextStyle get defaultTextStyle => DefaultTextStyle.of(this).style;
 
-  TextStyle? get supportLabelStyle =>
+  TextStyle? get supportTextStyle =>
       textTheme.bodyMedium?.copyWith(color: colorScheme.outline);
+
+  InputDecoration get outlinedInputDecoration => InputDecoration(
+    hintStyle: supportTextStyle,
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(BorderRadii.md.value),
+    ),
+  );
 
   ResponsiveBreakpointsData get responsiveBreakpoint =>
       ResponsiveBreakpoints.of(this);

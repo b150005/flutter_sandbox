@@ -26,10 +26,15 @@ void main() {
 
   group('🎨 UI elements', () {
     testWidgets(
-      'Callout should have an icon, message, and dismiss button.'
-      ' when canDismiss is true.',
+      'Callout should have an icon, message, and dismiss button'
+      ' when onDismiss is provided.',
       (tester) async {
-        await tester.pumpWidget(calloutApp(message: message));
+        await tester.pumpWidget(
+          calloutApp(
+            message: message,
+            onDismiss: () {},
+          ),
+        );
 
         expect(WidgetKeyFinder.icon, findsOneWidget);
         expect(WidgetKeyFinder.message, findsOneWidget);
