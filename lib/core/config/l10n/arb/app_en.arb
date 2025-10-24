@@ -96,8 +96,8 @@
 	"@profileUpdated": {
 		"description": "Success message after profile update"
 	},
-	"sharedPreferencesKeyNotFound": "The specified data could not be found.",
-	"@sharedPreferencesKeyNotFound": {
+	"notFound": "The specified data could not be found.",
+	"@notFound": {
 		"description": "Error message shown when a value for the specified SharedPreferences key is not found"
 	},
 	"signInWithEmailLinkSuccessfully": "You're signed in successfully. Now, set your password to finish your account setup.",
@@ -240,6 +240,14 @@
 	"@emailVerification": {
 		"description": "Email verification"
 	},
+	"emailVerified": "Email Verified",
+	"@emailVerified": {
+		"description": "Email Verified"
+	},
+	"emailUnverified": "Email Unverified",
+	"@emailUnverified": {
+		"description": "Email Unverified"
+	},
 	"signInProvider": "Sign-in Provider",
 	"@signInProvider": {
 		"description": "Sign-in Provider"
@@ -267,6 +275,10 @@
 	"expiredAt": "Expired at",
 	"@expiredAt": {
 		"description": "Expired at"
+	},
+	"save": "Save",
+	"@save": {
+		"description": "Save"
 	},
 	"dataConnectScreenDescription": "A comprehensive demo screen showcasing Firebase Data Connect.",
 	"@dataConnectScreenDescription": {

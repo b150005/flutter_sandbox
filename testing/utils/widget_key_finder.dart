@@ -18,4 +18,5 @@ class WidgetKeyFinder {
   static final Finder icon = find.byKey(WidgetKeys.icon);
   static final Finder message = find.byKey(WidgetKeys.message);
   static final Finder dismiss = find.byKey(WidgetKeys.dismiss);
+  static final Finder save = find.byKey(WidgetKeys.save);
 }

@@ -29,4 +29,11 @@ abstract final class WidgetKeys {
   static const ValueKey<String> setupPassword = ValueKey('setupPassword');
   static const ValueKey<String> verifyEmail = ValueKey('verifyEmail');
   static const ValueKey<String> avatar = ValueKey('avatar');
+  static const ValueKey<String> displayName = ValueKey('displayName');
+  static const ValueKey<String> uid = ValueKey('uid');
+  static const ValueKey<String> isAnonymous = ValueKey('isAnonymous');
+  static const ValueKey<String> emailVerified = ValueKey('emailVerified');
+  static const ValueKey<String> phoneNumber = ValueKey('phoneNumber');
+  static const ValueKey<String> photoURL = ValueKey('photoURL');
+  static const ValueKey<String> save = ValueKey('save');
 }

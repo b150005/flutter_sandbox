@@ -4,11 +4,13 @@ import 'package:flutter/widget_previews.dart';
 import '../../../core/config/constants/spacing.dart';
 import '../../../core/utils/extensions/build_context.dart';
 import '../../../core/utils/extensions/string.dart';
+import 'utils/preview/wrapper.dart';
 
-@Preview(name: 'Pill')
-Widget pill() => const Wrap(
-  spacing: 16,
-  children: [
+@Preview(name: 'Pill', wrapper: wrapper)
+Widget pill() => Wrap(
+  spacing: Spacing.xs.dp,
+  runSpacing: Spacing.xs.dp,
+  children: const [
     Pill(),
     Pill(
       text: 'Text Only',

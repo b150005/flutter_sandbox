@@ -96,8 +96,8 @@
 	"@profileUpdated": {
 		"description": "Success message after profile update"
 	},
-	"sharedPreferencesKeyNotFound": "指定されたデータが見つかりませんでした。",
-	"@sharedPreferencesKeyNotFound": {
+	"notFound": "指定されたデータが見つかりませんでした。",
+	"@notFound": {
 		"description": "Error message shown when a value for the specified SharedPreferences key is not found"
 	},
 	"signInWithEmailLinkSuccessfully": "サインインに成功しました。アカウントの作成を完了するため、パスワードを設定してください。",
@@ -240,6 +240,14 @@
 	"@emailVerification": {
 		"description": "Email verification"
 	},
+	"emailVerified": "メール認証済",
+	"@emailVerified": {
+		"description": "Email Verified"
+	},
+	"emailUnverified": "メール未認証",
+	"@emailUnverified": {
+		"description": "Email Unverified"
+	},
 	"signInProvider": "サインインプロバイダ",
 	"@signInProvider": {
 		"description": "Sign-in Provider"
@@ -267,6 +275,10 @@
 	"expiredAt": "有効期限",
 	"@expiredAt": {
 		"description": "Expired at"
+	},
+	"save": "保存",
+	"@save": {
+		"description": "Save"
 	},
 	"dataConnectScreenDescription": "Firebase Data Connect のデモ画面です。",
 	"@dataConnectScreenDescription": {
