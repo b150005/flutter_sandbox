@@ -39,7 +39,7 @@ void main() {
 class App extends ConsumerWidget {
   const App({super.key});
 
-  static const Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates =
+  static const Iterable<LocalizationsDelegate<Object>> localizationsDelegates =
       [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
