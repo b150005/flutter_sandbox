@@ -120,12 +120,14 @@ class UserProfileCard extends HookConsumerWidget {
                           iconData: currentUser.emailVerified
                               ? Icons.verified_outlined
                               : Icons.warning_amber_outlined,
+                          pillSize: PillSize.small,
                         ),
                         if (currentUser.isAnonymous)
                           Pill(
                             key: WidgetKeys.isAnonymous,
                             text: l10n.anonymousUser,
                             iconData: Icons.masks_outlined,
+                            pillSize: PillSize.small,
                           ),
                       ],
                     ),
