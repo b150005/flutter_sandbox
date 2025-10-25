@@ -136,12 +136,14 @@ class UserProfileCard extends HookConsumerWidget {
             PropertyTable(
               cellData: [
                 PropertyTableCellData(
+                  key: WidgetKeys.email,
                   label: l10n.email,
                   value: currentUser.email.orNullString(
                     objectName: 'currentUser.email',
                   ),
                 ),
                 PropertyTableCellData(
+                  key: WidgetKeys.phoneNumber,
                   label: l10n.phoneNumber,
                   value: currentUser.phoneNumber.orNullString(
                     objectName: 'currentUser.phoneNumber',
@@ -153,6 +155,7 @@ class UserProfileCard extends HookConsumerWidget {
             Align(
               alignment: AlignmentGeometry.centerLeft,
               child: Label(
+                key: WidgetKeys.photoURL,
                 l10n.photoURL,
                 child: Text(
                   currentUser.photoURL.orNullString(

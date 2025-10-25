@@ -35,5 +35,20 @@ abstract final class WidgetKeys {
   static const ValueKey<String> emailVerified = ValueKey('emailVerified');
   static const ValueKey<String> phoneNumber = ValueKey('phoneNumber');
   static const ValueKey<String> photoURL = ValueKey('photoURL');
+
+  static const ValueKey<String> refreshToken = ValueKey('refreshToken');
+  static const ValueKey<String> createdAt = ValueKey('createdAt');
+  static const ValueKey<String> lastSignInAt = ValueKey('lastSignInAt');
+  static const ValueKey<String> signInProvider = ValueKey('signInProvider');
+  static const ValueKey<String> signInSecondFactor = ValueKey(
+    'signInSecondFactor',
+  );
+  static const ValueKey<String> token = ValueKey('token');
+  static const ValueKey<String> authenticatedAt = ValueKey('authenticatedAt');
+  static const ValueKey<String> issuedAt = ValueKey('issuedAt');
+  static const ValueKey<String> expiredAt = ValueKey('expiredAt');
+
+  static const ValueKey<String> payloadClaims = ValueKey('payloadClaims');
+
   static const ValueKey<String> save = ValueKey('save');
 }

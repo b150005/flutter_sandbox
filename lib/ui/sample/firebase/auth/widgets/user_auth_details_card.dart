@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/config/constants/spacing.dart';
+import '../../../../../core/config/constants/widget_keys.dart';
 import '../../../../../core/utils/extensions/async_snapshot.dart';
 import '../../../../../core/utils/extensions/build_context.dart';
 import '../../../../../core/utils/extensions/nullable.dart';
@@ -67,6 +68,7 @@ class UserAuthDetailsCard extends HookConsumerWidget {
             Align(
               alignment: AlignmentGeometry.centerLeft,
               child: Label(
+                key: WidgetKeys.refreshToken,
                 l10n.refreshToken,
                 child: Text(
                   currentUser.refreshToken.orNullString(
@@ -78,12 +80,14 @@ class UserAuthDetailsCard extends HookConsumerWidget {
             PropertyTable(
               cellData: [
                 PropertyTableCellData(
+                  key: WidgetKeys.createdAt,
                   label: l10n.createdAt,
                   value: currentUser.metadata.creationTime.orNullString(
                     objectName: 'currentUser.metadata.creationTime',
                   ),
                 ),
                 PropertyTableCellData(
+                  key: WidgetKeys.lastSignInAt,
                   label: l10n.lastSignInAt,
                   value: currentUser.metadata.lastSignInTime.orNullString(
                     objectName: 'currentUser.metadata.creationTime',
@@ -110,36 +114,42 @@ class UserAuthDetailsCard extends HookConsumerWidget {
                   PropertyTable(
                     cellData: [
                       PropertyTableCellData(
+                        key: WidgetKeys.signInProvider,
                         label: l10n.signInProvider,
                         value: (idTokenResult?.signInProvider).orNullString(
                           objectName: 'idTokenResult?.signInProvider',
                         ),
                       ),
                       PropertyTableCellData(
+                        key: WidgetKeys.signInSecondFactor,
                         label: l10n.signInSecondFactor,
                         value: (idTokenResult?.signInSecondFactor).orNullString(
                           objectName: 'idTokenResult?.signInSecondFactor',
                         ),
                       ),
                       PropertyTableCellData(
+                        key: WidgetKeys.token,
                         label: l10n.idToken,
                         value: (idTokenResult?.token).orNullString(
                           objectName: 'idTokenResult?.token',
                         ),
                       ),
                       PropertyTableCellData(
+                        key: WidgetKeys.authenticatedAt,
                         label: l10n.authenticatedAt,
                         value: (idTokenResult?.authTime).orNullString(
                           objectName: 'idTokenResult?.authTime',
                         ),
                       ),
                       PropertyTableCellData(
+                        key: WidgetKeys.issuedAt,
                         label: l10n.issuedAt,
                         value: (idTokenResult?.issuedAtTime).orNullString(
                           objectName: 'idTokenResult?.issuedAtTime',
                         ),
                       ),
                       PropertyTableCellData(
+                        key: WidgetKeys.expiredAt,
                         label: l10n.expiredAt,
                         value: (idTokenResult?.expirationTime).orNullString(
                           objectName: 'idTokenResult?.expirationTime',
@@ -149,6 +159,7 @@ class UserAuthDetailsCard extends HookConsumerWidget {
                     columnCount: 2,
                   ),
                   Label(
+                    key: WidgetKeys.payloadClaims,
                     l10n.payloadClaims,
                     child: Text(
                       (idTokenResult?.claims).orNullString(
