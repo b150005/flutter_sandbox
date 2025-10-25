@@ -19,6 +19,7 @@ dependencies:
   firebase_app_check:
   firebase_app_installations:
   firebase_auth:
+  firebase_auth_platform_interface:
   firebase_auth_mocks:
   firebase_core:
   firebase_crashlytics:
