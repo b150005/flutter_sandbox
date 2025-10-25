@@ -234,7 +234,7 @@ final class _TextThemePreviewTableRowBuilder {
   }
 }
 
-extension BuildContextExtension on BuildContext {
+extension AppThemeExtension on BuildContext {
   @Deprecated(
     'Use specific getters like textTheme, colorScheme instead'
     ' for better code clarity and type safety.',
@@ -261,9 +261,18 @@ extension BuildContextExtension on BuildContext {
       borderRadius: BorderRadius.circular(BorderRadii.md.value),
     ),
   );
+}
 
+extension BreakpointExtension on BuildContext {
   ResponsiveBreakpointsData get responsiveBreakpoint =>
       ResponsiveBreakpoints.of(this);
 
   Breakpoint get breakpoint => responsiveBreakpoint.breakpoint;
+}
+
+extension WidgetExtension on BuildContext {
+  CircularProgressIndicator get loadingIndicator =>
+      CircularProgressIndicator.adaptive(
+        backgroundColor: colorScheme.onPrimary,
+      );
 }
