@@ -77,17 +77,30 @@ class UserAuthDetailsCard extends HookConsumerWidget {
                 ),
               ),
             ),
+            // TODO(b150005): firebase_auth_mocks パッケージの対応待ち
+            // Align(
+            //   alignment: AlignmentGeometry.centerLeft,
+            //   child: Label(
+            //     key: WidgetKeys.tenantId,
+            //     l10n.tenantId,
+            //     child: Text(
+            //       currentUser.tenantId.orNullString(
+            //         objectName: 'currentUser.tenantId',
+            //       ),
+            //     ),
+            //   ),
+            // ),
             PropertyTable(
               cellData: [
                 PropertyTableCellData(
-                  key: WidgetKeys.createdAt,
+                  key: WidgetKeys.creationTime,
                   label: l10n.createdAt,
                   value: currentUser.metadata.creationTime.orNullString(
                     objectName: 'currentUser.metadata.creationTime',
                   ),
                 ),
                 PropertyTableCellData(
-                  key: WidgetKeys.lastSignInAt,
+                  key: WidgetKeys.lastSignInTime,
                   label: l10n.lastSignInAt,
                   value: currentUser.metadata.lastSignInTime.orNullString(
                     objectName: 'currentUser.metadata.creationTime',
@@ -95,6 +108,58 @@ class UserAuthDetailsCard extends HookConsumerWidget {
                 ),
               ],
               columnCount: 2,
+            ),
+            ...currentUser.providerData.map(
+              (userInfo) => Card.outlined(
+                child: Padding(
+                  padding: EdgeInsets.all(Spacing.sm.dp),
+                  child: PropertyTable(
+                    cellData: [
+                      PropertyTableCellData(
+                        key: WidgetKeys.providerId,
+                        label: l10n.providerId,
+                        value: userInfo.providerId,
+                      ),
+                      PropertyTableCellData(
+                        key: WidgetKeys.uid,
+                        label: l10n.uid,
+                        value: userInfo.uid.orNullString(
+                          objectName: 'userInfo.uid',
+                        ),
+                      ),
+                      PropertyTableCellData(
+                        key: WidgetKeys.displayName,
+                        label: l10n.displayName,
+                        value: userInfo.displayName.orNullString(
+                          objectName: 'userInfo.displayName',
+                        ),
+                      ),
+                      PropertyTableCellData(
+                        key: WidgetKeys.email,
+                        label: l10n.email,
+                        value: userInfo.email.orNullString(
+                          objectName: 'userInfo.email',
+                        ),
+                      ),
+                      PropertyTableCellData(
+                        key: WidgetKeys.phoneNumber,
+                        label: l10n.phoneNumber,
+                        value: userInfo.phoneNumber.orNullString(
+                          objectName: 'userInfo.phoneNumber',
+                        ),
+                      ),
+                      PropertyTableCellData(
+                        key: WidgetKeys.photoURL,
+                        label: l10n.photoURL,
+                        value: userInfo.photoURL.orNullString(
+                          objectName: 'userInfo.photoURL',
+                        ),
+                      ),
+                    ],
+                    columnCount: 2,
+                  ),
+                ),
+              ),
             ),
             idTokenResultAsyncSnapshot.when(
               loading: () => context.loadingIndicator,
@@ -135,21 +200,21 @@ class UserAuthDetailsCard extends HookConsumerWidget {
                         ),
                       ),
                       PropertyTableCellData(
-                        key: WidgetKeys.authenticatedAt,
+                        key: WidgetKeys.authTime,
                         label: l10n.authenticatedAt,
                         value: (idTokenResult?.authTime).orNullString(
                           objectName: 'idTokenResult?.authTime',
                         ),
                       ),
                       PropertyTableCellData(
-                        key: WidgetKeys.issuedAt,
+                        key: WidgetKeys.issuedAtTime,
                         label: l10n.issuedAt,
                         value: (idTokenResult?.issuedAtTime).orNullString(
                           objectName: 'idTokenResult?.issuedAtTime',
                         ),
                       ),
                       PropertyTableCellData(
-                        key: WidgetKeys.expiredAt,
+                        key: WidgetKeys.expirationTime,
                         label: l10n.expiredAt,
                         value: (idTokenResult?.expirationTime).orNullString(
                           objectName: 'idTokenResult?.expirationTime',
@@ -159,7 +224,7 @@ class UserAuthDetailsCard extends HookConsumerWidget {
                     columnCount: 2,
                   ),
                   Label(
-                    key: WidgetKeys.payloadClaims,
+                    key: WidgetKeys.claims,
                     l10n.payloadClaims,
                     child: Text(
                       (idTokenResult?.claims).orNullString(

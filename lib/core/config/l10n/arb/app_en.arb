@@ -224,6 +224,10 @@
 	"@refreshToken": {
 		"description": "Refresh Token"
 	},
+	"tenantId": "Tenant ID",
+	"@tenantId": {
+		"description": "Tenant ID"
+	},
 	"createdAt": "Created at",
 	"@createdAt": {
 		"description": "Created at"
@@ -231,6 +235,10 @@
 	"lastSignInAt": "Last sign in at",
 	"@lastSignInAt": {
 		"description": "Last sign in at"
+	},
+	"providerId": "Provider ID",
+	"@providerId": {
+		"description": "Provider ID"
 	},
 	"anonymousUser": "Anonymous user",
 	"@anonymousUser": {

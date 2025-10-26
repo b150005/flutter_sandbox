@@ -224,6 +224,10 @@
 	"@refreshToken": {
 		"description": "Refresh Token"
 	},
+	"tenantId": "テナント ID",
+	"@tenantId": {
+		"description": "Tenant ID"
+	},
 	"createdAt": "作成日時",
 	"@createdAt": {
 		"description": "Created at"
@@ -231,6 +235,10 @@
 	"lastSignInAt": "最終サインイン日時",
 	"@lastSignInAt": {
 		"description": "Last sign in at"
+	},
+	"providerId": "プロバイダ ID",
+	"@providerId": {
+		"description": "Provider ID"
 	},
 	"anonymousUser": "匿名ユーザ",
 	"@anonymousUser": {
