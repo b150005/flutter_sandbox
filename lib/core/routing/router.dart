@@ -17,6 +17,8 @@ import '../../ui/core/ui/callout.dart';
 import '../../ui/core/ui/layouts/adaptive_scaffold.dart';
 import '../../ui/core/ui/layouts/scrollable_container.dart';
 import '../../ui/core/ui/utils/scaffold_messenger.dart';
+import '../../ui/sample/firebase/auth/widgets/user_auth_detail_card.dart';
+import '../../ui/sample/firebase/auth/widgets/user_profile_card.dart';
 import '../../ui/sample/firebase/sign-in/widgets/sign_in_form.dart';
 import '../../ui/sample/firebase/signup/widgets/sign_up_form.dart';
 import '../../ui/sample/widgets/content_card.dart';
