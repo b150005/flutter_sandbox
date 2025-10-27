@@ -59,6 +59,7 @@ class UserProfileCard extends HookConsumerWidget {
     final errorMessage = useState<String?>(null);
 
     return Card.outlined(
+      key: WidgetKeys.userProfileCard,
       child: Padding(
         padding: EdgeInsets.all(Spacing.md.dp),
         child: Column(

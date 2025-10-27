@@ -21,20 +21,20 @@ import '../../../../core/ui/property_table.dart';
 import '../../../../core/ui/utils/preview/preview_mock_data.dart';
 import '../../../../core/ui/utils/preview/wrapper.dart';
 
-@Preview(name: 'User Auth Details Card', wrapper: wrapper)
-Widget userAuthDetailsCard() => ProviderScope(
+@Preview(name: 'User Auth Detail Card', wrapper: wrapper)
+Widget userAuthDetailCard() => ProviderScope(
   overrides: [
     // ignore: scoped_providers_should_specify_dependencies
     firebaseAuthProvider.overrideWith(
       (_) => PreviewMockData.mockFirebaseAuth,
     ),
   ],
-  child: const UserAuthDetailsCard(),
+  child: const UserAuthDetailCard(),
 );
 
 @immutable
-class UserAuthDetailsCard extends HookConsumerWidget {
-  const UserAuthDetailsCard({super.key});
+class UserAuthDetailCard extends HookConsumerWidget {
+  const UserAuthDetailCard({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -53,6 +53,7 @@ class UserAuthDetailsCard extends HookConsumerWidget {
     final errorMessage = useState<String?>(null);
 
     return Card.outlined(
+      key: WidgetKeys.userAuthDetailCard,
       child: Padding(
         padding: EdgeInsetsGeometry.all(Spacing.sm.dp),
         child: Column(

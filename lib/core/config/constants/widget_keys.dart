@@ -11,7 +11,11 @@ abstract final class WidgetKeys {
   static final emailVerificationForm = LabeledGlobalKey<FormState>(
     'emailVerificationForm',
   );
-  static final userProfileForm = LabeledGlobalKey<FormState>('userProfileForm');
+
+  static const ValueKey<String> userProfileCard = ValueKey('userProfileCard');
+  static const ValueKey<String> userAuthDetailCard = ValueKey(
+    'userAuthDetailCard',
+  );
 
   static const ValueKey<String> callout = ValueKey('callout');
   static const ValueKey<String> icon = ValueKey('icon');
