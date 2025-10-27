@@ -54,5 +54,7 @@ abstract final class WidgetKeys {
 
   static const ValueKey<String> claims = ValueKey('claims');
 
+  static const ValueKey<String> errorRetry = ValueKey('errorRetry');
+
   static const ValueKey<String> save = ValueKey('save');
 }

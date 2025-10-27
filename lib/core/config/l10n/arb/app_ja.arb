@@ -28,9 +28,9 @@
 	"@accountDisabled": {
 		"description": "Error shown when user account is disabled"
 	},
-	"tooManyAttempts": "サインイン試行回数を超過しました。後でもう一度お試しください。",
+	"tooManyAttempts": "試行回数を超過しました。後でもう一度お試しください。",
 	"@tooManyAttempts": {
-		"description": "Error shown when too many sign-in attempts have been made"
+		"description": "Error shown when too many attempts have been made"
 	},
 	"authenticationFailed": "認証に失敗しました。もう一度お試しください。",
 	"@authenticationFailed": {
@@ -275,6 +275,10 @@
 	"payloadClaims": "Payload claims",
 	"@payloadClaims": {
 		"description": "Payload claims"
+	},
+	"retry": "リトライ",
+	"@retry": {
+		"description": "Retry"
 	},
 	"issuedAt": "発行日時",
 	"@issuedAt": {

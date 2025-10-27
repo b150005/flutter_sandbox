@@ -30,7 +30,7 @@
 	},
 	"tooManyAttempts": "Too many unsuccessful attempts. Please try again later.",
 	"@tooManyAttempts": {
-		"description": "Error shown when too many sign-in attempts have been made"
+		"description": "Error shown when too many attempts have been made"
 	},
 	"authenticationFailed": "Authentication failed. Please try again.",
 	"@authenticationFailed": {
@@ -275,6 +275,10 @@
 	"payloadClaims": "Payload claims",
 	"@payloadClaims": {
 		"description": "Payload claims"
+	},
+	"retry": "Retry",
+	"@retry": {
+		"description": "Retry"
 	},
 	"issuedAt": "Issued at",
 	"@issuedAt": {
