@@ -38,7 +38,7 @@ extension NullSafetyExtension<T> on T? {
 
   String orNullString({
     String? objectName,
-    logger.Level level = logger.Level.warning,
+    logger.Level level = logger.Level.info,
   }) {
     if (this == null) {
       if (objectName != null) {
