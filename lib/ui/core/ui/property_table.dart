@@ -107,11 +107,12 @@ class _PropertyTableCell extends StatelessWidget {
             spacing: Spacing.xs.dp,
             children: [
               ?data!.prefix,
-              Text(
-                data!.value,
-                style: data!.valueStyle ?? context.textTheme.bodyMedium,
+              Flexible(
+                child: Text(
+                  data!.value,
+                  style: data!.valueStyle ?? context.textTheme.bodyMedium,
+                ),
               ),
-              const Spacer(),
               ?data!.suffix,
             ],
           ),
