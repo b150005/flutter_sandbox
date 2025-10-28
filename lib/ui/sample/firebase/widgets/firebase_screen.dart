@@ -17,15 +17,11 @@ class FirebaseScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final contents = ref.watch(firebaseContentsProvider);
 
-    return Column(
-      children: [
-        GridView.extent(
-          maxCrossAxisExtent: GridDimensions.maxCrossAxisExtent,
-          children: contents
-              .map((content) => ContentCard(content: content))
-              .toList(),
-        ),
-      ],
+    return GridView.extent(
+      maxCrossAxisExtent: GridDimensions.maxCrossAxisExtent,
+      children: contents
+          .map((content) => ContentCard(content: content))
+          .toList(),
     );
   }
 }
