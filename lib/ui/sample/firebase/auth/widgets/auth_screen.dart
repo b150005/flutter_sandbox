@@ -5,7 +5,8 @@ class AuthScreenRoute extends GoRouteData with $AuthScreenRoute {
   static const absolutePath = '/sample/firebase/auth';
 
   @override
-  Widget build(BuildContext context, GoRouterState state) => const AuthScreen();
+  Widget build(BuildContext context, GoRouterState state) =>
+      const SelectionArea(child: AuthScreen());
 }
 
 @immutable
