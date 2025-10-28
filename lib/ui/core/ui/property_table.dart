@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widget_previews.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../core/config/constants/spacing.dart';
 import '../../../core/utils/extensions/build_context.dart';
 import 'label.dart';
 import 'utils/preview/wrapper.dart';
+
+part 'property_table.freezed.dart';
 
 @Preview(name: 'Property Table', wrapper: wrapper)
 Widget propertyTable() => PropertyTable(
@@ -119,21 +122,14 @@ class _PropertyTableCell extends StatelessWidget {
         );
 }
 
-@immutable
-class PropertyTableCellData {
-  const PropertyTableCellData({
-    this.key,
-    required this.label,
-    required this.value,
-    this.valueStyle,
-    this.prefix,
-    this.suffix,
-  });
-
-  final Key? key;
-  final String label;
-  final String value;
-  final TextStyle? valueStyle;
-  final Widget? prefix;
-  final Widget? suffix;
+@freezed
+abstract class PropertyTableCellData with _$PropertyTableCellData {
+  const factory PropertyTableCellData({
+    Key? key,
+    required String label,
+    required String value,
+    TextStyle? valueStyle,
+    Widget? prefix,
+    Widget? suffix,
+  }) = _PropertyTableCellData;
 }
