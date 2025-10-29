@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'logger.dart';
 
-class GoRouterObserver extends NavigatorObserver {
+class RouteLoggingObserver extends NavigatorObserver {
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
     // TODO(b150005): Firebase Analytics に送信

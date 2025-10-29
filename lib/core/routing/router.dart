@@ -31,7 +31,7 @@ import '../config/constants/widget_keys.dart';
 import '../utils/exceptions/app_exception.dart';
 import '../utils/extensions/build_context.dart';
 import '../utils/l10n/app_localizations.dart';
-import '../utils/logging/go_router_observer.dart';
+import '../utils/logging/route_logging_observer.dart';
 import '../utils/riverpod/provider_change_notifier.dart';
 
 part '../../ui/home/widgets/home_screen.dart';
@@ -64,7 +64,7 @@ class Router extends _$Router {
       provider: authRepositoryProvider,
     ),
     initialLocation: HomeScreenRoute.path,
-    observers: [GoRouterObserver()],
+    observers: [RouteLoggingObserver()],
     debugLogDiagnostics: kDebugMode,
     navigatorKey: rootNavigatorKey,
   );
