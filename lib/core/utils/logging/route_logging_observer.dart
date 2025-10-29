@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'logger.dart';
 
+@immutable
 class RouteLoggingObserver extends NavigatorObserver {
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {

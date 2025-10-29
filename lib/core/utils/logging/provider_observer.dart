@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/experimental/mutation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as hooks;
 import 'package:hooks_riverpod/misc.dart';
@@ -5,6 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'logger.dart';
 
+@immutable
 final class ProviderObserver extends hooks.ProviderObserver {
   @override
   void didAddProvider(hooks.ProviderObserverContext context, Object? value) {
