@@ -69,7 +69,7 @@ class Router extends _$Router {
     navigatorKey: rootNavigatorKey,
   );
 
-  FutureOr<String?> _redirect({
+  static FutureOr<String?> _redirect({
     required GoRouterState state,
     required Ref ref,
   }) {
@@ -89,7 +89,7 @@ class Router extends _$Router {
     return null;
   }
 
-  bool _requiresAuth(Uri uri) {
+  static bool _requiresAuth(Uri uri) {
     const authExcludedPaths = [
       SignInScreenRoute.absolutePath,
       ForgotPasswordScreenRoute.absolutePath,
