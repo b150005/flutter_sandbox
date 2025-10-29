@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 abstract final class WidgetKeys {
   const WidgetKeys._();
 
+  static const ValueKey<String> appBar = ValueKey('appBar');
+
   static final signInForm = LabeledGlobalKey<FormState>('signInForm');
   static final signUpForm = LabeledGlobalKey<FormState>('signUpForm');
   static final passwordSetupForm = LabeledGlobalKey<FormState>(

@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../core/config/constants/spacing.dart';
 import '../../../../core/config/policies/design_policy.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
+import '../../providers/app_bar_state_provider.dart';
 
 @immutable
 class _Destination {
@@ -33,10 +34,11 @@ class AdaptiveScaffold extends ConsumerWidget {
       _Destination(icon: const Icon(Icons.settings), label: l10n.settings),
     ];
 
+    final appBarState = ref.watch(appBarStateProvider);
+
     return Scaffold(
       appBar: switch (DesignPolicy.chooseNavigationLayout(context)) {
-        // TODO(b150005): AppBar のグローバルな状態管理
-        NavigationLayout.bar => AppBar(),
+        NavigationLayout.bar => appBarState?.appBar,
         _ => null,
       },
       body: SafeArea(
