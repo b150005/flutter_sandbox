@@ -4,10 +4,6 @@
 	"@serviceTemporarilyUnavailable": {
 		"description": "Error shown when the service is temporarily unavailable"
 	},
-	"restartApp": "問題が発生しました。アプリを再起動してもう一度お試しください。",
-	"@restartApp": {
-		"description": "Error shown when the app needs to be restarted"
-	},
 	"invalidEmailOrPassword": "メールアドレスまたはパスワードが正しくありません。",
 	"@invalidEmailOrPassword": {
 		"description": "Error shown when login credentials are incorrect"
@@ -55,46 +51,6 @@
 	"requiredField": "この項目は入力必須です。",
 	"@requiredField": {
 		"description": "Error shown for empty required fields"
-	},
-	"internalServerError": "サーバーエラーが発生しました。チームに通知され、対応中です。",
-	"@internalServerError": {
-		"description": "Error shown for server-side errors"
-	},
-	"permissionDenied": "権限がありません。この機能にアクセスできません。",
-	"@permissionDenied": {
-		"description": "Error shown when user doesn't have necessary permissions"
-	},
-	"fileUploadError": "ファイルのアップロードに失敗しました。もう一度お試しください。",
-	"@fileUploadError": {
-		"description": "Error shown when file upload fails"
-	},
-	"fileTooLarge": "ファイルサイズが上限を超えています。",
-	"@fileTooLarge": {
-		"description": "Error shown when file is too large"
-	},
-	"invalidOperation": "この操作は現在実行できません。",
-	"@invalidOperation": {
-		"description": "Error shown when operation is invalid in current context"
-	},
-	"loadingError": "データの読み込みに失敗しました。下にスワイプして更新してください。",
-	"@loadingError": {
-		"description": "Error shown when data fails to load with refresh suggestion"
-	},
-	"invalidFormInput": "フォームにエラーがあります。確認してください。",
-	"@invalidFormInput": {
-		"description": "General form validation error"
-	},
-	"accountRegistered": "アカウントの作成に成功しました。メールを確認してください。",
-	"@accountRegistered": {
-		"description": "Success message after account creation"
-	},
-	"passwordResetEmailSent": "パスワードリセットのメールを送信しました。受信トレイを確認してください。",
-	"@passwordResetEmailSent": {
-		"description": "Success message after password reset request"
-	},
-	"profileUpdated": "プロフィールが正常に更新されました。",
-	"@profileUpdated": {
-		"description": "Success message after profile update"
 	},
 	"notFound": "指定されたデータが見つかりませんでした。",
 	"@notFound": {
@@ -152,10 +108,6 @@
 	"@signUpDescription": {
 		"description": "Description text displayed on the sign up screen to encourage users to create an account"
 	},
-	"alreadyHaveAccount": "すでにアカウントをお持ちですか?",
-	"@alreadyHaveAccount": {
-		"description": "Text asking if user already has an account, typically followed by a sign in link"
-	},
 	"sentSignUpVerificationEmail": "認証メールを送信しました。メールに記載された認証 URL からユーザー登録を完了してください。",
 	"@sentSignUpVerificationEmail": {
 		"description": "Message shown after sending a verification email, instructing the user to complete registration via the link in the email"
@@ -195,10 +147,6 @@
 	"setUpPassword": "パスワードを設定",
 	"@setUpPassword": {
 		"description": "Set up Password"
-	},
-	"verifyEmail": "メールアドレスを検証",
-	"@verifyEmail": {
-		"description": "Verify Email"
 	},
 	"authScreenDescription": "Firebase Auth のデモ画面です。",
 	"@authScreenDescription": {
@@ -244,10 +192,6 @@
 	"@anonymousUser": {
 		"description": "Anonymous user"
 	},
-	"emailVerification": "メール認証",
-	"@emailVerification": {
-		"description": "Email verification"
-	},
 	"emailVerified": "メール認証済",
 	"@emailVerified": {
 		"description": "Email Verified"
@@ -287,10 +231,6 @@
 	"expiredAt": "有効期限",
 	"@expiredAt": {
 		"description": "Expired at"
-	},
-	"save": "保存",
-	"@save": {
-		"description": "Save"
 	},
 	"dataConnectScreenDescription": "Firebase Data Connect のデモ画面です。",
 	"@dataConnectScreenDescription": {

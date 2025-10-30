@@ -4,10 +4,6 @@
 	"@serviceTemporarilyUnavailable": {
 		"description": "Error shown when the service is temporarily unavailable"
 	},
-	"restartApp": "Something went wrong. Please restart the app and try again.",
-	"@restartApp": {
-		"description": "Error shown when the app needs to be restarted"
-	},
 	"invalidEmailOrPassword": "Invalid email or password. Please try again.",
 	"@invalidEmailOrPassword": {
 		"description": "Error shown when login credentials are incorrect"
@@ -55,46 +51,6 @@
 	"requiredField": "This field is required.",
 	"@requiredField": {
 		"description": "Error shown for empty required fields"
-	},
-	"internalServerError": "Internal server error. Our team has been notified and is working on it.",
-	"@internalServerError": {
-		"description": "Error shown for server-side errors"
-	},
-	"permissionDenied": "Permission denied. You don't have access to this feature.",
-	"@permissionDenied": {
-		"description": "Error shown when user doesn't have necessary permissions"
-	},
-	"fileUploadError": "Failed to upload file. Please try again.",
-	"@fileUploadError": {
-		"description": "Error shown when file upload fails"
-	},
-	"fileTooLarge": "File size exceeds the maximum limit.",
-	"@fileTooLarge": {
-		"description": "Error shown when file is too large"
-	},
-	"invalidOperation": "This operation cannot be performed right now.",
-	"@invalidOperation": {
-		"description": "Error shown when operation is invalid in current context"
-	},
-	"loadingError": "Failed to load data. Pull down to refresh.",
-	"@loadingError": {
-		"description": "Error shown when data fails to load with refresh suggestion"
-	},
-	"invalidFormInput": "Please check the form for errors.",
-	"@invalidFormInput": {
-		"description": "General form validation error"
-	},
-	"accountRegistered": "Account created successfully! Please verify your email.",
-	"@accountRegistered": {
-		"description": "Success message after account creation"
-	},
-	"passwordResetEmailSent": "Password reset email sent. Please check your inbox.",
-	"@passwordResetEmailSent": {
-		"description": "Success message after password reset request"
-	},
-	"profileUpdated": "Profile updated successfully.",
-	"@profileUpdated": {
-		"description": "Success message after profile update"
 	},
 	"notFound": "The specified data could not be found.",
 	"@notFound": {
@@ -152,10 +108,6 @@
 	"@signUpDescription": {
 		"description": "Description text displayed on the sign up screen to encourage users to create an account"
 	},
-	"alreadyHaveAccount": "Have an account already?",
-	"@alreadyHaveAccount": {
-		"description": "Text asking if user already has an account, typically followed by a sign in link"
-	},
 	"sentSignUpVerificationEmail": "A verification email has been sent. Please complete your registration by clicking the verification URL in the email.",
 	"@sentSignUpVerificationEmail": {
 		"description": "Message shown after sending a verification email, instructing the user to complete registration via the link in the email"
@@ -195,10 +147,6 @@
 	"setUpPassword": "Set up Password",
 	"@setUpPassword": {
 		"description": "Set up Password"
-	},
-	"verifyEmail": "Verify Email",
-	"@verifyEmail": {
-		"description": "Verify Email"
 	},
 	"authScreenDescription": "A comprehensive demo screen showcasing Firebase Auth.",
 	"@authScreenDescription": {
@@ -244,10 +192,6 @@
 	"@anonymousUser": {
 		"description": "Anonymous user"
 	},
-	"emailVerification": "Email verification",
-	"@emailVerification": {
-		"description": "Email verification"
-	},
 	"emailVerified": "Email Verified",
 	"@emailVerified": {
 		"description": "Email Verified"
@@ -287,10 +231,6 @@
 	"expiredAt": "Expired at",
 	"@expiredAt": {
 		"description": "Expired at"
-	},
-	"save": "Save",
-	"@save": {
-		"description": "Save"
 	},
 	"dataConnectScreenDescription": "A comprehensive demo screen showcasing Firebase Data Connect.",
 	"@dataConnectScreenDescription": {
