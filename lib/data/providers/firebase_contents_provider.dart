@@ -13,7 +13,7 @@ List<Content> firebaseContents(Ref ref) {
   return [
     // TODO(b150005): Firebase コンテンツの追加
     Content(
-      path: AuthScreenRoute.absolutePath,
+      path: FirebaseAuthScreenRoute.absolutePath,
       title: 'Auth',
       description: l10n.authScreenDescription,
       subtitle: 'Firebase Auth',

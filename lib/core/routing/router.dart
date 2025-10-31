@@ -36,7 +36,7 @@ import '../utils/logging/route_logging_observer.dart';
 import '../utils/riverpod/provider_change_notifier.dart';
 
 part '../../ui/home/widgets/home_screen.dart';
-part '../../ui/sample/firebase/auth/widgets/auth_screen.dart';
+part '../../ui/sample/firebase/auth/widgets/firebase_auth_screen.dart';
 part '../../ui/sample/firebase/data-connect/widgets/data_connect_screen.dart';
 part '../../ui/sample/firebase/forgot-password/widgets/forgot_password_screen.dart';
 part '../../ui/sample/firebase/sign-in/widgets/sign_in_screen.dart';

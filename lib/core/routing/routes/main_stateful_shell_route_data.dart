@@ -42,9 +42,9 @@ part of '../router.dart';
                     ),
                   ],
                 ),
-                TypedGoRoute<AuthScreenRoute>(
-                  path: AuthScreenRoute.path,
-                  name: AuthScreenRoute.path,
+                TypedGoRoute<FirebaseAuthScreenRoute>(
+                  path: FirebaseAuthScreenRoute.path,
+                  name: FirebaseAuthScreenRoute.path,
                 ),
                 TypedGoRoute<DataConnectScreenRoute>(
                   path: DataConnectScreenRoute.path,

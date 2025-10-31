@@ -1,17 +1,18 @@
 part of '../../../../../core/routing/router.dart';
 
-class AuthScreenRoute extends GoRouteData with $AuthScreenRoute {
+class FirebaseAuthScreenRoute extends GoRouteData
+    with $FirebaseAuthScreenRoute {
   static const path = '/auth';
   static const absolutePath = '/sample/firebase/auth';
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      const SelectionArea(child: AuthScreen());
+      const SelectionArea(child: FirebaseAuthScreen());
 }
 
 @immutable
-class AuthScreen extends ConsumerWidget {
-  const AuthScreen({super.key});
+class FirebaseAuthScreen extends ConsumerWidget {
+  const FirebaseAuthScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => ScrollableContainer(
