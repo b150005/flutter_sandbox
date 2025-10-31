@@ -11,6 +11,7 @@ import '../../data/providers/firebase_contents_provider.dart';
 import '../../data/providers/sample_contents_provider.dart';
 import '../../data/repositories/firebase/auth/auth_repository.dart';
 import '../../data/repositories/shared_preferences/shared_preferences_repository.dart';
+import '../../ui/core/hooks/use_app_bar.dart';
 import '../../ui/core/providers/app_bar_state_provider.dart';
 import '../../ui/core/ui/auth/email_input_form.dart';
 import '../../ui/core/ui/auth/password_setup_form.dart';

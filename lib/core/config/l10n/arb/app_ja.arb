@@ -70,6 +70,8 @@
 	"@settings": {},
 	"firebase": "Firebase",
 	"@firebase": {},
+	"firebaseAuth": "Firebase Auth",
+	"@firebaseAuth": {},
 	"signInScreenDescription": "Firebase の各機能を統合したデモ画面です。",
 	"@signInScreenDescription": {
 		"description": "Firebase デモ画面の説明テキスト"

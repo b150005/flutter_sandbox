@@ -70,6 +70,8 @@
 	"@settings": {},
 	"firebase": "Firebase",
 	"@firebase": {},
+	"firebaseAuth": "Firebase Auth",
+	"@firebaseAuth": {},
 	"signInScreenDescription": "A comprehensive demo screen showcasing Firebase services.",
 	"@signInScreenDescription": {
 		"description": "Descriptive text for the Firebase demo screen"

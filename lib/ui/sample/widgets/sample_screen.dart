@@ -14,25 +14,13 @@ class SampleScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isAtSampleScreen = context.isAt(SampleScreenRoute.path);
-
     final l10n = ref.watch(appLocalizationsProvider);
 
-    useEffect(() {
-      if (isAtSampleScreen) {
-        Future.microtask(
-          () => ref
-              .read(appBarStateProvider.notifier)
-              .update(
-                AppBarState(
-                  title: Text(l10n.sample),
-                ),
-              ),
-        );
-      }
-
-      return null;
-    }, [isAtSampleScreen]);
+    useAppBar(
+      ref,
+      path: SampleScreenRoute.path,
+      state: AppBarState(title: Text(l10n.sample)),
+    );
 
     final contents = ref.watch(sampleContentsProvider);
 

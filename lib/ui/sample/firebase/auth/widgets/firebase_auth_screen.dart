@@ -11,17 +11,27 @@ class FirebaseAuthScreenRoute extends GoRouteData
 }
 
 @immutable
-class FirebaseAuthScreen extends ConsumerWidget {
+class FirebaseAuthScreen extends HookConsumerWidget {
   const FirebaseAuthScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => ScrollableContainer(
-    child: Column(
-      spacing: Spacing.sm.dp,
-      children: const [
-        UserProfileCard(),
-        UserAuthDetailCard(),
-      ],
-    ),
-  );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = ref.watch(appLocalizationsProvider);
+
+    useAppBar(
+      ref,
+      path: FirebaseAuthScreenRoute.absolutePath,
+      state: AppBarState(title: Text(l10n.firebaseAuth)),
+    );
+
+    return ScrollableContainer(
+      child: Column(
+        spacing: Spacing.sm.dp,
+        children: const [
+          UserProfileCard(),
+          UserAuthDetailCard(),
+        ],
+      ),
+    );
+  }
 }

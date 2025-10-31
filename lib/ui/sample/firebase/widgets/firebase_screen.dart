@@ -15,25 +15,13 @@ class FirebaseScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isAtFirebaseScreen = context.isAt(FirebaseScreenRoute.absolutePath);
-
     final l10n = ref.watch(appLocalizationsProvider);
 
-    useEffect(() {
-      if (isAtFirebaseScreen) {
-        Future.microtask(
-          () => ref
-              .read(appBarStateProvider.notifier)
-              .update(
-                AppBarState(
-                  title: Text(l10n.firebase),
-                ),
-              ),
-        );
-      }
-
-      return null;
-    }, [isAtFirebaseScreen]);
+    useAppBar(
+      ref,
+      path: FirebaseScreenRoute.absolutePath,
+      state: AppBarState(title: Text(l10n.firebase)),
+    );
 
     final contents = ref.watch(firebaseContentsProvider);
 
