@@ -6,8 +6,8 @@ import 'package:flutter_sandbox/ui/core/ui/password_text_form_field.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../testing/utils/app_localization_utils.dart';
-import '../../../../../testing/utils/widget_key_finder.dart';
+import '../../../../../../testing/utils/app_localization_utils.dart';
+import '../../../../../../testing/utils/widget_key_finder.dart';
 
 void main() {
   Widget passwordTextFormFieldApp({
