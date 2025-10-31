@@ -60,12 +60,16 @@
 	"@signInWithEmailLinkSuccessfully": {
 		"description": "メールリンクによるサインインが成功した後に表示される成功メッセージ"
 	},
+	"back": "戻る",
+	"@back": {},
 	"home": "ホーム",
 	"@home": {},
 	"sample": "サンプル",
 	"@sample": {},
 	"settings": "設定",
 	"@settings": {},
+	"firebase": "Firebase",
+	"@firebase": {},
 	"signInScreenDescription": "Firebase の各機能を統合したデモ画面です。",
 	"@signInScreenDescription": {
 		"description": "Firebase デモ画面の説明テキスト"

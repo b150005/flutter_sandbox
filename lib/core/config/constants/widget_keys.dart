@@ -19,6 +19,8 @@ abstract final class WidgetKeys {
     'userAuthDetailCard',
   );
 
+  static const ValueKey<String> back = ValueKey('back');
+
   static const ValueKey<String> callout = ValueKey('callout');
   static const ValueKey<String> icon = ValueKey('icon');
   static const ValueKey<String> message = ValueKey('message');

@@ -10,11 +10,31 @@ class FirebaseScreenRoute extends GoRouteData with $FirebaseScreenRoute {
 }
 
 @immutable
-class FirebaseScreen extends ConsumerWidget {
+class FirebaseScreen extends HookConsumerWidget {
   const FirebaseScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isAtFirebaseScreen = context.isAt(FirebaseScreenRoute.absolutePath);
+
+    final l10n = ref.watch(appLocalizationsProvider);
+
+    useEffect(() {
+      if (isAtFirebaseScreen) {
+        Future.microtask(
+          () => ref
+              .read(appBarStateProvider.notifier)
+              .update(
+                AppBarState(
+                  title: Text(l10n.firebase),
+                ),
+              ),
+        );
+      }
+
+      return null;
+    }, [isAtFirebaseScreen]);
+
     final contents = ref.watch(firebaseContentsProvider);
 
     return GridView.extent(

@@ -60,12 +60,16 @@
 	"@signInWithEmailLinkSuccessfully": {
 		"description": "Success message displayed after successful sign-in via email link"
 	},
+	"back": "Back",
+	"@back": {},
 	"home": "Home",
 	"@home": {},
 	"sample": "Sample",
 	"@sample": {},
 	"settings": "Settings",
 	"@settings": {},
+	"firebase": "Firebase",
+	"@firebase": {},
 	"signInScreenDescription": "A comprehensive demo screen showcasing Firebase services.",
 	"@signInScreenDescription": {
 		"description": "Descriptive text for the Firebase demo screen"
