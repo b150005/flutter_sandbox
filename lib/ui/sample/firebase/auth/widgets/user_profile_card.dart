@@ -74,7 +74,7 @@ class UserProfileCard extends HookConsumerWidget {
             Wrap(
               alignment: WrapAlignment.center,
               spacing: Spacing.md.dp,
-              runSpacing: Spacing.xxs.dp,
+              runSpacing: Spacing.sm.dp,
               children: [
                 CircleAvatar(
                   key: WidgetKeys.avatar,
