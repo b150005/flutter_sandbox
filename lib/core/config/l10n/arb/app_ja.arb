@@ -1,5 +1,165 @@
 {
 	"@@locale": "ja",
+	"httpBadRequest": "リクエストを処理できませんでした。入力内容をご確認の上、再度お試しください。",
+	"@httpBadRequest": {
+		"description": "HTTP 400 Bad Request - サーバーは、クライアントエラーと認識されるため、リクエストを処理できないか、処理しません(例:不正なリクエスト構文、無効なリクエストメッセージフレーミング、または欺瞞的なリクエストルーティング)。"
+	},
+	"httpUnauthorized": "続けるにはサインインしてください。",
+	"@httpUnauthorized": {
+		"description": "HTTP 401 Unauthorized - HTTP標準では'unauthorized'と規定されていますが、意味的にはこのレスポンスは'unauthenticated'を意味します。つまり、クライアントはリクエストされたレスポンスを取得するために自身を認証する必要があります。"
+	},
+	"httpPaymentRequired": "この機能はサブスクリプションが必要です。プランをアップグレードしてください。",
+	"@httpPaymentRequired": {
+		"description": "HTTP 402 Payment Required - このコードの当初の目的はデジタル決済システムでしたが、このステータスコードはほとんど使用されておらず、標準的な規約も存在しません。"
+	},
+	"httpForbidden": "この機能へのアクセス権限がありません。誤りと思われる場合はサポートにお問い合わせください。",
+	"@httpForbidden": {
+		"description": "HTTP 403 Forbidden - クライアントはコンテンツへのアクセス権を持っていません。つまり、認証されていないため、サーバーは要求されたリソースの提供を拒否しています。`401 Unauthorized`とは異なり、クライアントの身元はサーバーに知られています。"
+	},
+	"httpNotFound": "お探しのコンテンツが見つかりませんでした。移動または削除された可能性があります。",
+	"@httpNotFound": {
+		"description": "HTTP 404 Not Found - サーバーは要求されたリソースを見つけることができません。ブラウザでは、これはURLが認識されていないことを意味します。APIでは、エンドポイントは有効ですがリソース自体が存在しないことも意味する場合があります。サーバーは、未承認のクライアントからリソースの存在を隠すために、`403 Forbidden`の代わりにこのレスポンスを送信することもあります。"
+	},
+	"httpMethodNotAllowed": "この操作はサポートされていません。別の方法をお試しください。",
+	"@httpMethodNotAllowed": {
+		"description": "HTTP 405 Method Not Allowed - リクエストメソッドはサーバーによって認識されていますが、対象リソースではサポートされていません。たとえば、APIがリソースでの`DELETE`を許可しない場合、または`TRACE`メソッド全体を許可しない場合があります。"
+	},
+	"httpNotAcceptable": "リクエストされた形式は利用できません。別の形式をお試しください。",
+	"@httpNotAcceptable": {
+		"description": "HTTP 406 Not Acceptable - このレスポンスは、サーバー駆動のコンテンツネゴシエーションを実行した後、Webサーバーがユーザーエージェントによって指定された基準に適合するコンテンツを見つけられない場合に送信されます。"
+	},
+	"httpProxyAuthRequired": "プロキシ認証が必要です。ネットワーク設定を構成してください。",
+	"@httpProxyAuthRequired": {
+		"description": "HTTP 407 Proxy Authentication Required - This is similar to 401 Unauthorized but authentication is needed to be done by a proxy"
+	},
+	"httpRequestTimeout": "リクエストの完了に時間がかかりすぎました。安定した接続で再度お試しください。",
+	"@httpRequestTimeout": {
+		"description": "HTTP 408 Request Timeout - このレスポンスは、クライアントからの以前のリクエストがなくても、一部のサーバーによってアイドル接続に送信されます。これは、サーバーがこの未使用の接続をシャットダウンしたいことを意味します。一部のブラウザがHTTP事前接続メカニズムを使用してブラウジングを高速化するため、このレスポンスはより頻繁に使用されます。一部のサーバーは、このメッセージを送信せずに接続をシャットダウンする場合があります。"
+	},
+	"httpConflict": "この変更は最近の更新と競合しています。画面を更新して再度お試しください。",
+	"@httpConflict": {
+		"description": "HTTP 409 Conflict - このレスポンスは、リクエストがサーバーの現在の状態と競合する場合に送信されます。WebDAPリモートWebオーサリングでは、`409`レスポンスは、ユーザーが競合を解決してリクエストを再送信できるように、クライアントに送信されるエラーです。"
+	},
+	"httpGone": "このコンテンツは恒久的に削除されており、復元されません。",
+	"@httpGone": {
+		"description": "HTTP 410 Gone - このレスポンスは、要求されたコンテンツがサーバーから永久に削除され、転送先アドレスがない場合に送信されます。クライアントは、キャッシュとリソースへのリンクを削除することが期待されます。HTTP仕様では、このステータスコードを'期間限定のプロモーションサービス'に使用することを意図しています。APIは、このステータスコードで削除されたリソースを示すことを強制されるべきではありません。"
+	},
+	"httpLengthRequired": "リクエストに必要な情報が不足しています。再度お試しください。",
+	"@httpLengthRequired": {
+		"description": "HTTP 411 Length Required - サーバーは、`Content-Length`ヘッダーフィールドが定義されておらず、サーバーがそれを必要とするため、リクエストを拒否しました。"
+	},
+	"httpPreconditionFailed": "この操作の条件が満たされませんでした。画面を更新して再度お試しください。",
+	"@httpPreconditionFailed": {
+		"description": "HTTP 412 Precondition Failed - 条件付きリクエストで、クライアントがヘッダーで示した前提条件をサーバーが満たしていません。"
+	},
+	"httpPayloadTooLarge": "ファイルまたはデータが大きすぎます。サイズを小さくして再度お試しください。",
+	"@httpPayloadTooLarge": {
+		"description": "HTTP 413 Payload Too Large - リクエストエンティティがサーバーで定義された制限よりも大きいです。サーバーは接続を閉じるか、Retry-After ヘッダーフィールドを返す場合があります。"
+	},
+	"httpUriTooLong": "リンクが長すぎて処理できません。短い URL をご使用ください。",
+	"@httpUriTooLong": {
+		"description": "HTTP 414 URI Too Long - クライアントが要求したURIが、サーバーが解釈する意思がある長さよりも長いです。"
+	},
+	"httpUnsupportedMediaType": "このファイル形式はサポートされていません。別の形式をご使用ください。",
+	"@httpUnsupportedMediaType": {
+		"description": "HTTP 415 Unsupported Media Type - 要求されたデータのメディア形式がサーバーでサポートされていないため、サーバーはリクエストを拒否しています。"
+	},
+	"httpRangeNotSatisfiable": "リクエストされた部分は利用できません。完全なファイルのダウンロードをお試しください。",
+	"@httpRangeNotSatisfiable": {
+		"description": "HTTP 416 Range Not Satisfiable - リクエストの`Range`ヘッダーフィールドで指定された範囲を満たすことができません。範囲がターゲットリソースのデータのサイズ外である可能性があります。"
+	},
+	"httpExpectationFailed": "リクエストの要件を満たせませんでした。別の方法をお試しください。",
+	"@httpExpectationFailed": {
+		"description": "HTTP 417 Expectation Failed - このレスポンスコードは、`Expect`リクエストヘッダーフィールドで示された期待をサーバーが満たすことができないことを意味します。"
+	},
+	"httpImATeapot": "このエンドポイントはコーヒーブレイク中です。☕ 別のエンドポイントをお試しください。",
+	"@httpImATeapot": {
+		"description": "HTTP 418 I'm a teapot - サーバーはティーポットでコーヒーを淹れようとする試みを拒否します。"
+	},
+	"httpMisdirectedRequest": "リクエストが誤った宛先に到達しました。正しい場所にリダイレクトしています。",
+	"@httpMisdirectedRequest": {
+		"description": "HTTP 421 Misdirected Request - リクエストが、レスポンスを生成できないサーバーに向けられました。これは、リクエストURIに含まれるスキームとオーソリティの組み合わせに対するレスポンスを生成するように構成されていないサーバーによって送信される可能性があります。"
+	},
+	"httpUnprocessableEntity": "リクエストは理解できましたが、処理できません。詳細を確認して再度お試しください。",
+	"@httpUnprocessableEntity": {
+		"description": "HTTP 422 Unprocessable Entity - リクエストは適切な形式でしたが、セマンティックエラーのために従うことができませんでした。"
+	},
+	"httpLocked": "この項目は現在他のユーザーが編集中です。しばらくしてから再度お試しください。",
+	"@httpLocked": {
+		"description": "HTTP 423 Locked - アクセスされているリソースはロックされています。"
+	},
+	"httpFailedDependency": "関連する操作が失敗しました。最初からやり直してください。",
+	"@httpFailedDependency": {
+		"description": "HTTP 424 Failed Dependency - 以前のリクエストの失敗により、リクエストが失敗しました。"
+	},
+	"httpTooEarly": "このリクエストの処理には早すぎます。しばらく待ってから再度お試しください。",
+	"@httpTooEarly": {
+		"description": "HTTP 425 Too Early - サーバーが、再生される可能性のあるリクエストの処理をリスクを冒すことを望まないことを示します。"
+	},
+	"httpUpgradeRequired": "続けるには最新バージョンにアップデートしてください。",
+	"@httpUpgradeRequired": {
+		"description": "HTTP 426 Upgrade Required - サーバーは、現在のプロトコルを使用してリクエストを実行することを拒否しますが、クライアントが別のプロトコルにアップグレードした後に実行する意思がある場合があります。サーバーは、必要なプロトコルを示すために、426レスポンスで`Upgrade`ヘッダーを送信します。"
+	},
+	"httpPreconditionRequired": "この操作には追加の検証が必要です。再度お試しください。",
+	"@httpPreconditionRequired": {
+		"description": "HTTP 428 Precondition Required - オリジンサーバーは、リクエストが条件付きであることを要求します。このレスポンスは、クライアントがリソースの状態を`GET`し、それを変更して`PUT`でサーバーに戻す際に、その間に第三者がサーバー上の状態を変更し、競合が発生する'失われた更新'問題を防ぐことを目的としています。"
+	},
+	"httpTooManyRequests": "試行回数の上限を超えました。しばらく時間をおいてから再度お試しください。",
+	"@httpTooManyRequests": {
+		"description": "HTTP 429 Too Many Requests - ユーザーは所定の時間内にあまりにも多くのリクエストを送信しました(レート制限)。"
+	},
+	"httpRequestHeaderFieldsTooLarge": "リクエストに含まれる情報が多すぎます。簡素化して再度お試しください。",
+	"@httpRequestHeaderFieldsTooLarge": {
+		"description": "HTTP 431 Request Header Fields Too Large - ヘッダーフィールドが大きすぎるため、サーバーはリクエストの処理を望みません。リクエストヘッダーフィールドのサイズを縮小した後、リクエストを再送信できます。"
+	},
+	"httpUnavailableForLegalReasons": "この内容は法的制限により、お住まいの地域ではご利用いただけません。",
+	"@httpUnavailableForLegalReasons": {
+		"description": "HTTP 451 Unavailable For Legal Reasons - ユーザーエージェントが、政府によって検閲されたWebページなど、法的に提供できないリソースを要求しました。"
+	},
+	"httpInternalServerError": "サーバー側で問題が発生しました。現在調査中です。後ほど再度お試しください。",
+	"@httpInternalServerError": {
+		"description": "HTTP 500 Internal Server Error - サーバーは、処理方法がわからない状況に遭遇しました。このエラーは汎用的であり、サーバーがより適切な`5XX`ステータスコードで応答できないことを示しています。"
+	},
+	"httpNotImplemented": "この機能はまだ利用できません。現在開発中です！ 🚧",
+	"@httpNotImplemented": {
+		"description": "HTTP 501 Not Implemented - リクエストメソッドはサーバーでサポートされておらず、処理できません。サーバーがサポートする必要がある(したがって、このコードを返してはならない)唯一のメソッドは、`GET`と`HEAD`です。"
+	},
+	"httpBadGateway": "サービスへの接続に問題が発生しています。数分後に再度お試しください。",
+	"@httpBadGateway": {
+		"description": "HTTP 502 Bad Gateway - このエラーレスポンスは、サーバーがリクエストを処理するために必要なレスポンスを取得するためにゲートウェイとして動作している間、無効なレスポンスを受け取ったことを意味します。"
+	},
+	"httpServiceUnavailable": "メンテナンスのため一時的にサービスを停止しています。まもなく再開します！ 🔧",
+	"@httpServiceUnavailable": {
+		"description": "HTTP 503 Service Unavailable - サーバーはリクエストを処理する準備ができていません。一般的な原因は、メンテナンスのためにダウンしているサーバー、または過負荷のサーバーです。このレスポンスとともに、問題を説明するユーザーフレンドリーなページを送信する必要があることに注意してください。このレスポンスは一時的な状態に使用する必要があり、可能であれば、`Retry-After` HTTPヘッダーにはサービスの回復前の推定時間を含める必要があります。Webマスターは、これらの一時的な状態のレスポンスは通常キャッシュされるべきではないため、このレスポンスとともに送信されるキャッシュ関連のヘッダーにも注意する必要があります。"
+	},
+	"httpGatewayTimeout": "サービスの応答に通常より時間がかかっています。しばらくしてから再度お試しください。",
+	"@httpGatewayTimeout": {
+		"description": "HTTP 504 Gateway Timeout - このエラーレスポンスは、サーバーがゲートウェイとして動作しており、時間内にレスポンスを取得できない場合に送信されます。"
+	},
+	"httpVersionNotSupported": "ご使用の接続方式はサポートされていません。アプリまたはブラウザを更新してください。",
+	"@httpVersionNotSupported": {
+		"description": "HTTP 505 HTTP Version Not Supported - The HTTP version used in the request is not supported by the server"
+	},
+	"httpVariantAlsoNegotiates": "設定に問題が発生しました。サポートにお問い合わせください。",
+	"@httpVariantAlsoNegotiates": {
+		"description": "HTTP 506 Variant Also Negotiates - サーバーには内部構成エラーがあります:コンテンツネゴシエーション中、選択されたバリアント自体がコンテンツネゴシエーションに関与するように構成されており、レスポンスを作成する際に循環参照が発生します。"
+	},
+	"httpInsufficientStorage": "ストレージ容量が不足しています。後ほど再度お試しいただくか、サポートにお問い合わせください。",
+	"@httpInsufficientStorage": {
+		"description": "HTTP 507 Insufficient Storage - サーバーがリクエストを正常に完了するために必要な表現を保存できないため、リソースでメソッドを実行できませんでした。"
+	},
+	"httpLoopDetected": "リクエストの処理で問題を検出しました。続く場合はサポートにお問い合わせください。",
+	"@httpLoopDetected": {
+		"description": "HTTP 508 Loop Detected - サーバーは、リクエストの処理中に無限ループを検出しました。"
+	},
+	"httpNotExtended": "追加の設定が必要です。サポートにお問い合わせください。",
+	"@httpNotExtended": {
+		"description": "HTTP 510 Not Extended - クライアントリクエストは、リクエストの処理に使用されるべきHTTP拡張機能(RFC 2774)を宣言していますが、拡張機能はサポートされていません。"
+	},
+	"httpNetworkAuthRequired": "ネットワーク認証が必要です。ネットワークに接続して再度お試しください。",
+	"@httpNetworkAuthRequired": {
+		"description": "HTTP 511 Network Authentication Required - Indicates that the client needs to authenticate to gain network access"
+	},
 	"serviceTemporarilyUnavailable": "サービスが一時的に利用できません。後でもう一度お試しください。",
 	"@serviceTemporarilyUnavailable": {
 		"description": "Error shown when the service is temporarily unavailable"
