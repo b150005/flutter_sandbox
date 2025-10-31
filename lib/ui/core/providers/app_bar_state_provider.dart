@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../core/config/constants/widget_keys.dart';
+import '../../../core/config/policies/design_policy.dart';
+import '../../../core/utils/l10n/app_localizations.dart';
 
 part 'app_bar_state_provider.freezed.dart';
 part 'app_bar_state_provider.g.dart';
@@ -12,7 +16,7 @@ part 'app_bar_state_provider.g.dart';
 abstract class AppBarState with _$AppBarState {
   const factory AppBarState({
     Widget? leading,
-    @Default(true) bool automaticallyImplyLeading,
+    @Default(false) bool automaticallyImplyLeading,
     Widget? title,
     List<Widget>? actions,
     Widget? flexibleSpace,
@@ -50,7 +54,7 @@ abstract class AppBarState with _$AppBarState {
 
   AppBar get appBar => AppBar(
     key: WidgetKeys.appBar,
-    leading: leading,
+    leading: leading ?? const _BackButton(),
     automaticallyImplyLeading: automaticallyImplyLeading,
     title: title,
     actions: actions,
@@ -93,4 +97,27 @@ class AppBarStateNotifier extends _$AppBarStateNotifier {
   AppBarState update(AppBarState newState) => state = newState;
 
   void clear() => state = null;
+}
+
+@immutable
+class _BackButton extends ConsumerWidget {
+  const _BackButton();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = ref.watch(appLocalizationsProvider);
+
+    return context.canPop()
+        ? IconButton(
+            key: WidgetKeys.back,
+            onPressed: () => context.pop(),
+            icon: Icon(
+              DesignPolicy.shouldUseCupertino
+                  ? Icons.arrow_back_ios_new_outlined
+                  : Icons.arrow_back_outlined,
+            ),
+            tooltip: l10n.back,
+          )
+        : const SizedBox.shrink();
+  }
 }

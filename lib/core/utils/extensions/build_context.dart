@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widget_previews.dart';
+import 'package:go_router/go_router.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import '../../../ui/core/themes/extensions/status_colors.dart';
@@ -275,4 +276,12 @@ extension WidgetExtension on BuildContext {
       CircularProgressIndicator.adaptive(
         backgroundColor: colorScheme.onPrimary,
       );
+}
+
+extension RouterExtension on BuildContext {
+  GoRouterState get routerState => GoRouterState.of(this);
+
+  String get currentPath => routerState.uri.path;
+
+  bool isAt(String path) => currentPath == path;
 }
