@@ -1,40 +1,16 @@
 {
 	"@@locale": "ja",
+	"tryAgain": "問題が発生しました。もう一度お試しください。",
+	"@tryAgain": {
+		"description": "操作が失敗し、ユーザーが再試行する必要がある場合に表示される汎用メッセージ"
+	},
 	"serviceTemporarilyUnavailable": "サービスが一時的に利用できません。後でもう一度お試しください。",
 	"@serviceTemporarilyUnavailable": {
 		"description": "サービスが一時的に利用できない場合に表示されるメッセージ"
 	},
-	"invalidEmailOrPassword": "メールアドレスまたはパスワードが正しくありません。",
-	"@invalidEmailOrPassword": {
-		"description": "ユーザーが誤ったログイン認証情報を入力した場合に表示される検証メッセージ"
-	},
-	"invalidEmailFormat": "有効なメールアドレスを入力してください。",
-	"@invalidEmailFormat": {
-		"description": "メールアドレスの形式が無効な場合に表示される検証メッセージ"
-	},
-	"nonCompliantPassword": "パスワードは8字以上4096字以下で、大文字・小文字・数字を含める必要があります。",
-	"@nonCompliantPassword": {
-		"description": "パスワードが必須のパスワードポリシー基準を満たしていない場合に表示される検証メッセージ"
-	},
-	"weakPassword": "パスワードが脆弱です。",
-	"@weakPassword": {
-		"description": "パスワードが最小強度要件を満たしていない場合に表示される検証メッセージ"
-	},
-	"accountDisabled": "このアカウントは無効になっています。サポートにお問い合わせください。",
-	"@accountDisabled": {
-		"description": "無効化されたユーザーアカウントへのアクセス試行時に表示されるメッセージ"
-	},
-	"tooManyAttempts": "試行回数を超過しました。後でもう一度お試しください。",
-	"@tooManyAttempts": {
-		"description": "ユーザーが許可された最大試行回数を超えた場合に表示されるメッセージ"
-	},
-	"authenticationFailed": "認証に失敗しました。もう一度お試しください。",
-	"@authenticationFailed": {
-		"description": "特定されていない理由により認証が失敗した場合に表示される汎用メッセージ"
-	},
-	"tryAgain": "問題が発生しました。もう一度お試しください。",
-	"@tryAgain": {
-		"description": "操作が失敗し、ユーザーが再試行する必要がある場合に表示される汎用メッセージ"
+	"notFound": "指定されたデータが見つかりませんでした。",
+	"@notFound": {
+		"description": "要求されたデータが見つからない場合に表示されるメッセージ"
 	},
 	"networkConnectionError": "ネットワーク接続エラーです。インターネット接続を確認してください。",
 	"@networkConnectionError": {
@@ -44,75 +20,33 @@
 	"@sessionExpired": {
 		"description": "ユーザーの認証セッションが期限切れになった場合に表示されるメッセージ"
 	},
-	"registeredEmail": "このメールアドレスは既に登録されています。別のメールアドレスを使用するか、サインインしてください。",
-	"@registeredEmail": {
-		"description": "サインアップ時にメールアドレスが既存のアカウントに関連付けられている場合に表示されるメッセージ"
-	},
 	"requiredField": "この項目は入力必須です。",
 	"@requiredField": {
 		"description": "必須フォームフィールドが空のままの場合に表示される検証メッセージ"
 	},
-	"notFound": "指定されたデータが見つかりませんでした。",
-	"@notFound": {
-		"description": "要求されたデータが見つからない場合に表示されるメッセージ"
+	"tooManyAttempts": "試行回数を超過しました。後でもう一度お試しください。",
+	"@tooManyAttempts": {
+		"description": "ユーザーが許可された最大試行回数を超えた場合に表示されるメッセージ"
 	},
-	"signInWithEmailLinkSuccessfully": "サインインに成功しました。アカウントの作成を完了するため、パスワードを設定してください。",
-	"@signInWithEmailLinkSuccessfully": {
-		"description": "メールリンクによるサインインが成功した後に表示される成功メッセージ"
+	"invalidEmailOrPassword": "メールアドレスまたはパスワードが正しくありません。",
+	"@invalidEmailOrPassword": {
+		"description": "ユーザーが誤ったログイン認証情報を入力した場合に表示される検証メッセージ"
 	},
-	"back": "戻る",
-	"@back": {},
-	"home": "ホーム",
-	"@home": {},
-	"sample": "サンプル",
-	"@sample": {},
-	"settings": "設定",
-	"@settings": {},
-	"firebase": "Firebase",
-	"@firebase": {},
-	"firebaseAuth": "Firebase Auth",
-	"@firebaseAuth": {},
-	"signInScreenDescription": "Firebase の各機能を統合したデモ画面です。",
-	"@signInScreenDescription": {
-		"description": "Firebase デモ画面の説明テキスト"
+	"invalidEmailFormat": "有効なメールアドレスを入力してください。",
+	"@invalidEmailFormat": {
+		"description": "メールアドレスの形式が無効な場合に表示される検証メッセージ"
 	},
-	"localStorageScreenDescription": "Local Storage 機能のデモ画面です。",
-	"@localStorageScreenDescription": {
-		"description": "Local Storage デモ画面の説明テキスト"
+	"registeredEmail": "このメールアドレスは既に登録されています。別のメールアドレスを使用するか、サインインしてください。",
+	"@registeredEmail": {
+		"description": "サインアップ時にメールアドレスが既存のアカウントに関連付けられている場合に表示されるメッセージ"
 	},
-	"email": "メールアドレス",
-	"@email": {},
-	"password": "パスワード",
-	"@password": {},
-	"forgotPassword": "パスワードをお忘れの方",
-	"@forgotPassword": {},
 	"enterEmailForPasswordReset": "登録したメールアドレスにパスワードリセット用のリンクを送信します。",
 	"@enterEmailForPasswordReset": {
 		"description": "パスワードリセット画面に表示される案内テキスト"
 	},
-	"submit": "送信",
-	"@submit": {},
-	"signIn": "サインイン",
-	"@signIn": {},
-	"signUp": "新規登録",
-	"@signUp": {},
-	"signUpDescription": "Sandbox を始める前に、アカウントを作成しましょう。",
-	"@signUpDescription": {
-		"description": "登録画面でユーザーにアカウント作成を促す案内テキスト"
-	},
-	"sentSignUpVerificationEmail": "認証メールを送信しました。メールに記載された認証 URL からユーザー登録を完了してください。",
-	"@sentSignUpVerificationEmail": {
-		"description": "登録確認メール送信後に表示される確認メッセージ"
-	},
-	"invalidVerificationEmailLink": "認証リンクが無効または期限切れです。再度認証メールを送信してやり直してください。",
-	"@invalidVerificationEmailLink": {
-		"description": "メール認証リンクが無効または期限切れの場合に表示されるメッセージ"
-	},
-	"confirmPassword": "パスワード(確認)",
-	"@confirmPassword": {},
-	"passwordMismatch": "パスワードが一致しません。",
-	"@passwordMismatch": {
-		"description": "パスワードと確認用パスワードフィールドが一致しない場合に表示される検証メッセージ"
+	"nonCompliantPassword": "パスワードは8字以上4096字以下で、大文字・小文字・数字を含める必要があります。",
+	"@nonCompliantPassword": {
+		"description": "パスワードが必須のパスワードポリシー基準を満たしていない場合に表示される検証メッセージ"
 	},
 	"passwordMinLength": "8字以上にしてください",
 	"@passwordMinLength": {
@@ -134,8 +68,44 @@
 	"@atLeastOneDigit": {
 		"description": "少なくとも1つの数字を要求するパスワード要件"
 	},
+	"passwordMismatch": "パスワードが一致しません。",
+	"@passwordMismatch": {
+		"description": "パスワードと確認用パスワードフィールドが一致しない場合に表示される検証メッセージ"
+	},
 	"setUpPassword": "パスワードを設定",
 	"@setUpPassword": {},
+	"weakPassword": "パスワードが脆弱です。",
+	"@weakPassword": {
+		"description": "パスワードが最小強度要件を満たしていない場合に表示される検証メッセージ"
+	},
+	"accountDisabled": "このアカウントは無効になっています。サポートにお問い合わせください。",
+	"@accountDisabled": {
+		"description": "無効化されたユーザーアカウントへのアクセス試行時に表示されるメッセージ"
+	},
+	"authenticationFailed": "認証に失敗しました。もう一度お試しください。",
+	"@authenticationFailed": {
+		"description": "特定されていない理由により認証が失敗した場合に表示される汎用メッセージ"
+	},
+	"signUpDescription": "Sandbox を始める前に、アカウントを作成しましょう。",
+	"@signUpDescription": {
+		"description": "登録画面でユーザーにアカウント作成を促す案内テキスト"
+	},
+	"sentSignUpVerificationEmail": "認証メールを送信しました。メールに記載された認証 URL からユーザー登録を完了してください。",
+	"@sentSignUpVerificationEmail": {
+		"description": "登録確認メール送信後に表示される確認メッセージ"
+	},
+	"invalidVerificationEmailLink": "認証リンクが無効または期限切れです。再度認証メールを送信してやり直してください。",
+	"@invalidVerificationEmailLink": {
+		"description": "メール認証リンクが無効または期限切れの場合に表示されるメッセージ"
+	},
+	"signInWithEmailLinkSuccessfully": "サインインに成功しました。アカウントの作成を完了するため、パスワードを設定してください。",
+	"@signInWithEmailLinkSuccessfully": {
+		"description": "メールリンクによるサインインが成功した後に表示される成功メッセージ"
+	},
+	"signInScreenDescription": "Firebase の各機能を統合したデモ画面です。",
+	"@signInScreenDescription": {
+		"description": "Firebase デモ画面の説明テキスト"
+	},
 	"authScreenDescription": "Firebase Auth のデモ画面です。",
 	"@authScreenDescription": {
 		"description": "Firebase Authentication デモ画面の説明テキスト"
@@ -144,6 +114,36 @@
 	"@dataConnectScreenDescription": {
 		"description": "Firebase Data Connect デモ画面の説明テキスト"
 	},
+	"localStorageScreenDescription": "Local Storage 機能のデモ画面です。",
+	"@localStorageScreenDescription": {
+		"description": "Local Storage デモ画面の説明テキスト"
+	},
+	"home": "ホーム",
+	"@home": {},
+	"sample": "サンプル",
+	"@sample": {},
+	"settings": "設定",
+	"@settings": {},
+	"firebase": "Firebase",
+	"@firebase": {},
+	"firebaseAuth": "Firebase Auth",
+	"@firebaseAuth": {},
+	"email": "メールアドレス",
+	"@email": {},
+	"password": "パスワード",
+	"@password": {},
+	"forgotPassword": "パスワードをお忘れの方",
+	"@forgotPassword": {},
+	"back": "戻る",
+	"@back": {},
+	"submit": "送信",
+	"@submit": {},
+	"signIn": "サインイン",
+	"@signIn": {},
+	"signUp": "新規登録",
+	"@signUp": {},
+	"confirmPassword": "パスワード(確認)",
+	"@confirmPassword": {},
 	"displayName": "表示名",
 	"@displayName": {},
 	"phoneNumber": "電話番号",

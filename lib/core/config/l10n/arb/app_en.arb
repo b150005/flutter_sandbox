@@ -1,40 +1,16 @@
 {
 	"@@locale": "en",
+	"tryAgain": "Something went wrong. Please try again.",
+	"@tryAgain": {
+		"description": "Generic message displayed when an operation fails and the user should retry"
+	},
 	"serviceTemporarilyUnavailable": "Service is temporarily unavailable. Please try again later.",
 	"@serviceTemporarilyUnavailable": {
 		"description": "Message displayed when a service is temporarily unavailable"
 	},
-	"invalidEmailOrPassword": "Invalid email or password. Please try again.",
-	"@invalidEmailOrPassword": {
-		"description": "Validation message displayed when user enters incorrect login credentials"
-	},
-	"invalidEmailFormat": "Please enter a valid email address.",
-	"@invalidEmailFormat": {
-		"description": "Validation message displayed when the email address format is invalid"
-	},
-	"nonCompliantPassword": "Password must be between 8 and 4096 characters length and must contain a combination of uppercase, lowercase, and numbers.",
-	"@nonCompliantPassword": {
-		"description": "Validation message displayed when the password does not meet the required password policy criteria"
-	},
-	"weakPassword": "Password must comply with our password policy.",
-	"@weakPassword": {
-		"description": "Validation message displayed when the password does not meet minimum strength requirements"
-	},
-	"accountDisabled": "This account has been disabled. Please contact support.",
-	"@accountDisabled": {
-		"description": "Message displayed when attempting to access a disabled user account"
-	},
-	"tooManyAttempts": "Too many unsuccessful attempts. Please try again later.",
-	"@tooManyAttempts": {
-		"description": "Message displayed when the user has exceeded the maximum number of allowed attempts"
-	},
-	"authenticationFailed": "Authentication failed. Please try again.",
-	"@authenticationFailed": {
-		"description": "Generic message displayed when authentication fails for unspecified reasons"
-	},
-	"tryAgain": "Something went wrong. Please try again.",
-	"@tryAgain": {
-		"description": "Generic message displayed when an operation fails and the user should retry"
+	"notFound": "The specified data could not be found.",
+	"@notFound": {
+		"description": "Message displayed when requested data cannot be found"
 	},
 	"networkConnectionError": "Network connection error. Please check your internet connection.",
 	"@networkConnectionError": {
@@ -44,77 +20,33 @@
 	"@sessionExpired": {
 		"description": "Message displayed when the user's authentication session has expired"
 	},
-	"registeredEmail": "This email is already registered. Please use a different email or try to sign in.",
-	"@registeredEmail": {
-		"description": "Message displayed during signup when the email address is already associated with an existing account"
-	},
 	"requiredField": "This field is required.",
 	"@requiredField": {
 		"description": "Validation message displayed when a required form field is left empty"
 	},
-	"notFound": "The specified data could not be found.",
-	"@notFound": {
-		"description": "Message displayed when requested data cannot be found"
+	"tooManyAttempts": "Too many unsuccessful attempts. Please try again later.",
+	"@tooManyAttempts": {
+		"description": "Message displayed when the user has exceeded the maximum number of allowed attempts"
 	},
-	"signInWithEmailLinkSuccessfully": "You're signed in successfully. Now, set your password to finish your account setup.",
-	"@signInWithEmailLinkSuccessfully": {
-		"description": "Success message displayed after successful sign-in via email link"
+	"invalidEmailOrPassword": "Invalid email or password. Please try again.",
+	"@invalidEmailOrPassword": {
+		"description": "Validation message displayed when user enters incorrect login credentials"
 	},
-	"back": "Back",
-	"@back": {},
-	"home": "Home",
-	"@home": {},
-	"sample": "Sample",
-	"@sample": {},
-	"settings": "Settings",
-	"@settings": {},
-	"firebase": "Firebase",
-	"@firebase": {},
-	"firebaseAuth": "Firebase Auth",
-	"@firebaseAuth": {},
-	"signInScreenDescription": "A comprehensive demo screen showcasing Firebase services.",
-	"@signInScreenDescription": {
-		"description": "Descriptive text for the Firebase demo screen"
+	"invalidEmailFormat": "Please enter a valid email address.",
+	"@invalidEmailFormat": {
+		"description": "Validation message displayed when the email address format is invalid"
 	},
-	"localStorageScreenDescription": "A comprehensive demo screen showcasing local storages.",
-	"@localStorageScreenDescription": {
-		"description": "Descriptive text for the Local Storage demo screen"
+	"registeredEmail": "This email is already registered. Please use a different email or try to sign in.",
+	"@registeredEmail": {
+		"description": "Message displayed during signup when the email address is already associated with an existing account"
 	},
-	"email": "Email",
-	"@email": {},
-	"password": "Password",
-	"@password": {},
-	"forgotPassword": "Forgot Password?",
-	"@forgotPassword": {},
 	"enterEmailForPasswordReset": "We'll send you a link to the email address you signed up with.",
 	"@enterEmailForPasswordReset": {
 		"description": "Instructional text displayed on the password reset screen"
 	},
-	"submit": "Submit",
-	"@submit": {},
-	"signIn": "Sign In",
-	"@signIn": {},
-	"signUp": "Sign Up",
-	"@signUp": {},
-	"signUpDescription": "Create an account and verify your details to dive into Sandbox.",
-	"@signUpDescription": {
-		"description": "Instructional text encouraging users to create an account on the registration screen"
-	},
-	"sentSignUpVerificationEmail": "A verification email has been sent. Please complete your registration by clicking the verification URL in the email.",
-	"@sentSignUpVerificationEmail": {
-		"description": "Confirmation message displayed after sending registration verification email"
-	},
-	"invalidVerificationEmailLink": "This verification link is invalid or has expired. Please request a new verification email.",
-	"@invalidVerificationEmailLink": {
-		"description": "Message displayed when the email verification link is invalid or has expired"
-	},
-	"confirmPassword": "Confirm password",
-	"@confirmPassword": {
-		"description": "Confirm password"
-	},
-	"passwordMismatch": "Passwords do not match.",
-	"@passwordMismatch": {
-		"description": "Validation message displayed when password and confirmation password fields do not match"
+	"nonCompliantPassword": "Password must be between 8 and 4096 characters length and must contain a combination of uppercase, lowercase, and numbers.",
+	"@nonCompliantPassword": {
+		"description": "Validation message displayed when the password does not meet the required password policy criteria"
 	},
 	"passwordMinLength": "Minimum 8 characters",
 	"@passwordMinLength": {
@@ -136,8 +68,44 @@
 	"@atLeastOneDigit": {
 		"description": "Password requirement for at least one numeric character"
 	},
+	"passwordMismatch": "Passwords do not match.",
+	"@passwordMismatch": {
+		"description": "Validation message displayed when password and confirmation password fields do not match"
+	},
 	"setUpPassword": "Set up Password",
 	"@setUpPassword": {},
+	"weakPassword": "Password must comply with our password policy.",
+	"@weakPassword": {
+		"description": "Validation message displayed when the password does not meet minimum strength requirements"
+	},
+	"accountDisabled": "This account has been disabled. Please contact support.",
+	"@accountDisabled": {
+		"description": "Message displayed when attempting to access a disabled user account"
+	},
+	"authenticationFailed": "Authentication failed. Please try again.",
+	"@authenticationFailed": {
+		"description": "Generic message displayed when authentication fails for unspecified reasons"
+	},
+	"signUpDescription": "Create an account and verify your details to dive into Sandbox.",
+	"@signUpDescription": {
+		"description": "Instructional text encouraging users to create an account on the registration screen"
+	},
+	"sentSignUpVerificationEmail": "A verification email has been sent. Please complete your registration by clicking the verification URL in the email.",
+	"@sentSignUpVerificationEmail": {
+		"description": "Confirmation message displayed after sending registration verification email"
+	},
+	"invalidVerificationEmailLink": "This verification link is invalid or has expired. Please request a new verification email.",
+	"@invalidVerificationEmailLink": {
+		"description": "Message displayed when the email verification link is invalid or has expired"
+	},
+	"signInWithEmailLinkSuccessfully": "You're signed in successfully. Now, set your password to finish your account setup.",
+	"@signInWithEmailLinkSuccessfully": {
+		"description": "Success message displayed after successful sign-in via email link"
+	},
+	"signInScreenDescription": "A comprehensive demo screen showcasing Firebase services.",
+	"@signInScreenDescription": {
+		"description": "Descriptive text for the Firebase demo screen"
+	},
 	"authScreenDescription": "A comprehensive demo screen showcasing Firebase Auth.",
 	"@authScreenDescription": {
 		"description": "Descriptive text for the Firebase Authentication demo screen"
@@ -146,6 +114,36 @@
 	"@dataConnectScreenDescription": {
 		"description": "Descriptive text for the Firebase Data Connect demo screen"
 	},
+	"localStorageScreenDescription": "A comprehensive demo screen showcasing local storages.",
+	"@localStorageScreenDescription": {
+		"description": "Descriptive text for the Local Storage demo screen"
+	},
+	"home": "Home",
+	"@home": {},
+	"sample": "Sample",
+	"@sample": {},
+	"settings": "Settings",
+	"@settings": {},
+	"firebase": "Firebase",
+	"@firebase": {},
+	"firebaseAuth": "Firebase Auth",
+	"@firebaseAuth": {},
+	"email": "Email",
+	"@email": {},
+	"password": "Password",
+	"@password": {},
+	"forgotPassword": "Forgot Password?",
+	"@forgotPassword": {},
+	"back": "Back",
+	"@back": {},
+	"submit": "Submit",
+	"@submit": {},
+	"signIn": "Sign In",
+	"@signIn": {},
+	"signUp": "Sign Up",
+	"@signUp": {},
+	"confirmPassword": "Confirm password",
+	"@confirmPassword": {},
 	"displayName": "Display Name",
 	"@displayName": {},
 	"phoneNumber": "Phone Number",
