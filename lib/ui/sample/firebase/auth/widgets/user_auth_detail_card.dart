@@ -202,7 +202,6 @@ class _IdTokenResultTable extends HookConsumerWidget {
         );
       },
       data: (idTokenResult) => Column(
-        spacing: Spacing.md.dp,
         children: [
           PropertyTable(
             cellData: [
@@ -220,13 +219,23 @@ class _IdTokenResultTable extends HookConsumerWidget {
                   objectName: 'idTokenResult?.signInSecondFactor',
                 ),
               ),
-              PropertyTableCellData(
-                key: WidgetKeys.token,
-                label: l10n.idToken,
-                value: (idTokenResult?.token).orNullString(
+            ],
+            columnCount: 2,
+          ),
+          Align(
+            alignment: AlignmentGeometry.centerLeft,
+            child: Label(
+              key: WidgetKeys.token,
+              l10n.idToken,
+              child: Text(
+                (idTokenResult?.token).orNullString(
                   objectName: 'idTokenResult?.token',
                 ),
               ),
+            ),
+          ),
+          PropertyTable(
+            cellData: [
               PropertyTableCellData(
                 key: WidgetKeys.authTime,
                 label: l10n.authenticatedAt,
@@ -251,12 +260,15 @@ class _IdTokenResultTable extends HookConsumerWidget {
             ],
             columnCount: 2,
           ),
-          Label(
-            key: WidgetKeys.claims,
-            l10n.payloadClaims,
-            child: Text(
-              (idTokenResult?.claims).orNullString(
-                objectName: 'idTokenResult?.claims',
+          Align(
+            alignment: AlignmentGeometry.centerLeft,
+            child: Label(
+              key: WidgetKeys.claims,
+              l10n.payloadClaims,
+              child: Text(
+                (idTokenResult?.claims).orNullString(
+                  objectName: 'idTokenResult?.claims',
+                ),
               ),
             ),
           ),
