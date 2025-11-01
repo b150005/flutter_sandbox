@@ -18,16 +18,16 @@ Widget passwordTextFormField() =>
 class PasswordTextFormField extends HookConsumerWidget {
   const PasswordTextFormField({
     super.key,
-    this.controller,
     this.labelText,
+    this.controller,
     this.textInputAction,
     this.onChanged,
     this.validator,
   });
 
-  final TextEditingController? controller;
-
   final String? labelText;
+
+  final TextEditingController? controller;
 
   final TextInputAction? textInputAction;
 
