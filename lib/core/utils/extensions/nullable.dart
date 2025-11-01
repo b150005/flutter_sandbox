@@ -4,6 +4,8 @@ import '../logging/log_message.dart';
 import '../logging/logger.dart';
 
 extension NullSafetyExtension<T> on T? {
+  static const int stackTraceLevel = Logger.defaultStackTraceLevel + 2;
+
   T orElse(
     T fallback, {
     String? objectName,
@@ -11,7 +13,11 @@ extension NullSafetyExtension<T> on T? {
   }) {
     if (this == null) {
       if (objectName != null) {
-        Logger.instance.custom(LogMessage.nullObject(objectName), level: level);
+        Logger.instance.custom(
+          LogMessage.nullObject(objectName),
+          level: level,
+          stackTraceLevel: stackTraceLevel,
+        );
       }
 
       return fallback;
@@ -27,7 +33,11 @@ extension NullSafetyExtension<T> on T? {
   }) {
     if (this == null) {
       if (objectName != null) {
-        Logger.instance.custom(LogMessage.nullObject(objectName), level: level);
+        Logger.instance.custom(
+          LogMessage.nullObject(objectName),
+          level: level,
+          stackTraceLevel: stackTraceLevel,
+        );
       }
 
       return;
@@ -42,7 +52,11 @@ extension NullSafetyExtension<T> on T? {
   }) {
     if (this == null) {
       if (objectName != null) {
-        Logger.instance.custom(LogMessage.nullObject(objectName), level: level);
+        Logger.instance.custom(
+          LogMessage.nullObject(objectName),
+          level: level,
+          stackTraceLevel: stackTraceLevel,
+        );
       }
 
       return 'null';
