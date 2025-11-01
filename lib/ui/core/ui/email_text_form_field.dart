@@ -16,10 +16,12 @@ Widget emailTextFormField() => const ProviderScope(child: EmailTextFormField());
 class EmailTextFormField extends HookConsumerWidget {
   const EmailTextFormField({
     super.key,
+    this.labelText,
     this.controller,
     this.textInputAction,
   });
 
+  final String? labelText;
   final TextEditingController? controller;
   final TextInputAction? textInputAction;
 
@@ -30,7 +32,7 @@ class EmailTextFormField extends HookConsumerWidget {
     final l10n = ref.watch(appLocalizationsProvider);
 
     return Label(
-      l10n.email,
+      labelText ?? l10n.email,
       child: TextFormField(
         key: WidgetKeys.email,
         controller: controller,
