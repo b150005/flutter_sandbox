@@ -76,23 +76,34 @@ class UserProfileCard extends HookConsumerWidget {
               spacing: Spacing.md.dp,
               runSpacing: Spacing.sm.dp,
               children: [
-                CircleAvatar(
-                  key: WidgetKeys.avatar,
-                  backgroundImage: NetworkImage(
-                    currentUser.photoURL.orNullString(
-                      objectName: 'currentUser.photoURL',
-                    ),
-                  ),
-                  onBackgroundImageError: (exception, stackTrace) =>
-                      Logger.instance.e(
-                        LogMessage.failedToFetch(
-                          Uri(path: currentUser.photoURL),
+                currentUser.photoURL.isNullOrEmpty
+                    ? ClipOval(
+                        child: ColoredBox(
+                          color: context.colorScheme.primaryContainer,
+                          child: Padding(
+                            padding: EdgeInsets.all(Spacing.sm.dp),
+                            child: Icon(
+                              Icons.person,
+                              size: IconSize.lg.dp,
+                            ),
+                          ),
                         ),
-                        error: exception,
-                        stackTrace: stackTrace,
+                      )
+                    : CircleAvatar(
+                        key: WidgetKeys.avatar,
+                        backgroundImage: NetworkImage(
+                          currentUser.photoURL!,
+                        ),
+                        onBackgroundImageError: (exception, stackTrace) =>
+                            Logger.instance.e(
+                              LogMessage.failedToFetch(
+                                Uri(path: currentUser.photoURL),
+                              ),
+                              error: exception,
+                              stackTrace: stackTrace,
+                            ),
+                        radius: IconSize.lg.dp,
                       ),
-                  radius: IconSize.lg.dp,
-                ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
