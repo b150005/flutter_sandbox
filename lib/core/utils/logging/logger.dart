@@ -38,6 +38,8 @@ class Logger extends logger.Logger {
   }) =>
       Logger._(filter: filter, printer: printer, output: output, level: level);
 
+  static const int defaultStackTraceLevel = 2;
+
   static final instance = Logger._(
     printer: LogPrinter(
       noBoxingByDefault: true,
@@ -269,9 +271,12 @@ class Logger extends logger.Logger {
   }
 
   /// スタックチェーンからスタックトレースを取得する
-  static StackTrace? _stackChain(StackTrace? stackTrace, {int level = 2}) {
+  static StackTrace? _stackChain(
+    StackTrace? stackTrace, {
+    int? stackTraceLevel,
+  }) {
     if (stackTrace == null) {
-      return Chain.current(level).terse;
+      return Chain.current(stackTraceLevel ?? defaultStackTraceLevel).terse;
     }
 
     return Chain.forTrace(stackTrace).terse;
@@ -288,21 +293,58 @@ class Logger extends logger.Logger {
     DateTime? time,
     Object? error,
     StackTrace? stackTrace,
+    int? stackTraceLevel,
   }) {
     switch (LogLevelConverter.toLoggingLevel(level)) {
       case logging.Level.ALL:
       case logging.Level.FINE:
-        t(message, time: time, error: error, stackTrace: stackTrace);
+        t(
+          message,
+          time: time,
+          error: error,
+          stackTrace: stackTrace,
+          stackTraceLevel: stackTraceLevel,
+        );
       case logging.Level.CONFIG:
-        d(message, time: time, error: error, stackTrace: stackTrace);
+        d(
+          message,
+          time: time,
+          error: error,
+          stackTrace: stackTrace,
+          stackTraceLevel: stackTraceLevel,
+        );
       case logging.Level.INFO:
-        i(message, time: time, error: error, stackTrace: stackTrace);
+        i(
+          message,
+          time: time,
+          error: error,
+          stackTrace: stackTrace,
+          stackTraceLevel: stackTraceLevel,
+        );
       case logging.Level.WARNING:
-        w(message, time: time, error: error, stackTrace: stackTrace);
+        w(
+          message,
+          time: time,
+          error: error,
+          stackTrace: stackTrace,
+          stackTraceLevel: stackTraceLevel,
+        );
       case logging.Level.SEVERE:
-        e(message, time: time, error: error, stackTrace: stackTrace);
+        e(
+          message,
+          time: time,
+          error: error,
+          stackTrace: stackTrace,
+          stackTraceLevel: stackTraceLevel,
+        );
       case logging.Level.SHOUT:
-        f(message, time: time, error: error, stackTrace: stackTrace);
+        f(
+          message,
+          time: time,
+          error: error,
+          stackTrace: stackTrace,
+          stackTraceLevel: stackTraceLevel,
+        );
       case logging.Level.OFF:
         break;
     }
@@ -314,8 +356,9 @@ class Logger extends logger.Logger {
     DateTime? time,
     Object? error,
     StackTrace? stackTrace,
+    int? stackTraceLevel,
   }) {
-    final chain = _stackChain(stackTrace);
+    final chain = _stackChain(stackTrace, stackTraceLevel: stackTraceLevel);
 
     super.t(message, time: time, error: error, stackTrace: chain);
   }
@@ -326,8 +369,9 @@ class Logger extends logger.Logger {
     DateTime? time,
     Object? error,
     StackTrace? stackTrace,
+    int? stackTraceLevel,
   }) {
-    final chain = _stackChain(stackTrace);
+    final chain = _stackChain(stackTrace, stackTraceLevel: stackTraceLevel);
 
     super.d(message, time: time, error: error, stackTrace: chain);
   }
@@ -338,6 +382,7 @@ class Logger extends logger.Logger {
     DateTime? time,
     Object? error,
     StackTrace? stackTrace,
+    int? stackTraceLevel,
     Map<String, String>? parameters,
     dynamic reason,
     Iterable<Object> information = const [],
@@ -347,7 +392,7 @@ class Logger extends logger.Logger {
     bool logsCrashlyticsMessage = false,
     bool recordsCrashlyticsError = false,
   }) {
-    final chain = _stackChain(stackTrace);
+    final chain = _stackChain(stackTrace, stackTraceLevel: stackTraceLevel);
 
     super.i(message, time: time, error: error, stackTrace: chain);
 
@@ -377,6 +422,7 @@ class Logger extends logger.Logger {
     DateTime? time,
     Object? error,
     StackTrace? stackTrace,
+    int? stackTraceLevel,
     Map<String, String>? parameters,
     dynamic reason,
     Iterable<Object> information = const [],
@@ -386,7 +432,7 @@ class Logger extends logger.Logger {
     bool logsCrashlyticsMessage = false,
     bool recordsCrashlyticsError = false,
   }) {
-    final chain = _stackChain(stackTrace);
+    final chain = _stackChain(stackTrace, stackTraceLevel: stackTraceLevel);
 
     super.w(message, time: time, error: error, stackTrace: chain);
 
@@ -416,6 +462,7 @@ class Logger extends logger.Logger {
     DateTime? time,
     Object? error,
     StackTrace? stackTrace,
+    int? stackTraceLevel,
     Map<String, String>? parameters,
     dynamic reason,
     Iterable<Object> information = const [],
@@ -425,7 +472,7 @@ class Logger extends logger.Logger {
     bool logsCrashlyticsMessage = true,
     bool recordsCrashlyticsError = true,
   }) {
-    final chain = _stackChain(stackTrace);
+    final chain = _stackChain(stackTrace, stackTraceLevel: stackTraceLevel);
 
     super.e(message, time: time, error: error, stackTrace: chain);
 
@@ -455,6 +502,7 @@ class Logger extends logger.Logger {
     DateTime? time,
     Object? error,
     StackTrace? stackTrace,
+    int? stackTraceLevel,
     Map<String, String>? parameters,
     dynamic reason,
     Iterable<Object> information = const [],
@@ -464,7 +512,7 @@ class Logger extends logger.Logger {
     bool logsCrashlyticsMessage = true,
     bool recordsCrashlyticsError = true,
   }) {
-    final chain = _stackChain(stackTrace);
+    final chain = _stackChain(stackTrace, stackTraceLevel: stackTraceLevel);
 
     super.f(message, time: time, error: error, stackTrace: chain);
 
