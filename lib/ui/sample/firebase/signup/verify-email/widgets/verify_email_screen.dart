@@ -56,9 +56,7 @@ class VerifyEmailScreen extends HookConsumerWidget {
 
     return switch (screenState.value) {
       _EmailVerificationState.loading => Center(
-        child: CircularProgressIndicator.adaptive(
-          backgroundColor: context.colorScheme.onPrimary,
-        ),
+        child: context.loadingIndicator,
       ),
       _EmailVerificationState.success => ScrollableContainer(
         child: Column(

@@ -151,9 +151,7 @@ class PasswordSetupForm extends HookConsumerWidget {
                   },
             style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
             child: isLoading.value
-                ? CircularProgressIndicator.adaptive(
-                    backgroundColor: context.colorScheme.onPrimary,
-                  )
+                ? context.loadingIndicator
                 : Text(l10n.setUpPassword),
           ),
         ],
