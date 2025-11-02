@@ -132,7 +132,7 @@ class AuthRepository extends _$AuthRepository {
     final l10n = ref.read(appLocalizationsProvider);
 
     if (auth.currentUser == null) {
-      throw AppException.badRequest(l10n.authenticationFailed);
+      throw AppException.unauthorized(l10n.authenticationFailed);
     }
 
     return auth.currentUser!.updatePassword(password);
