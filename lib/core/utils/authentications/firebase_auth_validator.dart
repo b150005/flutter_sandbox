@@ -18,7 +18,7 @@ abstract final class FirebaseAuthValidator {
     }
 
     if (email!.contains(Regexes.whitespace.regExp)) {
-      throw UnimplementedError(LogMessage.canEnterWhitespace);
+      throw ArgumentError.value(email, 'email', LogMessage.canEnterWhitespace);
     }
 
     if (!Regexes.email.regExp.hasMatch(email)) {
@@ -37,7 +37,11 @@ abstract final class FirebaseAuthValidator {
     }
 
     if (password.contains(Regexes.whitespace.regExp)) {
-      throw UnimplementedError(LogMessage.canEnterWhitespace);
+      throw ArgumentError.value(
+        password,
+        'password',
+        LogMessage.canEnterWhitespace,
+      );
     }
 
     if (!satisfiesMinLength(password) ||
@@ -75,9 +79,20 @@ abstract final class FirebaseAuthValidator {
       return l10n.requiredField;
     }
 
-    if (password.contains(Regexes.whitespace.regExp) ||
-        confirmPassword!.contains(Regexes.whitespace.regExp)) {
-      throw UnimplementedError(LogMessage.canEnterWhitespace);
+    if (password.contains(Regexes.whitespace.regExp)) {
+      throw ArgumentError.value(
+        password,
+        'password',
+        LogMessage.canEnterWhitespace,
+      );
+    }
+
+    if (confirmPassword!.contains(Regexes.whitespace.regExp)) {
+      throw ArgumentError.value(
+        confirmPassword,
+        'confirmPassword',
+        LogMessage.canEnterWhitespace,
+      );
     }
 
     if (password != confirmPassword) {

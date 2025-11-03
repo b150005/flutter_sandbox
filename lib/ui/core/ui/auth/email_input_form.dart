@@ -7,8 +7,8 @@ import 'package:multiple_result/multiple_result.dart';
 import '../../../../core/config/constants/button_size.dart';
 import '../../../../core/config/constants/spacing.dart';
 import '../../../../core/config/constants/widget_keys.dart';
-import '../../../../core/utils/authentications/firebase_auth_validator.dart';
 import '../../../../core/utils/exceptions/app_exception.dart';
+import '../../../../core/utils/extensions/bool.dart';
 import '../../../../core/utils/extensions/build_context.dart';
 import '../../../../core/utils/extensions/string.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
@@ -66,12 +66,12 @@ class EmailInputForm<T> extends HookConsumerWidget {
                 : () async {
                     isLoading.value = true;
 
-                    errorMessage.value = FirebaseAuthValidator.validateEmail(
-                      emailController.text,
-                      l10n: l10n,
-                    );
-
-                    if (errorMessage.value != null) {
+                    if (!(WidgetKeys.emailVerificationForm.currentState
+                            ?.validate())
+                        .orFalse(
+                          objectName:
+                              'WidgetKeys.emailVerificationForm.currentState',
+                        )) {
                       isLoading.value = false;
                       return;
                     }
