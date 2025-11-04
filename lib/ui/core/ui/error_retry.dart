@@ -4,8 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../core/config/constants/icon_size.dart';
 import '../../../core/config/constants/spacing.dart';
 import '../../../core/config/constants/widget_keys.dart';
-import '../../../core/utils/extensions/build_context.dart';
 import '../../../core/utils/l10n/app_localizations.dart';
+import '../extensions/build_context.dart';
 
 @immutable
 class ErrorRetry extends ConsumerWidget {

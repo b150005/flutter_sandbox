@@ -3,8 +3,8 @@ import 'package:flutter/widget_previews.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../core/config/constants/spacing.dart';
-import '../../../core/utils/extensions/build_context.dart';
 import '../../../core/utils/extensions/string.dart';
+import '../extensions/build_context.dart';
 import 'utils/preview/wrapper.dart';
 
 @Preview(name: 'Status Indicator', wrapper: wrapper)

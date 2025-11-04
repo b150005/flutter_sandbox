@@ -3,10 +3,10 @@ import 'package:flutter/widget_previews.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-import '../../../ui/core/themes/extensions/status_colors.dart';
-import '../../../ui/core/ui/utils/preview/wrapper.dart';
-import '../../config/constants/border_radii.dart';
-import '../../config/constants/spacing.dart';
+import '../../../core/config/constants/border_radii.dart';
+import '../../../core/config/constants/spacing.dart';
+import '../themes/extensions/status_colors.dart';
+import '../ui/utils/preview/wrapper.dart';
 import 'theme_data.dart';
 
 @Preview(name: 'TextTheme Table', wrapper: wrapper)
@@ -289,4 +289,10 @@ extension RouterExtension on BuildContext {
   String get currentPath => routerState.uri.path;
 
   bool isAt(String path) => currentPath == path;
+}
+
+extension NavigatorExtension on BuildContext {
+  NavigatorState get navigator => Navigator.of(this);
+
+  NavigatorState get rootNavigator => Navigator.of(this, rootNavigator: true);
 }

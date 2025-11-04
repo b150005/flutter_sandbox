@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widget_previews.dart';
 
 import '../../../../core/config/constants/spacing.dart';
-import '../../../../core/utils/extensions/build_context.dart';
+import '../../extensions/build_context.dart';
 import '../../ui/utils/preview/wrapper.dart';
 
 @Preview(name: 'Theme Colors Palette', wrapper: wrapper)

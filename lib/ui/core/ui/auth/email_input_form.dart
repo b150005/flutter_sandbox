@@ -9,9 +9,9 @@ import '../../../../core/config/constants/spacing.dart';
 import '../../../../core/config/constants/widget_keys.dart';
 import '../../../../core/utils/exceptions/app_exception.dart';
 import '../../../../core/utils/extensions/bool.dart';
-import '../../../../core/utils/extensions/build_context.dart';
 import '../../../../core/utils/extensions/string.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
+import '../../extensions/build_context.dart';
 import '../callout.dart';
 import '../email_text_form_field.dart';
 

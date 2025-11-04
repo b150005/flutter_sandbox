@@ -5,9 +5,9 @@ import 'package:go_router/go_router.dart';
 import '../../../core/config/constants/assets.dart';
 import '../../../core/config/constants/spacing.dart';
 import '../../../core/config/env/env.dart';
-import '../../../core/utils/extensions/build_context.dart';
 import '../../../core/utils/extensions/string.dart';
 import '../../../domain/models/content.dart';
+import '../../core/extensions/build_context.dart';
 
 @Preview(name: 'Content Card', size: Size(200, 200))
 Widget contentCard() => const ContentCard(

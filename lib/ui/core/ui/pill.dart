@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widget_previews.dart';
 
 import '../../../core/config/constants/spacing.dart';
-import '../../../core/utils/extensions/build_context.dart';
 import '../../../core/utils/extensions/string.dart';
+import '../extensions/build_context.dart';
 import 'utils/preview/wrapper.dart';
 
 @Preview(name: 'Pill', wrapper: wrapper)

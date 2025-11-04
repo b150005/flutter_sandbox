@@ -1,7 +1,7 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/utils/extensions/build_context.dart';
+import '../extensions/build_context.dart';
 import '../providers/app_bar_state_provider.dart';
 
 void useAppBar(
