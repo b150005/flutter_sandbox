@@ -236,6 +236,8 @@ final class _TextThemePreviewTableRowBuilder {
 }
 
 extension AppThemeExtension on BuildContext {
+  static const int _maxLines = 10;
+
   @Deprecated(
     'Use specific getters like textTheme, colorScheme instead'
     ' for better code clarity and type safety.',
@@ -257,7 +259,10 @@ extension AppThemeExtension on BuildContext {
       textTheme.bodyMedium?.copyWith(color: colorScheme.outline);
 
   InputDecoration get outlinedInputDecoration => InputDecoration(
+    helperMaxLines: _maxLines,
     hintStyle: supportTextStyle,
+    hintMaxLines: _maxLines,
+    errorMaxLines: _maxLines,
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(BorderRadii.md.value),
     ),
