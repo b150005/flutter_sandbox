@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' hide ScaffoldMessenger;
+import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' hide ProviderObserver;
 import 'package:responsive_framework/responsive_framework.dart';
@@ -13,7 +13,7 @@ import 'core/utils/logging/log_message.dart';
 import 'core/utils/logging/logger.dart';
 import 'core/utils/logging/provider_observer.dart';
 import 'ui/core/themes/extensions/status_colors.dart';
-import 'ui/core/ui/utils/scaffold_messenger.dart';
+import 'ui/core/ui/utils/app_messenger.dart';
 
 void main() {
   Chain.capture(() async {
@@ -60,7 +60,7 @@ class App extends ConsumerWidget {
     final router = ref.watch(routerProvider);
 
     return MaterialApp.router(
-      scaffoldMessengerKey: ScaffoldMessenger.key,
+      scaffoldMessengerKey: AppMessenger.key,
       routerConfig: router,
       builder: (context, child) => ResponsiveBreakpoints.builder(
         child: child.orElse(

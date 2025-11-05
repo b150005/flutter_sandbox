@@ -18,7 +18,7 @@ class SettingsScreen extends ConsumerWidget {
       children: [
         TextButton(onPressed: () => {}, child: const Text('go')),
         TextButton(
-          onPressed: () => ScaffoldMessenger.showSnackBar('Hello, world!'),
+          onPressed: () => AppMessenger.showSnackBar('Hello, world!'),
           child: const Text('Show SnackBar'),
         ),
       ],

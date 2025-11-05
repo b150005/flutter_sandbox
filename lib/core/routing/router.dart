@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' hide ScaffoldMessenger;
+import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -19,7 +19,7 @@ import '../../ui/core/ui/auth/password_setup_form.dart';
 import '../../ui/core/ui/callout.dart';
 import '../../ui/core/ui/layouts/adaptive_scaffold.dart';
 import '../../ui/core/ui/layouts/scrollable_container.dart';
-import '../../ui/core/ui/utils/scaffold_messenger.dart';
+import '../../ui/core/ui/utils/app_messenger.dart';
 import '../../ui/sample/firebase/auth/widgets/user_auth_detail_card.dart';
 import '../../ui/sample/firebase/auth/widgets/user_profile_card.dart';
 import '../../ui/sample/firebase/sign-in/widgets/sign_in_form.dart';

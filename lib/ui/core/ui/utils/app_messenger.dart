@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/utils/extensions/nullable.dart';
 
-final class ScaffoldMessenger {
-  const ScaffoldMessenger._();
+final class AppMessenger {
+  const AppMessenger._();
 
   static final key = GlobalKey<ScaffoldMessengerState>(
     debugLabel: 'ScaffoldMessenger',
