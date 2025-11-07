@@ -10,12 +10,18 @@ class SignInScreenRoute extends GoRouteData with $SignInScreenRoute {
 }
 
 @immutable
-class SignInScreen extends ConsumerWidget {
+class SignInScreen extends HookConsumerWidget {
   const SignInScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
+
+    useAppBar(
+      ref,
+      path: SignInScreenRoute.absolutePath,
+      state: AppBarState(title: Text(l10n.firebaseSignIn)),
+    );
 
     return ScrollableContainer(
       child: Column(

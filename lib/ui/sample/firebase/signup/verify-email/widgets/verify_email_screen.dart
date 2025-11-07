@@ -29,6 +29,12 @@ class VerifyEmailScreen extends HookConsumerWidget {
     );
     final l10n = ref.watch(appLocalizationsProvider);
 
+    useAppBar(
+      ref,
+      path: VerifyEmailScreenRoute.absolutePath,
+      state: AppBarState(title: Text(l10n.verifyEmail)),
+    );
+
     useEffect(() {
       authRepository
           .signInWithEmailLink(emailLink: emailLink)

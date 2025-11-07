@@ -10,12 +10,18 @@ class EmailSentScreenRoute extends GoRouteData with $EmailSentScreenRoute {
 }
 
 @immutable
-class EmailSentScreen extends ConsumerWidget {
+class EmailSentScreen extends HookConsumerWidget {
   const EmailSentScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
+
+    useAppBar(
+      ref,
+      path: EmailSentScreenRoute.absolutePath,
+      state: AppBarState(title: Text(l10n.emailSent)),
+    );
 
     return ScrollableContainer(
       child: Column(

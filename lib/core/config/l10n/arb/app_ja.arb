@@ -86,6 +86,10 @@
 	"@authenticationFailed": {
 		"description": "特定されていない理由により認証が失敗した場合に表示される汎用メッセージ"
 	},
+	"authenticationRequired": "続行するにはサインインしてください。",
+	"@authenticationRequired": {
+		"description": "操作を実行するためにユーザー認証が必要な場合に表示されるメッセージ"
+	},
 	"signUpDescription": "Sandbox を始める前に、アカウントを作成しましょう。",
 	"@signUpDescription": {
 		"description": "登録画面でユーザーにアカウント作成を促す案内テキスト"
@@ -93,6 +97,10 @@
 	"sentSignUpVerificationEmail": "認証メールを送信しました。メールに記載された認証 URL からユーザー登録を完了してください。",
 	"@sentSignUpVerificationEmail": {
 		"description": "登録確認メール送信後に表示される確認メッセージ"
+	},
+	"sentEmailUpdateVerificationEmail": "新しいメールアドレスに確認リンクが送信されます。リンクをクリックすると、メールアドレスが更新されます。",
+	"@sentEmailUpdateVerificationEmail": {
+		"description": "新しいメールアドレスに確認リンクを送信した後に表示される確認メッセージ"
 	},
 	"invalidVerificationEmailLink": "認証リンクが無効または期限切れです。再度認証メールを送信してやり直してください。",
 	"@invalidVerificationEmailLink": {
@@ -128,6 +136,10 @@
 	"@firebase": {},
 	"firebaseAuth": "Firebase Auth",
 	"@firebaseAuth": {},
+	"firebaseDataConnect": "Firebase Data Connect",
+	"@firebaseDataConnect": {},
+	"localStorage": "Local Storage",
+	"@localStorage": {},
 	"email": "メールアドレス",
 	"@email": {},
 	"password": "パスワード",
@@ -136,12 +148,36 @@
 	"@forgotPassword": {},
 	"back": "戻る",
 	"@back": {},
+	"ok": "OK",
+	"@ok": {},
 	"submit": "送信",
 	"@submit": {},
+	"edit": "編集",
+	"@edit": {},
+	"editEmail": "メールアドレスの編集",
+	"@editEmail": {},
+	"currentEmail": "現在のメールアドレス",
+	"@currentEmail": {},
+	"newEmail": "新しいメールアドレス",
+	"@newEmail": {},
+	"sendVerificationEmail": "認証メールを送信",
+	"@sendVerificationEmail": {},
+	"cancel": "キャンセル",
+	"@cancel": {},
+	"firebaseSignIn": "Firebase サインイン",
+	"@firebaseSignIn": {},
 	"signIn": "サインイン",
 	"@signIn": {},
+	"firebaseSignUp": "Firebase 新規登録",
+	"@firebaseSignUp": {},
 	"signUp": "新規登録",
 	"@signUp": {},
+	"emailSent": "メール送信完了",
+	"@emailSent": {},
+	"verifyEmail": "メール認証",
+	"@verifyEmail": {},
+	"resetPassword": "パスワード再設定",
+	"@resetPassword": {},
 	"confirmPassword": "パスワード(確認)",
 	"@confirmPassword": {},
 	"displayName": "表示名",

@@ -11,13 +11,19 @@ class ForgotPasswordScreenRoute extends GoRouteData
 }
 
 @immutable
-class ForgotPasswordScreen extends ConsumerWidget {
+class ForgotPasswordScreen extends HookConsumerWidget {
   const ForgotPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
     final authRepository = ref.watch(authRepositoryProvider.notifier);
+
+    useAppBar(
+      ref,
+      path: ForgotPasswordScreenRoute.absolutePath,
+      state: AppBarState(title: Text(l10n.resetPassword)),
+    );
 
     return ScrollableContainer(
       child: Column(

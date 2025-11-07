@@ -8,19 +8,29 @@ class HomeScreenRoute extends GoRouteData with $HomeScreenRoute {
 }
 
 @immutable
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends HookConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => Center(
-    child: Column(
-      children: [
-        TextButton(onPressed: () => {}, child: const Text('go')),
-        TextButton(
-          onPressed: () => AppMessenger.showSnackBar('Hello, world!'),
-          child: const Text('Show SnackBar'),
-        ),
-      ],
-    ),
-  );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = ref.watch(appLocalizationsProvider);
+
+    useAppBar(
+      ref,
+      path: HomeScreenRoute.path,
+      state: AppBarState(title: Text(l10n.home)),
+    );
+
+    return ScrollableContainer(
+      child: Column(
+        children: [
+          TextButton(onPressed: () => {}, child: const Text('go')),
+          TextButton(
+            onPressed: () => AppMessenger.showSnackBar('Hello, world!'),
+            child: const Text('Show SnackBar'),
+          ),
+        ],
+      ),
+    );
+  }
 }

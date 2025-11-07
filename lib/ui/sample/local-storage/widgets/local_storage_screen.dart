@@ -11,9 +11,19 @@ class LocalStorageScreenRoute extends GoRouteData
 }
 
 @immutable
-class LocalStorageScreen extends ConsumerWidget {
+class LocalStorageScreen extends HookConsumerWidget {
   const LocalStorageScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => const Placeholder();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = ref.watch(appLocalizationsProvider);
+
+    useAppBar(
+      ref,
+      path: LocalStorageScreenRoute.absolutePath,
+      state: AppBarState(title: Text(l10n.localStorage)),
+    );
+
+    return const Placeholder();
+  }
 }

@@ -10,12 +10,18 @@ class DataConnectScreenRoute extends GoRouteData with $DataConnectScreenRoute {
 }
 
 @immutable
-class DataConnectScreen extends ConsumerWidget {
+class DataConnectScreen extends HookConsumerWidget {
   const DataConnectScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
+
+    useAppBar(
+      ref,
+      path: DataConnectScreenRoute.absolutePath,
+      state: AppBarState(title: Text(l10n.firebaseDataConnect)),
+    );
 
     return const ScrollableContainer(
       child: Column(
