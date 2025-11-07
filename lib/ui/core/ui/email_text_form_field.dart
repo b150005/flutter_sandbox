@@ -19,11 +19,13 @@ class EmailTextFormField extends HookConsumerWidget {
     this.labelText,
     this.controller,
     this.textInputAction,
+    this.onFieldSubmitted,
   });
 
   final String? labelText;
   final TextEditingController? controller;
   final TextInputAction? textInputAction;
+  final void Function(String email)? onFieldSubmitted;
 
   static const exampleEmailAddress = 'user@example.com';
 
@@ -42,6 +44,7 @@ class EmailTextFormField extends HookConsumerWidget {
         keyboardType: TextInputType.emailAddress,
         textInputAction: textInputAction,
         autocorrect: false,
+        onFieldSubmitted: onFieldSubmitted,
         validator: (email) =>
             FirebaseAuthValidator.validateEmail(email, l10n: l10n),
         inputFormatters: [TextInputFormatters.noWhitespace],

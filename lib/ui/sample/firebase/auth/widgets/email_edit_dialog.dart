@@ -11,9 +11,11 @@ import '../../../../../core/utils/extensions/string.dart';
 import '../../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../../data/repositories/firebase/auth/auth_repository.dart';
 import '../../../../core/extensions/build_context.dart';
+import '../../../../core/extensions/navigator_state.dart';
 import '../../../../core/ui/callout.dart';
 import '../../../../core/ui/email_text_form_field.dart';
 import '../../../../core/ui/label.dart';
+import '../../../../core/ui/utils/app_messenger.dart';
 import '../../../../core/ui/utils/preview/preview_mock_data.dart';
 import '../../../../core/ui/utils/preview/wrapper.dart';
 
@@ -61,6 +63,48 @@ class EmailEditDialog extends HookConsumerWidget {
 
     final authRepository = ref.watch(authRepositoryProvider.notifier);
 
+    Future<void> onSubmit() async {
+      isLoading.value = true;
+
+      if (!(WidgetKeys.emailEditForm.currentState?.validate()).orFalse(
+        objectName: 'WidgetKeys.emailEditForm.currentState',
+      )) {
+        isLoading.value = false;
+        return;
+      }
+
+      await authRepository
+          .verifyBeforeUpdateEmail(
+            emailController.text,
+          )
+          .then(
+            (result) => result.when(
+              (_) {
+                context.rootNavigator.pop();
+
+                AppMessenger.showMaterialBanner(
+                  MaterialBanner(
+                    content: Text(
+                      l10n.sentEmailUpdateVerificationEmail,
+                    ),
+                    leading: const Icon(Icons.email_outlined),
+                    actions: [
+                      TextButton(
+                        onPressed: () => AppMessenger.hideMaterialBanner(
+                          reason: MaterialBannerClosedReason.dismiss,
+                        ),
+                        child: Text(l10n.ok),
+                      ),
+                    ],
+                  ),
+                );
+              },
+              (appException) => errorMessage.value = appException.message,
+            ),
+          )
+          .whenComplete(() => isLoading.value = false);
+    }
+
     return AlertDialog(
       icon: const Icon(Icons.email_outlined),
       title: Text(l10n.editEmail),
@@ -88,6 +132,7 @@ class EmailEditDialog extends HookConsumerWidget {
               labelText: l10n.newEmail,
               controller: emailController,
               textInputAction: TextInputAction.done,
+              onFieldSubmitted: (_) => onSubmit(),
             ),
           ],
         ),
@@ -96,40 +141,11 @@ class EmailEditDialog extends HookConsumerWidget {
         TextButton(
           onPressed: isLoading.value
               ? null
-              : () {
-                  if (context.rootNavigator.canPop()) {
-                    context.rootNavigator.pop();
-                  }
-                },
+              : () => context.rootNavigator.safePop(),
           child: Text(l10n.cancel),
         ),
         FilledButton(
-          onPressed: isLoading.value
-              ? null
-              : () async {
-                  isLoading.value = true;
-
-                  if (!(WidgetKeys.emailEditForm.currentState?.validate())
-                      .orFalse(
-                        objectName: 'WidgetKeys.emailEditForm.currentState',
-                      )) {
-                    isLoading.value = false;
-                    return;
-                  }
-
-                  await authRepository
-                      .verifyBeforeUpdateEmail(
-                        emailController.text,
-                      )
-                      .then(
-                        (result) => result.when(
-                          (_) {},
-                          (appException) =>
-                              errorMessage.value = appException.message,
-                        ),
-                      )
-                      .whenComplete(() => isLoading.value = false);
-                },
+          onPressed: isLoading.value ? null : onSubmit,
           child: isLoading.value
               ? context.loadingIndicator
               : Text(l10n.sendVerificationEmail),

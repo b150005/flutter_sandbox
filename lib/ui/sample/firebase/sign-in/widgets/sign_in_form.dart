@@ -30,6 +30,34 @@ class SignInForm extends HookConsumerWidget {
 
     final l10n = ref.watch(appLocalizationsProvider);
 
+    Future<void> onSubmit() async {
+      if (isLoading.value) {
+        return;
+      }
+
+      isLoading.value = true;
+
+      if (WidgetKeys.signInForm.currentState == null ||
+          !WidgetKeys.signInForm.currentState!.validate()) {
+        isLoading.value = false;
+        return;
+      }
+
+      await ref
+          .read(authRepositoryProvider.notifier)
+          .signInWithEmailAndPassword(
+            email: emailController.text.trim(),
+            password: passwordController.text.trim(),
+          )
+          .then(
+            (result) => result.when(
+              (credential) => context.go(FirebaseScreenRoute.absolutePath),
+              (appException) => errorMessage.value = appException.message,
+            ),
+          )
+          .whenComplete(() => isLoading.value = false);
+    }
+
     return Form(
       key: WidgetKeys.signInForm,
       child: Column(
@@ -48,6 +76,7 @@ class SignInForm extends HookConsumerWidget {
           PasswordTextFormField(
             controller: passwordController,
             textInputAction: TextInputAction.done,
+            onFieldSubmitted: (_) => onSubmit(),
           ),
           Align(
             alignment: Alignment.centerRight,
@@ -60,35 +89,7 @@ class SignInForm extends HookConsumerWidget {
           ),
           FilledButton(
             key: WidgetKeys.signIn,
-            onPressed: () async {
-              if (isLoading.value) {
-                return;
-              }
-
-              isLoading.value = true;
-
-              if (WidgetKeys.signInForm.currentState == null ||
-                  !WidgetKeys.signInForm.currentState!.validate()) {
-                isLoading.value = false;
-                return;
-              }
-
-              await ref
-                  .read(authRepositoryProvider.notifier)
-                  .signInWithEmailAndPassword(
-                    email: emailController.text.trim(),
-                    password: passwordController.text.trim(),
-                  )
-                  .then(
-                    (result) => result.when(
-                      (credential) =>
-                          context.go(FirebaseScreenRoute.absolutePath),
-                      (appException) =>
-                          errorMessage.value = appException.message,
-                    ),
-                  )
-                  .whenComplete(() => isLoading.value = false);
-            },
+            onPressed: onSubmit,
             style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
             child: isLoading.value
                 ? context.loadingIndicator

@@ -28,6 +28,29 @@ class SignUpForm extends HookConsumerWidget {
 
     final l10n = ref.watch(appLocalizationsProvider);
 
+    Future<void> onSubmit() async {
+      isLoading.value = true;
+
+      if (WidgetKeys.signUpForm.currentState == null ||
+          !WidgetKeys.signUpForm.currentState!.validate()) {
+        isLoading.value = false;
+        return;
+      }
+
+      await ref
+          .read(authRepositoryProvider.notifier)
+          .sendSignInLinkToEmail(
+            email: emailController.text.trim(),
+          )
+          .then(
+            (result) => result.when(
+              (_) => context.go(EmailSentScreenRoute.absolutePath),
+              (appException) => errorMessage.value = appException.message,
+            ),
+          )
+          .whenComplete(() => isLoading.value = false);
+    }
+
     return Form(
       key: WidgetKeys.signUpForm,
       child: Column(
@@ -42,35 +65,11 @@ class SignUpForm extends HookConsumerWidget {
           EmailTextFormField(
             controller: emailController,
             textInputAction: TextInputAction.done,
+            onFieldSubmitted: (_) => onSubmit(),
           ),
           FilledButton(
             key: WidgetKeys.signUp,
-            onPressed: isLoading.value
-                ? null
-                : () async {
-                    isLoading.value = true;
-
-                    if (WidgetKeys.signUpForm.currentState == null ||
-                        !WidgetKeys.signUpForm.currentState!.validate()) {
-                      isLoading.value = false;
-                      return;
-                    }
-
-                    await ref
-                        .read(authRepositoryProvider.notifier)
-                        .sendSignInLinkToEmail(
-                          email: emailController.text.trim(),
-                        )
-                        .then(
-                          (result) => result.when(
-                            (_) =>
-                                context.go(EmailSentScreenRoute.absolutePath),
-                            (appException) =>
-                                errorMessage.value = appException.message,
-                          ),
-                        )
-                        .whenComplete(() => isLoading.value = false);
-                  },
+            onPressed: isLoading.value ? null : onSubmit,
             style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
             child: isLoading.value
                 ? context.loadingIndicator

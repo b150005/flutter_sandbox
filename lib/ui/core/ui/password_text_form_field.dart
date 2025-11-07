@@ -22,6 +22,7 @@ class PasswordTextFormField extends HookConsumerWidget {
     this.controller,
     this.textInputAction,
     this.onChanged,
+    this.onFieldSubmitted,
     this.validator,
   });
 
@@ -32,6 +33,8 @@ class PasswordTextFormField extends HookConsumerWidget {
   final TextInputAction? textInputAction;
 
   final void Function(String password)? onChanged;
+
+  final void Function(String password)? onFieldSubmitted;
 
   final String? Function(String? password)? validator;
 
@@ -67,6 +70,7 @@ class PasswordTextFormField extends HookConsumerWidget {
         enableSuggestions: false,
         maxLength: FirebaseAuthValidator.passwordMaxLength,
         onChanged: onChanged,
+        onFieldSubmitted: onFieldSubmitted,
         validator:
             validator ??
             (password) =>
