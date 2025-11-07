@@ -12,6 +12,7 @@ bool get kIsStg => Env.instance.appEnv == Env.staging;
 bool get kIsProd => Env.instance.appEnv == Env.production;
 
 bool get kDebugModeInDev => kIsDev && kDebugMode;
+bool get kDebugModeInDevOnWeb => kDebugModeInDev && kIsWeb;
 
 @Envied(
   path: 'lib/core/config/env/development.env',

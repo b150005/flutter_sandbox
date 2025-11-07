@@ -58,7 +58,7 @@ abstract class AppInitializerProtocol {
       options: DefaultFirebaseOptions.currentPlatform,
     );
 
-    if (kDebugModeInDev && kIsWeb) {
+    if (kDebugModeInDevOnWeb) {
       Logger.instance.i('⚠️ Firebase App Check is disabled in Web debug mode');
     } else {
       await FirebaseAppCheck.instance.activate(

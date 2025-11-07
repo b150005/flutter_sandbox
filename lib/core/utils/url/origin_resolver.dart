@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 import '../../config/env/env.dart';
 
 class OriginResolver {
@@ -11,7 +9,5 @@ class OriginResolver {
       'http://localhost:$localDevelopmentServerPort';
 
   static String get current =>
-      _isLocalWebDevelopment ? localDevelopmentOrigin : Env.instance.origin;
-
-  static bool get _isLocalWebDevelopment => kDebugModeInDev && kIsWeb;
+      kDebugModeInDevOnWeb ? localDevelopmentOrigin : Env.instance.origin;
 }
