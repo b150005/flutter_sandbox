@@ -58,15 +58,19 @@ abstract class AppInitializerProtocol {
       options: DefaultFirebaseOptions.currentPlatform,
     );
 
-    await FirebaseAppCheck.instance.activate(
-      providerWeb: ReCaptchaV3Provider(Env.instance.recaptchaSiteKey),
-      providerAndroid: kDebugModeInDev
-          ? const AndroidDebugProvider(debugToken: 'Android Debug Provider')
-          : const AndroidPlayIntegrityProvider(),
-      providerApple: kDebugModeInDev
-          ? const AppleDebugProvider(debugToken: 'Apple Debug Provider')
-          : const AppleAppAttestWithDeviceCheckFallbackProvider(),
-    );
+    if (kDebugModeInDev && kIsWeb) {
+      Logger.instance.i('⚠️ Firebase App Check is disabled in Web debug mode');
+    } else {
+      await FirebaseAppCheck.instance.activate(
+        providerWeb: ReCaptchaV3Provider(Env.instance.recaptchaSiteKey),
+        providerAndroid: kDebugModeInDev
+            ? const AndroidDebugProvider(debugToken: 'Android Debug Provider')
+            : const AndroidPlayIntegrityProvider(),
+        providerApple: kDebugModeInDev
+            ? const AppleDebugProvider(debugToken: 'Apple Debug Provider')
+            : const AppleAppAttestWithDeviceCheckFallbackProvider(),
+      );
+    }
 
     if (kDebugModeInDev) {
       Logger.instance.d(
