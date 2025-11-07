@@ -172,6 +172,8 @@
 	"@firebaseSignUp": {},
 	"signUp": "Sign Up",
 	"@signUp": {},
+	"signOut": "Sign Out",
+	"@signOut": {},
 	"emailSent": "Email Sent",
 	"@emailSent": {},
 	"verifyEmail": "Verify Email",

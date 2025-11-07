@@ -30,6 +30,7 @@ class FirebaseAuthScreen extends HookConsumerWidget {
         children: const [
           UserProfileCard(),
           UserAuthDetailCard(),
+          SignOutButton(),
         ],
       ),
     );

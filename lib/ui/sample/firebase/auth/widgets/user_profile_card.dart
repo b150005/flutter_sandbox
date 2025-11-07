@@ -6,19 +6,20 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../core/config/constants/icon_size.dart';
 import '../../../../../core/config/constants/spacing.dart';
 import '../../../../../core/config/constants/widget_keys.dart';
-import '../../../../../core/utils/extensions/build_context.dart';
 import '../../../../../core/utils/extensions/nullable.dart';
 import '../../../../../core/utils/extensions/string.dart';
 import '../../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../../core/utils/logging/log_message.dart';
 import '../../../../../core/utils/logging/logger.dart';
 import '../../../../../data/repositories/firebase/auth/auth_repository.dart';
+import '../../../../core/extensions/build_context.dart';
 import '../../../../core/ui/callout.dart';
 import '../../../../core/ui/label.dart';
 import '../../../../core/ui/pill.dart';
 import '../../../../core/ui/property_table.dart';
 import '../../../../core/ui/utils/preview/preview_mock_data.dart';
 import '../../../../core/ui/utils/preview/wrapper.dart';
+import 'email_edit_dialog.dart';
 
 @Preview(name: 'User Profile Card', wrapper: wrapper)
 Widget userProfileCard() => ProviderScope(
@@ -155,12 +156,29 @@ class UserProfileCard extends HookConsumerWidget {
                   value: currentUser.email.orNullString(
                     objectName: 'currentUser.email',
                   ),
+                  suffix: SelectionContainer.disabled(
+                    child: TextButton(
+                      key: WidgetKeys.editEmail,
+                      onPressed: () => showAdaptiveDialog<void>(
+                        context: context,
+                        builder: (context) => const EmailEditDialog(),
+                      ),
+                      child: Text(l10n.edit),
+                    ),
+                  ),
                 ),
                 PropertyTableCellData(
                   key: WidgetKeys.phoneNumber,
                   label: l10n.phoneNumber,
                   value: currentUser.phoneNumber.orNullString(
                     objectName: 'currentUser.phoneNumber',
+                  ),
+                  suffix: SelectionContainer.disabled(
+                    child: TextButton(
+                      key: WidgetKeys.editPhoneNumber,
+                      onPressed: () {},
+                      child: Text(l10n.edit),
+                    ),
                   ),
                 ),
               ],

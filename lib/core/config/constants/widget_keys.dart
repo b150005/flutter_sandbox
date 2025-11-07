@@ -13,6 +13,7 @@ abstract final class WidgetKeys {
   static final emailVerificationForm = LabeledGlobalKey<FormState>(
     'emailVerificationForm',
   );
+  static final emailEditForm = LabeledGlobalKey<FormState>('emailEditForm');
 
   static const ValueKey<String> userProfileCard = ValueKey('userProfileCard');
   static const ValueKey<String> userAuthDetailCard = ValueKey(
@@ -33,9 +34,16 @@ abstract final class WidgetKeys {
   static const ValueKey<String> forgotPassword = ValueKey('forgotPassword');
   static const ValueKey<String> signIn = ValueKey('signIn');
   static const ValueKey<String> signUp = ValueKey('signUp');
+  static const ValueKey<String> signOut = ValueKey('signOut');
   static const ValueKey<String> confirmPassword = ValueKey('confirmPassword');
   static const ValueKey<String> setupPassword = ValueKey('setupPassword');
   static const ValueKey<String> verifyEmail = ValueKey('verifyEmail');
+
+  static const ValueKey<String> editEmail = ValueKey('changeEmail');
+  static const ValueKey<String> editPhoneNumber = ValueKey(
+    'changePhoneNumber',
+  );
+
   static const ValueKey<String> avatar = ValueKey('avatar');
   static const ValueKey<String> displayName = ValueKey('displayName');
   static const ValueKey<String> uid = ValueKey('uid');
