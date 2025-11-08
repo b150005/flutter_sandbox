@@ -53,7 +53,9 @@
 
   <script>
     // 実行時に baseUrl を設定
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', () => {
+      'use strict';
+
       const baseUrl = window.location.origin;
 
       const ogUrl = document.querySelector('meta[property="og:url"]');
@@ -64,15 +66,32 @@
       const ogImage = document.querySelector('meta[property="og:image"]');
       if (ogImage) {
         const imagePath = ogImage.getAttribute('content');
-        ogImage.setAttribute('content', baseUrl + '/' + imagePath);
+        ogImage.setAttribute('content', `${baseUrl}/${imagePath}`);
       }
 
       const twitterImage = document.querySelector('meta[name="twitter:image"]');
       if (twitterImage) {
         const imagePath = twitterImage.getAttribute('content');
-        twitterImage.setAttribute('content', baseUrl + '/' + imagePath);
+        twitterImage.setAttribute('content', `${baseUrl}/${imagePath}`);
       }
     });
+  </script>
+
+  <script>
+    /** @see [Use App Check with the debug provider with Flutter](https://firebase.google.com/docs/app-check/flutter/debug-provider) */
+    (() => {
+      'use strict';
+
+      const targetEnv = 'development';
+      const developmentEnv = 'development';
+      const isDevelopment = targetEnv === developmentEnv;
+      const isLocal = window.location.hostname === 'localhost';
+
+      if (isDevelopment && isLocal) {
+        console.info('⚠️ [Firebase App Check] Debug mode enabled.');
+        self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+      }
+    })();
   </script>
 </head>
 
