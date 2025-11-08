@@ -32,6 +32,7 @@ extension FirebaseAuthExceptionExtension on FirebaseAuthException {
           FirebaseErrorCode.invalidCredential:
         return AppException.unauthorized(l10n.authenticationFailed);
       case FirebaseErrorCode.invalidActionCode:
+      case FirebaseErrorCode.firebaseAppCheckTokenIsInvalid:
         return AppException.badRequest(l10n.authenticationFailed);
       case FirebaseErrorCode.operationNotAllowed:
         return AppException.forbidden(l10n.authenticationFailed);

@@ -45,4 +45,10 @@ final class FirebaseErrorCode {
 
   /// Firebase プロジェクトで有効化されていない認証方式である
   static const operationNotAllowed = 'operation-not-allowed';
+
+  /// Firebase App Check のトークンが無効である
+  ///
+  /// @see [Use App Check with the debug provider with Flutter](https://firebase.google.com/docs/app-check/flutter/debug-provider)
+  static const firebaseAppCheckTokenIsInvalid =
+      'firebase-app-check-token-is-invalid.';
 }
