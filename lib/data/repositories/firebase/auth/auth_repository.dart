@@ -168,27 +168,28 @@ class AuthRepository extends _$AuthRepository {
   });
 
   /// メールアドレス更新の認証メールを送信する
-  Future<Result<void, AppException>> verifyBeforeUpdateEmail(String email) =>
-      _executeWithFirebaseAuth(() {
-        final auth = ref.read(firebaseAuthProvider);
-        final l10n = ref.read(appLocalizationsProvider);
+  Future<Result<void, AppException>> verifyBeforeUpdateEmail(
+    String email,
+  ) => _executeWithFirebaseAuth(() {
+    final auth = ref.read(firebaseAuthProvider);
+    final l10n = ref.read(appLocalizationsProvider);
 
-        if (auth.currentUser == null) {
-          throw AppException.unauthorized(l10n.authenticationRequired);
-        }
+    if (auth.currentUser == null) {
+      throw AppException.unauthorized(l10n.authenticationRequired);
+    }
 
-        final actionCodeSettings = ActionCodeSettings(
-          androidPackageName: Env.instance.appId,
-          handleCodeInApp: true,
-          iOSBundleId: Env.instance.bundleId,
-          url: OriginResolver.current,
-        );
+    final actionCodeSettings = ActionCodeSettings(
+      androidPackageName: Env.instance.appId,
+      handleCodeInApp: true,
+      iOSBundleId: Env.instance.bundleId,
+      url: FirebaseAuthScreenRoute.emailUpdateUrl(OriginResolver.current),
+    );
 
-        return auth.currentUser!.verifyBeforeUpdateEmail(
-          email,
-          actionCodeSettings,
-        );
-      });
+    return auth.currentUser!.verifyBeforeUpdateEmail(
+      email,
+      actionCodeSettings,
+    );
+  });
 
   /// サインアウトする
   ///

@@ -110,6 +110,10 @@
 	"@signInWithEmailLinkSuccessfully": {
 		"description": "Success message displayed after successful sign-in via email link"
 	},
+	"updateEmailSuccessfully": "Your email address has been successfully updated.",
+	"@updateEmailSuccessfully": {
+		"description": "Success message displayed when email address update is completed"
+	},
 	"signInScreenDescription": "A comprehensive demo screen showcasing Firebase services.",
 	"@signInScreenDescription": {
 		"description": "Descriptive text for the Firebase demo screen"

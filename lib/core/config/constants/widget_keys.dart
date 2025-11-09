@@ -21,11 +21,13 @@ abstract final class WidgetKeys {
   );
 
   static const ValueKey<String> back = ValueKey('back');
+  static const ValueKey<String> dismiss = ValueKey('dismiss');
+  static const ValueKey<String> save = ValueKey('save');
 
   static const ValueKey<String> callout = ValueKey('callout');
+
   static const ValueKey<String> icon = ValueKey('icon');
   static const ValueKey<String> message = ValueKey('message');
-  static const ValueKey<String> dismiss = ValueKey('dismiss');
   static const ValueKey<String> email = ValueKey('email');
   static const ValueKey<String> password = ValueKey('password');
   static const ValueKey<String> togglePasswordVisibility = ValueKey(
@@ -35,6 +37,7 @@ abstract final class WidgetKeys {
   static const ValueKey<String> signIn = ValueKey('signIn');
   static const ValueKey<String> signUp = ValueKey('signUp');
   static const ValueKey<String> signOut = ValueKey('signOut');
+
   static const ValueKey<String> confirmPassword = ValueKey('confirmPassword');
   static const ValueKey<String> setupPassword = ValueKey('setupPassword');
   static const ValueKey<String> verifyEmail = ValueKey('verifyEmail');
@@ -51,14 +54,11 @@ abstract final class WidgetKeys {
   static const ValueKey<String> emailVerified = ValueKey('emailVerified');
   static const ValueKey<String> phoneNumber = ValueKey('phoneNumber');
   static const ValueKey<String> photoURL = ValueKey('photoURL');
-
   static const ValueKey<String> refreshToken = ValueKey('refreshToken');
   static const ValueKey<String> tenantId = ValueKey('tenantId');
   static const ValueKey<String> creationTime = ValueKey('creationTime');
   static const ValueKey<String> lastSignInTime = ValueKey('lastSignInTime');
-
   static const ValueKey<String> providerId = ValueKey('providerId');
-
   static const ValueKey<String> signInProvider = ValueKey('signInProvider');
   static const ValueKey<String> signInSecondFactor = ValueKey(
     'signInSecondFactor',
@@ -67,10 +67,7 @@ abstract final class WidgetKeys {
   static const ValueKey<String> authTime = ValueKey('authTime');
   static const ValueKey<String> issuedAtTime = ValueKey('issuedAtTime');
   static const ValueKey<String> expirationTime = ValueKey('expirationTime');
-
   static const ValueKey<String> claims = ValueKey('claims');
 
   static const ValueKey<String> errorRetry = ValueKey('errorRetry');
-
-  static const ValueKey<String> save = ValueKey('save');
 }

@@ -110,6 +110,10 @@
 	"@signInWithEmailLinkSuccessfully": {
 		"description": "メールリンクによるサインインが成功した後に表示される成功メッセージ"
 	},
+	"updateEmailSuccessfully": "メールアドレスが正常に変更されました。",
+	"@updateEmailSuccessfully": {
+		"description": "メールアドレス変更が成功した際に表示される成功メッセージ"
+	},
 	"signInScreenDescription": "Firebase の各機能を統合したデモ画面です。",
 	"@signInScreenDescription": {
 		"description": "Firebase デモ画面の説明テキスト"
