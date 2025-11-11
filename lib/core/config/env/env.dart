@@ -283,4 +283,33 @@ final class Env implements EnvField {
   @override
   @EnviedField()
   final String recaptchaSecretKey = instance.recaptchaSecretKey;
+
+  @override
+  @EnviedField()
+  final String appleKeychainAccountName = instance.appleKeychainAccountName;
+
+  @override
+  @EnviedField()
+  final String appleKeychainGroupId = instance.appleKeychainGroupId;
+
+  @override
+  @EnviedField()
+  final String androidSharedPreferencesName =
+      instance.androidSharedPreferencesName;
+
+  @override
+  @EnviedField()
+  final String webDbName = instance.webDbName;
+
+  @override
+  @EnviedField()
+  final String webPublicKey = instance.webPublicKey;
+
+  @override
+  @EnviedField()
+  final String webKeyEncryptionKey = instance.webKeyEncryptionKey;
+
+  @override
+  @EnviedField()
+  final String webKeyEncryptionIv = instance.webKeyEncryptionIv;
 }

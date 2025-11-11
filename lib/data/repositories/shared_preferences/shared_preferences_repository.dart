@@ -6,5 +6,3 @@ part 'shared_preferences_repository.g.dart';
 @riverpod
 SharedPreferencesAsync sharedPreferencesRepository(Ref ref) =>
     SharedPreferencesAsync();
-
-enum SharedPreferencesKeys { emailForSignIn }

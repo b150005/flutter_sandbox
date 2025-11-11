@@ -55,4 +55,11 @@ abstract interface class EnvField {
   abstract final String firebaseDataConnectServiceId;
   abstract final String recaptchaSiteKey;
   abstract final String recaptchaSecretKey;
+  abstract final String appleKeychainAccountName;
+  abstract final String appleKeychainGroupId;
+  abstract final String androidSharedPreferencesName;
+  abstract final String webDbName;
+  abstract final String webPublicKey;
+  abstract final String webKeyEncryptionKey;
+  abstract final String webKeyEncryptionIv;
 }

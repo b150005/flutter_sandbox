@@ -11,7 +11,7 @@ import '../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../core/utils/logging/log_message.dart';
 import '../../../../core/utils/logging/logger.dart';
 import '../../../../core/utils/url/origin_resolver.dart';
-import '../../shared_preferences/shared_preferences_repository.dart';
+import '../../secure_storage/secure_storage_repository.dart';
 
 part 'auth_repository.g.dart';
 
@@ -85,9 +85,16 @@ class AuthRepository extends _$AuthRepository {
       url: OriginResolver.current + VerifyEmailScreenRoute.absolutePath,
     );
 
-    await ref
-        .read(sharedPreferencesRepositoryProvider)
-        .setString(SharedPreferencesKeys.emailForSignIn.name, email);
+    final secureStorageRepository = ref.read(
+      secureStorageRepositoryProvider.notifier,
+    );
+    final l10n = ref.read(appLocalizationsProvider);
+
+    await secureStorageRepository.write(
+      key: SecureStorageKey.email.name,
+      value: email,
+      label: l10n.email,
+    );
 
     await auth.sendSignInLinkToEmail(
       email: email,
@@ -99,6 +106,7 @@ class AuthRepository extends _$AuthRepository {
   ///
   /// @see [Complete sign in with the email link](https://firebase.google.com/docs/auth/flutter/email-link-auth#complete_sign_in_with_the_email_link)
   Future<Result<UserCredential, AppException>> signInWithEmailLink({
+    String? email,
     required Uri emailLink,
   }) => _executeWithFirebaseAuth(() async {
     final auth = ref.read(firebaseAuthProvider);
@@ -108,16 +116,30 @@ class AuthRepository extends _$AuthRepository {
       throw AppException.badRequest(l10n.invalidVerificationEmailLink);
     }
 
-    final email = await ref
-        .read(sharedPreferencesRepositoryProvider)
-        .getString(SharedPreferencesKeys.emailForSignIn.name);
+    final String? effectiveEmail;
+    final secureStorageRepository = ref.read(
+      secureStorageRepositoryProvider.notifier,
+    );
 
     if (email == null) {
-      throw AppException.notFound(l10n.notFound);
+      effectiveEmail = await secureStorageRepository.read(
+        key: SecureStorageKey.email.name,
+      );
+
+      if (effectiveEmail == null) {
+        throw AppException.notFound(l10n.notFound);
+      }
+    } else {
+      effectiveEmail = email;
+      await secureStorageRepository.write(
+        key: SecureStorageKey.email.name,
+        value: email,
+        label: l10n.email,
+      );
     }
 
     return auth.signInWithEmailLink(
-      email: email,
+      email: effectiveEmail,
       emailLink: emailLink.toString(),
     );
   });
@@ -159,8 +181,8 @@ class AuthRepository extends _$AuthRepository {
     final auth = ref.read(firebaseAuthProvider);
 
     await ref
-        .read(sharedPreferencesRepositoryProvider)
-        .setString(SharedPreferencesKeys.emailForSignIn.name, email);
+        .read(secureStorageRepositoryProvider.notifier)
+        .write(key: SecureStorageKey.email.name, value: email);
 
     return auth.sendPasswordResetEmail(
       email: email,
