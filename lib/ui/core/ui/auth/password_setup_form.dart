@@ -9,6 +9,7 @@ import '../../../../core/config/constants/spacing.dart';
 import '../../../../core/config/constants/widget_keys.dart';
 import '../../../../core/routing/router.dart';
 import '../../../../core/utils/authentications/firebase_auth_validator.dart';
+import '../../../../core/utils/exceptions/exception_handler.dart';
 import '../../../../core/utils/extensions/string.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../data/repositories/firebase/auth/auth_repository.dart';
@@ -56,6 +57,29 @@ class PasswordSetupForm extends HookConsumerWidget {
 
     final isLoading = useState<bool>(false);
 
+    Future<void> onSubmit() async {
+      isLoading.value = true;
+
+      if (WidgetKeys.passwordSetupForm.currentState == null ||
+          !WidgetKeys.passwordSetupForm.currentState!.validate()) {
+        isLoading.value = false;
+        return;
+      }
+
+      await ExceptionHandler.execute(() async {
+        final passwordUpdateResult = await ref
+            .read(authRepositoryProvider.notifier)
+            .updatePassword(
+              password: passwordController.text.trim(),
+            );
+
+        passwordUpdateResult.when(
+          (_) => context.go(FirebaseScreenRoute.absolutePath),
+          (appException) => errorMessage.value = appException.message,
+        );
+      }, l10n: l10n).whenComplete(() => isLoading.value = false);
+    }
+
     return Form(
       key: WidgetKeys.passwordSetupForm,
       child: Column(
@@ -84,11 +108,13 @@ class PasswordSetupForm extends HookConsumerWidget {
               hasLowercase.value = FirebaseAuthValidator.hasLowercase(password);
               hasDigit.value = FirebaseAuthValidator.hasDigit(password);
             },
+            onFieldSubmitted: (_) => onSubmit(),
           ),
           PasswordTextFormField(
             key: WidgetKeys.confirmPassword,
             labelText: l10n.confirmPassword,
             textInputAction: TextInputAction.done,
+            onFieldSubmitted: (_) => onSubmit(),
             validator: (confirmPassword) =>
                 FirebaseAuthValidator.validateConfirmPassword(
                   confirmPassword,
@@ -123,32 +149,7 @@ class PasswordSetupForm extends HookConsumerWidget {
           ),
           FilledButton(
             key: WidgetKeys.setupPassword,
-            onPressed: isLoading.value
-                ? null
-                : () async {
-                    isLoading.value = true;
-
-                    if (WidgetKeys.passwordSetupForm.currentState == null ||
-                        !WidgetKeys.passwordSetupForm.currentState!
-                            .validate()) {
-                      isLoading.value = false;
-                      return;
-                    }
-
-                    await ref
-                        .read(authRepositoryProvider.notifier)
-                        .updatePassword(
-                          password: passwordController.text.trim(),
-                        )
-                        .then(
-                          (result) => result.when(
-                            (_) => context.go(FirebaseScreenRoute.absolutePath),
-                            (appException) =>
-                                errorMessage.value = appException.message,
-                          ),
-                        )
-                        .whenComplete(() => isLoading.value = false);
-                  },
+            onPressed: isLoading.value ? null : onSubmit,
             style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
             child: isLoading.value
                 ? context.loadingIndicator

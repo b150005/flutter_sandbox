@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../core/config/env/env.dart';
 import '../../../../core/routing/router.dart';
 import '../../../../core/utils/exceptions/app_exception.dart';
-import '../../../../core/utils/extensions/firebase_auth_exception.dart';
+import '../../../../core/utils/exceptions/exception_handler.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../core/utils/logging/log_message.dart';
 import '../../../../core/utils/logging/logger.dart';
@@ -42,32 +42,12 @@ class AuthRepository extends _$AuthRepository {
   }
 
   Future<Result<T, AppException>> _executeWithFirebaseAuth<T>(
-    Future<T> Function() operation,
-  ) async {
-    try {
-      _ensureFirebaseInitialized();
-
-      final result = await operation();
-
-      return Result.success(result);
-    } on AppException catch (error) {
-      return Result.error(error);
-    } on FirebaseAuthException catch (error, stackTrace) {
-      Logger.instance.e(error.message, error: error, stackTrace: stackTrace);
-
-      final l10n = ref.read(appLocalizationsProvider);
-
-      return Result.error(error.toAppException(l10n));
-    } on Exception catch (error, stackTrace) {
-      Logger.instance.e(
-        LogMessage.unhandledError,
-        error: error,
-        stackTrace: stackTrace,
-      );
-
-      return const Result.error(AppException.unknown());
-    }
-  }
+    FutureOr<T> Function() operation,
+  ) => ExceptionHandler.execute(
+    operation,
+    l10n: ref.read(appLocalizationsProvider),
+    precheck: _ensureFirebaseInitialized,
+  );
 
   /// メールリンク認証の URL が記載されたメールを送信する
   ///
@@ -116,30 +96,34 @@ class AuthRepository extends _$AuthRepository {
       throw AppException.badRequest(l10n.invalidVerificationEmailLink);
     }
 
-    final String? effectiveEmail;
     final secureStorageRepository = ref.read(
       secureStorageRepositoryProvider.notifier,
     );
 
-    if (email == null) {
-      effectiveEmail = await secureStorageRepository.read(
-        key: SecureStorageKey.email.name,
-      );
-
-      if (effectiveEmail == null) {
-        throw AppException.notFound(l10n.notFound);
-      }
-    } else {
-      effectiveEmail = email;
-      await secureStorageRepository.write(
+    if (email != null) {
+      final emailWritingResult = await secureStorageRepository.write(
         key: SecureStorageKey.email.name,
         value: email,
         label: l10n.email,
       );
+
+      emailWritingResult.whenError((appException) => throw appException);
+    }
+
+    final storedEmailReadingResult = await secureStorageRepository.read(
+      key: SecureStorageKey.email.name,
+    );
+    final storedEmail = storedEmailReadingResult.when(
+      (email) => email,
+      (appException) => throw appException,
+    );
+
+    if (storedEmail == null) {
+      throw AppException.notFound(l10n.notFound);
     }
 
     return auth.signInWithEmailLink(
-      email: effectiveEmail,
+      email: storedEmail,
       emailLink: emailLink.toString(),
     );
   });
@@ -204,7 +188,7 @@ class AuthRepository extends _$AuthRepository {
       androidPackageName: Env.instance.appId,
       handleCodeInApp: true,
       iOSBundleId: Env.instance.bundleId,
-      url: FirebaseAuthScreenRoute.emailUpdateUrl(OriginResolver.current),
+      url: OriginResolver.current + FirebaseAuthScreenRoute.absolutePath,
     );
 
     return auth.currentUser!.verifyBeforeUpdateEmail(

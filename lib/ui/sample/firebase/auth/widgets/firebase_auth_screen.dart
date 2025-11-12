@@ -4,11 +4,6 @@ class FirebaseAuthScreenRoute extends GoRouteData
     with $FirebaseAuthScreenRoute {
   static const path = '/auth';
   static const absolutePath = '/sample/firebase/auth';
-  static const emailUpdated = 'emailUpdated';
-
-  static String emailUpdateUrl(String origin) => Uri.parse(
-    origin + FirebaseAuthScreenRoute.absolutePath,
-  ).replace(queryParameters: {emailUpdated: true.toString()}).toString();
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
@@ -22,6 +17,7 @@ class FirebaseAuthScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
+    final firebaseAuth = ref.watch(firebaseAuthProvider);
 
     useAppBar(
       ref,
@@ -29,36 +25,42 @@ class FirebaseAuthScreen extends HookConsumerWidget {
       state: AppBarState(title: Text(l10n.firebaseAuth)),
     );
 
-    final emailUpdated = BoolParser.tryParse(
-      context
-          .routerState
-          .uri
-          .queryParameters[FirebaseAuthScreenRoute.emailUpdated]
-          .orNullString(
-            objectName:
-                'context.routerState.uri.queryParameters['
-                '${FirebaseAuthScreenRoute.emailUpdated}'
-                ']',
-          ),
-    ).orFalse();
+    final secureStorageRepository = ref.watch(
+      secureStorageRepositoryProvider.notifier,
+    );
+    final currentEmail = firebaseAuth.currentUser?.email;
 
     useEffect(
       () {
-        if (emailUpdated) {
-          Future.microtask(
-            () => AppMessenger.showMaterialBanner(
-              MaterialBanner(
-                content: Text(l10n.updateEmailSuccessfully),
-                leading: const Icon(Icons.check_circle_outline_outlined),
-                actions: const [DismissMaterialBannerButton()],
-              ),
-            ),
+        Future.microtask(() async {
+          final storedEmailReadingResult = await secureStorageRepository.read(
+            key: SecureStorageKey.email.name,
           );
-        }
+
+          await storedEmailReadingResult.whenSuccess((email) async {
+            if (email != currentEmail) {
+              await secureStorageRepository.write(
+                key: SecureStorageKey.email.name,
+                value: currentEmail,
+                label: l10n.email,
+              );
+
+              AppMessenger.showMaterialBanner(
+                MaterialBanner(
+                  content: Text(l10n.updateEmailSuccessfully),
+                  leading: const Icon(
+                    Icons.check_circle_outline_outlined,
+                  ),
+                  actions: const [DismissMaterialBannerButton()],
+                ),
+              );
+            }
+          });
+        });
 
         return null;
       },
-      [emailUpdated],
+      [currentEmail],
     );
 
     return ScrollableContainer(

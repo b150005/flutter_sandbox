@@ -1,7 +1,11 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:multiple_result/multiple_result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../core/config/env/env.dart';
+import '../../../core/utils/exceptions/app_exception.dart';
+import '../../../core/utils/exceptions/exception_handler.dart';
+import '../../../core/utils/l10n/app_localizations.dart';
 
 part 'secure_storage_repository.g.dart';
 
@@ -32,7 +36,7 @@ class SecureStorageRepository extends _$SecureStorageRepository {
     ),
   );
 
-  Future<void> write({
+  Future<Result<void, AppException>> write({
     required String key,
     required String? value,
     String? label,
@@ -46,38 +50,45 @@ class SecureStorageRepository extends _$SecureStorageRepository {
     bool? shouldReturnPersistentReference,
     String? authenticationUIBehavior,
     String? accessControlSettings,
-  }) => state.write(
-    key: key,
-    value: value,
-    iOptions: state.iOptions.copyWith(
-      label: label,
-      description: description,
-      comment: comment,
-      isInvisible: isInvisible,
-      isNegative: isNegative,
-      creationDate: creationDate,
-      lastModifiedDate: lastModifiedDate,
-      resultLimit: resultLimit,
-      shouldReturnPersistentReference: shouldReturnPersistentReference,
-      authenticationUIBehavior: authenticationUIBehavior,
-      accessControlSettings: accessControlSettings,
+  }) => ExceptionHandler.execute(
+    () => state.write(
+      key: key,
+      value: value,
+      iOptions: state.iOptions.copyWith(
+        label: label,
+        description: description,
+        comment: comment,
+        isInvisible: isInvisible,
+        isNegative: isNegative,
+        creationDate: creationDate,
+        lastModifiedDate: lastModifiedDate,
+        resultLimit: resultLimit,
+        shouldReturnPersistentReference: shouldReturnPersistentReference,
+        authenticationUIBehavior: authenticationUIBehavior,
+        accessControlSettings: accessControlSettings,
+      ),
+      mOptions: (state.mOptions as MacOsOptions).copyWith(
+        label: label,
+        description: description,
+        comment: comment,
+        isInvisible: isInvisible,
+        isNegative: isNegative,
+        creationDate: creationDate,
+        lastModifiedDate: lastModifiedDate,
+        resultLimit: resultLimit,
+        shouldReturnPersistentReference: shouldReturnPersistentReference,
+        authenticationUIBehavior: authenticationUIBehavior,
+        accessControlSettings: accessControlSettings,
+      ),
     ),
-    mOptions: (state.mOptions as MacOsOptions).copyWith(
-      label: label,
-      description: description,
-      comment: comment,
-      isInvisible: isInvisible,
-      isNegative: isNegative,
-      creationDate: creationDate,
-      lastModifiedDate: lastModifiedDate,
-      resultLimit: resultLimit,
-      shouldReturnPersistentReference: shouldReturnPersistentReference,
-      authenticationUIBehavior: authenticationUIBehavior,
-      accessControlSettings: accessControlSettings,
-    ),
+    l10n: ref.read(appLocalizationsProvider),
   );
 
-  Future<String?> read({required String key}) => state.read(key: key);
+  Future<Result<String?, AppException>> read({required String key}) =>
+      ExceptionHandler.execute(
+        () => state.read(key: key),
+        l10n: ref.read(appLocalizationsProvider),
+      );
 }
 
 enum SecureStorageKey { email }

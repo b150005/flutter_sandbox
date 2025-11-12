@@ -83,7 +83,7 @@ class VerifyEmailScreen extends HookConsumerWidget {
               onDismiss: () => errorMessage.value = null,
             ),
             EmailInputForm(
-              onSubmit: (email) => authRepository.signInWithEmailLink(
+              submitAction: (email) => authRepository.signInWithEmailLink(
                 email: email,
                 emailLink: emailLink,
               ),
