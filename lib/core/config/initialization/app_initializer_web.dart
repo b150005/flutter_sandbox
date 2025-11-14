@@ -8,6 +8,8 @@ final class AppInitializerImpl extends AppInitializerProtocol {
   Future<void> initialize() async {
     WidgetsFlutterBinding.ensureInitialized();
 
+    super.initializeErrorHandlers();
+
     usePathUrlStrategy();
 
     await super.initializeFirebaseApp();

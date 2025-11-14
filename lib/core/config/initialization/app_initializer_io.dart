@@ -10,6 +10,8 @@ final class AppInitializerImpl extends AppInitializerProtocol {
   Future<void> initialize() async {
     WidgetsFlutterBinding.ensureInitialized();
 
+    super.initializeErrorHandlers();
+
     await super.initializeFirebaseApp();
 
     if (PackageCapability.supportsWindowManager) {

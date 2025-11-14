@@ -59,72 +59,7 @@ abstract class AppInitializerProtocol {
     );
 
     if (kDebugModeInDev) {
-      Logger.instance.d(
-        '🚀 Starting Firebase Local Emulator Suite connection ...',
-      );
-
-      try {
-        const host = 'localhost';
-
-        if (PackageCapability.supportsDataConnect) {
-          FirebaseDataConnect.instance.dataConnect.useDataConnectEmulator(
-            host,
-            _Firebase.dataConnect.port,
-          );
-        }
-
-        await FirebaseAuth.instance.useAuthEmulator(host, _Firebase.auth.port);
-
-        if (PackageCapability.supportsCloudFunctions) {
-          FirebaseFunctions.instance.useFunctionsEmulator(
-            host,
-            _Firebase.cloudFunctions.port,
-          );
-        }
-
-        FirebaseFirestore.instance.useFirestoreEmulator(
-          host,
-          _Firebase.firestore.port,
-        );
-
-        if (PackageCapability.supportsFirebaseRealtimeDatabase) {
-          FirebaseDatabase.instance.useDatabaseEmulator(
-            host,
-            _Firebase.realtimeDatabase.port,
-          );
-        }
-
-        await FirebaseStorage.instance.useStorageEmulator(
-          host,
-          _Firebase.cloudStorage.port,
-        );
-
-        Logger.instance.d(
-          '✅ Firebase Local Emulator Suite'
-          ' connections established successfully!',
-        );
-
-        _initializeErrorHandlers();
-      } on Exception catch (error, stackTrace) {
-        Logger.instance.e(
-          '❌ Firebase Local Emulator connection failed'
-          ' - Firebase local emulator suite is not available.'
-          ' Check the host and port settings in your configuration.'
-          ' Make sure your environment variables are correct.'
-          '\n\nPlease ensure that:'
-          '\n1. Firebase Local Emulator is running and accessible'
-          '\n2. The correct port is specified in firebase.json'
-          '\n3. Your firewall settings allow connections to the specified ports'
-          '\n\nIf you\'re running the app in an emulator or simulator,'
-          ' make sure the virtual device can access your host machine.',
-          error: error,
-          stackTrace: stackTrace,
-        );
-
-        throw const AppException.serviceUnavailable(
-          'Firebase Local Emulator connection failed',
-        );
-      }
+      await _initializeLocalEmulators();
 
       return;
     }
@@ -140,9 +75,76 @@ abstract class AppInitializerProtocol {
     );
   }
 
+  Future<void> _initializeLocalEmulators() async {
+    Logger.instance.d(
+      '🚀 Starting Firebase Local Emulator Suite connection ...',
+    );
+
+    try {
+      const host = 'localhost';
+
+      if (PackageCapability.supportsDataConnect) {
+        FirebaseDataConnect.instance.dataConnect.useDataConnectEmulator(
+          host,
+          _Firebase.dataConnect.port,
+        );
+      }
+
+      await FirebaseAuth.instance.useAuthEmulator(host, _Firebase.auth.port);
+
+      if (PackageCapability.supportsCloudFunctions) {
+        FirebaseFunctions.instance.useFunctionsEmulator(
+          host,
+          _Firebase.cloudFunctions.port,
+        );
+      }
+
+      FirebaseFirestore.instance.useFirestoreEmulator(
+        host,
+        _Firebase.firestore.port,
+      );
+
+      if (PackageCapability.supportsFirebaseRealtimeDatabase) {
+        FirebaseDatabase.instance.useDatabaseEmulator(
+          host,
+          _Firebase.realtimeDatabase.port,
+        );
+      }
+
+      await FirebaseStorage.instance.useStorageEmulator(
+        host,
+        _Firebase.cloudStorage.port,
+      );
+
+      Logger.instance.d(
+        '✅ Firebase Local Emulator Suite'
+        ' connections established successfully!',
+      );
+    } on Exception catch (error, stackTrace) {
+      Logger.instance.e(
+        '❌ Firebase Local Emulator connection failed'
+        ' - Firebase local emulator suite is not available.'
+        ' Check the host and port settings in your configuration.'
+        ' Make sure your environment variables are correct.'
+        '\n\nPlease ensure that:'
+        '\n1. Firebase Local Emulator is running and accessible'
+        '\n2. The correct port is specified in firebase.json'
+        '\n3. Your firewall settings allow connections to the specified ports'
+        '\n\nIf you\'re running the app in an emulator or simulator,'
+        ' make sure the virtual device can access your host machine.',
+        error: error,
+        stackTrace: stackTrace,
+      );
+
+      throw const AppException.serviceUnavailable(
+        'Firebase Local Emulator connection failed',
+      );
+    }
+  }
+
   /// @see [Configure crash handlers](https://firebase.google.com/docs/crashlytics/get-started?platform=flutter#configure-crash-handlers)
   /// @see [Handling errors in Flutter](https://docs.flutter.dev/testing/errors)
-  void _initializeErrorHandlers() {
+  void initializeErrorHandlers() {
     FlutterError.onError = (flutterErrorDetails) {
       FlutterError.presentError(flutterErrorDetails);
 
