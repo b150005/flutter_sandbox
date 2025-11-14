@@ -58,16 +58,6 @@ abstract class AppInitializerProtocol {
       options: DefaultFirebaseOptions.currentPlatform,
     );
 
-    await FirebaseAppCheck.instance.activate(
-      providerWeb: ReCaptchaV3Provider(Env.instance.recaptchaSiteKey),
-      providerAndroid: kDebugModeInDev
-          ? const AndroidDebugProvider(debugToken: 'Android Debug Provider')
-          : const AndroidPlayIntegrityProvider(),
-      providerApple: kDebugModeInDev
-          ? const AppleDebugProvider(debugToken: 'Apple Debug Provider')
-          : const AppleAppAttestWithDeviceCheckFallbackProvider(),
-    );
-
     if (kDebugModeInDev) {
       Logger.instance.d(
         '🚀 Starting Firebase Local Emulator Suite connection ...',
@@ -135,7 +125,19 @@ abstract class AppInitializerProtocol {
           'Firebase Local Emulator connection failed',
         );
       }
+
+      return;
     }
+
+    await FirebaseAppCheck.instance.activate(
+      providerWeb: ReCaptchaV3Provider(Env.instance.recaptchaSiteKey),
+      providerAndroid: kDebugMode
+          ? const AndroidDebugProvider(debugToken: 'Android Debug Provider')
+          : const AndroidPlayIntegrityProvider(),
+      providerApple: kDebugMode
+          ? const AppleDebugProvider(debugToken: 'Apple Debug Provider')
+          : const AppleAppAttestWithDeviceCheckFallbackProvider(),
+    );
   }
 
   /// @see [Configure crash handlers](https://firebase.google.com/docs/crashlytics/get-started?platform=flutter#configure-crash-handlers)
