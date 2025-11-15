@@ -52,9 +52,11 @@ class EmailEditDialog extends HookConsumerWidget {
     final currentUser = firebaseAuth.currentUser;
 
     if (currentUser == null) {
-      return AlertDialog(
-        title: Text(l10n.error),
-        content: Text(l10n.authenticationRequired),
+      return SelectionArea(
+        child: AlertDialog(
+          title: Text(l10n.error),
+          content: Text(l10n.authenticationRequired),
+        ),
       );
     }
 
@@ -97,52 +99,54 @@ class EmailEditDialog extends HookConsumerWidget {
       }, l10n: l10n).whenComplete(() => isLoading.value = false);
     }
 
-    return AlertDialog(
-      icon: const Icon(Icons.email_outlined),
-      title: Text(l10n.editEmail),
-      content: Form(
-        key: WidgetKeys.emailEditForm,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: Spacing.sm.dp,
-          children: [
-            if (errorMessage.value.isNotNullAndNotEmpty)
-              Callout(
-                errorMessage.value!,
-                type: CalloutType.error,
-              ),
-            Label(
-              l10n.currentEmail,
-              child: Text(
-                currentUser.email.orNullString(
-                  objectName: 'currentUser.email',
+    return SelectionArea(
+      child: AlertDialog(
+        icon: const Icon(Icons.email_outlined),
+        title: Text(l10n.editEmail),
+        content: Form(
+          key: WidgetKeys.emailEditForm,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: Spacing.sm.dp,
+            children: [
+              if (errorMessage.value.isNotNullAndNotEmpty)
+                Callout(
+                  errorMessage.value!,
+                  type: CalloutType.error,
+                ),
+              Label(
+                l10n.currentEmail,
+                child: Text(
+                  currentUser.email.orNullString(
+                    objectName: 'currentUser.email',
+                  ),
                 ),
               ),
-            ),
-            EmailTextFormField(
-              labelText: l10n.newEmail,
-              controller: emailController,
-              textInputAction: TextInputAction.done,
-              onFieldSubmitted: (_) => onSubmit(),
-            ),
-          ],
+              EmailTextFormField(
+                labelText: l10n.newEmail,
+                controller: emailController,
+                textInputAction: TextInputAction.done,
+                onFieldSubmitted: (_) => onSubmit(),
+              ),
+            ],
+          ),
         ),
+        actions: [
+          TextButton(
+            onPressed: isLoading.value
+                ? null
+                : () => context.rootNavigator.safePop(),
+            child: Text(l10n.cancel),
+          ),
+          FilledButton(
+            onPressed: isLoading.value ? null : onSubmit,
+            child: isLoading.value
+                ? context.loadingIndicator
+                : Text(l10n.sendVerificationEmail),
+          ),
+        ],
       ),
-      actions: [
-        TextButton(
-          onPressed: isLoading.value
-              ? null
-              : () => context.rootNavigator.safePop(),
-          child: Text(l10n.cancel),
-        ),
-        FilledButton(
-          onPressed: isLoading.value ? null : onSubmit,
-          child: isLoading.value
-              ? context.loadingIndicator
-              : Text(l10n.sendVerificationEmail),
-        ),
-      ],
     );
   }
 }
