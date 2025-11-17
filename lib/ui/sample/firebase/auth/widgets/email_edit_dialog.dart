@@ -101,6 +101,7 @@ class EmailEditDialog extends HookConsumerWidget {
 
     return SelectionArea(
       child: AlertDialog(
+        key: key,
         icon: const Icon(Icons.email_outlined),
         title: Text(l10n.editEmail),
         content: Form(
