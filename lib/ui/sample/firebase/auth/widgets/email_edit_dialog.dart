@@ -20,6 +20,7 @@ import '../../../../core/ui/label.dart';
 import '../../../../core/ui/utils/app_messenger.dart';
 import '../../../../core/ui/utils/preview/preview_mock_data.dart';
 import '../../../../core/ui/utils/preview/wrapper.dart';
+import 'auth_required_dialog.dart';
 
 @Preview(name: 'Email Edit Dialog', wrapper: wrapper)
 Widget emailEditDialog() => Builder(
@@ -52,12 +53,7 @@ class EmailEditDialog extends HookConsumerWidget {
     final currentUser = firebaseAuth.currentUser;
 
     if (currentUser == null) {
-      return SelectionArea(
-        child: AlertDialog(
-          title: Text(l10n.error),
-          content: Text(l10n.authenticationRequired),
-        ),
-      );
+      return const AuthRequiredDialog();
     }
 
     final emailController = useTextEditingController();
