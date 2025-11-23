@@ -15,8 +15,9 @@ import '../../../../core/utils/l10n/app_localizations.dart';
 import '../../extensions/build_context.dart';
 import '../callout.dart';
 import '../email_text_form_field.dart';
+import '../utils/preview/wrapper.dart';
 
-@Preview(name: 'Email Input Form')
+@Preview(name: 'Email Input Form', wrapper: wrapper)
 Widget emailInputForm() => ProviderScope(
   child: EmailInputForm<void>(
     submitAction: (email) async => const Result.success(null),

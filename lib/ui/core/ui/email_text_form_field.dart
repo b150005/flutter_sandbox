@@ -8,8 +8,9 @@ import '../../../core/utils/authentications/firebase_auth_validator.dart';
 import '../../../core/utils/l10n/app_localizations.dart';
 import '../extensions/build_context.dart';
 import 'label.dart';
+import 'utils/preview/wrapper.dart';
 
-@Preview(name: 'EmailTextFormField')
+@Preview(name: 'EmailTextFormField', wrapper: wrapper)
 Widget emailTextFormField() => const ProviderScope(child: EmailTextFormField());
 
 @immutable
