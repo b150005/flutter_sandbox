@@ -3,11 +3,14 @@ import 'package:flutter/widget_previews.dart';
 
 import '../../../core/config/constants/spacing.dart';
 import '../extensions/build_context.dart';
+import 'utils/preview/wrapper.dart';
 
-@Preview(name: 'Label')
-Widget label() => const Label(
-  'label',
-  child: Text('Child'),
+@Preview(name: 'Label', wrapper: wrapper)
+Widget label() => Builder(
+  builder: (context) => Label(
+    'label',
+    child: Text('Child', style: context.textTheme.bodyMedium),
+  ),
 );
 
 class Label extends StatelessWidget {
@@ -18,6 +21,7 @@ class Label extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(
+    mainAxisSize: MainAxisSize.min,
     crossAxisAlignment: CrossAxisAlignment.start,
     spacing: Spacing.xxs.dp,
     children: [
