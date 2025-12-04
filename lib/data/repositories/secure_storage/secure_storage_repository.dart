@@ -49,7 +49,7 @@ class SecureStorageRepository extends _$SecureStorageRepository {
     int? resultLimit,
     bool? shouldReturnPersistentReference,
     String? authenticationUIBehavior,
-    String? accessControlSettings,
+    List<AccessControlFlag>? accessControlFlags,
   }) => ExceptionHandler.execute(
     () => state.write(
       key: key,
@@ -65,7 +65,7 @@ class SecureStorageRepository extends _$SecureStorageRepository {
         resultLimit: resultLimit,
         shouldReturnPersistentReference: shouldReturnPersistentReference,
         authenticationUIBehavior: authenticationUIBehavior,
-        accessControlSettings: accessControlSettings,
+        accessControlFlags: accessControlFlags,
       ),
       mOptions: (state.mOptions as MacOsOptions).copyWith(
         label: label,
@@ -78,7 +78,7 @@ class SecureStorageRepository extends _$SecureStorageRepository {
         resultLimit: resultLimit,
         shouldReturnPersistentReference: shouldReturnPersistentReference,
         authenticationUIBehavior: authenticationUIBehavior,
-        accessControlSettings: accessControlSettings,
+        accessControlFlags: accessControlFlags,
       ),
     ),
     l10n: ref.read(appLocalizationsProvider),
@@ -109,7 +109,7 @@ extension IOSOptionsExtension on IOSOptions {
     int? resultLimit,
     bool? shouldReturnPersistentReference,
     String? authenticationUIBehavior,
-    String? accessControlSettings,
+    List<AccessControlFlag>? accessControlFlags,
   }) => IOSOptions(
     accountName: accountName ?? this.accountName,
     groupId: groupId ?? this.groupId,
@@ -127,7 +127,7 @@ extension IOSOptionsExtension on IOSOptions {
         shouldReturnPersistentReference ?? this.shouldReturnPersistentReference,
     authenticationUIBehavior:
         authenticationUIBehavior ?? this.authenticationUIBehavior,
-    accessControlSettings: accessControlSettings ?? this.accessControlSettings,
+    accessControlFlags: accessControlFlags ?? this.accessControlFlags,
   );
 }
 
@@ -147,7 +147,7 @@ extension MacOsOptionsExtension on MacOsOptions {
     int? resultLimit,
     bool? shouldReturnPersistentReference,
     String? authenticationUIBehavior,
-    String? accessControlSettings,
+    List<AccessControlFlag>? accessControlFlags,
     bool? usesDataProtectionKeychain,
   }) => MacOsOptions(
     accountName: accountName ?? this.accountName,
@@ -166,7 +166,7 @@ extension MacOsOptionsExtension on MacOsOptions {
         shouldReturnPersistentReference ?? this.shouldReturnPersistentReference,
     authenticationUIBehavior:
         authenticationUIBehavior ?? this.authenticationUIBehavior,
-    accessControlSettings: accessControlSettings ?? this.accessControlSettings,
+    accessControlFlags: accessControlFlags ?? this.accessControlFlags,
     usesDataProtectionKeychain:
         usesDataProtectionKeychain ?? this.usesDataProtectionKeychain,
   );
