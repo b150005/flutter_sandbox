@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/config/constants/assets.dart';
 import '../../../core/config/constants/spacing.dart';
-import '../../../core/config/env/env.dart';
 import '../../../core/utils/extensions/string.dart';
 import '../../../domain/models/content.dart';
 import '../../core/extensions/build_context.dart';
@@ -30,26 +29,20 @@ class ContentCard extends StatelessWidget {
   Widget build(BuildContext context) => Card.outlined(
     clipBehavior: Clip.antiAlias,
     child: InkWell(
-      onTap: kPreviewMode ? () {} : () => context.go(content.path),
+      onTap: () => context.go(content.path),
       child: Column(
         children: [
           Flexible(
-            child: kPreviewMode
-                ? Image.network(
-                    'https://picsum.photos/200',
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                  )
-                : Image.asset(
-                    content.thumbnailPath ?? Assets.flutterIcon.path,
-                    errorBuilder: (context, error, stackTrace) => Image.asset(
-                      Assets.flutterIcon.path,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                    ),
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                  ),
+            child: Image.asset(
+              content.thumbnailPath ?? Assets.flutterIcon.path,
+              errorBuilder: (context, error, stackTrace) => Image.asset(
+                Assets.flutterIcon.path,
+                fit: BoxFit.cover,
+                width: double.infinity,
+              ),
+              fit: BoxFit.cover,
+              width: double.infinity,
+            ),
           ),
           Padding(
             padding: EdgeInsets.all(Spacing.sm.dp),
