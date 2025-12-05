@@ -8,8 +8,9 @@ import '../../../core/config/env/env.dart';
 import '../../../core/utils/extensions/string.dart';
 import '../../../domain/models/content.dart';
 import '../../core/extensions/build_context.dart';
+import '../../core/ui/utils/preview/wrapper.dart';
 
-@Preview(name: 'Content Card', size: Size(200, 200))
+@Preview(name: 'Content Card', size: Size(200, 200), wrapper: wrapper)
 Widget contentCard() => const ContentCard(
   content: Content(
     path: 'sample',
