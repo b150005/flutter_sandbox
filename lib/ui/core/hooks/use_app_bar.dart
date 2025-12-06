@@ -10,16 +10,15 @@ void useAppBar(
   required AppBarState state,
 }) {
   final context = ref.context;
-
-  final isActiveRoute = context.isAt(path);
+  final currentAppBarState = ref.watch(appBarStateProvider);
 
   useEffect(() {
-    if (isActiveRoute) {
+    if (context.isAt(path)) {
       Future.microtask(
         () => ref.read(appBarStateProvider.notifier).update(state),
       );
     }
 
     return null;
-  }, [isActiveRoute]);
+  }, [context.currentPath, currentAppBarState == null]);
 }
