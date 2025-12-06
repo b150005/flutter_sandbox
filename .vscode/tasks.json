@@ -5,6 +5,22 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "update-packages",
+      "type": "shell",
+      "command": "bun",
+      "args": [
+        "update"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/firebase/functions"
+      },
+      "presentation": {
+        "showReuseMessage": false,
+        "clear": true,
+        "close": false
+      }
+    },
+    {
       "label": "compile-cloud-functions",
       "type": "shell",
       "command": "bun",
@@ -19,7 +35,11 @@
         "showReuseMessage": false,
         "clear": true,
         "close": true
-      }
+      },
+      "dependsOn": [
+        "update-packages"
+      ],
+      "dependsOrder": "sequence"
     },
     {
       "label": "run-build-runner",
