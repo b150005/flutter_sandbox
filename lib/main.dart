@@ -47,7 +47,12 @@ class App extends ConsumerWidget {
         GlobalWidgetsLocalizations.delegate,
       ];
 
-  static const supportedLocales = [Locale('en', 'US'), Locale('ja', 'JP')];
+  static const defaultLocale = Locale('en', 'US');
+
+  static const List<Locale> supportedLocales = [
+    defaultLocale,
+    Locale('ja', 'JP'),
+  ];
 
   static const breakpoints = [
     Breakpoint(start: 0, end: 767, name: MOBILE),

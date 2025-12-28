@@ -1,3 +1,5 @@
+import 'package:dlibphonenumber/dlibphonenumber.dart';
+
 import '../../config/constants/regexes.dart';
 import '../../config/l10n/app_localizations.dart';
 import '../extensions/string.dart';
@@ -50,6 +52,27 @@ abstract final class FirebaseAuthValidator {
         !hasLowercase(password) ||
         !hasDigit(password)) {
       return l10n.nonCompliantPassword;
+    }
+
+    return null;
+  }
+
+  /// 電話番号の有効性を判定する
+  ///
+  /// [phoneNumber] E.164 形式の電話番号(例: +23324123456)
+  /// [l10n] ロケールごとのメッセージを保持するローカライゼーション
+  static String? validatePhoneNumber(
+    String? phoneNumber, {
+    required AppLocalizations l10n,
+  }) {
+    if (phoneNumber.isNullOrEmpty) {
+      return null;
+    }
+
+    final number = PhoneNumberUtil.instance.parse(phoneNumber, null);
+
+    if (!PhoneNumberUtil.instance.isValidNumber(number)) {
+      return l10n.invalidPhoneNumberFormat;
     }
 
     return null;

@@ -8,4 +8,8 @@ abstract final class TextInputFormatters {
   static final noWhitespace = FilteringTextInputFormatter.deny(
     Regexes.whitespace.regExp,
   );
+
+  static final phoneNumber = FilteringTextInputFormatter.allow(
+    Regexes.phoneNumberCharacter.regExp,
+  );
 }

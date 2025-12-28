@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widget_previews.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:sealed_countries/sealed_countries.dart';
 
 import '../../../core/config/constants/border_radii.dart';
 import '../../../core/config/constants/spacing.dart';
-import '../../../core/utils/extensions/nullable.dart';
-import '../../../main.dart';
 import '../themes/extensions/status_colors.dart';
 import '../ui/utils/preview/wrapper.dart';
 import 'theme_data.dart';
@@ -280,6 +277,12 @@ extension BreakpointExtension on BuildContext {
 }
 
 extension WidgetExtension on BuildContext {
+  @Deprecated(
+    'Use skeleton loading UI instead of loading indicators for better UX.'
+    ' Skeleton screens preserve layout structure and provide visual context'
+    ' during loading. For button loading states, disable the button instead of'
+    ' showing an indicator. This getter will be removed in a future version.',
+  )
   CircularProgressIndicator get loadingIndicator =>
       CircularProgressIndicator.adaptive(
         backgroundColor: colorScheme.onPrimary,
@@ -302,22 +305,10 @@ extension NavigatorExtension on BuildContext {
   NavigatorState get rootNavigator => Navigator.of(this, rootNavigator: true);
 }
 
-extension LocalizationExtension on BuildContext {
-  Locale get locale => Localizations.maybeLocaleOf(this).orElse(
-    App.defaultLocale,
-    objectName: 'Localizations.maybeLocaleOf(this)',
-  );
+extension MaterialLocalizationsExtension on BuildContext {
+  MaterialLocalizations get materialLocalizations =>
+      MaterialLocalizations.of(this);
 
-  String get countryCode => locale.countryCode.orElse(
-    App.defaultLocale.countryCode!,
-    objectName: 'locale.countryCode',
-  );
-
-  String get languageCode => locale.languageCode;
-}
-
-extension TypedLocaleExtension on BuildContext {
-  NaturalLanguage get language => NaturalLanguage.fromAnyCode(languageCode);
-
-  BasicTypedLocale get basicTypedLocale => BasicTypedLocale(language);
+  String get modalBarrierDismissLabel =>
+      materialLocalizations.modalBarrierDismissLabel;
 }

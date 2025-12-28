@@ -36,6 +36,10 @@
 	"@invalidEmailFormat": {
 		"description": "メールアドレスの形式が無効な場合に表示される検証メッセージ"
 	},
+	"invalidPhoneNumberFormat": "有効な電話番号を入力してください。",
+	"@invalidPhoneNumberFormat": {
+		"description": "電話番号の形式が無効な場合に表示される検証メッセージ"
+	},
 	"registeredEmail": "このメールアドレスは既に登録されています。別のメールアドレスを使用するか、サインインしてください。",
 	"@registeredEmail": {
 		"description": "サインアップ時にメールアドレスが既存のアカウントに関連付けられている場合に表示されるメッセージ"
@@ -172,6 +176,12 @@
 	"@newPhoneNumber": {},
 	"sendVerificationEmail": "認証メールを送信",
 	"@sendVerificationEmail": {},
+	"dialCodePickerSearchHint": "国名または国番号で検索 (例: 日本, +81)",
+	"@dialCodePickerSearchHint": {
+		"description": "DialCodePicker の検索フィールドで表示するヒント"
+	},
+	"sendVerificationCode": "認証コードを送信",
+	"@sendVerificationCode": {},
 	"cancel": "キャンセル",
 	"@cancel": {},
 	"firebaseSignIn": "Firebase サインイン",

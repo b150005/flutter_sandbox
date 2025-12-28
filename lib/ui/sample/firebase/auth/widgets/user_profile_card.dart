@@ -1,5 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widget_previews.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -11,26 +11,13 @@ import '../../../../../core/utils/extensions/string.dart';
 import '../../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../../core/utils/logging/log_message.dart';
 import '../../../../../core/utils/logging/logger.dart';
-import '../../../../../data/repositories/firebase/auth/auth_repository.dart';
 import '../../../../core/extensions/build_context.dart';
 import '../../../../core/ui/callout.dart';
 import '../../../../core/ui/label.dart';
 import '../../../../core/ui/pill.dart';
 import '../../../../core/ui/property_table.dart';
-import '../../../../core/ui/utils/preview/preview_mock_data.dart';
-import '../../../../core/ui/utils/preview/wrapper.dart';
 import 'email_edit_dialog.dart';
-
-@Preview(name: 'User Profile Card', wrapper: wrapper)
-Widget userProfileCard() => ProviderScope(
-  overrides: [
-    // ignore: scoped_providers_should_specify_dependencies
-    firebaseAuthProvider.overrideWith(
-      (_) => PreviewMockData.mockFirebaseAuth,
-    ),
-  ],
-  child: const UserProfileCard(),
-);
+import 'phone_number_edit_dialog.dart';
 
 // TODO(b150005): バリデーションチェック, 変更処理
 // email, password: EmailAuthProvider.credential
@@ -41,21 +28,13 @@ Widget userProfileCard() => ProviderScope(
 // 上記以外: updateProfile
 @immutable
 class UserProfileCard extends HookConsumerWidget {
-  const UserProfileCard({super.key});
+  const UserProfileCard({super.key, required this.user});
+
+  final User user;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final firebaseAuth = ref.watch(firebaseAuthProvider);
-    final currentUser = firebaseAuth.currentUser;
-
     final l10n = ref.watch(appLocalizationsProvider);
-
-    if (currentUser == null) {
-      return Callout(
-        l10n.notFound,
-        type: CalloutType.error,
-      );
-    }
 
     final errorMessage = useState<String?>(null);
 
@@ -77,7 +56,7 @@ class UserProfileCard extends HookConsumerWidget {
               spacing: Spacing.md.dp,
               runSpacing: Spacing.sm.dp,
               children: [
-                currentUser.photoURL.isNullOrEmpty
+                user.photoURL.isNullOrEmpty
                     ? ClipOval(
                         child: ColoredBox(
                           color: context.colorScheme.primaryContainer,
@@ -93,12 +72,12 @@ class UserProfileCard extends HookConsumerWidget {
                     : CircleAvatar(
                         key: WidgetKeys.avatar,
                         backgroundImage: NetworkImage(
-                          currentUser.photoURL!,
+                          user.photoURL!,
                         ),
                         onBackgroundImageError: (exception, stackTrace) =>
                             Logger.instance.e(
                               LogMessage.failedToFetch(
-                                Uri(path: currentUser.photoURL),
+                                Uri(path: user.photoURL),
                               ),
                               error: exception,
                               stackTrace: stackTrace,
@@ -110,15 +89,15 @@ class UserProfileCard extends HookConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: Spacing.xxs.dp,
                   children: [
-                    if (currentUser.displayName.isNotNullAndNotEmpty)
+                    if (user.displayName.isNotNullAndNotEmpty)
                       Text(
                         key: WidgetKeys.displayName,
-                        currentUser.displayName!,
+                        user.displayName!,
                         style: context.textTheme.headlineSmall,
                       ),
                     Text(
                       key: WidgetKeys.uid,
-                      '@${currentUser.uid}',
+                      '@${user.uid}',
                       style: context.supportTextStyle,
                     ),
                     Wrap(
@@ -127,15 +106,15 @@ class UserProfileCard extends HookConsumerWidget {
                       children: [
                         Pill(
                           key: WidgetKeys.emailVerified,
-                          text: currentUser.emailVerified
+                          text: user.emailVerified
                               ? l10n.emailVerified
                               : l10n.emailUnverified,
-                          iconData: currentUser.emailVerified
+                          iconData: user.emailVerified
                               ? Icons.verified_outlined
                               : Icons.warning_amber_outlined,
                           pillSize: PillSize.small,
                         ),
-                        if (currentUser.isAnonymous)
+                        if (user.isAnonymous)
                           Pill(
                             key: WidgetKeys.isAnonymous,
                             text: l10n.anonymousUser,
@@ -153,15 +132,15 @@ class UserProfileCard extends HookConsumerWidget {
                 PropertyTableCellData(
                   key: WidgetKeys.email,
                   label: l10n.email,
-                  value: currentUser.email.orNullString(
-                    objectName: 'currentUser.email',
+                  value: user.email.orNullString(
+                    objectName: 'user.email',
                   ),
                   suffix: SelectionContainer.disabled(
                     child: TextButton(
                       key: WidgetKeys.editEmail,
                       onPressed: () => showAdaptiveDialog<void>(
                         context: context,
-                        builder: (context) => const EmailEditDialog(),
+                        builder: (context) => EmailEditDialog(user: user),
                       ),
                       child: Text(l10n.edit),
                     ),
@@ -170,13 +149,16 @@ class UserProfileCard extends HookConsumerWidget {
                 PropertyTableCellData(
                   key: WidgetKeys.phoneNumber,
                   label: l10n.phoneNumber,
-                  value: currentUser.phoneNumber.orNullString(
-                    objectName: 'currentUser.phoneNumber',
+                  value: user.phoneNumber.orNullString(
+                    objectName: 'user.phoneNumber',
                   ),
                   suffix: SelectionContainer.disabled(
                     child: TextButton(
                       key: WidgetKeys.editPhoneNumber,
-                      onPressed: () {},
+                      onPressed: () => showAdaptiveDialog<void>(
+                        context: context,
+                        builder: (context) => PhoneNumberEditDialog(user: user),
+                      ),
                       child: Text(l10n.edit),
                     ),
                   ),
@@ -190,8 +172,8 @@ class UserProfileCard extends HookConsumerWidget {
                 key: WidgetKeys.photoURL,
                 l10n.photoURL,
                 child: Text(
-                  currentUser.photoURL.orNullString(
-                    objectName: 'currentUser.photoURL',
+                  user.photoURL.orNullString(
+                    objectName: 'user.photoURL',
                   ),
                   key: WidgetKeys.photoURL,
                   style: context.textTheme.bodyMedium,

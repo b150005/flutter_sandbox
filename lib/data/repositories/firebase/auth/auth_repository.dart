@@ -18,7 +18,7 @@ part 'auth_repository.g.dart';
 @Riverpod(keepAlive: true)
 FirebaseAuth firebaseAuth(Ref ref) => FirebaseAuth.instance;
 
-@riverpod
+@Riverpod(keepAlive: true)
 class AuthRepository extends _$AuthRepository {
   /// Firebase Authentication の認証状態を取得する
   ///
@@ -144,6 +144,20 @@ class AuthRepository extends _$AuthRepository {
     return auth.currentUser!.updatePassword(password);
   });
 
+  /// 電話番号を更新する
+  Future<Result<void, AppException>> updatePhoneNumber({
+    required PhoneAuthCredential phoneCredential,
+  }) => _executeWithFirebaseAuth(() {
+    final auth = ref.read(firebaseAuthProvider);
+    final l10n = ref.read(appLocalizationsProvider);
+
+    if (auth.currentUser == null) {
+      throw AppException.unauthorized(l10n.authenticationFailed);
+    }
+
+    return auth.currentUser!.updatePhoneNumber(phoneCredential);
+  });
+
   /// メールアドレスとパスワードを用いてサインインを行う
   ///
   /// @see [Sign in a user with an email address and password](https://firebase.google.com/docs/auth/flutter/password-auth#sign_in_a_user_with_an_email_address_and_password)
@@ -194,6 +208,45 @@ class AuthRepository extends _$AuthRepository {
     return auth.currentUser!.verifyBeforeUpdateEmail(
       email,
       actionCodeSettings,
+    );
+  });
+
+  /// 電話番号の認証コードを送信する
+  Future<Result<void, AppException>> verifyPhoneNumber({
+    required String phoneNumber,
+    required void Function(Result<void, AppException> result)
+    onPhoneNumberUpdated,
+    required void Function(AppException appException) onVerificationFailed,
+    required void Function(String verificationId, int? forceResendingToken)
+    onCodeSent,
+    required void Function(String verificationId) onAutoRetrievalTimeout,
+  }) => _executeWithFirebaseAuth(() {
+    final auth = ref.read(firebaseAuthProvider);
+    final l10n = ref.read(appLocalizationsProvider);
+
+    if (auth.currentUser == null) {
+      throw AppException.unauthorized(l10n.authenticationRequired);
+    }
+
+    return auth.verifyPhoneNumber(
+      phoneNumber: phoneNumber,
+      verificationCompleted: (phoneCredential) async {
+        final updateResult = await updatePhoneNumber(
+          phoneCredential: phoneCredential,
+        );
+
+        onPhoneNumberUpdated(updateResult);
+      },
+      verificationFailed: (firebaseAuthException) async {
+        final result = await ExceptionHandler.execute(
+          () => throw firebaseAuthException,
+          l10n: l10n,
+        );
+
+        result.whenError(onVerificationFailed);
+      },
+      codeSent: onCodeSent,
+      codeAutoRetrievalTimeout: onAutoRetrievalTimeout,
     );
   });
 

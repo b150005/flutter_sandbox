@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widget_previews.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -12,43 +11,21 @@ import '../../../../../core/utils/extensions/string.dart';
 import '../../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../../core/utils/logging/log_message.dart';
 import '../../../../../core/utils/logging/logger.dart';
-import '../../../../../data/repositories/firebase/auth/auth_repository.dart';
 import '../../../../core/extensions/build_context.dart';
 import '../../../../core/ui/callout.dart';
-import '../../../../core/ui/error_retry.dart';
 import '../../../../core/ui/label.dart';
 import '../../../../core/ui/property_table.dart';
-import '../../../../core/ui/utils/preview/preview_mock_data.dart';
-import '../../../../core/ui/utils/preview/wrapper.dart';
-
-@Preview(name: 'User Auth Detail Card', wrapper: wrapper)
-Widget userAuthDetailCard() => ProviderScope(
-  overrides: [
-    // ignore: scoped_providers_should_specify_dependencies
-    firebaseAuthProvider.overrideWith(
-      (_) => PreviewMockData.mockFirebaseAuth,
-    ),
-  ],
-  child: const UserAuthDetailCard(),
-);
+import '../../../../core/ui/retry_button.dart';
 
 @immutable
 class UserAuthDetailCard extends HookConsumerWidget {
-  const UserAuthDetailCard({super.key});
+  const UserAuthDetailCard({super.key, required this.user});
+
+  final User user;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final firebaseAuth = ref.watch(firebaseAuthProvider);
-    final currentUser = firebaseAuth.currentUser;
-
     final l10n = ref.watch(appLocalizationsProvider);
-
-    if (currentUser == null) {
-      return Callout(
-        l10n.notFound,
-        type: CalloutType.error,
-      );
-    }
 
     final errorMessage = useState<String?>(null);
 
@@ -71,45 +48,44 @@ class UserAuthDetailCard extends HookConsumerWidget {
                 key: WidgetKeys.refreshToken,
                 l10n.refreshToken,
                 child: Text(
-                  currentUser.refreshToken.orNullString(
-                    objectName: 'currentUser.refreshToken',
+                  user.refreshToken.orNullString(
+                    objectName: 'user.refreshToken',
                   ),
                 ),
               ),
             ),
-            // TODO(b150005): firebase_auth_mocks パッケージの対応待ち
-            // Align(
-            //   alignment: AlignmentGeometry.centerLeft,
-            //   child: Label(
-            //     key: WidgetKeys.tenantId,
-            //     l10n.tenantId,
-            //     child: Text(
-            //       currentUser.tenantId.orNullString(
-            //         objectName: 'currentUser.tenantId',
-            //       ),
-            //     ),
-            //   ),
-            // ),
+            Align(
+              alignment: AlignmentGeometry.centerLeft,
+              child: Label(
+                key: WidgetKeys.tenantId,
+                l10n.tenantId,
+                child: Text(
+                  user.tenantId.orNullString(
+                    objectName: 'user.tenantId',
+                  ),
+                ),
+              ),
+            ),
             PropertyTable(
               cellData: [
                 PropertyTableCellData(
                   key: WidgetKeys.creationTime,
                   label: l10n.createdAt,
-                  value: currentUser.metadata.creationTime.orNullString(
-                    objectName: 'currentUser.metadata.creationTime',
+                  value: user.metadata.creationTime.orNullString(
+                    objectName: 'user.metadata.creationTime',
                   ),
                 ),
                 PropertyTableCellData(
                   key: WidgetKeys.lastSignInTime,
                   label: l10n.lastSignInAt,
-                  value: currentUser.metadata.lastSignInTime.orNullString(
-                    objectName: 'currentUser.metadata.creationTime',
+                  value: user.metadata.lastSignInTime.orNullString(
+                    objectName: 'user.metadata.creationTime',
                   ),
                 ),
               ],
               columnCount: 2,
             ),
-            ...currentUser.providerData.map(
+            ...user.providerData.map(
               (userInfo) => Card.outlined(
                 child: Padding(
                   padding: EdgeInsets.all(Spacing.sm.dp),
@@ -162,7 +138,7 @@ class UserAuthDetailCard extends HookConsumerWidget {
               ),
             ),
             _IdTokenResultTable(
-              user: currentUser,
+              user: user,
             ),
           ],
         ),
@@ -197,7 +173,7 @@ class _IdTokenResultTable extends HookConsumerWidget {
           stackTrace: stackTrace,
         );
 
-        return ErrorRetry(
+        return RetryButton(
           onPressed: () => retriedAt.value = DateTime.now(),
         );
       },

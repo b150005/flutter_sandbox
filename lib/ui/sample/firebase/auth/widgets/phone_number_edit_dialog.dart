@@ -10,18 +10,16 @@ import '../../../../../core/utils/extensions/bool.dart';
 import '../../../../../core/utils/extensions/nullable.dart';
 import '../../../../../core/utils/extensions/string.dart';
 import '../../../../../core/utils/l10n/app_localizations.dart';
-import '../../../../../data/repositories/firebase/auth/auth_repository.dart';
 import '../../../../core/extensions/build_context.dart';
 import '../../../../core/extensions/navigator_state.dart';
+import '../../../../core/ui/auth/dial_code_picker.dart';
 import '../../../../core/ui/callout.dart';
-import '../../../../core/ui/dismiss_material_banner_button.dart';
-import '../../../../core/ui/email_text_form_field.dart';
 import '../../../../core/ui/label.dart';
-import '../../../../core/ui/utils/app_messenger.dart';
+import '../../../../core/ui/phone_number_form_field.dart';
 
 @immutable
-class EmailEditDialog extends HookConsumerWidget {
-  const EmailEditDialog({super.key, required this.user});
+class PhoneNumberEditDialog extends HookConsumerWidget {
+  const PhoneNumberEditDialog({super.key, required this.user});
 
   final User user;
 
@@ -29,53 +27,38 @@ class EmailEditDialog extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
 
-    final emailController = useTextEditingController()
-      ..text = user.email.orElse('', objectName: 'user.email');
+    final dialCode = useState<String?>(null);
+    final controller = useTextEditingController()
+      ..text = user.phoneNumber.orElse('', objectName: 'user.phoneNumber');
 
     final isLoading = useState<bool>(false);
     final errorMessage = useState<String?>(null);
 
-    final authRepository = ref.watch(authRepositoryProvider.notifier);
-
     Future<void> onSubmit() async {
       isLoading.value = true;
 
-      if (!(WidgetKeys.emailEditForm.currentState?.validate()).orFalse(
-        objectName: 'WidgetKeys.emailEditForm.currentState',
+      if (!(WidgetKeys.phoneNumberForm.currentState?.validate()).orFalse(
+        objectName: 'WidgetKeys.phoneNumberEditForm.currentState',
       )) {
         isLoading.value = false;
         return;
       }
 
-      await ExceptionHandler.execute(() async {
-        final verificationEmailSendingResult = await authRepository
-            .verifyBeforeUpdateEmail(
-              emailController.text,
-            );
-
-        verificationEmailSendingResult.when((_) {
-          context.rootNavigator.pop();
-
-          AppMessenger.showMaterialBanner(
-            MaterialBanner(
-              content: Text(
-                l10n.sentEmailUpdateVerificationEmail,
-              ),
-              leading: const Icon(Icons.email_outlined),
-              actions: const [DismissMaterialBannerButton()],
-            ),
-          );
-        }, (appException) => errorMessage.value = appException.message);
-      }, l10n: l10n).whenComplete(() => isLoading.value = false);
+      await ExceptionHandler.execute(
+        () async => {
+          // TODO(b150005): SMS による電話番号認証の実装
+        },
+        l10n: l10n,
+      ).whenComplete(() => isLoading.value = false);
     }
 
     return SelectionArea(
       child: AlertDialog(
         key: key,
-        icon: const Icon(Icons.email_outlined),
-        title: Text(l10n.editEmail),
+        icon: const Icon(Icons.phone_outlined),
+        title: Text(l10n.editPhoneNumber),
         content: Form(
-          key: WidgetKeys.emailEditForm,
+          key: WidgetKeys.phoneNumberForm,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,18 +70,23 @@ class EmailEditDialog extends HookConsumerWidget {
                   type: CalloutType.error,
                 ),
               Label(
-                l10n.currentEmail,
+                l10n.currentPhoneNumber,
                 child: Text(
-                  user.email.orNullString(
-                    objectName: 'user.email',
+                  user.phoneNumber.orNullString(
+                    objectName: 'user.phoneNumber',
                   ),
                 ),
               ),
-              EmailTextFormField(
-                labelText: l10n.newEmail,
-                controller: emailController,
-                textInputAction: TextInputAction.done,
-                onFieldSubmitted: (_) => onSubmit(),
+              Wrap(
+                spacing: Spacing.md.dp,
+                runSpacing: Spacing.sm.dp,
+                children: [
+                  DialCodePicker(
+                    onSelected: (selectedDialCode) =>
+                        dialCode.value = selectedDialCode,
+                  ),
+                  PhoneNumberFormField(controller: controller),
+                ],
               ),
             ],
           ),
@@ -114,7 +102,7 @@ class EmailEditDialog extends HookConsumerWidget {
             onPressed: isLoading.value ? null : onSubmit,
             child: isLoading.value
                 ? context.loadingIndicator
-                : Text(l10n.sendVerificationEmail),
+                : Text(l10n.sendVerificationCode),
           ),
         ],
       ),

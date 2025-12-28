@@ -49,7 +49,7 @@ class PasswordTextFormField extends HookConsumerWidget {
     return Label(
       label,
       child: TextFormField(
-        key: WidgetKeys.password,
+        key: key ?? WidgetKeys.password,
         controller: controller,
         decoration: context.outlinedInputDecoration.copyWith(
           hintText: label,

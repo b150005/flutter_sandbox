@@ -14,7 +14,7 @@ abstract final class WidgetKeys {
     'emailVerificationForm',
   );
   static final emailEditForm = LabeledGlobalKey<FormState>('emailEditForm');
-  static final phoneNumberEditForm = LabeledGlobalKey<FormState>(
+  static final phoneNumberForm = LabeledGlobalKey<FormState>(
     'phoneNumberEditForm',
   );
 
@@ -26,6 +26,8 @@ abstract final class WidgetKeys {
   static const ValueKey<String> authRequiredDialog = ValueKey(
     'authRequiredDialog',
   );
+
+  static const ValueKey<String> dialCodePicker = ValueKey('dialCodePicker');
 
   static const ValueKey<String> back = ValueKey('back');
   static const ValueKey<String> dismiss = ValueKey('dismiss');

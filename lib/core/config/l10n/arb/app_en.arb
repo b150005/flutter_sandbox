@@ -36,6 +36,10 @@
 	"@invalidEmailFormat": {
 		"description": "Validation message displayed when the email address format is invalid"
 	},
+	"invalidPhoneNumberFormat": "Please enter a valid phone number.",
+	"@invalidPhoneNumberFormat": {
+		"description": "Validation message displayed when the phone number format is invalid"
+	},
 	"registeredEmail": "This email is already registered. Please use a different email or try to sign in.",
 	"@registeredEmail": {
 		"description": "Message displayed during signup when the email address is already associated with an existing account"
@@ -172,6 +176,12 @@
 	"@newPhoneNumber": {},
 	"sendVerificationEmail": "Send Verification Email",
 	"@sendVerificationEmail": {},
+	"dialCodePickerSearchHint": "Search by country or dial code (e.g., United States, +1)",
+	"@dialCodePickerSearchHint": {
+		"description": "Hint text displayed in the dial code picker search field"
+	},
+	"sendVerificationCode": "Send Verification Code",
+	"@sendVerificationCode": {},
 	"cancel": "Cancel",
 	"@cancel": {},
 	"firebaseSignIn": "Firebase Sign In",

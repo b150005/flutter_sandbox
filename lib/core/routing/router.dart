@@ -14,6 +14,7 @@ import '../../data/repositories/secure_storage/secure_storage_repository.dart';
 import '../../ui/core/extensions/build_context.dart';
 import '../../ui/core/hooks/use_app_bar.dart';
 import '../../ui/core/providers/app_bar_state_provider.dart';
+import '../../ui/core/ui/auth/auth_state_builder.dart';
 import '../../ui/core/ui/auth/email_input_form.dart';
 import '../../ui/core/ui/auth/password_setup_form.dart';
 import '../../ui/core/ui/auth/sign_out_button.dart';
@@ -83,8 +84,8 @@ class Router extends _$Router {
   }) {
     final uri = state.uri;
 
-    final firebaseAuth = ref.watch(firebaseAuthProvider);
-    final isLoggedIn = firebaseAuth.currentUser != null;
+    final authState = ref.read(authRepositoryProvider);
+    final isLoggedIn = authState.value != null;
 
     if (_requiresAuth(uri) && !isLoggedIn) {
       return SignInScreenRoute.absolutePath;

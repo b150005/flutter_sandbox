@@ -1,5 +1,6 @@
 enum Regexes {
   email(r'^[^@]+@[^@]+\.[^@]{2,}$'),
+  phoneNumberCharacter(r'[0-9\s\-]'),
   whitespace(r'\s'),
   uppercase(r'[A-Z]'),
   lowercase(r'[a-z]'),
