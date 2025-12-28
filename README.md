@@ -331,9 +331,7 @@ i  Writing project information to .firebaserc...
 
 ### 🚧 .env ファイルの編集
 
-```txt
-placeholder=placeholder
-```
+`lib/core/config/env/sample.env` を参照してください。
 
 ### Android のビルド設定
 
@@ -411,16 +409,19 @@ Xcode の Runner > TARGETS > Runner > Build Phases > New Run Script Phase で以
 ## 🔨 トラブルシューティング
 
 ビルドに失敗する場合、以下のコマンドの実行を検討してください。
+ターゲットプラットフォームが `iOS` の場合は `Podfile.lock` を削除してから実行してください。
 
 | プラットフォーム | コマンド | 用途 | 補足 |
 | --- | --- | --- | --- |
 | 共通 | `flutter clean` | ビルド・キャッシュのクリア | `build/`, `.dart_tool/` ディレクトリが削除される |
 | ^ | `flutter pub cache repair` | パッケージキャッシュの再構築 | - |
 | ^ | `flutter pub upgrade` | パッケージのバージョンアップ | - |
-| iOS | `pod deintegrate` | CocoaPods のクリーンアップ | - |
+| iOS | `pod deintegrate && rm -rf Podfile.lock` | CocoaPods のクリーンアップ<br />`Pod` 定義ファイルの削除 | - |
 | ^ | `pod cache clean --all` | Pod キャッシュのクリア | - |
 | ^ | `pod update` | Pod パッケージのバージョンアップ | - |
 | Android | `./android/gradlew -p android clean` | Gradle キャッシュのクリア | - |
+
+Flutter をアップグレードした場合、 `dart pub global activate flutterfire_cli` を実行して `flutterfire` コマンドを有効化してください。
 
 ## 💚 CI/CD(GitHub Actions)
 
@@ -434,7 +435,7 @@ Xcode の Runner > TARGETS > Runner > Build Phases > New Run Script Phase で以
 
 | プラットフォーム | コマンド |
 | --- | --- |
-| Web | 1. `scripts/flutterfire-config.sh {short_env}`<br />2. `scripts/prebuild-web.sh lib/core/config/env/{environment}.env`<br />3. `flutter build web --release --wasm --dart-define-from-file=lib/core/config/env/{environment}.env`<br />4. `firebase -P <project_id> deploy --only hosting` |
+| Web | 1. `scripts/flutterfire-config.sh {short_env}`<br />2. `scripts/prebuild-web.sh lib/core/config/env/{environment}.env`<br />3. `firebase dataconnect:sdk:generate`<br />4. `flutter build web --release --wasm --dart-define-from-file=lib/core/config/env/{environment}.env`<br />5. `firebase -P <project_id> deploy --only hosting` |
 
 ## 🌐 l10n
 
