@@ -13,6 +13,8 @@ dependencies:
   cloud_firestore:
   cloud_functions:
   cupertino_icons:
+  dlibphonenumber:
+  dropdown_search: ^7.0.0-pre6
   envied:
   firebase_ai:
   firebase_analytics:
@@ -34,7 +36,7 @@ dependencies:
   flutter_hooks:
   flutter_localizations:
     sdk: flutter
-  flutter_secure_storage: ^10.0.0-beta.4
+  flutter_secure_storage:
   flutter_web_plugins:
     sdk: flutter
   freezed_annotation:
@@ -47,6 +49,7 @@ dependencies:
   multiple_result:
   responsive_framework:
   riverpod_annotation:
+  sealed_countries:
   shared_preferences:
   stack_trace:
   window_manager:
@@ -65,7 +68,7 @@ dev_dependencies:
   integration_test:
     sdk: flutter
   mockito:
-  pedantic_mono: ^1.33.0
+  pedantic_mono:
   riverpod_generator:
   riverpod_lint:
 
