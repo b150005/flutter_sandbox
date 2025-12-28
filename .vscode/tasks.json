@@ -170,8 +170,6 @@
       "label": "pre-launch-native-development",
       "dependsOrder": "sequence",
       "dependsOn": [
-        "compile-cloud-functions",
-        "run-build-runner",
         "firebase-emulators",
       ]
     },
@@ -179,8 +177,6 @@
       "label": "pre-launch-web-development",
       "dependsOrder": "sequence",
       "dependsOn": [
-        "compile-cloud-functions",
-        "run-build-runner",
         "firebase-emulators",
         "pre-build-web-development"
       ]
@@ -190,7 +186,6 @@
       "dependsOrder": "sequence",
       "dependsOn": [
         "flutterfire-config-staging",
-        "run-build-runner",
         "pre-build-web-staging"
       ]
     },
@@ -199,7 +194,6 @@
       "dependsOrder": "sequence",
       "dependsOn": [
         "flutterfire-config-production",
-        "run-build-runner",
         "pre-build-web-production"
       ]
     },

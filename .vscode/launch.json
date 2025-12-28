@@ -39,7 +39,7 @@
       ],
     },
     {
-      "name": "[Web] development - debug(CanvasKit)",
+      "name": "[Web] development - debug",
       "type": "dart",
       "request": "launch",
       "deviceId": "chrome",
@@ -48,22 +48,6 @@
       "preLaunchTask": "pre-launch-web-development",
       "args": [
         "--dart-define-from-file=lib/core/config/env/development.env",
-        "--web-header=Cross-Origin-Embedder-Policy=credentialless",
-        "--web-header=Cross-Origin-Opener-Policy=same-origin",
-        "--web-port=5500",
-      ],
-    },
-    {
-      "name": "[Web] development - debug(SKWasm)",
-      "type": "dart",
-      "request": "launch",
-      "deviceId": "chrome",
-      "program": "lib/main.dart",
-      "flutterMode": "debug",
-      "preLaunchTask": "pre-launch-web-development",
-      "args": [
-        "--dart-define-from-file=lib/core/config/env/development.env",
-        "--wasm",
         "--web-header=Cross-Origin-Embedder-Policy=credentialless",
         "--web-header=Cross-Origin-Opener-Policy=same-origin",
         "--web-port=5500",

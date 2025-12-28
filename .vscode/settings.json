@@ -9,6 +9,7 @@
     "--dart-define-from-file=lib/core/config/env/development.env"
   ],
   "cSpell.words": [
-    "msix"
+    "msix",
+    "recaptcha"
   ]
 }
