@@ -45,12 +45,14 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
         return;
       }
 
-      await ExceptionHandler.execute(
+      await ExceptionHandler.executeAsync(
         () async => {
           // TODO(b150005): SMS による電話番号認証の実装
         },
         l10n: l10n,
-      ).whenComplete(() => isLoading.value = false);
+      );
+
+      isLoading.value = false;
     }
 
     return SelectionArea(

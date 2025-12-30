@@ -5,7 +5,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/config/constants/spacing.dart';
 import '../../../../../core/config/constants/widget_keys.dart';
-import '../../../../../core/utils/exceptions/exception_handler.dart';
 import '../../../../../core/utils/extensions/bool.dart';
 import '../../../../../core/utils/extensions/nullable.dart';
 import '../../../../../core/utils/extensions/string.dart';
@@ -35,8 +34,6 @@ class EmailEditDialog extends HookConsumerWidget {
     final isLoading = useState<bool>(false);
     final errorMessage = useState<String?>(null);
 
-    final authRepository = ref.watch(authRepositoryProvider.notifier);
-
     Future<void> onSubmit() async {
       isLoading.value = true;
 
@@ -47,26 +44,23 @@ class EmailEditDialog extends HookConsumerWidget {
         return;
       }
 
-      await ExceptionHandler.execute(() async {
-        final verificationEmailSendingResult = await authRepository
-            .verifyBeforeUpdateEmail(
-              emailController.text,
-            );
+      final verificationEmailSendingResult = await ref
+          .read(authRepositoryProvider.notifier)
+          .verifyBeforeUpdateEmail(emailController.text);
 
-        verificationEmailSendingResult.when((_) {
-          context.rootNavigator.pop();
+      verificationEmailSendingResult.when((_) {
+        context.rootNavigator.pop();
 
-          AppMessenger.showMaterialBanner(
-            MaterialBanner(
-              content: Text(
-                l10n.sentEmailUpdateVerificationEmail,
-              ),
-              leading: const Icon(Icons.email_outlined),
-              actions: const [DismissMaterialBannerButton()],
-            ),
-          );
-        }, (appException) => errorMessage.value = appException.message);
-      }, l10n: l10n).whenComplete(() => isLoading.value = false);
+        AppMessenger.showMaterialBanner(
+          MaterialBanner(
+            content: Text(l10n.sentEmailUpdateVerificationEmail),
+            leading: const Icon(Icons.email_outlined),
+            actions: const [DismissMaterialBannerButton()],
+          ),
+        );
+      }, (appException) => errorMessage.value = appException.message);
+
+      isLoading.value = false;
     }
 
     return SelectionArea(

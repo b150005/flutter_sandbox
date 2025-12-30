@@ -2,9 +2,9 @@ import 'package:dlibphonenumber/dlibphonenumber.dart';
 
 import '../../config/constants/regexes.dart';
 import '../../config/l10n/app_localizations.dart';
+import '../exceptions/exception_handler.dart';
 import '../extensions/string.dart';
 import '../logging/log_message.dart';
-import '../logging/logger.dart';
 
 abstract final class FirebaseAuthValidator {
   const FirebaseAuthValidator._();
@@ -81,24 +81,20 @@ abstract final class FirebaseAuthValidator {
       return l10n.countryCodeRequired;
     }
 
-    try {
-      final number = PhoneNumberUtil.instance.parse(
+    final parseResult = ExceptionHandler.execute(
+      () => PhoneNumberUtil.instance.parse(
         countryCode! + nationalNumber!,
         null,
-      );
+      ),
+      l10n: l10n,
+    );
 
-      if (!PhoneNumberUtil.instance.isValidNumber(number)) {
-        return l10n.invalidPhoneNumberFormat;
-      }
-    } on Exception catch (error, stackTrace) {
-      Logger.instance.e(
-        LogMessage.unhandledError(error),
-        error: error,
-        stackTrace: stackTrace,
-      );
-    }
-
-    return null;
+    return parseResult.when(
+      (phoneNumber) => PhoneNumberUtil.instance.isValidNumber(phoneNumber)
+          ? null
+          : l10n.invalidPhoneNumberFormat,
+      (appException) => appException.message,
+    );
   }
 
   static bool satisfiesMinLength(String password) =>

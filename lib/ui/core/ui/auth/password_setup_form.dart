@@ -9,7 +9,6 @@ import '../../../../core/config/constants/spacing.dart';
 import '../../../../core/config/constants/widget_keys.dart';
 import '../../../../core/routing/router.dart';
 import '../../../../core/utils/authentications/firebase_auth_validator.dart';
-import '../../../../core/utils/exceptions/exception_handler.dart';
 import '../../../../core/utils/extensions/string.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../data/repositories/firebase/auth/auth_repository.dart';
@@ -67,18 +66,16 @@ class PasswordSetupForm extends HookConsumerWidget {
         return;
       }
 
-      await ExceptionHandler.execute(() async {
-        final passwordUpdateResult = await ref
-            .read(authRepositoryProvider.notifier)
-            .updatePassword(
-              password: passwordController.text.trim(),
-            );
+      final passwordUpdateResult = await ref
+          .read(authRepositoryProvider.notifier)
+          .updatePassword(password: passwordController.text.trim());
 
-        passwordUpdateResult.when(
-          (_) => context.go(FirebaseScreenRoute.absolutePath),
-          (appException) => errorMessage.value = appException.message,
-        );
-      }, l10n: l10n).whenComplete(() => isLoading.value = false);
+      passwordUpdateResult.when(
+        (_) => context.go(FirebaseScreenRoute.absolutePath),
+        (appException) => errorMessage.value = appException.message,
+      );
+
+      isLoading.value = false;
     }
 
     return Form(

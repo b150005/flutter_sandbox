@@ -7,7 +7,6 @@ import '../../../../../core/config/constants/button_size.dart';
 import '../../../../../core/config/constants/spacing.dart';
 import '../../../../../core/config/constants/widget_keys.dart';
 import '../../../../../core/routing/router.dart';
-import '../../../../../core/utils/exceptions/exception_handler.dart';
 import '../../../../../core/utils/extensions/string.dart';
 import '../../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../../data/repositories/firebase/auth/auth_repository.dart';
@@ -44,19 +43,19 @@ class SignInForm extends HookConsumerWidget {
         return;
       }
 
-      await ExceptionHandler.execute(() async {
-        final signInResult = await ref
-            .read(authRepositoryProvider.notifier)
-            .signInWithEmailAndPassword(
-              email: emailController.text.trim(),
-              password: passwordController.text.trim(),
-            );
+      final signInResult = await ref
+          .read(authRepositoryProvider.notifier)
+          .signInWithEmailAndPassword(
+            email: emailController.text.trim(),
+            password: passwordController.text.trim(),
+          );
 
-        signInResult.when(
-          (credential) => context.go(FirebaseScreenRoute.absolutePath),
-          (appException) => errorMessage.value = appException.message,
-        );
-      }, l10n: l10n).whenComplete(() => isLoading.value = false);
+      signInResult.when(
+        (credential) => context.go(FirebaseScreenRoute.absolutePath),
+        (appException) => errorMessage.value = appException.message,
+      );
+
+      isLoading.value = false;
     }
 
     return Form(

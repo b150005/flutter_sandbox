@@ -42,8 +42,8 @@ class AuthRepository extends _$AuthRepository {
   }
 
   Future<Result<T, AppException>> _executeWithFirebaseAuth<T>(
-    FutureOr<T> Function() operation,
-  ) => ExceptionHandler.execute(
+    Future<T> Function() operation,
+  ) => ExceptionHandler.executeAsync(
     operation,
     l10n: ref.read(appLocalizationsProvider),
     precheck: _ensureFirebaseInitialized,
@@ -237,14 +237,11 @@ class AuthRepository extends _$AuthRepository {
 
         onPhoneNumberUpdated(updateResult);
       },
-      verificationFailed: (firebaseAuthException) async {
-        final result = await ExceptionHandler.execute(
-          () => throw firebaseAuthException,
-          l10n: l10n,
-        );
-
-        result.whenError(onVerificationFailed);
-      },
+      verificationFailed: (firebaseAuthException) =>
+          ExceptionHandler.execute<void>(
+            () => throw firebaseAuthException,
+            l10n: l10n,
+          ).whenError(onVerificationFailed),
       codeSent: onCodeSent,
       codeAutoRetrievalTimeout: onAutoRetrievalTimeout,
     );

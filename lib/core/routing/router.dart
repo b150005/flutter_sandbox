@@ -78,7 +78,7 @@ class Router extends _$Router {
     navigatorKey: rootNavigatorKey,
   );
 
-  static FutureOr<String?> _redirect({
+  static String? _redirect({
     required GoRouterState state,
     required Ref ref,
   }) {

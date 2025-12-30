@@ -50,7 +50,7 @@ class SecureStorageRepository extends _$SecureStorageRepository {
     bool? shouldReturnPersistentReference,
     String? authenticationUIBehavior,
     List<AccessControlFlag>? accessControlFlags,
-  }) => ExceptionHandler.execute(
+  }) => ExceptionHandler.executeAsync(
     () => state.write(
       key: key,
       value: value,
@@ -85,7 +85,7 @@ class SecureStorageRepository extends _$SecureStorageRepository {
   );
 
   Future<Result<String?, AppException>> read({required String key}) =>
-      ExceptionHandler.execute(
+      ExceptionHandler.executeAsync(
         () => state.read(key: key),
         l10n: ref.read(appLocalizationsProvider),
       );
