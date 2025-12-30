@@ -168,7 +168,7 @@ class _IdTokenResultTable extends HookConsumerWidget {
       loading: () => context.loadingIndicator,
       error: (error, stackTrace) {
         Logger.instance.e(
-          LogMessage.unhandledError,
+          LogMessage.unhandledError(error),
           error: error,
           stackTrace: stackTrace,
         );

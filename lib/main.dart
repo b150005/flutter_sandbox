@@ -27,7 +27,7 @@ void main() {
       // 何もしない
     } on Exception catch (error, stackTrace) {
       Logger.instance.e(
-        LogMessage.unhandledError,
+        LogMessage.unhandledError(error),
         error: error,
         stackTrace: stackTrace,
       );

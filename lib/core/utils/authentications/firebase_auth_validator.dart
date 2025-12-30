@@ -4,6 +4,7 @@ import '../../config/constants/regexes.dart';
 import '../../config/l10n/app_localizations.dart';
 import '../extensions/string.dart';
 import '../logging/log_message.dart';
+import '../logging/logger.dart';
 
 abstract final class FirebaseAuthValidator {
   const FirebaseAuthValidator._();
@@ -90,8 +91,11 @@ abstract final class FirebaseAuthValidator {
         return l10n.invalidPhoneNumberFormat;
       }
     } on Exception catch (error, stackTrace) {
-      print(error);
-      print(stackTrace);
+      Logger.instance.e(
+        LogMessage.unhandledError(error),
+        error: error,
+        stackTrace: stackTrace,
+      );
     }
 
     return null;

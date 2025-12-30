@@ -5,8 +5,6 @@ final class LogMessage {
       '❌ Firebase app'
       ' not properly initialized';
 
-  static const unhandledError = '❌ Unhandled error occurred';
-
   static const internalError = '❌ Internal error occurred';
 
   static const invalidArgument = '❌ Invalid argument passed';
@@ -14,6 +12,9 @@ final class LogMessage {
   static const canEnterWhitespace = '⚠️ Whitespace can be entered';
 
   static const cancelledByDebounce = '⛔️ Cancelled by debounce';
+
+  static String unhandledError(Object? error) =>
+      '❌ Unhandled error occurred, runtimeType: ${error.runtimeType}';
 
   static String nullObject(String objectName) => '⚠️ $objectName is null';
 

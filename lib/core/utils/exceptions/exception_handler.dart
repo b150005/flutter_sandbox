@@ -31,7 +31,7 @@ class ExceptionHandler {
       return Result.error(error.toAppException(l10n));
     } on Exception catch (error, stackTrace) {
       Logger.instance.e(
-        LogMessage.unhandledError,
+        LogMessage.unhandledError(error),
         error: error,
         stackTrace: stackTrace,
       );

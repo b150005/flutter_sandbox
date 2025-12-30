@@ -36,7 +36,7 @@ class AuthStateBuilder extends ConsumerWidget {
       error: (error, stackTrace) {
         if (error is! AppException) {
           Logger.instance.e(
-            LogMessage.unhandledError,
+            LogMessage.unhandledError(error),
             error: error,
             stackTrace: stackTrace,
           );
