@@ -36,6 +36,14 @@
 	"@invalidEmailFormat": {
 		"description": "メールアドレスの形式が無効な場合に表示される検証メッセージ"
 	},
+	"countryCodeRequired": "電話番号を入力した場合は国番号を選択してください。",
+	"@countryCodeRequired": {
+		"description": "国内番号のみ入力されて国番号が未選択の場合のエラーメッセージ"
+	},
+	"nationalNumberRequired": "国番号を選択した場合は電話番号を入力してください。",
+	"@nationalNumberRequired": {
+		"description": "国番号のみ選択されて国内番号が未入力の場合のエラーメッセージ"
+	},
 	"invalidPhoneNumberFormat": "有効な電話番号を入力してください。",
 	"@invalidPhoneNumberFormat": {
 		"description": "電話番号の形式が無効な場合に表示される検証メッセージ"
@@ -162,6 +170,8 @@
 	"@submit": {},
 	"edit": "編集",
 	"@edit": {},
+	"select": "選択",
+	"@select": {},
 	"editEmail": "メールアドレスの編集",
 	"@editEmail": {},
 	"currentEmail": "現在のメールアドレス",
@@ -176,9 +186,9 @@
 	"@newPhoneNumber": {},
 	"sendVerificationEmail": "認証メールを送信",
 	"@sendVerificationEmail": {},
-	"dialCodePickerSearchHint": "国名または国番号で検索 (例: 日本, +81)",
-	"@dialCodePickerSearchHint": {
-		"description": "DialCodePicker の検索フィールドで表示するヒント"
+	"countryCodePickerSearchHint": "国名または国番号で検索 (例: 日本, +81)",
+	"@countryCodePickerSearchHint": {
+		"description": "国番号の検索フィールドで表示するヒント"
 	},
 	"sendVerificationCode": "認証コードを送信",
 	"@sendVerificationCode": {},

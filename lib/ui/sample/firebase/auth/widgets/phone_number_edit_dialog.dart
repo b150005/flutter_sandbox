@@ -12,10 +12,9 @@ import '../../../../../core/utils/extensions/string.dart';
 import '../../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../core/extensions/build_context.dart';
 import '../../../../core/extensions/navigator_state.dart';
-import '../../../../core/ui/auth/dial_code_picker.dart';
 import '../../../../core/ui/callout.dart';
 import '../../../../core/ui/label.dart';
-import '../../../../core/ui/phone_number_form_field.dart';
+import '../../../../core/ui/phone_number_text_form_field.dart';
 
 @immutable
 class PhoneNumberEditDialog extends HookConsumerWidget {
@@ -27,7 +26,6 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
 
-    final dialCode = useState<String?>(null);
     final controller = useTextEditingController()
       ..text = user.phoneNumber.orElse('', objectName: 'user.phoneNumber');
 
@@ -40,7 +38,10 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
       if (!(WidgetKeys.phoneNumberForm.currentState?.validate()).orFalse(
         objectName: 'WidgetKeys.phoneNumberEditForm.currentState',
       )) {
+        errorMessage.value =
+            WidgetKeys.nationalNumberTextFormField.currentState?.errorText;
         isLoading.value = false;
+
         return;
       }
 
@@ -77,16 +78,9 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
                   ),
                 ),
               ),
-              Wrap(
-                spacing: Spacing.md.dp,
-                runSpacing: Spacing.sm.dp,
-                children: [
-                  DialCodePicker(
-                    onSelected: (selectedDialCode) =>
-                        dialCode.value = selectedDialCode,
-                  ),
-                  PhoneNumberFormField(controller: controller),
-                ],
+              PhoneNumberTextFormField(
+                controller: controller,
+                onFieldSubmitted: (_) => onSubmit(),
               ),
             ],
           ),

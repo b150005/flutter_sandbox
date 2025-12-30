@@ -59,20 +59,39 @@ abstract final class FirebaseAuthValidator {
 
   /// 電話番号の有効性を判定する
   ///
-  /// [phoneNumber] E.164 形式の電話番号(例: +23324123456)
+  /// [countryCode] 国番号(例: +81)
+  /// [nationalNumber] 国際番号(例: 9012345678)
   /// [l10n] ロケールごとのメッセージを保持するローカライゼーション
-  static String? validatePhoneNumber(
-    String? phoneNumber, {
+  static String? validatePhoneNumber({
+    required String? countryCode,
+    required String? nationalNumber,
     required AppLocalizations l10n,
   }) {
-    if (phoneNumber.isNullOrEmpty) {
+    final hasCountryCode = countryCode.isNotNullAndNotEmpty;
+    final hasNationalNumber = nationalNumber.isNotNullAndNotEmpty;
+
+    if (!hasCountryCode && !hasNationalNumber) {
       return null;
     }
+    if (hasCountryCode && !hasNationalNumber) {
+      return l10n.nationalNumberRequired;
+    }
+    if (!hasCountryCode && hasNationalNumber) {
+      return l10n.countryCodeRequired;
+    }
 
-    final number = PhoneNumberUtil.instance.parse(phoneNumber, null);
+    try {
+      final number = PhoneNumberUtil.instance.parse(
+        countryCode! + nationalNumber!,
+        null,
+      );
 
-    if (!PhoneNumberUtil.instance.isValidNumber(number)) {
-      return l10n.invalidPhoneNumberFormat;
+      if (!PhoneNumberUtil.instance.isValidNumber(number)) {
+        return l10n.invalidPhoneNumberFormat;
+      }
+    } on Exception catch (error, stackTrace) {
+      print(error);
+      print(stackTrace);
     }
 
     return null;

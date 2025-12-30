@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widget_previews.dart';
@@ -14,16 +12,16 @@ import '../../../../data/providers/world_countries_provider.dart';
 import '../../extensions/build_context.dart';
 import '../utils/preview/wrapper.dart';
 
-@Preview(name: 'Dial Code Picker', wrapper: wrapper)
-Widget dialCodePicker() => const ProviderScope(
-  child: Scaffold(body: DialCodePicker()),
+@Preview(name: 'Country Code Picker', wrapper: wrapper)
+Widget countryCodePicker() => const ProviderScope(
+  child: Scaffold(body: CountryCodePicker()),
 );
 
 @immutable
-class DialCodePicker extends HookConsumerWidget {
-  const DialCodePicker({super.key, this.onSelected});
+class CountryCodePicker extends HookConsumerWidget {
+  const CountryCodePicker({super.key, this.onSelected});
 
-  final void Function(String? dialCode)? onSelected;
+  final void Function(String? countryCode)? onSelected;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -48,7 +46,7 @@ class DialCodePicker extends HookConsumerWidget {
           ),
           searchFieldProps: TextFieldProps(
             decoration: context.outlinedInputDecoration.copyWith(
-              hintText: l10n.dialCodePickerSearchHint,
+              hintText: l10n.countryCodePickerSearchHint,
             ),
             textInputAction: TextInputAction.search,
           ),
@@ -67,39 +65,33 @@ class DialCodePicker extends HookConsumerWidget {
             tileColor: context.colorScheme.surface,
           ),
         ),
-        key: key ?? WidgetKeys.dialCodePicker,
+        key: key ?? WidgetKeys.countryCodePicker,
         onSelected: onSelected == null
             ? null
-            : (entry) => onSelected!(entry?.key.idd.phoneCode()),
+            : (item) => onSelected!(item?.key.idd.phoneCode()),
         items: (filter, loadProps) => countries.entries.toList(),
-        dropdownBuilder: (context, selectedItem) => selectedItem == null
-            ? FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(
-                  l10n.dialCodePickerSearchHint,
-                  style: context.textTheme.bodyMedium,
-                ),
-              )
-            : Row(
-                spacing: Spacing.xs.dp,
-                children: [
-                  if (selectedItem.key.emoji.isNotNullAndNotEmpty)
-                    Text(
-                      selectedItem.key.emoji,
-                      style: context.textTheme.titleLarge,
-                    ),
-                  Text(selectedItem.key.idd.phoneCode()),
-                  Flexible(
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        selectedItem.key.commonNameFor(basicTypeLocale),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-        compareFn: (entry1, entry2) => entry1.key == entry2.key,
+        dropdownBuilder: (context, selectedItem) => Row(
+          spacing: Spacing.xs.dp,
+          children: [
+            Text(
+              (selectedItem?.key.emoji).isNullOrEmpty
+                  ? '🌐'
+                  : selectedItem!.key.emoji,
+            ),
+            Text(
+              selectedItem == null
+                  ? l10n.select
+                  : selectedItem.key.idd.phoneCode(),
+            ),
+          ],
+        ),
+        filterFn: (item, filter) {
+          final query = filter.toLowerCase();
+
+          return item.value.toLowerCase().contains(query) ||
+              item.key.idd.phoneCode().contains(query);
+        },
+        compareFn: (item1, item2) => item1.key == item2.key,
         decoratorProps: DropDownDecoratorProps(
           decoration: context.outlinedInputDecoration,
         ),

@@ -36,6 +36,14 @@
 	"@invalidEmailFormat": {
 		"description": "Validation message displayed when the email address format is invalid"
 	},
+	"countryCodeRequired": "Please select a country code when national number is entered.",
+	"@countryCodeRequired": {
+		"description": "Error message when only national number is entered without country code"
+	},
+	"nationalNumberRequired": "Please enter a national number when country code is selected.",
+	"@nationalNumberRequired": {
+		"description": "Error message when only country code is selected without national number"
+	},
 	"invalidPhoneNumberFormat": "Please enter a valid phone number.",
 	"@invalidPhoneNumberFormat": {
 		"description": "Validation message displayed when the phone number format is invalid"
@@ -162,6 +170,8 @@
 	"@submit": {},
 	"edit": "Edit",
 	"@edit": {},
+	"select": "Select",
+	"@select": {},
 	"editEmail": "Edit Email",
 	"@editEmail": {},
 	"currentEmail": "Current Email",
@@ -176,9 +186,9 @@
 	"@newPhoneNumber": {},
 	"sendVerificationEmail": "Send Verification Email",
 	"@sendVerificationEmail": {},
-	"dialCodePickerSearchHint": "Search by country or dial code (e.g., United States, +1)",
-	"@dialCodePickerSearchHint": {
-		"description": "Hint text displayed in the dial code picker search field"
+	"countryCodePickerSearchHint": "Search by country or dial code (e.g., United States, +1)",
+	"@countryCodePickerSearchHint": {
+		"description": "Hint text displayed in the country code picker search field"
 	},
 	"sendVerificationCode": "Send Verification Code",
 	"@sendVerificationCode": {},

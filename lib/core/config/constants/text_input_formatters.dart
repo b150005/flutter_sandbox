@@ -9,7 +9,7 @@ abstract final class TextInputFormatters {
     Regexes.whitespace.regExp,
   );
 
-  static final phoneNumber = FilteringTextInputFormatter.allow(
-    Regexes.phoneNumberCharacter.regExp,
+  static final nationalNumber = FilteringTextInputFormatter.allow(
+    Regexes.nationalNumberCharacter.regExp,
   );
 }
