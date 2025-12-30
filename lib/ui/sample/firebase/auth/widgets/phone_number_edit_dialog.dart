@@ -26,8 +26,7 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
 
-    final controller = useTextEditingController()
-      ..text = user.phoneNumber.orElse('', objectName: 'user.phoneNumber');
+    final controller = useTextEditingController();
 
     final isLoading = useState<bool>(false);
     final errorMessage = useState<String?>(null);
