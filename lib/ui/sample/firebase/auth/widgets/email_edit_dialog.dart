@@ -49,7 +49,7 @@ class EmailEditDialog extends HookConsumerWidget {
           .verifyBeforeUpdateEmail(emailController.text);
 
       verificationEmailSendingResult.when((_) {
-        context.rootNavigator.pop();
+        context.rootNavigator.safePop();
 
         AppMessenger.showMaterialBanner(
           MaterialBanner(

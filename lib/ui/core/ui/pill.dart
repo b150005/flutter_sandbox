@@ -93,9 +93,7 @@ class Pill extends StatelessWidget {
             if (text.isNotNullAndNotEmpty)
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: Spacing.xxs.dp),
-                child: Text(
-                  text!,
-                ),
+                child: Text(text!),
               ),
           ],
         ),
