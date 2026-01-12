@@ -1,20 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widget_previews.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../core/config/constants/spacing.dart';
 import '../../../core/utils/extensions/string.dart';
 import '../extensions/build_context.dart';
-import 'utils/preview/wrapper.dart';
-
-@Preview(name: 'Status Indicator', wrapper: wrapper)
-Widget statusIndicator() => Column(
-  spacing: Spacing.sm.dp,
-  children: const [
-    StatusIndicator(isValid: true, message: 'valid'),
-    StatusIndicator(isValid: false, message: 'invalid'),
-  ],
-);
 
 class StatusIndicator extends HookWidget {
   const StatusIndicator({

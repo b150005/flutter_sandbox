@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widget_previews.dart';
 
 import '../../../core/config/constants/border_radii.dart';
 import '../../../core/config/constants/icon_size.dart';
@@ -7,23 +6,6 @@ import '../../../core/config/constants/spacing.dart';
 import '../../../core/config/constants/widget_keys.dart';
 import '../../../core/config/l10n/app_localizations.dart';
 import '../extensions/build_context.dart';
-
-@Preview(name: 'Callout')
-Widget callout() => Column(
-  spacing: Spacing.sm.dp,
-  children: const [
-    Callout('info'),
-    Callout('success', type: CalloutType.success),
-    Callout(
-      'warning',
-      type: CalloutType.warning,
-    ),
-    Callout(
-      'error',
-      type: CalloutType.error,
-    ),
-  ],
-);
 
 enum CalloutType {
   info(icon: Icons.info_outlined, color: Colors.blue),

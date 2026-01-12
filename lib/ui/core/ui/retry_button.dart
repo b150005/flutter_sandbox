@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widget_previews.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/config/constants/icon_size.dart';
@@ -7,10 +6,6 @@ import '../../../core/config/constants/spacing.dart';
 import '../../../core/config/constants/widget_keys.dart';
 import '../../../core/utils/l10n/app_localizations.dart';
 import '../extensions/build_context.dart';
-import 'utils/preview/wrapper.dart';
-
-@Preview(name: 'Retry Button', wrapper: wrapper)
-Widget retryButton() => const ProviderScope(child: RetryButton());
 
 @immutable
 class RetryButton extends ConsumerWidget {

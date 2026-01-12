@@ -1,31 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widget_previews.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/config/constants/spacing.dart';
 import '../../../../core/config/constants/widget_keys.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../data/repositories/firebase/auth/auth_repository.dart';
-import '../utils/preview/preview_mock_data.dart';
-import '../utils/preview/wrapper.dart';
-
-@Preview(name: 'Sign Out Button', wrapper: wrapper)
-Widget signOutButton() => ProviderScope(
-  overrides: [
-    // ignore: scoped_providers_should_specify_dependencies
-    firebaseAuthProvider.overrideWith(
-      (_) => PreviewMockData.mockFirebaseAuth,
-    ),
-  ],
-  child: Wrap(
-    spacing: Spacing.sm.dp,
-    children: [
-      const SignOutButton(),
-      SignOutButton.icon(),
-      SignOutButton.filled(),
-    ],
-  ),
-);
 
 @immutable
 class SignOutButton extends ConsumerWidget {

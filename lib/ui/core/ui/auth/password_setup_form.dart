@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widget_previews.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -16,12 +15,6 @@ import '../../extensions/build_context.dart';
 import '../callout.dart';
 import '../password_text_form_field.dart';
 import '../status_indicator.dart';
-import '../utils/preview/wrapper.dart';
-
-@Preview(name: 'Password Setup Form', wrapper: wrapper)
-Widget passwordSetupForm() => const ProviderScope(
-  child: PasswordSetupForm(),
-);
 
 @immutable
 class PasswordSetupForm extends HookConsumerWidget {

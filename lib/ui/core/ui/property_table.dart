@@ -1,38 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widget_previews.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../core/config/constants/spacing.dart';
 import '../extensions/build_context.dart';
 import 'label.dart';
-import 'utils/preview/wrapper.dart';
 
 part 'property_table.freezed.dart';
-
-@Preview(name: 'Property Table', wrapper: wrapper)
-Widget propertyTable() => PropertyTable(
-  cellData: const [
-    PropertyTableCellData(label: 'key 1', value: 'value 1'),
-    PropertyTableCellData(
-      label: 'key 2',
-      value: 'value 2',
-      prefix: Icon(Icons.check_outlined),
-    ),
-    PropertyTableCellData(
-      label: 'key 3',
-      value: 'value 3',
-      suffix: Icon(Icons.check_outlined),
-    ),
-    PropertyTableCellData(
-      label: 'key 4',
-      value: 'value 4',
-      prefix: Icon(Icons.check_outlined),
-      suffix: Icon(Icons.check_outlined),
-    ),
-    PropertyTableCellData(label: 'key 5', value: 'value 5'),
-  ],
-  columnCount: 2,
-);
 
 @immutable
 class PropertyTable extends StatelessWidget {
