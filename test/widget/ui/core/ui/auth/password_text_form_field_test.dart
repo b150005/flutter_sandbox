@@ -14,7 +14,7 @@ void main() {
     TextEditingController? controller,
     String? hintText,
     TextInputAction? textInputAction,
-    void Function(String password)? onChanged,
+    ValueChanged<String>? onChanged,
     String? Function(String? password)? validator,
   }) => ProviderScope(
     child: MaterialApp(

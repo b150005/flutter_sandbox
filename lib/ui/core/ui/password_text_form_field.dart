@@ -27,9 +27,9 @@ class PasswordTextFormField extends HookConsumerWidget {
 
   final TextInputAction? textInputAction;
 
-  final void Function(String password)? onChanged;
+  final ValueChanged<String>? onChanged;
 
-  final void Function(String password)? onFieldSubmitted;
+  final ValueChanged<String>? onFieldSubmitted;
 
   final String? Function(String? password)? validator;
 
