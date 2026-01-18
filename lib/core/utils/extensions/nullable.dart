@@ -27,7 +27,7 @@ extension NullSafetyExtension<T> on T? {
   }
 
   void ifNotNull(
-    void Function(T) operation, {
+    void Function(T value) operation, {
     String? objectName,
     logger.Level level = logger.Level.warning,
   }) {
