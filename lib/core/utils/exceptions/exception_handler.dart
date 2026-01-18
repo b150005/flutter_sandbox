@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:multiple_result/multiple_result.dart';
 
 import '../../config/l10n/app_localizations.dart';
@@ -15,7 +16,7 @@ class ExceptionHandler {
   static Result<T, AppException> execute<T>(
     T Function() operation, {
     required AppLocalizations l10n,
-    void Function()? precheck,
+    VoidCallback? precheck,
   }) {
     try {
       precheck?.call();
@@ -41,7 +42,7 @@ class ExceptionHandler {
   }
 
   static Future<Result<T, AppException>> executeAsync<T>(
-    Future<T> Function() operation, {
+    FutureOr<T> Function() operation, {
     required AppLocalizations l10n,
     FutureOr<void> Function()? precheck,
   }) async {
