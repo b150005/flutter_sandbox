@@ -76,7 +76,9 @@
       }
     });
   </script>
+</head>
 
+<body>
   <script>
     /** @see [Use App Check with the debug provider with Flutter](https://firebase.google.com/docs/app-check/flutter/debug-provider) */
     (() => {
@@ -93,9 +95,7 @@
       }
     })();
   </script>
-</head>
 
-<body>
   <h1 aria-label="{{WEB_DESCRIPTION}}"></h1>
   <script src="flutter_bootstrap.js" defer></script>
 </body>

@@ -60,8 +60,6 @@ abstract class AppInitializerProtocol {
 
     if (kDebugModeInDev) {
       await _initializeLocalEmulators();
-
-      return;
     }
 
     await FirebaseAppCheck.instance.activate(
