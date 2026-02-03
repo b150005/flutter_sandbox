@@ -14,7 +14,7 @@ class DismissMaterialBannerButton extends ConsumerWidget {
     final l10n = ref.watch(appLocalizationsProvider);
 
     return TextButton(
-      key: key ?? WidgetKeys.dismiss,
+      key: WidgetKeys.dismiss,
       onPressed: () => AppMessenger.hideMaterialBanner(
         reason: MaterialBannerClosedReason.dismiss,
       ),

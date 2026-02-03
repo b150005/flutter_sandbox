@@ -19,7 +19,7 @@ class SignOutButton extends ConsumerWidget {
     final l10n = ref.watch(appLocalizationsProvider);
 
     return OutlinedButton.icon(
-      key: key ?? WidgetKeys.signOut,
+      key: WidgetKeys.signOut,
       onPressed: authRepository.signOut,
       icon: const Icon(Icons.logout_outlined),
       label: Text(l10n.signOut),
@@ -36,7 +36,7 @@ class _SignOutIconButton extends SignOutButton {
     final authRepository = ref.watch(authRepositoryProvider.notifier);
 
     return IconButton.outlined(
-      key: key ?? WidgetKeys.signOut,
+      key: WidgetKeys.signOut,
       onPressed: authRepository.signOut,
       icon: const Icon(Icons.logout_outlined),
     );

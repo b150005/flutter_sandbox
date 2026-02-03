@@ -34,7 +34,6 @@ class PropertyTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Table(
-    key: key,
     columnWidths: columnWidths,
     defaultColumnWidth: defaultColumnWidth,
     textDirection: textDirection,
