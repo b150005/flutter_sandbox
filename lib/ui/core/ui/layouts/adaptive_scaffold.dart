@@ -66,7 +66,7 @@ class AdaptiveScaffold extends ConsumerWidget {
               const VerticalDivider(),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.only(right: Spacing.xs.dp),
+                  padding: EdgeInsetsDirectional.only(end: Spacing.xs.dp),
                   child: _navigationShell,
                 ),
               ),
