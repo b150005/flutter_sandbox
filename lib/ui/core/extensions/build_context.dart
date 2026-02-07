@@ -304,8 +304,6 @@ extension RouterExtension on BuildContext {
   GoRouter get router => GoRouter.of(this);
 
   String get currentPath => router.routerDelegate.currentConfiguration.uri.path;
-
-  bool isAt(String path) => currentPath == path;
 }
 
 extension ModalRouteExtension on BuildContext {
