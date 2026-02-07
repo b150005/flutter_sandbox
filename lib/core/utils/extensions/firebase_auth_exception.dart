@@ -46,4 +46,7 @@ extension FirebaseAuthExceptionExtension on FirebaseAuthException {
 
   String toLocalizedMessage(AppLocalizations l10n) =>
       toAppException(l10n).message;
+
+  bool get isInvalidAppCheckToken =>
+      code == FirebaseErrorCode.firebaseAppCheckTokenIsInvalid;
 }

@@ -2,8 +2,15 @@ final class LogMessage {
   const LogMessage._();
 
   static const firebaseNotInitialized =
-      '❌ Firebase app'
-      ' not properly initialized';
+      '❌ Firebase app not properly initialized';
+
+  static String invalidAppCheckToken =
+      '⚠️ App Check token is invalid, refreshing token';
+
+  static const appCheckTokenRefreshSucceeded = '♻️ App Check token refreshed';
+
+  static const appCheckTokenRefreshFailed =
+      '❌ Failed to refresh App Check token';
 
   static const internalError = '❌ Internal error occurred';
 
