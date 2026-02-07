@@ -12,7 +12,6 @@ import '../../data/providers/sample_contents_provider.dart';
 import '../../data/repositories/firebase/auth/auth_repository.dart';
 import '../../data/repositories/secure_storage/secure_storage_repository.dart';
 import '../../ui/core/extensions/build_context.dart';
-import '../../ui/core/hooks/use_app_bar.dart';
 import '../../ui/core/providers/app_bar_state_provider.dart';
 import '../../ui/core/ui/auth/auth_state_builder.dart';
 import '../../ui/core/ui/auth/email_input_form.dart';
@@ -21,6 +20,7 @@ import '../../ui/core/ui/auth/sign_out_button.dart';
 import '../../ui/core/ui/callout.dart';
 import '../../ui/core/ui/dismiss_material_banner_button.dart';
 import '../../ui/core/ui/layouts/adaptive_scaffold.dart';
+import '../../ui/core/ui/layouts/app_bar_scope.dart';
 import '../../ui/core/ui/layouts/scrollable_container.dart';
 import '../../ui/core/ui/utils/app_messenger.dart';
 import '../../ui/sample/firebase/auth/widgets/user_auth_detail_card.dart';
@@ -63,11 +63,7 @@ class Router extends _$Router {
   @override
   GoRouter build() => GoRouter(
     routes: $appRoutes,
-    redirect: (_, state) {
-      ref.read(appBarStateProvider.notifier).clear();
-
-      return _redirect(state: state, ref: ref);
-    },
+    redirect: (_, state) => _redirect(state: state, ref: ref),
     refreshListenable: ProviderChangeNotifier(
       ref: ref,
       provider: authRepositoryProvider,

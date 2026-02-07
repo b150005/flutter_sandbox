@@ -17,19 +17,16 @@ class FirebaseScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
 
-    useAppBar(
-      ref,
-      path: FirebaseScreenRoute.absolutePath,
-      state: AppBarState(title: Text(l10n.firebase)),
-    );
-
     final contents = ref.watch(firebaseContentsProvider);
 
-    return GridView.extent(
-      maxCrossAxisExtent: GridDimensions.maxCrossAxisExtent,
-      children: contents
-          .map((content) => ContentCard(content: content))
-          .toList(),
+    return AppBarScope(
+      state: AppBarState(title: Text(l10n.firebase)),
+      child: GridView.extent(
+        maxCrossAxisExtent: GridDimensions.maxCrossAxisExtent,
+        children: contents
+            .map((content) => ContentCard(content: content))
+            .toList(),
+      ),
     );
   }
 }

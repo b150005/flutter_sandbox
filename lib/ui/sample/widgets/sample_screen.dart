@@ -2,6 +2,7 @@ part of '../../../core/routing/router.dart';
 
 class SampleScreenRoute extends GoRouteData with $SampleScreenRoute {
   static const path = '/sample';
+  static const absolutePath = '/sample';
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
@@ -16,19 +17,16 @@ class SampleScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
 
-    useAppBar(
-      ref,
-      path: SampleScreenRoute.path,
-      state: AppBarState(title: Text(l10n.sample)),
-    );
-
     final contents = ref.watch(sampleContentsProvider);
 
-    return GridView.extent(
-      maxCrossAxisExtent: GridDimensions.maxCrossAxisExtent,
-      children: contents
-          .map((content) => ContentCard(content: content))
-          .toList(),
+    return AppBarScope(
+      state: AppBarState(title: Text(l10n.sample)),
+      child: GridView.extent(
+        maxCrossAxisExtent: GridDimensions.maxCrossAxisExtent,
+        children: contents
+            .map((content) => ContentCard(content: content))
+            .toList(),
+      ),
     );
   }
 }

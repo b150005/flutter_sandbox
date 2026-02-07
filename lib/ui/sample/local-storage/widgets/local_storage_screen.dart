@@ -18,12 +18,9 @@ class LocalStorageScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
 
-    useAppBar(
-      ref,
-      path: LocalStorageScreenRoute.absolutePath,
+    return AppBarScope(
       state: AppBarState(title: Text(l10n.localStorage)),
+      child: const Placeholder(),
     );
-
-    return const Placeholder();
   }
 }

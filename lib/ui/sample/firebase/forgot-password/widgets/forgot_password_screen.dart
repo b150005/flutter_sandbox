@@ -19,23 +19,20 @@ class ForgotPasswordScreen extends HookConsumerWidget {
     final l10n = ref.watch(appLocalizationsProvider);
     final authRepository = ref.watch(authRepositoryProvider.notifier);
 
-    useAppBar(
-      ref,
-      path: ForgotPasswordScreenRoute.absolutePath,
+    return AppBarScope(
       state: AppBarState(title: Text(l10n.resetPassword)),
-    );
-
-    return ScrollableContainer(
-      child: Column(
-        spacing: Spacing.xxxl.dp,
-        children: [
-          Text(l10n.enterEmailForPasswordReset),
-          EmailInputForm(
-            submitAction: (email) =>
-                authRepository.sendPasswordResetEmail(email: email),
-            onSuccess: (_) => context.go(EmailSentScreenRoute.absolutePath),
-          ),
-        ],
+      child: ScrollableContainer(
+        child: Column(
+          spacing: Spacing.xxxl.dp,
+          children: [
+            Text(l10n.enterEmailForPasswordReset),
+            EmailInputForm(
+              submitAction: (email) =>
+                  authRepository.sendPasswordResetEmail(email: email),
+              onSuccess: (_) => context.go(EmailSentScreenRoute.absolutePath),
+            ),
+          ],
+        ),
       ),
     );
   }

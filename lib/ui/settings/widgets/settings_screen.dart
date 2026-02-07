@@ -2,6 +2,7 @@ part of '../../../core/routing/router.dart';
 
 class SettingsScreenRoute extends GoRouteData with $SettingsScreenRoute {
   static const path = '/settings';
+  static const absolutePath = '/settings';
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
@@ -16,21 +17,18 @@ class SettingsScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
 
-    useAppBar(
-      ref,
-      path: SettingsScreenRoute.path,
+    return AppBarScope(
       state: AppBarState(title: Text(l10n.settings)),
-    );
-
-    return ScrollableContainer(
-      child: Column(
-        children: [
-          TextButton(onPressed: () => {}, child: const Text('go')),
-          TextButton(
-            onPressed: () => AppMessenger.showSnackBar('Hello, world!'),
-            child: const Text('Show SnackBar'),
-          ),
-        ],
+      child: ScrollableContainer(
+        child: Column(
+          children: [
+            TextButton(onPressed: () => {}, child: const Text('go')),
+            TextButton(
+              onPressed: () => AppMessenger.showSnackBar('Hello, world!'),
+              child: const Text('Show SnackBar'),
+            ),
+          ],
+        ),
       ),
     );
   }

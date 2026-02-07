@@ -308,6 +308,10 @@ extension RouterExtension on BuildContext {
   bool isAt(String path) => currentPath == path;
 }
 
+extension ModalRouteExtension on BuildContext {
+  ModalRoute<dynamic>? get modalRoute => ModalRoute.of(this);
+}
+
 extension NavigatorExtension on BuildContext {
   NavigatorState get navigator => Navigator.of(this);
 

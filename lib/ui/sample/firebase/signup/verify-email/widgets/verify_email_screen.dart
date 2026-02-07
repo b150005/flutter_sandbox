@@ -26,12 +26,6 @@ class VerifyEmailScreen extends HookConsumerWidget {
     final authRepository = ref.watch(authRepositoryProvider.notifier);
     final l10n = ref.watch(appLocalizationsProvider);
 
-    useAppBar(
-      ref,
-      path: VerifyEmailScreenRoute.absolutePath,
-      state: AppBarState(title: Text(l10n.verifyEmail)),
-    );
-
     useEffect(() {
       authRepository
           .signInWithEmailLink(emailLink: emailLink)
@@ -57,52 +51,55 @@ class VerifyEmailScreen extends HookConsumerWidget {
       return null;
     }, []);
 
-    return switch (screenState.value) {
-      _EmailVerificationState.loading => Center(
-        child: context.loadingIndicator,
-      ),
-      _EmailVerificationState.success => ScrollableContainer(
-        child: Column(
-          spacing: Spacing.xxxl.dp,
-          children: [
-            Callout(
-              l10n.signInWithEmailLinkSuccessfully,
-              type: CalloutType.success,
-            ),
-            const PasswordSetupForm(),
-          ],
+    return AppBarScope(
+      state: AppBarState(title: Text(l10n.verifyEmail)),
+      child: switch (screenState.value) {
+        _EmailVerificationState.loading => Center(
+          child: context.loadingIndicator,
         ),
-      ),
-      _EmailVerificationState.emailNotFound => ScrollableContainer(
-        child: Column(
-          spacing: Spacing.xxxl.dp,
-          children: [
-            Callout(
-              errorMessage.value!,
-              type: CalloutType.warning,
-              onDismiss: () => errorMessage.value = null,
-            ),
-            EmailInputForm(
-              submitAction: (email) => authRepository.signInWithEmailLink(
-                email: email,
-                emailLink: emailLink,
+        _EmailVerificationState.success => ScrollableContainer(
+          child: Column(
+            spacing: Spacing.xxxl.dp,
+            children: [
+              Callout(
+                l10n.signInWithEmailLinkSuccessfully,
+                type: CalloutType.success,
               ),
-              onSuccess: (credential) {
-                screenState.value = _EmailVerificationState.success;
-              },
-            ),
-          ],
+              const PasswordSetupForm(),
+            ],
+          ),
         ),
-      ),
-      _EmailVerificationState.invalidLink ||
-      _EmailVerificationState.serviceUnavailable ||
-      _EmailVerificationState.unknown => ScrollableContainer(
-        child: Callout(
-          errorMessage.value!,
-          type: CalloutType.error,
+        _EmailVerificationState.emailNotFound => ScrollableContainer(
+          child: Column(
+            spacing: Spacing.xxxl.dp,
+            children: [
+              Callout(
+                errorMessage.value!,
+                type: CalloutType.warning,
+                onDismiss: () => errorMessage.value = null,
+              ),
+              EmailInputForm(
+                submitAction: (email) => authRepository.signInWithEmailLink(
+                  email: email,
+                  emailLink: emailLink,
+                ),
+                onSuccess: (credential) {
+                  screenState.value = _EmailVerificationState.success;
+                },
+              ),
+            ],
+          ),
         ),
-      ),
-    };
+        _EmailVerificationState.invalidLink ||
+        _EmailVerificationState.serviceUnavailable ||
+        _EmailVerificationState.unknown => ScrollableContainer(
+          child: Callout(
+            errorMessage.value!,
+            type: CalloutType.error,
+          ),
+        ),
+      },
+    );
   }
 }
 

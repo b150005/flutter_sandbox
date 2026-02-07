@@ -2,6 +2,7 @@ part of '../../../core/routing/router.dart';
 
 class HomeScreenRoute extends GoRouteData with $HomeScreenRoute {
   static const path = '/';
+  static const absolutePath = '/';
 
   @override
   Widget build(BuildContext context, GoRouterState state) => const HomeScreen();
@@ -15,21 +16,18 @@ class HomeScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
 
-    useAppBar(
-      ref,
-      path: HomeScreenRoute.path,
+    return AppBarScope(
       state: AppBarState(title: Text(l10n.home)),
-    );
-
-    return ScrollableContainer(
-      child: Column(
-        children: [
-          TextButton(onPressed: () => {}, child: const Text('go')),
-          TextButton(
-            onPressed: () => AppMessenger.showSnackBar('Hello, world!'),
-            child: const Text('Show SnackBar'),
-          ),
-        ],
+      child: ScrollableContainer(
+        child: Column(
+          children: [
+            TextButton(onPressed: () => {}, child: const Text('go')),
+            TextButton(
+              onPressed: () => AppMessenger.showSnackBar('Hello, world!'),
+              child: const Text('Show SnackBar'),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -17,15 +17,12 @@ class DataConnectScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
 
-    useAppBar(
-      ref,
-      path: DataConnectScreenRoute.absolutePath,
+    return AppBarScope(
       state: AppBarState(title: Text(l10n.firebaseDataConnect)),
-    );
-
-    return const ScrollableContainer(
-      child: Column(
-        children: [Placeholder()],
+      child: const ScrollableContainer(
+        child: Column(
+          children: [Placeholder()],
+        ),
       ),
     );
   }

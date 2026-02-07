@@ -18,12 +18,6 @@ class FirebaseAuthScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
 
-    useAppBar(
-      ref,
-      path: FirebaseAuthScreenRoute.absolutePath,
-      state: AppBarState(title: Text(l10n.firebaseAuth)),
-    );
-
     final secureStorageRepository = ref.watch(
       secureStorageRepositoryProvider.notifier,
     );
@@ -63,15 +57,18 @@ class FirebaseAuthScreen extends HookConsumerWidget {
       });
     });
 
-    return AuthStateBuilder(
-      builder: (user) => ScrollableContainer(
-        child: Column(
-          spacing: Spacing.sm.dp,
-          children: [
-            UserProfileCard(user: user),
-            UserAuthDetailCard(user: user),
-            const SignOutButton(),
-          ],
+    return AppBarScope(
+      state: AppBarState(title: Text(l10n.firebaseAuth)),
+      child: AuthStateBuilder(
+        builder: (user) => ScrollableContainer(
+          child: Column(
+            spacing: Spacing.sm.dp,
+            children: [
+              UserProfileCard(user: user),
+              UserAuthDetailCard(user: user),
+              const SignOutButton(),
+            ],
+          ),
         ),
       ),
     );
