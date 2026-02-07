@@ -107,6 +107,8 @@ class _BackButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
 
+    ref.watch(appBarStateProvider);
+
     return context.canPop()
         ? IconButton(
             key: WidgetKeys.back,
