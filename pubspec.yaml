@@ -12,9 +12,9 @@ environment:
 dependencies:
   cloud_firestore:
   cloud_functions:
+  collection:
   cupertino_icons:
   dlibphonenumber:
-  dropdown_search: ^7.0.0-pre6
   envied:
   firebase_ai:
   firebase_analytics:
