@@ -13,11 +13,26 @@ class SampleScreenRoute extends GoRouteData with $SampleScreenRoute {
 class SampleScreen extends HookConsumerWidget {
   const SampleScreen({super.key});
 
+  static List<Content> _contents(l10n.AppLocalizations l10n) => [
+        Content(
+          path: FirebaseScreenRoute.absolutePath,
+          title: 'Firebase',
+          description: l10n.signInScreenDescription,
+          subtitle: 'Firebase Sign-In',
+        ),
+        Content(
+          path: LocalStorageScreenRoute.absolutePath,
+          title: 'Local Storage',
+          description: l10n.localStorageScreenDescription,
+          subtitle: 'Local Storage Sandbox',
+        ),
+      ];
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
 
-    final contents = ref.watch(sampleContentsProvider);
+    final contents = useMemoized(() => _contents(l10n), [l10n]);
 
     return AppBarScope(
       state: AppBarState(title: Text(l10n.sample)),
