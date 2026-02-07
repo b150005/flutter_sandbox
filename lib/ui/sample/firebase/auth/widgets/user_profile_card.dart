@@ -157,7 +157,7 @@ class UserProfileCard extends HookConsumerWidget {
                       key: WidgetKeys.editPhoneNumber,
                       onPressed: () => showAdaptiveDialog<void>(
                         context: context,
-                        builder: (context) => PhoneNumberEditDialog(user: user),
+                        builder: (context) => const PhoneNumberEditDialog(),
                       ),
                       child: Text(l10n.edit),
                     ),

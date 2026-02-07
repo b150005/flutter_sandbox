@@ -36,17 +36,25 @@
 	"@invalidEmailFormat": {
 		"description": "メールアドレスの形式が無効な場合に表示される検証メッセージ"
 	},
-	"countryCodeRequired": "電話番号を入力した場合は国番号を選択してください。",
+	"countryCodeRequired": "国番号を選択してください。",
 	"@countryCodeRequired": {
-		"description": "国内番号のみ入力されて国番号が未選択の場合のエラーメッセージ"
+		"description": "国番号が選択されていない場合に表示される検証メッセージ"
 	},
-	"nationalNumberRequired": "国番号を選択した場合は電話番号を入力してください。",
+	"nationalNumberRequired": "電話番号を入力してください。",
 	"@nationalNumberRequired": {
-		"description": "国番号のみ選択されて国内番号が未入力の場合のエラーメッセージ"
+		"description": "国内番号が入力されていない場合に表示される検証メッセージ"
 	},
 	"invalidPhoneNumberFormat": "有効な電話番号を入力してください。",
 	"@invalidPhoneNumberFormat": {
 		"description": "電話番号の形式が無効な場合に表示される検証メッセージ"
+	},
+	"unchangedPhoneNumber": "現在と同じ電話番号です。別の番号を入力してください。",
+	"@unchangedPhoneNumber": {
+		"description": "電話番号編集時に、現在の電話番号と同じ番号が入力された場合に表示される検証メッセージ"
+	},
+	"unlinkPhoneNumberConfirmation": "電話番号の連携を解除しますか？この操作は取り消せません。",
+	"@unlinkPhoneNumberConfirmation": {
+		"description": "電話番号の連携解除を試みた際に表示される確認メッセージ"
 	},
 	"registeredEmail": "このメールアドレスは既に登録されています。別のメールアドレスを使用するか、サインインしてください。",
 	"@registeredEmail": {
@@ -126,6 +134,18 @@
 	"@updateEmailSuccessfully": {
 		"description": "メールアドレス変更が成功した際に表示される成功メッセージ"
 	},
+	"linkPhoneNumberSuccessfully": "電話番号が正常に連携されました。",
+	"@linkPhoneNumberSuccessfully": {
+		"description": "電話番号の紐付けに成功した際に表示される成功メッセージ"
+	},
+	"updatePhoneNumberSuccessfully": "電話番号が正常に変更されました。",
+	"@updatePhoneNumberSuccessfully": {
+		"description": "電話番号の変更が成功した際に表示される成功メッセージ"
+	},
+	"unlinkPhoneNumberSuccessfully": "電話番号の連携が解除されました。",
+	"@unlinkPhoneNumberSuccessfully": {
+		"description": "電話番号の連携解除が成功した際に表示される成功メッセージ"
+	},
 	"signInScreenDescription": "Firebase の各機能を統合したデモ画面です。",
 	"@signInScreenDescription": {
 		"description": "Firebase デモ画面の説明テキスト"
@@ -168,10 +188,16 @@
 	"@ok": {},
 	"submit": "送信",
 	"@submit": {},
+	"confirm": "確認",
+	"@confirm": {},
+	"done": "完了",
+	"@done": {},
 	"edit": "編集",
 	"@edit": {},
 	"select": "選択",
 	"@select": {},
+	"unlink": "連携を解除",
+	"@unlink": {},
 	"editEmail": "メールアドレスの編集",
 	"@editEmail": {},
 	"currentEmail": "現在のメールアドレス",
@@ -190,8 +216,22 @@
 	"@countryCodePickerSearchHint": {
 		"description": "国番号の検索フィールドで表示するヒント"
 	},
+	"noSearchResults": "\"{query}\" に一致する結果が見つかりませんでした",
+	"@noSearchResults": {
+		"description": "検索結果が空の場合に表示されるメッセージ",
+		"placeholders": {
+			"query": {
+				"type": "String",
+				"example": "りんご"
+			}
+		}
+	},
+	"noSearchResultsHint": "別のキーワードで検索するか、入力内容をご確認ください。",
+	"@noSearchResultsHint": {},
 	"sendVerificationCode": "認証コードを送信",
 	"@sendVerificationCode": {},
+	"unlinkPhoneNumber": "電話番号の連携解除",
+	"@unlinkPhoneNumber": {},
 	"cancel": "キャンセル",
 	"@cancel": {},
 	"firebaseSignIn": "Firebase サインイン",

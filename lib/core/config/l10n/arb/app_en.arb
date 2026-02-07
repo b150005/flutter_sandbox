@@ -36,17 +36,25 @@
 	"@invalidEmailFormat": {
 		"description": "Validation message displayed when the email address format is invalid"
 	},
-	"countryCodeRequired": "Please select a country code when national number is entered.",
+	"countryCodeRequired": "Please select a country code.",
 	"@countryCodeRequired": {
-		"description": "Error message when only national number is entered without country code"
+		"description": "Validation message displayed when no country code is selected"
 	},
-	"nationalNumberRequired": "Please enter a national number when country code is selected.",
+	"nationalNumberRequired": "Please enter a national number.",
 	"@nationalNumberRequired": {
-		"description": "Error message when only country code is selected without national number"
+		"description": "Validation message displayed when no national number is entered"
 	},
 	"invalidPhoneNumberFormat": "Please enter a valid phone number.",
 	"@invalidPhoneNumberFormat": {
 		"description": "Validation message displayed when the phone number format is invalid"
+	},
+	"unchangedPhoneNumber": "This is your current phone number. Please enter a different number.",
+	"@unchangedPhoneNumber": {
+		"description": "Validation message displayed when the entered phone number is the same as the current one during phone number editing"
+	},
+	"unlinkPhoneNumberConfirmation": "Are you sure you want to unlink your phone number? This action cannot be undone.",
+	"@unlinkPhoneNumberConfirmation": {
+		"description": "Confirmation message displayed when user attempts to unlink their phone number from the account"
 	},
 	"registeredEmail": "This email is already registered. Please use a different email or try to sign in.",
 	"@registeredEmail": {
@@ -126,6 +134,18 @@
 	"@updateEmailSuccessfully": {
 		"description": "Success message displayed when email address update is completed"
 	},
+	"linkPhoneNumberSuccessfully": "Your phone number has been successfully linked.",
+	"@linkPhoneNumberSuccessfully": {
+		"description": "Success message displayed when phone number is linked to the account"
+	},
+	"updatePhoneNumberSuccessfully": "Your phone number has been successfully updated.",
+	"@updatePhoneNumberSuccessfully": {
+		"description": "Success message displayed when phone number update is completed"
+	},
+	"unlinkPhoneNumberSuccessfully": "Your phone number has been successfully unlinked.",
+	"@unlinkPhoneNumberSuccessfully": {
+		"description": "Success message displayed when phone number provider is unlinked from the account"
+	},
 	"signInScreenDescription": "A comprehensive demo screen showcasing Firebase services.",
 	"@signInScreenDescription": {
 		"description": "Descriptive text for the Firebase demo screen"
@@ -168,10 +188,16 @@
 	"@ok": {},
 	"submit": "Submit",
 	"@submit": {},
+	"confirm": "Confirm",
+	"@confirm": {},
+	"done": "Done",
+	"@done": {},
 	"edit": "Edit",
 	"@edit": {},
 	"select": "Select",
 	"@select": {},
+	"unlink": "Unlink",
+	"@unlink": {},
 	"editEmail": "Edit Email",
 	"@editEmail": {},
 	"currentEmail": "Current Email",
@@ -190,8 +216,22 @@
 	"@countryCodePickerSearchHint": {
 		"description": "Hint text displayed in the country code picker search field"
 	},
+	"noSearchResults": "No results found for \"{query}\"",
+	"@noSearchResults": {
+		"description": "Message displayed when search returns no results",
+		"placeholders": {
+			"query": {
+				"type": "String",
+				"example": "apple"
+			}
+		}
+	},
+	"noSearchResultsHint": "Try different keywords or check your spelling.",
+	"@noSearchResultsHint": {},
 	"sendVerificationCode": "Send Verification Code",
 	"@sendVerificationCode": {},
+	"unlinkPhoneNumber": "Unlink Phone Number",
+	"@unlinkPhoneNumber": {},
 	"cancel": "Cancel",
 	"@cancel": {},
 	"firebaseSignIn": "Firebase Sign In",

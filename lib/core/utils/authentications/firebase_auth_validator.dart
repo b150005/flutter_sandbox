@@ -2,9 +2,9 @@ import 'package:dlibphonenumber/dlibphonenumber.dart';
 
 import '../../config/constants/regexes.dart';
 import '../../config/l10n/app_localizations.dart';
-import '../exceptions/exception_handler.dart';
 import '../extensions/string.dart';
 import '../logging/log_message.dart';
+import 'phone_number_parser.dart';
 
 abstract final class FirebaseAuthValidator {
   const FirebaseAuthValidator._();
@@ -62,37 +62,44 @@ abstract final class FirebaseAuthValidator {
   ///
   /// [countryCode] 国番号(例: +81)
   /// [nationalNumber] 国際番号(例: 9012345678)
+  /// [currentPhoneNumber] E.164 形式で表現されるユーザーの現在の電話番号(例: +819012345678)
   /// [l10n] ロケールごとのメッセージを保持するローカライゼーション
   static String? validatePhoneNumber({
     required String? countryCode,
-    required String? nationalNumber,
+    required String nationalNumber,
+    required String? currentPhoneNumber,
     required AppLocalizations l10n,
   }) {
-    final hasCountryCode = countryCode.isNotNullAndNotEmpty;
-    final hasNationalNumber = nationalNumber.isNotNullAndNotEmpty;
-
-    if (!hasCountryCode && !hasNationalNumber) {
-      return null;
-    }
-    if (hasCountryCode && !hasNationalNumber) {
-      return l10n.nationalNumberRequired;
-    }
-    if (!hasCountryCode && hasNationalNumber) {
+    if (countryCode.isNullOrEmpty) {
       return l10n.countryCodeRequired;
     }
 
-    final parseResult = ExceptionHandler.execute(
-      () => PhoneNumberUtil.instance.parse(
-        countryCode! + nationalNumber!,
-        null,
-      ),
+    if (nationalNumber.isEmpty) {
+      return l10n.nationalNumberRequired;
+    }
+
+    final parseResult = PhoneNumberParser.format(
+      countryCode: countryCode!,
+      nationalNumber: nationalNumber,
       l10n: l10n,
     );
 
     return parseResult.when(
-      (phoneNumber) => PhoneNumberUtil.instance.isValidNumber(phoneNumber)
-          ? null
-          : l10n.invalidPhoneNumberFormat,
+      (phoneNumber) {
+        if (!PhoneNumberUtil.instance.isValidNumber(phoneNumber)) {
+          return l10n.invalidPhoneNumberFormat;
+        }
+
+        final e164InputPhoneNumber = PhoneNumberUtil.instance.format(
+          phoneNumber,
+          PhoneNumberFormat.e164,
+        );
+        if (currentPhoneNumber == e164InputPhoneNumber) {
+          return l10n.unchangedPhoneNumber;
+        }
+
+        return null;
+      },
       (appException) => appException.message,
     );
   }

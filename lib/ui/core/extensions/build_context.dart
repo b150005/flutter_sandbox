@@ -258,14 +258,23 @@ extension AppThemeExtension on BuildContext {
   TextStyle? get supportTextStyle =>
       textTheme.bodyMedium?.copyWith(color: colorScheme.outline);
 
+  BorderRadius get borderRadius => BorderRadius.circular(BorderRadii.md.value);
+
+  OutlineInputBorder get outlinedInputBorder => OutlineInputBorder(
+    borderRadius: borderRadius,
+  );
+
   InputDecoration get outlinedInputDecoration => InputDecoration(
     helperMaxLines: _maxLines,
     hintStyle: supportTextStyle,
     hintMaxLines: _maxLines,
     errorMaxLines: _maxLines,
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(BorderRadii.md.value),
-    ),
+    border: outlinedInputBorder,
+  );
+
+  BoxDecoration outlinedBoxDecoration({Color? borderColor}) => BoxDecoration(
+    border: Border.all(color: borderColor ?? colorScheme.outline),
+    borderRadius: borderRadius,
   );
 }
 
@@ -311,4 +320,10 @@ extension MaterialLocalizationsExtension on BuildContext {
 
   String get modalBarrierDismissLabel =>
       materialLocalizations.modalBarrierDismissLabel;
+
+  String get deleteButtonTooltip => materialLocalizations.deleteButtonTooltip;
+}
+
+extension MediaQueryExtension on BuildContext {
+  Size get windowSize => MediaQuery.sizeOf(this);
 }

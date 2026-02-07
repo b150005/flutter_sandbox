@@ -18,7 +18,7 @@ abstract final class WidgetKeys {
     'phoneNumberEditForm',
   );
 
-  static final nationalNumberTextFormField =
+  static final nationalNumberTextField =
       LabeledGlobalKey<FormFieldState<String>>('nationalNumberTextFormField');
 
   static const ValueKey<String> userProfileCard = ValueKey('userProfileCard');
@@ -26,12 +26,24 @@ abstract final class WidgetKeys {
     'userAuthDetailCard',
   );
 
+  static const ValueKey<String> confirmationDialog = ValueKey(
+    'confirmationDialog',
+  );
+  static const ValueKey<String> searchableListDialog = ValueKey(
+    'searchableListDialog',
+  );
   static const ValueKey<String> authRequiredDialog = ValueKey(
     'authRequiredDialog',
+  );
+  static const ValueKey<String> unlinkPhoneAuthConfirmationDialog = ValueKey(
+    'unlinkPhoneNumberConfirmationDialog',
   );
 
   static const ValueKey<String> countryCodePicker = ValueKey(
     'countryCodePicker',
+  );
+  static const ValueKey<String> countryPicker = ValueKey(
+    'countryPicker',
   );
 
   static const ValueKey<String> back = ValueKey('back');
