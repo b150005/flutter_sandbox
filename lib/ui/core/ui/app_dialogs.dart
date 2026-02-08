@@ -8,6 +8,7 @@ import '../../../core/utils/l10n/app_localizations.dart';
 import '../extensions/build_context.dart';
 import '../extensions/navigator_state.dart';
 import '../hooks/use_debounced_text_editing_controller.dart';
+import 'search_text_field.dart';
 
 typedef ItemBuilder<T> = Widget? Function(T item);
 
@@ -267,20 +268,9 @@ class _SearchableListDialog<T> extends HookConsumerWidget {
                 children: [
                   if (searchFilter != null)
                     Flexible(
-                      // TODO(b150005): この TextField の共通化
-                      child: TextField(
+                      child: SearchTextField(
                         controller: controller,
-                        decoration: context.outlinedInputDecoration.copyWith(
-                          hintText: searchHintText,
-                          prefixIcon: const Icon(Icons.search_outlined),
-                          suffixIcon: controller.text.isEmpty
-                              ? null
-                              : IconButton(
-                                  onPressed: controller.clear,
-                                  icon: const Icon(Icons.clear_outlined),
-                                ),
-                        ),
-                        textInputAction: TextInputAction.search,
+                        hintText: searchHintText,
                       ),
                     ),
                   if (multiSelectable)

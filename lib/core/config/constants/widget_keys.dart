@@ -21,6 +21,8 @@ abstract final class WidgetKeys {
   static final nationalNumberTextField =
       LabeledGlobalKey<FormFieldState<String>>('nationalNumberTextFormField');
 
+  static const ValueKey<String> searchTextField = ValueKey('searchTextField');
+
   static const ValueKey<String> userProfileCard = ValueKey('userProfileCard');
   static const ValueKey<String> userAuthDetailCard = ValueKey(
     'userAuthDetailCard',
