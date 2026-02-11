@@ -5,7 +5,6 @@ import 'package:sealed_countries/sealed_countries.dart';
 
 import '../../../core/config/constants/spacing.dart';
 import '../../../core/config/constants/widget_keys.dart';
-import '../../../data/providers/world_countries_provider.dart';
 import '../extensions/build_context.dart';
 import 'app_dialogs.dart';
 
@@ -51,13 +50,21 @@ class CountryPicker<T> extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final basicTypeLocale = BasicTypedLocale(
-      NaturalLanguage.fromAnyCode(
-        WidgetsBinding.instance.platformDispatcher.locale.languageCode,
-      ),
-    );
-    final countryNameMap = ref.watch(
-      worldCountriesProvider(basicTypedLocale: basicTypeLocale),
+    final countryNameMap = useMemoized(
+      () {
+        final basicTypedLocale = BasicTypedLocale(
+          NaturalLanguage.fromAnyCode(
+            WidgetsBinding.instance.platformDispatcher.locale.languageCode,
+          ),
+        );
+
+        return WorldCountry.list.commonNamesMap(
+          options: LocaleMappingOptions(
+            mainLocale: basicTypedLocale,
+          ),
+        );
+      },
+      [WidgetsBinding.instance.platformDispatcher.locale.languageCode],
     );
 
     final country = useState<WorldCountry?>(initialCountry);
