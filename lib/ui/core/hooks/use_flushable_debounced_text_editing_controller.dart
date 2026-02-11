@@ -46,7 +46,9 @@ DebouncedTextFieldManager useFlushableDebouncedTextEditingController({
       return;
     }
 
-    onDebounced?.call(debouncedText);
+    Future.microtask(() {
+      onDebounced?.call(debouncedText);
+    });
   });
 
   void flush() {
