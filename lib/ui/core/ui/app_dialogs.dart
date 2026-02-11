@@ -55,29 +55,37 @@ abstract final class AppDialogs {
     bool Function(T item, String query)? searchFilter,
     Duration timeout = const Duration(milliseconds: 300),
     bool barrierDismissible = true,
-  }) => showAdaptiveDialog(
-    context: context,
-    builder: (context) => _SearchableListDialog(
-      key: key,
-      title: title,
-      searchHintText: searchHintText,
-      showCloseButton: showCloseButton,
-      items: items,
-      itemLeadingBuilder: itemLeadingBuilder,
-      itemTitleBuilder: itemTitleBuilder,
-      itemSubtitleBuilder: itemSubtitleBuilder,
-      itemTrailingBuilder: itemTrailingBuilder,
-      initialSelection: initialSelection == null
-          ? <T>{}
-          : Set.of({initialSelection}),
-      searchFilter: searchFilter,
-      timeout: timeout,
-    ),
-    barrierDismissible: barrierDismissible,
-    barrierLabel: context.modalBarrierDismissLabel,
-  );
+  }) async {
+    final result = await showAdaptiveDialog<(T?,)>(
+      context: context,
+      builder: (context) => _SearchableListDialog(
+        key: key,
+        title: title,
+        searchHintText: searchHintText,
+        showCloseButton: showCloseButton,
+        items: items,
+        itemLeadingBuilder: itemLeadingBuilder,
+        itemTitleBuilder: itemTitleBuilder,
+        itemSubtitleBuilder: itemSubtitleBuilder,
+        itemTrailingBuilder: itemTrailingBuilder,
+        initialSelection: initialSelection == null
+            ? <T>{}
+            : Set.of({initialSelection}),
+        searchFilter: searchFilter,
+        timeout: timeout,
+      ),
+      barrierDismissible: barrierDismissible,
+      barrierLabel: context.modalBarrierDismissLabel,
+    );
 
-  static Future<Set<T>?> showMultiSelectableListDialog<T>({
+    if (result == null) {
+      return initialSelection;
+    }
+
+    return result.$1;
+  }
+
+  static Future<Set<T>> showMultiSelectableListDialog<T>({
     required BuildContext context,
     Key? key,
     Widget? title,
@@ -93,27 +101,35 @@ abstract final class AppDialogs {
     Duration timeout = const Duration(milliseconds: 300),
     required String Function(T item)? chipLabel,
     bool barrierDismissible = true,
-  }) => showAdaptiveDialog(
-    context: context,
-    builder: (context) => _SearchableListDialog(
-      key: key,
-      title: title,
-      searchHintText: searchHintText,
-      showCloseButton: showCloseButton,
-      items: items,
-      itemLeadingBuilder: itemLeadingBuilder,
-      itemTitleBuilder: itemTitleBuilder,
-      itemSubtitleBuilder: itemSubtitleBuilder,
-      itemTrailingBuilder: itemTrailingBuilder,
-      initialSelection: initialSelection,
-      searchFilter: searchFilter,
-      timeout: timeout,
-      multiSelectable: true,
-      chipLabel: chipLabel,
-    ),
-    barrierDismissible: barrierDismissible,
-    barrierLabel: context.modalBarrierDismissLabel,
-  );
+  }) async {
+    final result = await showAdaptiveDialog<(Set<T>,)>(
+      context: context,
+      builder: (context) => _SearchableListDialog(
+        key: key,
+        title: title,
+        searchHintText: searchHintText,
+        showCloseButton: showCloseButton,
+        items: items,
+        itemLeadingBuilder: itemLeadingBuilder,
+        itemTitleBuilder: itemTitleBuilder,
+        itemSubtitleBuilder: itemSubtitleBuilder,
+        itemTrailingBuilder: itemTrailingBuilder,
+        initialSelection: initialSelection,
+        searchFilter: searchFilter,
+        timeout: timeout,
+        multiSelectable: true,
+        chipLabel: chipLabel,
+      ),
+      barrierDismissible: barrierDismissible,
+      barrierLabel: context.modalBarrierDismissLabel,
+    );
+
+    if (result == null) {
+      return initialSelection;
+    }
+
+    return result.$1;
+  }
 }
 
 @immutable
@@ -238,7 +254,7 @@ class _SearchableListDialog<T> extends HookConsumerWidget {
 
     void onItemTapped(T item) {
       if (!multiSelectable) {
-        context.rootNavigator.safePop(item);
+        context.rootNavigator.safePop((item,));
 
         return;
       }
@@ -276,12 +292,12 @@ class _SearchableListDialog<T> extends HookConsumerWidget {
                   if (multiSelectable)
                     TextButton(
                       onPressed: () =>
-                          context.rootNavigator.safePop(selectedItems.value),
+                          context.rootNavigator.safePop((selectedItems.value,)),
                       child: Text(l10n.done),
                     ),
                   if (showCloseButton)
                     IconButton(
-                      onPressed: () => context.rootNavigator.safePop(),
+                      onPressed: () => context.rootNavigator.safePop(null),
                       icon: const Icon(Icons.close_rounded),
                     ),
                 ],
