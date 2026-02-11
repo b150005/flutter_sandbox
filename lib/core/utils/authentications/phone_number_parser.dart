@@ -4,6 +4,7 @@ import 'package:multiple_result/multiple_result.dart';
 import '../../config/l10n/app_localizations.dart';
 import '../exceptions/app_exception.dart';
 import '../exceptions/exception_handler.dart';
+import '../extensions/nullable.dart';
 import '../extensions/string.dart';
 
 abstract final class PhoneNumberParser {
@@ -59,4 +60,22 @@ abstract final class PhoneNumberParser {
 
     return PhoneNumberUtil.instance.getRegionCodeForCountryCode(parsed);
   }
+
+  static PhoneNumber examplePhoneNumber({String? countryCode}) =>
+      PhoneNumberUtil.instance
+          .getExampleNumberForType(
+            regionCode: PhoneNumberParser.regionCodeFromCountryCode(
+              countryCode,
+            ),
+            type: PhoneNumberType.mobile,
+          )
+          .orElse(
+            PhoneNumberUtil.instance.getExampleNumberForType(
+              type: PhoneNumberType.mobile,
+            )!,
+            objectName:
+                'PhoneNumberUtil.instance.getExampleNumberForType('
+                'regionCode: $countryCode, '
+                'type: PhoneNumberType.mobile)',
+          );
 }

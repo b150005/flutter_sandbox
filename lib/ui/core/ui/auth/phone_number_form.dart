@@ -1,5 +1,4 @@
 import 'package:collection/collection.dart';
-import 'package:dlibphonenumber/dlibphonenumber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -77,15 +76,9 @@ class PhoneNumberForm extends HookConsumerWidget {
     );
 
     final exampleNationalNumber = useMemoized(
-      () => PhoneNumberUtil.instance
-          .getExampleNumberForType(
-            regionCode: PhoneNumberParser.regionCodeFromCountryCode(
-              phoneNumber.countryCode,
-            ),
-            type: PhoneNumberType.mobile,
-          )!
-          .nationalNumber
-          .toString(),
+      () => PhoneNumberParser.examplePhoneNumber(
+        countryCode: phoneNumber.countryCode,
+      ).nationalNumber.toString(),
       [phoneNumber.countryCode],
     );
 
