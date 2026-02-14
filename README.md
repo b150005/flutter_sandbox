@@ -341,6 +341,13 @@ i  Writing project information to .firebaserc...
 
 ### iOS/macOS のビルド設定
 
+#### APNs Certificate(.p8) の配置
+
+以下のファイルを配置してください。
+
+- `ios/Credentials/AuthKey_***.p8`
+- `maxos/Credentials/AuthKey_***.p8`
+
 #### xcconfig の生成と読み取り
 
 以下のファイルを参照してください。
