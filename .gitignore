@@ -54,6 +54,9 @@ firebase/data_connect/.dataconnect/schema/
 firebase/data_connect/.local/pgliteData
 firebase/local_emulator/*
 
+# Apple credentials
+*.p8
+
 # Environment variables
 *.env
 !sample.env
