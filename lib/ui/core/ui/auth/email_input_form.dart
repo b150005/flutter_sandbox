@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:multiple_result/multiple_result.dart';
@@ -49,38 +50,45 @@ class EmailInputForm<T> extends HookConsumerWidget {
 
       final actionResult = await submitAction(emailController.text);
       actionResult.when(
-        onSuccess,
+        (result) {
+          TextInput.finishAutofillContext();
+
+          onSuccess(result);
+        },
         (appException) => errorMessage.value = appException.message,
       );
 
       isLoading.value = false;
     }
 
-    return Form(
-      key: WidgetKeys.emailVerificationForm,
-      child: Column(
-        spacing: Spacing.sm.dp,
-        children: [
-          if (errorMessage.value.isNotNullAndNotEmpty)
-            Callout(
-              errorMessage.value!,
-              type: CalloutType.error,
-              onDismiss: () => errorMessage.value = null,
+    return AutofillGroup(
+      onDisposeAction: AutofillContextAction.cancel,
+      child: Form(
+        key: WidgetKeys.emailVerificationForm,
+        child: Column(
+          spacing: Spacing.sm.dp,
+          children: [
+            if (errorMessage.value.isNotNullAndNotEmpty)
+              Callout(
+                errorMessage.value!,
+                type: CalloutType.error,
+                onDismiss: () => errorMessage.value = null,
+              ),
+            EmailTextFormField(
+              controller: emailController,
+              textInputAction: TextInputAction.done,
+              onFieldSubmitted: (_) => onSubmit(),
             ),
-          EmailTextFormField(
-            controller: emailController,
-            textInputAction: TextInputAction.done,
-            onFieldSubmitted: (_) => onSubmit(),
-          ),
-          FilledButton(
-            key: WidgetKeys.verifyEmail,
-            onPressed: isLoading.value ? null : onSubmit,
-            style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
-            child: isLoading.value
-                ? context.loadingIndicator
-                : Text(l10n.submit),
-          ),
-        ],
+            FilledButton(
+              key: WidgetKeys.verifyEmail,
+              onPressed: isLoading.value ? null : onSubmit,
+              style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
+              child: isLoading.value
+                  ? context.loadingIndicator
+                  : Text(l10n.submit),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -49,6 +50,8 @@ class EmailEditDialog extends HookConsumerWidget {
           .verifyBeforeUpdateEmail(emailController.text);
 
       verificationEmailSendingResult.when((_) {
+        TextInput.finishAutofillContext();
+
         context.rootNavigator.safePop();
 
         AppMessenger.showMaterialBanner(
@@ -67,33 +70,36 @@ class EmailEditDialog extends HookConsumerWidget {
       child: AlertDialog(
         icon: const Icon(Icons.email_outlined),
         title: Text(l10n.editEmail),
-        content: Form(
-          key: WidgetKeys.emailEditForm,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: Spacing.sm.dp,
-            children: [
-              if (errorMessage.value.isNotNullAndNotEmpty)
-                Callout(
-                  errorMessage.value!,
-                  type: CalloutType.error,
-                ),
-              Label(
-                l10n.currentEmail,
-                child: Text(
-                  user.email.orNullString(
-                    objectName: 'user.email',
+        content: AutofillGroup(
+          onDisposeAction: AutofillContextAction.cancel,
+          child: Form(
+            key: WidgetKeys.emailEditForm,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: Spacing.sm.dp,
+              children: [
+                if (errorMessage.value.isNotNullAndNotEmpty)
+                  Callout(
+                    errorMessage.value!,
+                    type: CalloutType.error,
+                  ),
+                Label(
+                  l10n.currentEmail,
+                  child: Text(
+                    user.email.orNullString(
+                      objectName: 'user.email',
+                    ),
                   ),
                 ),
-              ),
-              EmailTextFormField(
-                labelText: l10n.newEmail,
-                controller: emailController,
-                textInputAction: TextInputAction.done,
-                onFieldSubmitted: (_) => onSubmit(),
-              ),
-            ],
+                EmailTextFormField(
+                  labelText: l10n.newEmail,
+                  controller: emailController,
+                  textInputAction: TextInputAction.done,
+                  onFieldSubmitted: (_) => onSubmit(),
+                ),
+              ],
+            ),
           ),
         ),
         actions: [

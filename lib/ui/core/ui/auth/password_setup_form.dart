@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -64,89 +65,102 @@ class PasswordSetupForm extends HookConsumerWidget {
           .updatePassword(password: passwordController.text.trim());
 
       passwordUpdateResult.when(
-        (_) => context.go(FirebaseScreenRoute.absolutePath),
+        (_) {
+          TextInput.finishAutofillContext();
+
+          context.go(FirebaseScreenRoute.absolutePath);
+        },
         (appException) => errorMessage.value = appException.message,
       );
 
       isLoading.value = false;
     }
 
-    return Form(
-      key: WidgetKeys.passwordSetupForm,
-      child: Column(
-        spacing: Spacing.xxs.dp,
-        children: [
-          if (errorMessage.value.isNotNullAndNotEmpty)
-            Callout(
-              errorMessage.value!,
-              type: CalloutType.error,
-              onDismiss: () => errorMessage.value = null,
+    return AutofillGroup(
+      onDisposeAction: AutofillContextAction.cancel,
+      child: Form(
+        key: WidgetKeys.passwordSetupForm,
+        child: Column(
+          spacing: Spacing.xxs.dp,
+          children: [
+            if (errorMessage.value.isNotNullAndNotEmpty)
+              Callout(
+                errorMessage.value!,
+                type: CalloutType.error,
+                onDismiss: () => errorMessage.value = null,
+              ),
+            PasswordTextFormField(
+              controller: passwordController,
+              labelText: l10n.password,
+              textInputAction: TextInputAction.next,
+              onChanged: (password) {
+                satisfiesMinLength.value =
+                    FirebaseAuthValidator.satisfiesMinLength(
+                      password,
+                    );
+                satisfiesMaxLength.value =
+                    FirebaseAuthValidator.satisfiesMaxLength(
+                      password,
+                    );
+                hasUppercase.value = FirebaseAuthValidator.hasUppercase(
+                  password,
+                );
+                hasLowercase.value = FirebaseAuthValidator.hasLowercase(
+                  password,
+                );
+                hasDigit.value = FirebaseAuthValidator.hasDigit(password);
+              },
+              onFieldSubmitted: (_) => onSubmit(),
+              autofillHints: const [AutofillHints.newPassword],
             ),
-          PasswordTextFormField(
-            controller: passwordController,
-            labelText: l10n.password,
-            textInputAction: TextInputAction.next,
-            onChanged: (password) {
-              satisfiesMinLength.value =
-                  FirebaseAuthValidator.satisfiesMinLength(
-                    password,
-                  );
-              satisfiesMaxLength.value =
-                  FirebaseAuthValidator.satisfiesMaxLength(
-                    password,
-                  );
-              hasUppercase.value = FirebaseAuthValidator.hasUppercase(password);
-              hasLowercase.value = FirebaseAuthValidator.hasLowercase(password);
-              hasDigit.value = FirebaseAuthValidator.hasDigit(password);
-            },
-            onFieldSubmitted: (_) => onSubmit(),
-          ),
-          PasswordTextFormField(
-            key: WidgetKeys.confirmPassword,
-            labelText: l10n.confirmPassword,
-            textInputAction: TextInputAction.done,
-            onFieldSubmitted: (_) => onSubmit(),
-            validator: (confirmPassword) =>
-                FirebaseAuthValidator.validateConfirmPassword(
-                  confirmPassword,
-                  password: passwordController.text,
-                  l10n: l10n,
+            PasswordTextFormField(
+              key: WidgetKeys.confirmPassword,
+              labelText: l10n.confirmPassword,
+              textInputAction: TextInputAction.done,
+              onFieldSubmitted: (_) => onSubmit(),
+              validator: (confirmPassword) =>
+                  FirebaseAuthValidator.validateConfirmPassword(
+                    confirmPassword,
+                    password: passwordController.text,
+                    l10n: l10n,
+                  ),
+              autofillHints: const [AutofillHints.newPassword],
+            ),
+            Column(
+              spacing: Spacing.xs.dp,
+              children: [
+                StatusIndicator(
+                  isValid: satisfiesMinLength.value,
+                  message: l10n.passwordMinLength,
                 ),
-          ),
-          Column(
-            spacing: Spacing.xs.dp,
-            children: [
-              StatusIndicator(
-                isValid: satisfiesMinLength.value,
-                message: l10n.passwordMinLength,
-              ),
-              StatusIndicator(
-                isValid: satisfiesMaxLength.value,
-                message: l10n.passwordMaxLength,
-              ),
-              StatusIndicator(
-                isValid: hasUppercase.value,
-                message: l10n.atLeastOneUppercaseLetter,
-              ),
-              StatusIndicator(
-                isValid: hasLowercase.value,
-                message: l10n.atLeastOneLowercaseLetter,
-              ),
-              StatusIndicator(
-                isValid: hasDigit.value,
-                message: l10n.atLeastOneDigit,
-              ),
-            ],
-          ),
-          FilledButton(
-            key: WidgetKeys.setupPassword,
-            onPressed: isLoading.value ? null : onSubmit,
-            style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
-            child: isLoading.value
-                ? context.loadingIndicator
-                : Text(l10n.setUpPassword),
-          ),
-        ],
+                StatusIndicator(
+                  isValid: satisfiesMaxLength.value,
+                  message: l10n.passwordMaxLength,
+                ),
+                StatusIndicator(
+                  isValid: hasUppercase.value,
+                  message: l10n.atLeastOneUppercaseLetter,
+                ),
+                StatusIndicator(
+                  isValid: hasLowercase.value,
+                  message: l10n.atLeastOneLowercaseLetter,
+                ),
+                StatusIndicator(
+                  isValid: hasDigit.value,
+                  message: l10n.atLeastOneDigit,
+                ),
+              ],
+            ),
+            FilledButton(
+              key: WidgetKeys.setupPassword,
+              onPressed: isLoading.value ? null : onSubmit,
+              style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
+              child: isLoading.value
+                  ? context.loadingIndicator
+                  : Text(l10n.setUpPassword),
+            ),
+          ],
+        ),
       ),
     );
   }

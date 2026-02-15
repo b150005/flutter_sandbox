@@ -163,6 +163,9 @@ class PhoneNumberForm extends HookConsumerWidget {
                               inputFormatters: [
                                 TextInputFormatters.nationalNumber,
                               ],
+                              autofillHints: const [
+                                AutofillHints.telephoneNumberNational,
+                              ],
                             ),
                           ),
                         ],

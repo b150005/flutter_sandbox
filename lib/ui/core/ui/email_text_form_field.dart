@@ -44,6 +44,7 @@ class EmailTextFormField extends HookConsumerWidget {
         validator: (email) =>
             FirebaseAuthValidator.validateEmail(email, l10n: l10n),
         inputFormatters: [TextInputFormatters.noWhitespace],
+        autofillHints: const [AutofillHints.email],
         autovalidateMode: AutovalidateMode.onUserInteraction,
       ),
     );

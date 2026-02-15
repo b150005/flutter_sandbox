@@ -19,6 +19,7 @@ class PasswordTextFormField extends HookConsumerWidget {
     this.onChanged,
     this.onFieldSubmitted,
     this.validator,
+    this.autofillHints = const [AutofillHints.password],
   });
 
   final String? labelText;
@@ -32,6 +33,8 @@ class PasswordTextFormField extends HookConsumerWidget {
   final ValueChanged<String>? onFieldSubmitted;
 
   final String? Function(String? password)? validator;
+
+  final Iterable<String> autofillHints;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -71,6 +74,7 @@ class PasswordTextFormField extends HookConsumerWidget {
             (password) =>
                 FirebaseAuthValidator.validatePassword(password, l10n: l10n),
         inputFormatters: [TextInputFormatters.noWhitespace],
+        autofillHints: autofillHints,
         autovalidateMode: AutovalidateMode.onUserInteraction,
       ),
     );

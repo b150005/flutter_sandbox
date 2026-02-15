@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -51,51 +52,58 @@ class SignInForm extends HookConsumerWidget {
           );
 
       signInResult.when(
-        (credential) => context.go(FirebaseScreenRoute.absolutePath),
+        (_) {
+          TextInput.finishAutofillContext();
+
+          context.go(FirebaseScreenRoute.absolutePath);
+        },
         (appException) => errorMessage.value = appException.message,
       );
 
       isLoading.value = false;
     }
 
-    return Form(
-      key: WidgetKeys.signInForm,
-      child: Column(
-        spacing: Spacing.sm.dp,
-        children: [
-          if (errorMessage.value.isNotNullAndNotEmpty)
-            Callout(
-              errorMessage.value!,
-              type: CalloutType.error,
-              onDismiss: () => errorMessage.value = null,
+    return AutofillGroup(
+      onDisposeAction: AutofillContextAction.cancel,
+      child: Form(
+        key: WidgetKeys.signInForm,
+        child: Column(
+          spacing: Spacing.sm.dp,
+          children: [
+            if (errorMessage.value.isNotNullAndNotEmpty)
+              Callout(
+                errorMessage.value!,
+                type: CalloutType.error,
+                onDismiss: () => errorMessage.value = null,
+              ),
+            EmailTextFormField(
+              controller: emailController,
+              textInputAction: TextInputAction.next,
             ),
-          EmailTextFormField(
-            controller: emailController,
-            textInputAction: TextInputAction.next,
-          ),
-          PasswordTextFormField(
-            controller: passwordController,
-            textInputAction: TextInputAction.done,
-            onFieldSubmitted: (_) => onSubmit(),
-          ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: TextButton(
-              key: WidgetKeys.forgotPassword,
-              onPressed: () =>
-                  context.go(ForgotPasswordScreenRoute.absolutePath),
-              child: Text(l10n.forgotPassword),
+            PasswordTextFormField(
+              controller: passwordController,
+              textInputAction: TextInputAction.done,
+              onFieldSubmitted: (_) => onSubmit(),
             ),
-          ),
-          FilledButton(
-            key: WidgetKeys.signIn,
-            onPressed: onSubmit,
-            style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
-            child: isLoading.value
-                ? context.loadingIndicator
-                : Text(l10n.signIn),
-          ),
-        ],
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                key: WidgetKeys.forgotPassword,
+                onPressed: () =>
+                    context.go(ForgotPasswordScreenRoute.absolutePath),
+                child: Text(l10n.forgotPassword),
+              ),
+            ),
+            FilledButton(
+              key: WidgetKeys.signIn,
+              onPressed: onSubmit,
+              style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
+              child: isLoading.value
+                  ? context.loadingIndicator
+                  : Text(l10n.signIn),
+            ),
+          ],
+        ),
       ),
     );
   }

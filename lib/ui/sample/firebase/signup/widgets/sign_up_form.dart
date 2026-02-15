@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -44,38 +45,45 @@ class SignUpForm extends HookConsumerWidget {
           )
           .then(
             (result) => result.when(
-              (_) => context.go(EmailSentScreenRoute.absolutePath),
+              (_) {
+                TextInput.finishAutofillContext();
+
+                context.go(EmailSentScreenRoute.absolutePath);
+              },
               (appException) => errorMessage.value = appException.message,
             ),
           )
           .whenComplete(() => isLoading.value = false);
     }
 
-    return Form(
-      key: WidgetKeys.signUpForm,
-      child: Column(
-        spacing: Spacing.sm.dp,
-        children: [
-          if (errorMessage.value.isNotNullAndNotEmpty)
-            Callout(
-              errorMessage.value!,
-              type: CalloutType.error,
-              onDismiss: () => errorMessage.value = null,
+    return AutofillGroup(
+      onDisposeAction: AutofillContextAction.cancel,
+      child: Form(
+        key: WidgetKeys.signUpForm,
+        child: Column(
+          spacing: Spacing.sm.dp,
+          children: [
+            if (errorMessage.value.isNotNullAndNotEmpty)
+              Callout(
+                errorMessage.value!,
+                type: CalloutType.error,
+                onDismiss: () => errorMessage.value = null,
+              ),
+            EmailTextFormField(
+              controller: emailController,
+              textInputAction: TextInputAction.done,
+              onFieldSubmitted: (_) => onSubmit(),
             ),
-          EmailTextFormField(
-            controller: emailController,
-            textInputAction: TextInputAction.done,
-            onFieldSubmitted: (_) => onSubmit(),
-          ),
-          FilledButton(
-            key: WidgetKeys.signUp,
-            onPressed: isLoading.value ? null : onSubmit,
-            style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
-            child: isLoading.value
-                ? context.loadingIndicator
-                : Text(l10n.signUp),
-          ),
-        ],
+            FilledButton(
+              key: WidgetKeys.signUp,
+              onPressed: isLoading.value ? null : onSubmit,
+              style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
+              child: isLoading.value
+                  ? context.loadingIndicator
+                  : Text(l10n.signUp),
+            ),
+          ],
+        ),
       ),
     );
   }
