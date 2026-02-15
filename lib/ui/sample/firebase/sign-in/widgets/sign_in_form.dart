@@ -12,9 +12,9 @@ import '../../../../../core/utils/extensions/string.dart';
 import '../../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../../data/repositories/firebase/auth/auth_repository.dart';
 import '../../../../core/extensions/build_context.dart';
+import '../../../../core/ui/auth/email_text_form_field.dart';
+import '../../../../core/ui/auth/password_text_form_field.dart';
 import '../../../../core/ui/callout.dart';
-import '../../../../core/ui/email_text_form_field.dart';
-import '../../../../core/ui/password_text_form_field.dart';
 
 @immutable
 class SignInForm extends HookConsumerWidget {

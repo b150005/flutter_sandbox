@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sandbox/core/config/constants/text_input_formatters.dart';
 import 'package:flutter_sandbox/core/utils/authentications/firebase_auth_validator.dart';
+import 'package:flutter_sandbox/ui/core/ui/auth/password_text_form_field.dart';
 import 'package:flutter_sandbox/ui/core/ui/label.dart';
-import 'package:flutter_sandbox/ui/core/ui/password_text_form_field.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

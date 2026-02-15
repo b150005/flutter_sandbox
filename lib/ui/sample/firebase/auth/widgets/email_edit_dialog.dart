@@ -13,9 +13,9 @@ import '../../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../../data/repositories/firebase/auth/auth_repository.dart';
 import '../../../../core/extensions/build_context.dart';
 import '../../../../core/extensions/navigator_state.dart';
+import '../../../../core/ui/auth/email_text_form_field.dart';
 import '../../../../core/ui/callout.dart';
 import '../../../../core/ui/dismiss_material_banner_button.dart';
-import '../../../../core/ui/email_text_form_field.dart';
 import '../../../../core/ui/label.dart';
 import '../../../../core/ui/utils/app_messenger.dart';
 

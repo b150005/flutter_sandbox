@@ -1,9 +1,9 @@
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sandbox/core/config/constants/button_size.dart';
+import 'package:flutter_sandbox/ui/core/ui/auth/email_text_form_field.dart';
+import 'package:flutter_sandbox/ui/core/ui/auth/password_text_form_field.dart';
 import 'package:flutter_sandbox/ui/core/ui/callout.dart';
-import 'package:flutter_sandbox/ui/core/ui/email_text_form_field.dart';
-import 'package:flutter_sandbox/ui/core/ui/password_text_form_field.dart';
 import 'package:flutter_sandbox/ui/sample/firebase/sign-in/widgets/sign_in_form.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

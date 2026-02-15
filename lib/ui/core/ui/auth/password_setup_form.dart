@@ -14,8 +14,8 @@ import '../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../data/repositories/firebase/auth/auth_repository.dart';
 import '../../extensions/build_context.dart';
 import '../callout.dart';
-import '../password_text_form_field.dart';
 import '../status_indicator.dart';
+import 'password_text_form_field.dart';
 
 @immutable
 class PasswordSetupForm extends HookConsumerWidget {

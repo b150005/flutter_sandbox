@@ -15,7 +15,7 @@ import '../../../../core/utils/extensions/string.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
 import '../../extensions/build_context.dart';
 import '../callout.dart';
-import '../email_text_form_field.dart';
+import 'email_text_form_field.dart';
 
 class EmailInputForm<T> extends HookConsumerWidget {
   const EmailInputForm({
