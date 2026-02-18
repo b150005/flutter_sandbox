@@ -4,6 +4,26 @@ A new Flutter project.
 
 # ⚙️ 環境構築
 
+## 🧑‍💻 Skills の導入
+
+### 💄 ui-ux-pro-max
+
+- [ui-ux-pro-max by nextlevelbuilder/ui-ux-pro-max-skills](https://skills.sh/nextlevelbuilder/ui-ux-pro-max-skill/ui-ux-pro-max)
+
+```sh
+# ui-ux-pro-max Skills の導入
+bunx skills add https://github.com/nextlevelbuilder/ui-ux-pro-max-skill --skill ui-ux-pro-max
+
+# Global にインストールした ui-ux-pro-max Skills を介した Design System の生成
+python3 ~/.agents/skills/ui-ux-pro-max/scripts/search.py "developer tools learning platform flutter firebase tech education open source" --design-system --persist -p "<your-application-name>"
+
+# 特定領域について詳細情報を取得したい場合
+python3 ~/.agents/skills/ui-ux-pro-max/scripts/search.py "<keyword>" --domain <domain>
+
+# 技術スタック固有の実装ガイドラインの取得
+python3 ~/.agents/skills/ui-ux-pro-max/scripts/search.py "developer tools learning platform" --stack flutter
+```
+
 ## 🚨 pedantic_mono の導入
 
 - [pedantic_mono](https://pub.dev/packages/pedantic_mono)
