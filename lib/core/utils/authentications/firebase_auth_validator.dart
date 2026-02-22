@@ -1,4 +1,5 @@
 import 'package:dlibphonenumber/dlibphonenumber.dart';
+import 'package:flutter/material.dart';
 
 import '../../config/constants/regexes.dart';
 import '../../config/l10n/app_localizations.dart';
@@ -105,10 +106,10 @@ abstract final class FirebaseAuthValidator {
   }
 
   static bool satisfiesMinLength(String password) =>
-      password.trim().length >= passwordMinLength;
+      password.trim().characters.length >= passwordMinLength;
 
   static bool satisfiesMaxLength(String password) =>
-      password.length <= passwordMaxLength;
+      password.characters.length <= passwordMaxLength;
 
   static bool hasUppercase(String password) =>
       password.contains(Regexes.uppercase.regExp);
