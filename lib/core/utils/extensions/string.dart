@@ -1,4 +1,6 @@
-extension NullableString on String? {
+import 'package:flutter/material.dart';
+
+extension NullableStringExtension on String? {
   bool get isNotNullAndNotEmpty => this != null && this!.isNotEmpty;
   bool get isNullOrEmpty => this == null || this!.isEmpty;
 
@@ -7,6 +9,9 @@ extension NullableString on String? {
   bool get isTrimmedNullOrEmpty => this == null || this!.trim().isEmpty;
 }
 
-extension EmptyString on String {
+extension StringExtension on String {
   bool get isTrimmedEmpty => trim().isEmpty;
+
+  bool equalsLength(String value) =>
+      characters.length == value.characters.length;
 }
