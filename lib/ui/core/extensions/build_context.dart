@@ -244,13 +244,10 @@ extension AppThemeExtension on BuildContext {
   )
   ThemeData get theme => Theme.of(this);
 
-  // ignore: deprecated_member_use_from_same_package
   TextTheme get textTheme => theme.textTheme;
 
-  // ignore: deprecated_member_use_from_same_package
   ColorScheme get colorScheme => theme.colorScheme;
 
-  // ignore: deprecated_member_use_from_same_package
   StatusColors get statusColors => theme.statusColors;
 
   TextStyle get defaultTextStyle => DefaultTextStyle.of(this).style;
