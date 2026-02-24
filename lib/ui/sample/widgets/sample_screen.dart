@@ -14,19 +14,25 @@ class SampleScreen extends HookConsumerWidget {
   const SampleScreen({super.key});
 
   static List<Content> _contents(l10n.AppLocalizations l10n) => [
-        Content(
-          path: FirebaseScreenRoute.absolutePath,
-          title: 'Firebase',
-          description: l10n.signInScreenDescription,
-          subtitle: 'Firebase Sign-In',
-        ),
-        Content(
-          path: LocalStorageScreenRoute.absolutePath,
-          title: 'Local Storage',
-          description: l10n.localStorageScreenDescription,
-          subtitle: 'Local Storage Sandbox',
-        ),
-      ];
+    Content(
+      path: FirebaseScreenRoute.absolutePath,
+      title: 'Firebase',
+      description: l10n.signInScreenDescription,
+      subtitle: 'Firebase Sign-In',
+    ),
+    Content(
+      path: LocalStorageScreenRoute.absolutePath,
+      title: 'Local Storage',
+      description: l10n.localStorageScreenDescription,
+      subtitle: 'Local Storage Sandbox',
+    ),
+    Content(
+      path: PlaygroundScreenRoute.absolutePath,
+      title: 'Playground',
+      description: l10n.playgroundScreenDescription,
+      subtitle: 'Playground',
+    ),
+  ];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
