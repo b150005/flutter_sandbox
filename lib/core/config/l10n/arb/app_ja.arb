@@ -162,6 +162,10 @@
 	"@localStorageScreenDescription": {
 		"description": "Local Storage デモ画面の説明テキスト"
 	},
+	"playgroundScreenDescription": "カスタムウィジェット・ UI インタラクションの実験のための画面です。",
+	"@playgroundScreenDescription": {
+		"description": "Playground 画面の説明テキスト"
+	},
 	"home": "ホーム",
 	"@home": {},
 	"sample": "サンプル",
@@ -176,6 +180,8 @@
 	"@firebaseDataConnect": {},
 	"localStorage": "Local Storage",
 	"@localStorage": {},
+	"playground": "Playground",
+	"@playground": {},
 	"email": "メールアドレス",
 	"@email": {},
 	"password": "パスワード",

@@ -49,6 +49,7 @@ part '../../ui/sample/firebase/signup/verify-email/widgets/verify_email_screen.d
 part '../../ui/sample/firebase/signup/widgets/sign_up_screen.dart';
 part '../../ui/sample/firebase/widgets/firebase_screen.dart';
 part '../../ui/sample/local-storage/widgets/local_storage_screen.dart';
+part '../../ui/sample/playground/playground_screen.dart';
 part '../../ui/sample/widgets/sample_screen.dart';
 part '../../ui/settings/widgets/settings_screen.dart';
 part 'router.g.dart';

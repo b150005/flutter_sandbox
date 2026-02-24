@@ -56,6 +56,10 @@ part of '../router.dart';
               path: LocalStorageScreenRoute.path,
               name: LocalStorageScreenRoute.absolutePath,
             ),
+            TypedGoRoute<PlaygroundScreenRoute>(
+              path: PlaygroundScreenRoute.path,
+              name: PlaygroundScreenRoute.absolutePath,
+            ),
           ],
         ),
       ],

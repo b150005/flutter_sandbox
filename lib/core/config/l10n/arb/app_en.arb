@@ -162,6 +162,10 @@
 	"@localStorageScreenDescription": {
 		"description": "Descriptive text for the Local Storage demo screen"
 	},
+	"playgroundScreenDescription": "An experimental sandbox for testing custom widgets and UI interactions.",
+	"@playgroundScreenDescription": {
+		"description": "Descriptive text for the Playground screen"
+	},
 	"home": "Home",
 	"@home": {},
 	"sample": "Sample",
@@ -176,6 +180,8 @@
 	"@firebaseDataConnect": {},
 	"localStorage": "Local Storage",
 	"@localStorage": {},
+	"playground": "Playground",
+	"@playground": {},
 	"email": "Email",
 	"@email": {},
 	"password": "Password",
