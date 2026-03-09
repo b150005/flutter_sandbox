@@ -44,9 +44,7 @@ void main() {
 
   group('🎨 UI elements', () {
     testWidgets('EmailTextFormField should have a label'
-        ' and an email TextFormField.', (
-      tester,
-    ) async {
+        ' and an email TextFormField.', (tester) async {
       await tester.pumpWidget(emailTextFormFieldApp());
 
       expect(find.byType(Label), findsOneWidget);
@@ -56,9 +54,7 @@ void main() {
 
     testWidgets(
       'Email textfield should have correct properties with default values.',
-      (
-        tester,
-      ) async {
+      (tester) async {
         await tester.pumpWidget(emailTextFormFieldApp());
 
         final l10n = AppLocalizationUtils.readL10n(tester);
