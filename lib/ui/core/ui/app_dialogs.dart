@@ -194,7 +194,10 @@ class _SearchableListDialog<T> extends HookConsumerWidget {
     this.searchHintText,
     this.multiSelectable = false,
     this.chipLabel,
-  }) : assert(!multiSelectable || multiSelectable && chipLabel != null);
+  }) : assert(
+         !multiSelectable || multiSelectable && chipLabel != null,
+         'chipLabel is required when multiSelectable is true.',
+       );
 
   final bool showCloseButton;
 

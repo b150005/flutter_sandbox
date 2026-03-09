@@ -19,8 +19,8 @@ class PropertyTable extends StatelessWidget {
     this.border,
     this.defaultVerticalAlignment = TableCellVerticalAlignment.top,
     this.textBaseline,
-  }) : assert(cellData.length > 0, 'data cannot be empty.'),
-       assert(columnCount > 0, 'columnCount must be positive.');
+  }) : assert(cellData.length > 0),
+       assert(columnCount > 0);
 
   final List<PropertyTableCellData> cellData;
   final int columnCount;
