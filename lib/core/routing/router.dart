@@ -14,6 +14,7 @@ import '../../ui/core/extensions/build_context.dart';
 import '../../ui/core/providers/app_bar_state_provider.dart';
 import '../../ui/core/ui/auth/auth_state_builder.dart';
 import '../../ui/core/ui/auth/email_input_form.dart';
+import '../../ui/core/ui/auth/otp_input_form.dart';
 import '../../ui/core/ui/auth/password_setup_form.dart';
 import '../../ui/core/ui/auth/sign_out_button.dart';
 import '../../ui/core/ui/callout.dart';
