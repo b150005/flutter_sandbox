@@ -229,7 +229,7 @@ class AuthRepository extends _$AuthRepository {
       ).whenError((appException) => throw appException),
       verificationCompleted: (phoneAuthCredential) async {
         if (currentUser.hasPhoneAuthProvider) {
-          final updatePhoneNumberResult = await updatePhoneNumber(
+          final updatePhoneNumberResult = await _updatePhoneNumber(
             phoneCredential: phoneAuthCredential,
           );
 
@@ -249,9 +249,7 @@ class AuthRepository extends _$AuthRepository {
         final result = linkWithCredentialResult
             .when<Result<User, AppException>>(
               (userCredential) => userCredential.user == null
-                  ? .error(
-                      .unauthorized(l10n.authenticationFailed),
-                    )
+                  ? .error(.unauthorized(l10n.authenticationFailed))
                   : .success(userCredential.user!),
               Result.error,
             );
@@ -277,7 +275,7 @@ class AuthRepository extends _$AuthRepository {
   );
 
   /// 電話番号を更新する
-  Future<Result<void, AppException>> updatePhoneNumber({
+  Future<Result<void, AppException>> _updatePhoneNumber({
     required PhoneAuthCredential phoneCredential,
   }) => _executeWithFirebaseAuth(() async {
     final user = currentUser;
