@@ -20,6 +20,9 @@ abstract final class WidgetKeys {
 
   static final nationalNumberTextField =
       LabeledGlobalKey<FormFieldState<String>>('nationalNumberTextFormField');
+  static final otpEditableText = LabeledGlobalKey<EditableTextState>(
+    'otpEditableText',
+  );
 
   static const ValueKey<String> searchTextField = ValueKey('searchTextField');
 

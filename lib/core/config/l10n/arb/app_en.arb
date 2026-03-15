@@ -56,6 +56,20 @@
 	"@unlinkPhoneNumberConfirmation": {
 		"description": "Confirmation message displayed when user attempts to unlink their phone number from the account"
 	},
+	"enterVerificationCode": "Enter the verification code",
+	"@enterVerificationCode": {
+		"description": "Title displayed on code verification input screen"
+	},
+	"verificationCodeSent": "A verification code has been sent to {phoneNumber}.",
+	"@verificationCodeSent": {
+		"description": "Confirmation message displayed after sending a verification code to the user's phone number",
+		"placeholders": {
+			"phoneNumber": {
+				"type": "String",
+				"example": "+1 234-567-8901"
+			}
+		}
+	},
 	"registeredEmail": "This email is already registered. Please use a different email or try to sign in.",
 	"@registeredEmail": {
 		"description": "Message displayed during signup when the email address is already associated with an existing account"
@@ -236,6 +250,16 @@
 	"@noSearchResultsHint": {},
 	"sendVerificationCode": "Send Verification Code",
 	"@sendVerificationCode": {},
+	"resend": "Resend ({seconds}s)",
+	"@resend": {
+		"description": "Button label to resend verification code with countdown timer",
+		"placeholders": {
+			"seconds": {
+				"type": "int",
+				"example": "60"
+			}
+		}
+	},
 	"unlinkPhoneNumber": "Unlink Phone Number",
 	"@unlinkPhoneNumber": {},
 	"cancel": "Cancel",

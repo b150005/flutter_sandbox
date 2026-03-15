@@ -56,6 +56,20 @@
 	"@unlinkPhoneNumberConfirmation": {
 		"description": "電話番号の連携解除を試みた際に表示される確認メッセージ"
 	},
+	"enterVerificationCode": "認証コードを入力",
+	"@enterVerificationCode": {
+		"description": "認証コード入力画面に表示されるタイトル"
+	},
+	"verificationCodeSent": "{phoneNumber} に認証コードを送信しました。",
+	"@verificationCodeSent": {
+		"description": "電話番号に認証コードを送信したことをユーザーに通知する確認メッセージ",
+		"placeholders": {
+			"phoneNumber": {
+				"type": "String",
+				"example": "+81 90-1234-5678"
+			}
+		}
+	},
 	"registeredEmail": "このメールアドレスは既に登録されています。別のメールアドレスを使用するか、サインインしてください。",
 	"@registeredEmail": {
 		"description": "サインアップ時にメールアドレスが既存のアカウントに関連付けられている場合に表示されるメッセージ"
@@ -236,6 +250,16 @@
 	"@noSearchResultsHint": {},
 	"sendVerificationCode": "認証コードを送信",
 	"@sendVerificationCode": {},
+	"resend": "再送信 ({seconds}s)",
+	"@resend": {
+		"description": "認証コードを再送する、カウントダウン付きのボタンラベル",
+		"placeholders": {
+			"seconds": {
+				"type": "int",
+				"example": "60"
+			}
+		}
+	},
 	"unlinkPhoneNumber": "電話番号の連携解除",
 	"@unlinkPhoneNumber": {},
 	"cancel": "キャンセル",

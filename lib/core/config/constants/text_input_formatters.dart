@@ -12,4 +12,8 @@ abstract final class TextInputFormatters {
   static final nationalNumber = FilteringTextInputFormatter.allow(
     Regexes.nationalNumberCharacter.regExp,
   );
+
+  static final digitOrWhitespace = FilteringTextInputFormatter.allow(
+    Regexes.digitOrWhitespace.regExp,
+  );
 }
