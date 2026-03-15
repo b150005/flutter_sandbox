@@ -207,7 +207,7 @@ class AuthRepository extends _$AuthRepository {
   Future<Result<void, AppException>> verifyPhoneNumber({
     required String countryCode,
     required String nationalNumber,
-    required void Function(Result<void, AppException> result)
+    required void Function(Result<User, AppException> result)
     onPhoneNumberUpdated,
     required void Function(AppException appException) onVerificationFailed,
     required void Function(String verificationId, int? forceResendingToken)
