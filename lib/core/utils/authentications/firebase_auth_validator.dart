@@ -93,7 +93,7 @@ abstract final class FirebaseAuthValidator {
 
         final e164InputPhoneNumber = PhoneNumberUtil.instance.format(
           phoneNumber,
-          PhoneNumberFormat.e164,
+          .e164,
         );
         if (currentPhoneNumber == e164InputPhoneNumber) {
           return l10n.unchangedPhoneNumber;

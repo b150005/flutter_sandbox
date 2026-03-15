@@ -235,7 +235,7 @@ class AuthRepository extends _$AuthRepository {
 
           final result = updatePhoneNumberResult
               .when<Result<User, AppException>>(
-                (_) => Result.success(currentUser),
+                (_) => .success(currentUser),
                 Result.error,
               );
 
@@ -249,10 +249,10 @@ class AuthRepository extends _$AuthRepository {
         final result = linkWithCredentialResult
             .when<Result<User, AppException>>(
               (userCredential) => userCredential.user == null
-                  ? Result.error(
+                  ? .error(
                       .unauthorized(l10n.authenticationFailed),
                     )
-                  : Result.success(userCredential.user!),
+                  : .success(userCredential.user!),
               Result.error,
             );
 

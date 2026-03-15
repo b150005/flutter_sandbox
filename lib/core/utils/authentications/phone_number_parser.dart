@@ -39,8 +39,8 @@ abstract final class PhoneNumberParser {
     );
 
     return parseResult.when(
-      (phoneNumber) => Result.success(
-        PhoneNumberUtil.instance.format(phoneNumber, PhoneNumberFormat.e164),
+      (phoneNumber) => .success(
+        PhoneNumberUtil.instance.format(phoneNumber, .e164),
       ),
       Result.error,
     );

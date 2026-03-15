@@ -24,13 +24,13 @@ abstract final class ExceptionHandler {
 
       final result = operation();
 
-      return Result.success(result);
+      return .success(result);
     } on AppException catch (error) {
-      return Result.error(error);
+      return .error(error);
     } on FirebaseAuthException catch (error, stackTrace) {
       Logger.instance.e(error.message, error: error, stackTrace: stackTrace);
 
-      return Result.error(error.toAppException(l10n));
+      return .error(error.toAppException(l10n));
     } on Exception catch (error, stackTrace) {
       Logger.instance.e(
         LogMessage.unhandledError(error),
@@ -38,7 +38,7 @@ abstract final class ExceptionHandler {
         stackTrace: stackTrace,
       );
 
-      return const Result.error(.unknown());
+      return const .error(.unknown());
     }
   }
 
@@ -54,9 +54,9 @@ abstract final class ExceptionHandler {
 
       final result = await operation();
 
-      return Result.success(result);
+      return .success(result);
     } on AppException catch (error) {
-      return Result.error(error);
+      return .error(error);
     } on FirebaseAuthException catch (error, stackTrace) {
       Logger.instance.e(error.message, error: error, stackTrace: stackTrace);
 
@@ -79,7 +79,7 @@ abstract final class ExceptionHandler {
         );
       }
 
-      return Result.error(error.toAppException(l10n));
+      return .error(error.toAppException(l10n));
     } on Exception catch (error, stackTrace) {
       Logger.instance.e(
         LogMessage.unhandledError(error),
@@ -87,7 +87,7 @@ abstract final class ExceptionHandler {
         stackTrace: stackTrace,
       );
 
-      return const Result.error(.unknown());
+      return const .error(.unknown());
     }
   }
 
