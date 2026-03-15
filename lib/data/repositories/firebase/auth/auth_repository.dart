@@ -303,5 +303,3 @@ class AuthRepository extends _$AuthRepository {
     return auth.signOut();
   });
 }
-
-enum _PhoneAuthOperation { add, update }
