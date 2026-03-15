@@ -391,7 +391,7 @@ void main() {
 
         final selection = OTPInputForm.nextSelectionFor(
           previousSelection: previousSelection,
-          currentSelection: const TextSelection.collapsed(offset: 0),
+          currentSelection: const .collapsed(offset: 0),
           current: '1234'.characters,
         );
 
@@ -407,7 +407,7 @@ void main() {
 
         final selection = OTPInputForm.nextSelectionFor(
           previousSelection: previousSelection,
-          currentSelection: const TextSelection.collapsed(offset: 1),
+          currentSelection: const .collapsed(offset: 1),
           current: '1234'.characters,
         );
 
@@ -426,9 +426,7 @@ void main() {
 
         final selection = OTPInputForm.nextSelectionFor(
           previousSelection: previousSelection,
-          currentSelection: TextSelection.collapsed(
-            offset: previousSelection.extentOffset,
-          ),
+          currentSelection: .collapsed(offset: previousSelection.extentOffset),
           current: ' 234'.characters,
         );
 
@@ -448,9 +446,7 @@ void main() {
 
         final selection = OTPInputForm.nextSelectionFor(
           previousSelection: previousSelection,
-          currentSelection: TextSelection.collapsed(
-            offset: previousSelection.extentOffset,
-          ),
+          currentSelection: .collapsed(offset: previousSelection.extentOffset),
           current: '1234'.characters,
         );
 
@@ -466,9 +462,7 @@ void main() {
 
         final selection = OTPInputForm.nextSelectionFor(
           previousSelection: previousSelection,
-          currentSelection: TextSelection.collapsed(
-            offset: previousSelection.extentOffset,
-          ),
+          currentSelection: .collapsed(offset: previousSelection.extentOffset),
           current: '1234'.characters,
         );
 
@@ -485,8 +479,8 @@ void main() {
       () {
         expect(
           () => OTPInputForm.nextSelectionFor(
-            previousSelection: const TextSelection.collapsed(offset: 0),
-            currentSelection: const TextSelection.collapsed(offset: 1),
+            previousSelection: const .collapsed(offset: 0),
+            currentSelection: const .collapsed(offset: 1),
             current: '1234'.characters,
           ),
           throwsAssertionError,
@@ -526,7 +520,7 @@ void main() {
               baseOffset: 0,
               extentOffset: 1,
             ),
-            currentSelection: const TextSelection.collapsed(offset: 2),
+            currentSelection: const .collapsed(offset: 2),
             current: '1234'.characters,
           ),
           throwsStateError,

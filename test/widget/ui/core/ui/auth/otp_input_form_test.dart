@@ -99,7 +99,7 @@ extension _OTPInputFormInteraction on WidgetTester {
     testTextInput.updateEditingValue(
       TextEditingValue(
         text: text,
-        selection: TextSelection.collapsed(offset: selection.extentOffset),
+        selection: .collapsed(offset: selection.extentOffset),
       ),
     );
 

@@ -106,7 +106,7 @@ class OTPInputForm extends HookConsumerWidget {
 
           final nextSelection = OTPInputForm.nextSelectionFor(
             previousSelection: currentSelection,
-            currentSelection: TextSelection.collapsed(
+            currentSelection: .collapsed(
               offset: isForward
                   ? currentSelection.extentOffset
                   : currentSelection.baseOffset,
