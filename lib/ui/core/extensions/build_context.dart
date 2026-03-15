@@ -178,56 +178,38 @@ final class _TextThemePreviewTableRowBuilder {
     return TableRow(
       children: [
         TableCell(
-          verticalAlignment: TableCellVerticalAlignment.middle,
+          verticalAlignment: .middle,
           child: Padding(
-            padding: EdgeInsets.all(Spacing.xxs.dp),
-            child: Align(
-              child: Text(
-                fontWeightText,
-                style: style,
-              ),
-            ),
+            padding: .all(Spacing.xxs.dp),
+            child: Align(child: Text(fontWeightText, style: style)),
           ),
         ),
         TableCell(
-          verticalAlignment: TableCellVerticalAlignment.middle,
+          verticalAlignment: .middle,
           child: Padding(
-            padding: EdgeInsets.all(Spacing.xxs.dp),
-            child: Align(
-              child: Text(
-                fontSizeText,
-                style: style,
-              ),
-            ),
+            padding: .all(Spacing.xxs.dp),
+            child: Align(child: Text(fontSizeText, style: style)),
           ),
         ),
         TableCell(
-          verticalAlignment: TableCellVerticalAlignment.middle,
+          verticalAlignment: .middle,
           child: Padding(
-            padding: EdgeInsets.all(Spacing.xxs.dp),
-            child: Align(
-              child: Text(
-                lineHeightText,
-                style: style,
-              ),
-            ),
+            padding: .all(Spacing.xxs.dp),
+            child: Align(child: Text(lineHeightText, style: style)),
           ),
         ),
         TableCell(
-          verticalAlignment: TableCellVerticalAlignment.middle,
+          verticalAlignment: .middle,
           child: Padding(
-            padding: EdgeInsets.all(Spacing.xxs.dp),
+            padding: .all(Spacing.xxs.dp),
             child: Align(child: Text(letterSpacingText, style: style)),
           ),
         ),
         TableCell(
-          verticalAlignment: TableCellVerticalAlignment.middle,
+          verticalAlignment: .middle,
           child: Padding(
-            padding: EdgeInsets.all(Spacing.xxs.dp),
-            child: Text(
-              previewText,
-              style: previewTextStyle ?? style,
-            ),
+            padding: .all(Spacing.xxs.dp),
+            child: Text(previewText, style: previewTextStyle ?? style),
           ),
         ),
       ],
@@ -238,6 +220,7 @@ final class _TextThemePreviewTableRowBuilder {
 extension AppThemeExtension on BuildContext {
   static const int _maxLines = 10;
 
+  // ignore: remove_deprecations_in_breaking_versions
   @Deprecated(
     'Use specific getters like textTheme, colorScheme instead'
     ' for better code clarity and type safety.',
@@ -255,7 +238,7 @@ extension AppThemeExtension on BuildContext {
   TextStyle? get supportTextStyle =>
       textTheme.bodyMedium?.copyWith(color: colorScheme.outline);
 
-  BorderRadius get borderRadius => BorderRadius.circular(BorderRadii.md.value);
+  BorderRadius get borderRadius => .circular(BorderRadii.md.value);
 
   OutlineInputBorder get outlinedInputBorder => OutlineInputBorder(
     borderRadius: borderRadius,
@@ -270,7 +253,7 @@ extension AppThemeExtension on BuildContext {
   );
 
   BoxDecoration outlinedBoxDecoration({Color? borderColor}) => BoxDecoration(
-    border: Border.all(color: borderColor ?? colorScheme.outline),
+    border: .all(color: borderColor ?? colorScheme.outline),
     borderRadius: borderRadius,
   );
 }
@@ -283,6 +266,7 @@ extension BreakpointExtension on BuildContext {
 }
 
 extension WidgetExtension on BuildContext {
+  // ignore: remove_deprecations_in_breaking_versions
   @Deprecated(
     'Use skeleton loading UI instead of loading indicators for better UX.'
     ' Skeleton screens preserve layout structure and provide visual context'
@@ -304,7 +288,7 @@ extension RouterExtension on BuildContext {
 }
 
 extension ModalRouteExtension on BuildContext {
-  ModalRoute<dynamic>? get modalRoute => ModalRoute.of(this);
+  ModalRoute<dynamic>? get modalRoute => .of(this);
 }
 
 extension NavigatorExtension on BuildContext {
@@ -314,8 +298,7 @@ extension NavigatorExtension on BuildContext {
 }
 
 extension MaterialLocalizationsExtension on BuildContext {
-  MaterialLocalizations get materialLocalizations =>
-      MaterialLocalizations.of(this);
+  MaterialLocalizations get materialLocalizations => .of(this);
 
   String get modalBarrierDismissLabel =>
       materialLocalizations.modalBarrierDismissLabel;

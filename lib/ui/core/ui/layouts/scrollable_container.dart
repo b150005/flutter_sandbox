@@ -10,6 +10,6 @@ class ScrollableContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
-    child: Padding(padding: EdgeInsets.all(Spacing.sm.dp), child: child),
+    child: Padding(padding: .all(Spacing.sm.dp), child: child),
   );
 }

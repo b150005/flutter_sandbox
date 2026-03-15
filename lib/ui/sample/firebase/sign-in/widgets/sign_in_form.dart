@@ -64,7 +64,7 @@ class SignInForm extends HookConsumerWidget {
     }
 
     return AutofillGroup(
-      onDisposeAction: AutofillContextAction.cancel,
+      onDisposeAction: .cancel,
       child: Form(
         key: WidgetKeys.signInForm,
         child: Column(
@@ -73,20 +73,20 @@ class SignInForm extends HookConsumerWidget {
             if (errorMessage.value.isNotNullAndNotEmpty)
               Callout(
                 errorMessage.value!,
-                type: CalloutType.error,
+                type: .error,
                 onDismiss: () => errorMessage.value = null,
               ),
             EmailTextFormField(
               controller: emailController,
-              textInputAction: TextInputAction.next,
+              textInputAction: .next,
             ),
             PasswordTextFormField(
               controller: passwordController,
-              textInputAction: TextInputAction.done,
+              textInputAction: .done,
               onFieldSubmitted: (_) => onSubmit(),
             ),
             Align(
-              alignment: Alignment.centerRight,
+              alignment: .centerRight,
               child: TextButton(
                 key: WidgetKeys.forgotPassword,
                 onPressed: () =>

@@ -473,7 +473,7 @@ void main() {
         const tappedIndex = 1;
 
         await tester.tapDigitBoxAt(tappedIndex);
-        await tester.pressArrowKey(direction: ArrowKeyDirection.left);
+        await tester.pressArrowKey(direction: .left);
 
         final boxes = tester.digitBoxes;
 
@@ -495,7 +495,7 @@ void main() {
         const tappedIndex = 0;
 
         await tester.tapDigitBoxAt(tappedIndex);
-        await tester.pressArrowKey(direction: ArrowKeyDirection.left);
+        await tester.pressArrowKey(direction: .left);
 
         final boxes = tester.digitBoxes;
 
@@ -517,7 +517,7 @@ void main() {
         const tappedIndex = 1;
 
         await tester.tapDigitBoxAt(tappedIndex);
-        await tester.pressArrowKey(direction: ArrowKeyDirection.right);
+        await tester.pressArrowKey(direction: .right);
 
         final boxes = tester.digitBoxes;
 
@@ -539,7 +539,7 @@ void main() {
         const tappedIndex = 3;
 
         await tester.tapDigitBoxAt(tappedIndex);
-        await tester.pressArrowKey(direction: ArrowKeyDirection.right);
+        await tester.pressArrowKey(direction: .right);
 
         final boxes = tester.digitBoxes;
 
@@ -561,7 +561,7 @@ void main() {
         const tappedIndex = 3;
 
         await tester.tapDigitBoxAt(tappedIndex);
-        await tester.pressArrowKey(direction: ArrowKeyDirection.right);
+        await tester.pressArrowKey(direction: .right);
 
         final boxes = tester.digitBoxes;
 

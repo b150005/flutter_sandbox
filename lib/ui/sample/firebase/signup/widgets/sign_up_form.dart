@@ -57,7 +57,7 @@ class SignUpForm extends HookConsumerWidget {
     }
 
     return AutofillGroup(
-      onDisposeAction: AutofillContextAction.cancel,
+      onDisposeAction: .cancel,
       child: Form(
         key: WidgetKeys.signUpForm,
         child: Column(
@@ -66,12 +66,12 @@ class SignUpForm extends HookConsumerWidget {
             if (errorMessage.value.isNotNullAndNotEmpty)
               Callout(
                 errorMessage.value!,
-                type: CalloutType.error,
+                type: .error,
                 onDismiss: () => errorMessage.value = null,
               ),
             EmailTextFormField(
               controller: emailController,
-              textInputAction: TextInputAction.done,
+              textInputAction: .done,
               onFieldSubmitted: (_) => onSubmit(),
             ),
             FilledButton(

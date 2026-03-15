@@ -95,23 +95,23 @@ class PhoneNumberForm extends HookConsumerWidget {
                 : context.colorScheme.outline;
 
             return Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: .min,
+              crossAxisAlignment: .start,
               children: [
                 DecoratedBox(
                   decoration: context.outlinedBoxDecoration(
                     borderColor: outlineColor,
                   ),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: Spacing.xs.dp),
+                    padding: .symmetric(horizontal: Spacing.xs.dp),
                     child: IntrinsicHeight(
                       child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisSize: .min,
+                        crossAxisAlignment: .stretch,
                         spacing: Spacing.xs.dp,
                         children: [
                           Row(
-                            mainAxisSize: MainAxisSize.min,
+                            mainAxisSize: .min,
                             children: [
                               _CountryCodePicker(
                                 key: WidgetKeys.countryCodePicker,
@@ -140,8 +140,8 @@ class PhoneNumberForm extends HookConsumerWidget {
                                     ?.copyWith(
                                       color: context.colorScheme.outlineVariant,
                                     ),
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.all(Spacing.xs.dp),
+                                border: .none,
+                                contentPadding: .all(Spacing.xs.dp),
                                 prefixIcon:
                                     phoneNumber.countryCode.isNotNullAndNotEmpty
                                     ? Text(
@@ -151,9 +151,8 @@ class PhoneNumberForm extends HookConsumerWidget {
                                     : null,
                                 prefixIconConstraints: const BoxConstraints(),
                               ),
-                              keyboardType: TextInputType.phone,
-                              textInputAction:
-                                  textInputAction ?? TextInputAction.done,
+                              keyboardType: .phone,
+                              textInputAction: textInputAction ?? .done,
                               autocorrect: false,
                               onSubmitted: (_) {
                                 nationalNumberManager.flush();
@@ -213,13 +212,13 @@ class _CountryCodePicker extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CountryPicker<WorldCountry>(
-      initialCountry: WorldCountry.list.firstWhereOrNull(
+      initialCountry: .list.firstWhereOrNull(
         (country) => country.idd.phoneCode() == initialCountryCode,
       ),
       valueBuilder: (country) => country,
       onChanged: (country) => onChanged(country?.idd.phoneCode()),
       builder: (country) => Row(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: .min,
         spacing: Spacing.xs.dp,
         children: [
           Text(country?.emoji ?? '🌐'),
@@ -231,8 +230,8 @@ class _CountryCodePicker extends HookConsumerWidget {
       ),
       itemLeadingBuilder: (country, _) => Text(country.emoji),
       itemTitleBuilder: (_, commonName) => FittedBox(
-        fit: BoxFit.scaleDown,
-        alignment: AlignmentGeometry.centerLeft,
+        fit: .scaleDown,
+        alignment: .centerLeft,
         child: Text(commonName),
       ),
       itemTrailingBuilder: (country, _) => Text(country.idd.phoneCode()),

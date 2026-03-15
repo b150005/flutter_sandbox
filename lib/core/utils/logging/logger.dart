@@ -46,7 +46,7 @@ class Logger extends logger.Logger {
       dateTimeFormat: logger.DateTimeFormat.none,
     ),
     output: LogOutput(),
-    level: !kPreviewMode && kIsProd ? logger.Level.info : null,
+    level: !kPreviewMode && kIsProd ? .info : null,
   );
 
   /// データ収集に関するユーザの同意ステータスを設定する
@@ -296,8 +296,7 @@ class Logger extends logger.Logger {
     int? stackTraceLevel,
   }) {
     switch (LogLevelConverter.toLoggingLevel(level)) {
-      case logging.Level.ALL:
-      case logging.Level.FINE:
+      case .ALL || .FINE:
         t(
           message,
           time: time,
@@ -305,7 +304,7 @@ class Logger extends logger.Logger {
           stackTrace: stackTrace,
           stackTraceLevel: stackTraceLevel,
         );
-      case logging.Level.CONFIG:
+      case .CONFIG:
         d(
           message,
           time: time,
@@ -313,7 +312,7 @@ class Logger extends logger.Logger {
           stackTrace: stackTrace,
           stackTraceLevel: stackTraceLevel,
         );
-      case logging.Level.INFO:
+      case .INFO:
         i(
           message,
           time: time,
@@ -321,7 +320,7 @@ class Logger extends logger.Logger {
           stackTrace: stackTrace,
           stackTraceLevel: stackTraceLevel,
         );
-      case logging.Level.WARNING:
+      case .WARNING:
         w(
           message,
           time: time,
@@ -329,7 +328,7 @@ class Logger extends logger.Logger {
           stackTrace: stackTrace,
           stackTraceLevel: stackTraceLevel,
         );
-      case logging.Level.SEVERE:
+      case .SEVERE:
         e(
           message,
           time: time,
@@ -337,7 +336,7 @@ class Logger extends logger.Logger {
           stackTrace: stackTrace,
           stackTraceLevel: stackTraceLevel,
         );
-      case logging.Level.SHOUT:
+      case .SHOUT:
         f(
           message,
           time: time,
@@ -345,7 +344,7 @@ class Logger extends logger.Logger {
           stackTrace: stackTrace,
           stackTraceLevel: stackTraceLevel,
         );
-      case logging.Level.OFF:
+      case .OFF:
         break;
     }
   }

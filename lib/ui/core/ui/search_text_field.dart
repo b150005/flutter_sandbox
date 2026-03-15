@@ -36,7 +36,7 @@ class SearchTextField extends ConsumerWidget {
                 icon: const Icon(Icons.clear_outlined),
               ),
       ),
-      textInputAction: TextInputAction.search,
+      textInputAction: .search,
     );
 
     if (labelText.isNullOrEmpty) {

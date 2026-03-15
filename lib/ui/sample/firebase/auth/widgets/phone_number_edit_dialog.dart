@@ -131,15 +131,12 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
         icon: const Icon(Icons.phone_outlined),
         title: Text(l10n.editPhoneNumber),
         content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: .min,
+          crossAxisAlignment: .start,
           spacing: Spacing.sm.dp,
           children: [
             if (errorMessage.value.isNotNullAndNotEmpty)
-              Callout(
-                errorMessage.value!,
-                type: CalloutType.error,
-              ),
+              Callout(errorMessage.value!, type: .error),
             Label(
               l10n.currentPhoneNumber,
               child: Text(

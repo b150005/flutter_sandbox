@@ -17,9 +17,7 @@ class VerifyEmailScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final screenState = useState<_EmailVerificationState>(
-      _EmailVerificationState.loading,
-    );
+    final screenState = useState<_EmailVerificationState>(.loading);
 
     final errorMessage = useState<String?>(null);
 
@@ -32,17 +30,16 @@ class VerifyEmailScreen extends HookConsumerWidget {
           .then(
             (result) => result.when(
               (credential) {
-                screenState.value = _EmailVerificationState.success;
+                screenState.value = .success;
               },
               (appException) {
                 errorMessage.value = appException.message;
 
                 screenState.value = switch (appException) {
-                  BadRequest() => _EmailVerificationState.invalidLink,
-                  NotFound() => _EmailVerificationState.emailNotFound,
-                  ServiceUnavailable() =>
-                    _EmailVerificationState.serviceUnavailable,
-                  _ => _EmailVerificationState.unknown,
+                  BadRequest() => .invalidLink,
+                  NotFound() => .emailNotFound,
+                  ServiceUnavailable() => .serviceUnavailable,
+                  _ => .unknown,
                 };
               },
             ),
@@ -54,28 +51,28 @@ class VerifyEmailScreen extends HookConsumerWidget {
     return AppBarScope(
       state: AppBarState(title: Text(l10n.verifyEmail)),
       child: switch (screenState.value) {
-        _EmailVerificationState.loading => Center(
+        .loading => Center(
           child: context.loadingIndicator,
         ),
-        _EmailVerificationState.success => ScrollableContainer(
+        .success => ScrollableContainer(
           child: Column(
             spacing: Spacing.xxxl.dp,
             children: [
               Callout(
                 l10n.signInWithEmailLinkSuccessfully,
-                type: CalloutType.success,
+                type: .success,
               ),
               const PasswordSetupForm(),
             ],
           ),
         ),
-        _EmailVerificationState.emailNotFound => ScrollableContainer(
+        .emailNotFound => ScrollableContainer(
           child: Column(
             spacing: Spacing.xxxl.dp,
             children: [
               Callout(
                 errorMessage.value!,
-                type: CalloutType.warning,
+                type: .warning,
                 onDismiss: () => errorMessage.value = null,
               ),
               EmailInputForm(
@@ -84,18 +81,16 @@ class VerifyEmailScreen extends HookConsumerWidget {
                   emailLink: emailLink,
                 ),
                 onSuccess: (credential) {
-                  screenState.value = _EmailVerificationState.success;
+                  screenState.value = .success;
                 },
               ),
             ],
           ),
         ),
-        _EmailVerificationState.invalidLink ||
-        _EmailVerificationState.serviceUnavailable ||
-        _EmailVerificationState.unknown => ScrollableContainer(
+        .invalidLink || .serviceUnavailable || .unknown => ScrollableContainer(
           child: Callout(
             errorMessage.value!,
-            type: CalloutType.error,
+            type: .error,
           ),
         ),
       },

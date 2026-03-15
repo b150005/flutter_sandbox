@@ -16,7 +16,7 @@ class LogPrinter extends PrettyPrinter {
     super.levelColors,
     super.levelEmojis,
   }) {
-    PrettyPrinter.startTime ??= DateTime.now();
+    PrettyPrinter.startTime ??= .now();
 
     final doubleDividerLine = StringBuffer();
     final singleDividerLine = StringBuffer();
@@ -53,13 +53,13 @@ class LogPrinter extends PrettyPrinter {
     if (event.error != null) {
       if (errorMethodCount == null || errorMethodCount! > 0) {
         stackTraceStr = formatStackTrace(
-          event.stackTrace ?? StackTrace.current,
+          event.stackTrace ?? .current,
           errorMethodCount,
         );
       }
     } else if (methodCount == null || methodCount! > 0) {
       stackTraceStr = formatStackTrace(
-        event.stackTrace ?? StackTrace.current,
+        event.stackTrace ?? .current,
         methodCount,
       );
     }
@@ -87,7 +87,7 @@ class LogPrinter extends PrettyPrinter {
     if (colors) {
       color = levelColors?[level] ?? PrettyPrinter.defaultLevelColors[level];
     }
-    return color ?? const AnsiColor.none();
+    return color ?? const .none();
   }
 
   String _getEmoji(Level level) {

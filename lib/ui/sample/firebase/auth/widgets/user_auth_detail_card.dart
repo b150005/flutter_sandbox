@@ -32,18 +32,18 @@ class UserAuthDetailCard extends HookConsumerWidget {
     return Card.outlined(
       key: WidgetKeys.userAuthDetailCard,
       child: Padding(
-        padding: EdgeInsetsGeometry.all(Spacing.sm.dp),
+        padding: .all(Spacing.sm.dp),
         child: Column(
           spacing: Spacing.md.dp,
           children: [
             if (errorMessage.value.isNotNullAndNotEmpty)
               Callout(
                 errorMessage.value!,
-                type: CalloutType.error,
+                type: .error,
                 onDismiss: () => errorMessage.value = null,
               ),
             Align(
-              alignment: AlignmentGeometry.centerLeft,
+              alignment: .centerLeft,
               child: Label(
                 key: WidgetKeys.refreshToken,
                 l10n.refreshToken,
@@ -55,14 +55,12 @@ class UserAuthDetailCard extends HookConsumerWidget {
               ),
             ),
             Align(
-              alignment: AlignmentGeometry.centerLeft,
+              alignment: .centerLeft,
               child: Label(
                 key: WidgetKeys.tenantId,
                 l10n.tenantId,
                 child: Text(
-                  user.tenantId.orNullString(
-                    objectName: 'user.tenantId',
-                  ),
+                  user.tenantId.orNullString(objectName: 'user.tenantId'),
                 ),
               ),
             ),
@@ -88,7 +86,7 @@ class UserAuthDetailCard extends HookConsumerWidget {
             ...user.providerData.map(
               (userInfo) => Card.outlined(
                 child: Padding(
-                  padding: EdgeInsets.all(Spacing.sm.dp),
+                  padding: .all(Spacing.sm.dp),
                   child: PropertyTable(
                     cellData: [
                       PropertyTableCellData(
@@ -173,9 +171,7 @@ class _IdTokenResultTable extends HookConsumerWidget {
           stackTrace: stackTrace,
         );
 
-        return RetryButton(
-          onPressed: () => retriedAt.value = DateTime.now(),
-        );
+        return RetryButton(onPressed: () => retriedAt.value = .now());
       },
       data: (idTokenResult) => Column(
         children: [
@@ -199,7 +195,7 @@ class _IdTokenResultTable extends HookConsumerWidget {
             columnCount: 2,
           ),
           Align(
-            alignment: AlignmentGeometry.centerLeft,
+            alignment: .centerLeft,
             child: Label(
               key: WidgetKeys.token,
               l10n.idToken,
@@ -237,7 +233,7 @@ class _IdTokenResultTable extends HookConsumerWidget {
             columnCount: 2,
           ),
           Align(
-            alignment: AlignmentGeometry.centerLeft,
+            alignment: .centerLeft,
             child: Label(
               key: WidgetKeys.claims,
               l10n.payloadClaims,

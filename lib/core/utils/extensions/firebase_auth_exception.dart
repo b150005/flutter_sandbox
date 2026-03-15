@@ -10,37 +10,36 @@ extension FirebaseAuthExceptionExtension on FirebaseAuthException {
   AppException toAppException(AppLocalizations l10n) {
     switch (code) {
       case FirebaseErrorCode.invalidEmail:
-        return AppException.badRequest(l10n.invalidEmailFormat);
+        return .badRequest(l10n.invalidEmailFormat);
       case FirebaseErrorCode.emailAlreadyInUse:
-        return AppException.conflict(l10n.registeredEmail);
+        return .conflict(l10n.registeredEmail);
       case FirebaseErrorCode.userDisabled:
-        return AppException.forbidden(l10n.accountDisabled);
+        return .forbidden(l10n.accountDisabled);
       case FirebaseErrorCode.userNotFound:
-        return AppException.notFound(l10n.authenticationFailed);
+        return .notFound(l10n.authenticationFailed);
       case FirebaseErrorCode.weakPassword:
-        return AppException.upgradeRequired(l10n.weakPassword);
+        return .upgradeRequired(l10n.weakPassword);
       case FirebaseErrorCode.wrongPassword:
-        return AppException.unauthorized(l10n.invalidEmailOrPassword);
-      case FirebaseErrorCode.tooManyRequests:
-      case FirebaseErrorCode.quotaExceeded:
-        return AppException.tooManyRequests(l10n.tooManyAttempts);
+        return .unauthorized(l10n.invalidEmailOrPassword);
+      case FirebaseErrorCode.tooManyRequests || FirebaseErrorCode.quotaExceeded:
+        return .tooManyRequests(l10n.tooManyAttempts);
       case FirebaseErrorCode.userTokenExpired:
-        return AppException.unauthorized(l10n.sessionExpired);
+        return .unauthorized(l10n.sessionExpired);
       case FirebaseErrorCode.networkRequestFailed:
-        return AppException.serviceUnavailable(l10n.networkConnectionError);
+        return .serviceUnavailable(l10n.networkConnectionError);
       case FirebaseErrorCode.invalidLoginCredentials ||
           FirebaseErrorCode.invalidCredential:
-        return AppException.unauthorized(l10n.authenticationFailed);
-      case FirebaseErrorCode.invalidActionCode:
-      case FirebaseErrorCode.firebaseAppCheckTokenIsInvalid:
-        return AppException.badRequest(l10n.authenticationFailed);
+        return .unauthorized(l10n.authenticationFailed);
+      case FirebaseErrorCode.invalidActionCode ||
+          FirebaseErrorCode.firebaseAppCheckTokenIsInvalid:
+        return .badRequest(l10n.authenticationFailed);
       case FirebaseErrorCode.operationNotAllowed:
-        return AppException.forbidden(l10n.authenticationFailed);
+        return .forbidden(l10n.authenticationFailed);
       default:
         Logger.instance.w(LogMessage.unimplementedCode(code));
         Logger.instance.w(message);
 
-        return AppException.unknown(l10n.authenticationFailed);
+        return .unknown(l10n.authenticationFailed);
     }
   }
 

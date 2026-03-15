@@ -61,7 +61,7 @@ class PasswordTextFormField extends HookConsumerWidget {
             ),
           ),
         ),
-        keyboardType: TextInputType.visiblePassword,
+        keyboardType: .visiblePassword,
         textInputAction: textInputAction,
         obscureText: obscureText.value,
         autocorrect: false,
@@ -75,7 +75,7 @@ class PasswordTextFormField extends HookConsumerWidget {
                 FirebaseAuthValidator.validatePassword(password, l10n: l10n),
         inputFormatters: [TextInputFormatters.noWhitespace],
         autofillHints: autofillHints,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
+        autovalidateMode: .onUserInteraction,
       ),
     );
   }

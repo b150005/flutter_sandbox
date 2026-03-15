@@ -22,27 +22,17 @@ Widget pill() => Wrap(
       text: 'Text + Icon',
       iconData: Icons.check_circle_sharp,
     ),
-    Pill(
-      text: 'Small',
-      iconData: Icons.check_circle_sharp,
-      pillSize: PillSize.small,
-    ),
-    Pill(
-      text: 'Medium',
-      iconData: Icons.check_circle_sharp,
-    ),
-    Pill(
-      text: 'Large',
-      iconData: Icons.check_circle_sharp,
-      pillSize: PillSize.large,
-    ),
+    Pill(text: 'Small', iconData: Icons.check_circle_sharp, pillSize: .small),
+    Pill(text: 'Medium', iconData: Icons.check_circle_sharp),
+    Pill(text: 'Large', iconData: Icons.check_circle_sharp, pillSize: .large),
   ],
 );
 
 enum PillSize {
-  small(dp: 12, padding: EdgeInsets.symmetric(vertical: 2)),
-  medium(dp: 16, padding: EdgeInsets.symmetric(vertical: 2)),
-  large(dp: 20, padding: EdgeInsets.symmetric(vertical: 2));
+  small(dp: 12, padding: .symmetric(vertical: 2)),
+  medium(dp: 16, padding: .symmetric(vertical: 2)),
+  large(dp: 20, padding: .symmetric(vertical: 2))
+  ;
 
   const PillSize({required this.dp, required this.padding});
 
@@ -58,7 +48,7 @@ class Pill extends StatelessWidget {
     this.iconData,
     this.foregroundColor,
     this.backgroundColor,
-    this.pillSize = PillSize.medium,
+    this.pillSize = .medium,
   });
 
   final String? text;
@@ -78,21 +68,15 @@ class Pill extends StatelessWidget {
       largeSize: textSize,
       textStyle: TextStyle(fontSize: textSize),
       label: Padding(
-        padding: text.isNullOrEmpty
-            ? EdgeInsetsGeometry.zero
-            : pillSize.padding,
+        padding: text.isNullOrEmpty ? .zero : pillSize.padding,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: .center,
           children: [
             if (iconData != null)
-              Icon(
-                iconData,
-                size: textSize,
-                color: textColor,
-              ),
+              Icon(iconData, size: textSize, color: textColor),
             if (text.isNotNullAndNotEmpty)
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: Spacing.xxs.dp),
+                padding: .symmetric(horizontal: Spacing.xxs.dp),
                 child: Text(text!),
               ),
           ],

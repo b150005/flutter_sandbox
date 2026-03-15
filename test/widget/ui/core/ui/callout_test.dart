@@ -8,7 +8,7 @@ import '../../../../../testing/utils/widget_key_finder.dart';
 void main() {
   Widget calloutApp({
     required String message,
-    CalloutType type = CalloutType.info,
+    CalloutType type = .info,
     VoidCallback? onDismiss,
   }) => ProviderScope(
     child: MaterialApp(
@@ -30,10 +30,7 @@ void main() {
       ' when onDismiss is provided.',
       (tester) async {
         await tester.pumpWidget(
-          calloutApp(
-            message: message,
-            onDismiss: () {},
-          ),
+          calloutApp(message: message, onDismiss: () {}),
         );
 
         expect(WidgetKeyFinder.icon, findsOneWidget);
@@ -47,9 +44,7 @@ void main() {
       (
         tester,
       ) async {
-        await tester.pumpWidget(
-          calloutApp(message: message),
-        );
+        await tester.pumpWidget(calloutApp(message: message));
 
         expect(WidgetKeyFinder.icon, findsOneWidget);
         expect(WidgetKeyFinder.message, findsOneWidget);
@@ -65,10 +60,7 @@ void main() {
         var dismissed = false;
 
         await tester.pumpWidget(
-          calloutApp(
-            message: message,
-            onDismiss: () => dismissed = true,
-          ),
+          calloutApp(message: message, onDismiss: () => dismissed = true),
         );
 
         await tester.tap(WidgetKeyFinder.dismiss);

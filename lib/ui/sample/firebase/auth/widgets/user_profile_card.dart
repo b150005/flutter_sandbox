@@ -41,18 +41,18 @@ class UserProfileCard extends HookConsumerWidget {
     return Card.outlined(
       key: WidgetKeys.userProfileCard,
       child: Padding(
-        padding: EdgeInsets.all(Spacing.md.dp),
+        padding: .all(Spacing.md.dp),
         child: Column(
           spacing: Spacing.md.dp,
           children: [
             if (errorMessage.value.isNotNullAndNotEmpty)
               Callout(
                 errorMessage.value!,
-                type: CalloutType.error,
+                type: .error,
                 onDismiss: () => errorMessage.value = null,
               ),
             Wrap(
-              alignment: WrapAlignment.center,
+              alignment: .center,
               spacing: Spacing.md.dp,
               runSpacing: Spacing.sm.dp,
               children: [
@@ -61,7 +61,7 @@ class UserProfileCard extends HookConsumerWidget {
                         child: ColoredBox(
                           color: context.colorScheme.primaryContainer,
                           child: Padding(
-                            padding: EdgeInsets.all(Spacing.sm.dp),
+                            padding: .all(Spacing.sm.dp),
                             child: Icon(
                               Icons.person,
                               size: IconSize.lg.dp,
@@ -85,8 +85,8 @@ class UserProfileCard extends HookConsumerWidget {
                         radius: IconSize.lg.dp,
                       ),
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: .center,
+                  crossAxisAlignment: .start,
                   spacing: Spacing.xxs.dp,
                   children: [
                     if (user.displayName.isNotNullAndNotEmpty)
@@ -112,14 +112,14 @@ class UserProfileCard extends HookConsumerWidget {
                           iconData: user.emailVerified
                               ? Icons.verified_outlined
                               : Icons.warning_amber_outlined,
-                          pillSize: PillSize.small,
+                          pillSize: .small,
                         ),
                         if (user.isAnonymous)
                           Pill(
                             key: WidgetKeys.isAnonymous,
                             text: l10n.anonymousUser,
                             iconData: Icons.masks_outlined,
-                            pillSize: PillSize.small,
+                            pillSize: .small,
                           ),
                       ],
                     ),
@@ -132,9 +132,7 @@ class UserProfileCard extends HookConsumerWidget {
                 PropertyTableCellData(
                   key: WidgetKeys.email,
                   label: l10n.email,
-                  value: user.email.orNullString(
-                    objectName: 'user.email',
-                  ),
+                  value: user.email.orNullString(objectName: 'user.email'),
                   suffix: SelectionContainer.disabled(
                     child: TextButton(
                       key: WidgetKeys.editEmail,
@@ -167,14 +165,12 @@ class UserProfileCard extends HookConsumerWidget {
               columnCount: 2,
             ),
             Align(
-              alignment: AlignmentGeometry.centerLeft,
+              alignment: .centerLeft,
               child: Label(
                 key: WidgetKeys.photoURL,
                 l10n.photoURL,
                 child: Text(
-                  user.photoURL.orNullString(
-                    objectName: 'user.photoURL',
-                  ),
+                  user.photoURL.orNullString(objectName: 'user.photoURL'),
                   key: WidgetKeys.photoURL,
                   style: context.textTheme.bodyMedium,
                 ),

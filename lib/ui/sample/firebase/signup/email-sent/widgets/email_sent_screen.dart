@@ -21,7 +21,7 @@ class EmailSentScreen extends HookConsumerWidget {
       state: AppBarState(title: Text(l10n.emailSent)),
       child: ScrollableContainer(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: .center,
           spacing: Spacing.xxxl.dp,
           children: [
             SizedBox(

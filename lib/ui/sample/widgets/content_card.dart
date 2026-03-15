@@ -15,7 +15,7 @@ class ContentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Card.outlined(
-    clipBehavior: Clip.antiAlias,
+    clipBehavior: .antiAlias,
     child: InkWell(
       onTap: () => context.go(content.path),
       child: Column(
@@ -25,17 +25,17 @@ class ContentCard extends StatelessWidget {
               content.thumbnailPath ?? Assets.flutterIcon.path,
               errorBuilder: (context, error, stackTrace) => Image.asset(
                 Assets.flutterIcon.path,
-                fit: BoxFit.cover,
-                width: double.infinity,
+                fit: .cover,
+                width: .infinity,
               ),
-              fit: BoxFit.cover,
-              width: double.infinity,
+              fit: .cover,
+              width: .infinity,
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(Spacing.sm.dp),
+            padding: .all(Spacing.sm.dp),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: .stretch,
               spacing: Spacing.xxs.dp,
               children: [
                 Text(
@@ -46,12 +46,12 @@ class ContentCard extends StatelessWidget {
                   Text(
                     content.subtitle!,
                     style: context.textTheme.bodySmall,
-                    overflow: TextOverflow.ellipsis,
+                    overflow: .ellipsis,
                   ),
                 Text(
                   content.description,
                   style: context.textTheme.bodyMedium,
-                  overflow: TextOverflow.ellipsis,
+                  overflow: .ellipsis,
                 ),
               ],
             ),

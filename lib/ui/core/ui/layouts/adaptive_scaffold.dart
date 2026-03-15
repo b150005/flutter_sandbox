@@ -38,14 +38,14 @@ class AdaptiveScaffold extends ConsumerWidget {
 
     return Scaffold(
       appBar: switch (DesignPolicy.chooseNavigationLayout(context)) {
-        NavigationLayout.bar => appBarState?.appBar,
+        .bar => appBarState?.appBar,
         _ => null,
       },
       body: SafeArea(
         // FIXME: Focus Traversal で非表示中のタブ(Branch)のウィジェットが traversable である問題
         child: switch (DesignPolicy.chooseNavigationLayout(context)) {
-          NavigationLayout.bar => _navigationShell,
-          NavigationLayout.rail => Row(
+          .bar => _navigationShell,
+          .rail => Row(
             children: [
               NavigationRail(
                 destinations: destinations
@@ -74,8 +74,7 @@ class AdaptiveScaffold extends ConsumerWidget {
           ),
         },
       ),
-      bottomNavigationBar:
-          DesignPolicy.chooseNavigationLayout(context) == NavigationLayout.bar
+      bottomNavigationBar: DesignPolicy.chooseNavigationLayout(context) == .bar
           ? NavigationBar(
               selectedIndex: _navigationShell.currentIndex,
               destinations: destinations

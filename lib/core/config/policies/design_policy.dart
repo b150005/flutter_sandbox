@@ -10,14 +10,14 @@ final class DesignPolicy {
   const DesignPolicy._();
 
   static bool get shouldUseCupertino => switch (defaultTargetPlatform) {
-    TargetPlatform.iOS || TargetPlatform.macOS => true,
+    .iOS || .macOS => true,
     _ => false,
   };
 
   static NavigationLayout chooseNavigationLayout(BuildContext context) =>
       switch (context.breakpoint.name) {
-        null || MOBILE => NavigationLayout.bar,
-        TABLET || DESKTOP => NavigationLayout.rail,
+        null || MOBILE => .bar,
+        TABLET || DESKTOP => .rail,
         _ => throw UnsupportedError(
           'Unsupported breakpoint: ${context.breakpoint}',
         ),

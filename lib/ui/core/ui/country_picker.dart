@@ -53,15 +53,13 @@ class CountryPicker<T> extends HookConsumerWidget {
     final countryNameMap = useMemoized(
       () {
         final basicTypedLocale = BasicTypedLocale(
-          NaturalLanguage.fromAnyCode(
+          .fromAnyCode(
             WidgetsBinding.instance.platformDispatcher.locale.languageCode,
           ),
         );
 
         return WorldCountry.list.commonNamesMap(
-          options: LocaleMappingOptions(
-            mainLocale: basicTypedLocale,
-          ),
+          options: LocaleMappingOptions(mainLocale: basicTypedLocale),
         );
       },
       [WidgetsBinding.instance.platformDispatcher.locale.languageCode],
@@ -77,9 +75,8 @@ class CountryPicker<T> extends HookConsumerWidget {
 
     return Row(
       key: WidgetKeys.countryPicker,
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      // spacing: Spacing.xxs.dp,
+      mainAxisAlignment: .center,
+      mainAxisSize: .min,
       children: [
         InkWell(
           onTap: () async {
@@ -118,7 +115,7 @@ class CountryPicker<T> extends HookConsumerWidget {
             onChanged(value);
           },
           child: Padding(
-            padding: EdgeInsets.all(Spacing.xs.dp),
+            padding: .all(Spacing.xs.dp),
             child: builder(country.value),
           ),
         ),

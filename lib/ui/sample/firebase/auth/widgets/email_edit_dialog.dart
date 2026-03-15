@@ -71,31 +71,26 @@ class EmailEditDialog extends HookConsumerWidget {
         icon: const Icon(Icons.email_outlined),
         title: Text(l10n.editEmail),
         content: AutofillGroup(
-          onDisposeAction: AutofillContextAction.cancel,
+          onDisposeAction: .cancel,
           child: Form(
             key: WidgetKeys.emailEditForm,
             child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: .min,
+              crossAxisAlignment: .start,
               spacing: Spacing.sm.dp,
               children: [
                 if (errorMessage.value.isNotNullAndNotEmpty)
-                  Callout(
-                    errorMessage.value!,
-                    type: CalloutType.error,
-                  ),
+                  Callout(errorMessage.value!, type: .error),
                 Label(
                   l10n.currentEmail,
                   child: Text(
-                    user.email.orNullString(
-                      objectName: 'user.email',
-                    ),
+                    user.email.orNullString(objectName: 'user.email'),
                   ),
                 ),
                 EmailTextFormField(
                   labelText: l10n.newEmail,
                   controller: emailController,
-                  textInputAction: TextInputAction.done,
+                  textInputAction: .done,
                   onFieldSubmitted: (_) => onSubmit(),
                 ),
               ],

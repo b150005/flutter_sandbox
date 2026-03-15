@@ -250,7 +250,7 @@ class AuthRepository extends _$AuthRepository {
             .when<Result<User, AppException>>(
               (userCredential) => userCredential.user == null
                   ? Result.error(
-                      AppException.unauthorized(l10n.authenticationFailed),
+                      .unauthorized(l10n.authenticationFailed),
                     )
                   : Result.success(userCredential.user!),
               Result.error,

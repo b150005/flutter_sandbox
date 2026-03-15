@@ -11,18 +11,16 @@ enum LogicalKeyAction {
 
 extension KeyEventExtension on KeyEvent {
   LogicalKeyAction? get action => switch (this) {
-    KeyDownEvent() when logicalKey == LogicalKeyboardKey.arrowLeft =>
+    KeyDownEvent() when logicalKey == .arrowLeft =>
       HardwareKeyboard.instance.isShiftPressed
-          ? LogicalKeyAction.shiftArrowLeftKeyDown
-          : LogicalKeyAction.arrowLeftKeyDown,
-    KeyDownEvent() when logicalKey == LogicalKeyboardKey.arrowRight =>
+          ? .shiftArrowLeftKeyDown
+          : .arrowLeftKeyDown,
+    KeyDownEvent() when logicalKey == .arrowRight =>
       HardwareKeyboard.instance.isShiftPressed
-          ? LogicalKeyAction.shiftArrowRightKeyDown
-          : LogicalKeyAction.arrowRightKeyDown,
-    KeyDownEvent() when logicalKey == LogicalKeyboardKey.tab =>
-      HardwareKeyboard.instance.isShiftPressed
-          ? LogicalKeyAction.shiftTabKeyDown
-          : LogicalKeyAction.tabKeyDown,
+          ? .shiftArrowRightKeyDown
+          : .arrowRightKeyDown,
+    KeyDownEvent() when logicalKey == .tab =>
+      HardwareKeyboard.instance.isShiftPressed ? .shiftTabKeyDown : .tabKeyDown,
     _ => null,
   };
 }

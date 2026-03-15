@@ -11,7 +11,8 @@ enum CalloutType {
   info(icon: Icons.info_outlined, color: Colors.blue),
   success(icon: Icons.check_circle_outlined, color: Colors.green),
   warning(icon: Icons.warning_amber_outlined, color: Colors.orange),
-  error(icon: Icons.error_outline_outlined, color: Colors.red);
+  error(icon: Icons.error_outline_outlined, color: Colors.red)
+  ;
 
   const CalloutType({required this.icon, required this.color});
 
@@ -43,7 +44,7 @@ class Callout extends StatelessWidget {
   const Callout(
     this.message, {
     super.key,
-    this.type = CalloutType.info,
+    this.type = .info,
     this.onDismiss,
     this.child,
   });
@@ -59,11 +60,11 @@ class Callout extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     key: WidgetKeys.callout,
-    padding: EdgeInsets.all(Spacing.sm.dp),
+    padding: .all(Spacing.sm.dp),
     decoration: BoxDecoration(
       color: type.backgroundColor,
-      border: Border.all(color: type.borderColor),
-      borderRadius: BorderRadius.circular(BorderRadii.sm.value),
+      border: .all(color: type.borderColor),
+      borderRadius: .circular(BorderRadii.sm.value),
     ),
     child: Column(
       spacing: Spacing.xxs.dp,

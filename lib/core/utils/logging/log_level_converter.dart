@@ -5,17 +5,17 @@ final class LogLevelConverter {
   const LogLevelConverter._();
 
   static logging.Level toLoggingLevel(logger.Level level) => switch (level) {
-    logger.Level.all => logging.Level.ALL,
+    .all => .ALL,
     // ignore: deprecated_member_use
-    logger.Level.verbose || logger.Level.trace => logging.Level.FINE,
-    logger.Level.debug => logging.Level.CONFIG,
-    logger.Level.info => logging.Level.INFO,
-    logger.Level.warning => logging.Level.WARNING,
+    .verbose || .trace => .FINE,
+    .debug => .CONFIG,
+    .info => .INFO,
+    .warning => .WARNING,
     // ignore: deprecated_member_use
-    logger.Level.error || logger.Level.wtf => logging.Level.SEVERE,
-    logger.Level.fatal => logging.Level.SHOUT,
+    .error || .wtf => .SEVERE,
+    .fatal => .SHOUT,
     // ignore: deprecated_member_use
-    logger.Level.nothing || logger.Level.off => logging.Level.OFF,
+    .nothing || .off => .OFF,
   };
 
   static int toInt(logger.Level level) => toLoggingLevel(level).value;

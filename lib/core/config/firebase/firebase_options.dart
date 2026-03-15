@@ -1,6 +1,5 @@
-import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
-import 'package:flutter/foundation.dart'
-    show TargetPlatform, defaultTargetPlatform, kIsWeb;
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 
 import '../env/env.dart';
 
@@ -22,20 +21,20 @@ class DefaultFirebaseOptions {
       return web;
     }
     switch (defaultTargetPlatform) {
-      case TargetPlatform.android:
+      case .android:
         return android;
-      case TargetPlatform.iOS:
+      case .iOS:
         return ios;
-      case TargetPlatform.macOS:
+      case .macOS:
         return macos;
-      case TargetPlatform.windows:
+      case .windows:
         return windows;
-      case TargetPlatform.linux:
+      case .linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
-      case TargetPlatform.fuchsia:
+      case .fuchsia:
         throw UnsupportedError(
           'DefaultFirebaseOptions are not supported for this platform.',
         );

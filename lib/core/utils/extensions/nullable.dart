@@ -9,7 +9,7 @@ extension NullSafetyExtension<T> on T? {
   T orElse(
     T fallback, {
     String? objectName,
-    logger.Level level = logger.Level.warning,
+    logger.Level level = .warning,
   }) {
     if (this == null) {
       if (objectName != null) {
@@ -29,7 +29,7 @@ extension NullSafetyExtension<T> on T? {
   void ifNotNull(
     void Function(T value) operation, {
     String? objectName,
-    logger.Level level = logger.Level.warning,
+    logger.Level level = .warning,
   }) {
     if (this == null) {
       if (objectName != null) {
@@ -48,7 +48,7 @@ extension NullSafetyExtension<T> on T? {
 
   String orNullString({
     String? objectName,
-    logger.Level level = logger.Level.info,
+    logger.Level level = .info,
   }) {
     if (this == null) {
       if (objectName != null) {

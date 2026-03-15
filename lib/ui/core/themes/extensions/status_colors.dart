@@ -336,12 +336,9 @@ class _PaletteGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Card(
-    clipBehavior: Clip.antiAlias,
+    clipBehavior: .antiAlias,
     child: IntrinsicWidth(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: children,
-      ),
+      child: Column(crossAxisAlignment: .stretch, children: children),
     ),
   );
 }
@@ -362,11 +359,8 @@ class _Palette extends StatelessWidget {
   Widget build(BuildContext context) => ColoredBox(
     color: color,
     child: Padding(
-      padding: EdgeInsets.all(Spacing.sm.dp),
-      child: Text(
-        labelText,
-        style: TextStyle(color: onColor),
-      ),
+      padding: .all(Spacing.sm.dp),
+      child: Text(labelText, style: TextStyle(color: onColor)),
     ),
   );
 }
@@ -386,12 +380,12 @@ class StatusColors extends ThemeExtension<StatusColors> {
 
   factory StatusColors.fromSeed({
     Color successSeedColor = Colors.green,
-    Brightness brightness = Brightness.light,
+    Brightness brightness = .light,
   }) {
     final colorScheme = ColorScheme.fromSeed(
       seedColor: successSeedColor,
       brightness: brightness,
-      dynamicSchemeVariant: DynamicSchemeVariant.fidelity,
+      dynamicSchemeVariant: .fidelity,
     );
 
     return StatusColors._(
@@ -442,26 +436,26 @@ class StatusColors extends ThemeExtension<StatusColors> {
     double t,
   ) => other is StatusColors
       ? StatusColors._(
-          success: Color.lerp(success, other.success, t)!,
-          onSuccess: Color.lerp(onSuccess, other.onSuccess, t)!,
-          successContainer: Color.lerp(
+          success: .lerp(success, other.success, t)!,
+          onSuccess: .lerp(onSuccess, other.onSuccess, t)!,
+          successContainer: .lerp(
             successContainer,
             other.successContainer,
             t,
           )!,
-          onSuccessContainer: Color.lerp(
+          onSuccessContainer: .lerp(
             onSuccessContainer,
             other.onSuccessContainer,
             t,
           )!,
-          failed: Color.lerp(failed, other.failed, t)!,
-          onFailed: Color.lerp(onFailed, other.onFailed, t)!,
-          failedContainer: Color.lerp(
+          failed: .lerp(failed, other.failed, t)!,
+          onFailed: .lerp(onFailed, other.onFailed, t)!,
+          failedContainer: .lerp(
             failedContainer,
             other.failedContainer,
             t,
           )!,
-          onFailedContainer: Color.lerp(
+          onFailedContainer: .lerp(
             onFailedContainer,
             other.onFailedContainer,
             t,

@@ -21,7 +21,7 @@ class SignInScreen extends HookConsumerWidget {
       state: AppBarState(title: Text(l10n.firebaseSignIn)),
       child: ScrollableContainer(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: .center,
           spacing: Spacing.xxxl.dp,
           children: [
             SizedBox(

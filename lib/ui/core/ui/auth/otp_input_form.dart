@@ -32,7 +32,8 @@ extension _CharactersExtension on Characters {
 enum _EditOperation {
   delete,
   single,
-  multiple;
+  multiple
+  ;
 
   factory _EditOperation.from({
     required int previousLength,
@@ -85,7 +86,7 @@ class OTPInputForm extends HookConsumerWidget {
 
     KeyEventResult onKeyEvent(FocusNode node, KeyEvent event) {
       if (activeSelection.value == null) {
-        return KeyEventResult.ignored;
+        return .ignored;
       }
 
       final action = event.action;
@@ -95,13 +96,12 @@ class OTPInputForm extends HookConsumerWidget {
       );
 
       switch (action) {
-        case LogicalKeyAction.tabKeyDown:
-        case LogicalKeyAction.shiftTabKeyDown:
-          final isForward = action == LogicalKeyAction.tabKeyDown;
+        case .tabKeyDown || .shiftTabKeyDown:
+          final isForward = action == .tabKeyDown;
           if ((isForward && currentSelection.extentOffset >= current.length) ||
               (!isForward && currentSelection.baseOffset <= 0)) {
             activeSelection.value = null;
-            return KeyEventResult.ignored;
+            return .ignored;
           }
 
           final nextSelection = OTPInputForm.nextSelectionFor(
@@ -118,9 +118,9 @@ class OTPInputForm extends HookConsumerWidget {
             update(value: current, selection: nextSelection);
           }
 
-          return KeyEventResult.handled;
+          return .handled;
         default:
-          return KeyEventResult.ignored;
+          return .ignored;
       }
     }
 
@@ -231,10 +231,10 @@ class OTPInputForm extends HookConsumerWidget {
       children: [
         Text(l10n.enterVerificationCode, style: context.textTheme.titleMedium),
         AutofillGroup(
-          onDisposeAction: AutofillContextAction.cancel,
+          onDisposeAction: .cancel,
           child: Form(
             child: Stack(
-              alignment: AlignmentGeometry.centerLeft,
+              alignment: .centerLeft,
               children: [
                 Offstage(
                   child: EditableText(
@@ -244,8 +244,8 @@ class OTPInputForm extends HookConsumerWidget {
                     style: context.defaultTextStyle,
                     cursorColor: context.colorScheme.primary,
                     backgroundCursorColor: Colors.grey,
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.done,
+                    keyboardType: .number,
+                    textInputAction: .done,
                     onChanged: onChanged,
                     onSelectionChanged: onSelectionChanged,
                     inputFormatters: [
@@ -259,8 +259,8 @@ class OTPInputForm extends HookConsumerWidget {
                   onTapOutside: (_) => onTapOutsideDigitBox(),
                   child: Wrap(
                     spacing: Spacing.xs.dp,
-                    alignment: WrapAlignment.spaceEvenly,
-                    children: List.generate(
+                    alignment: .spaceEvenly,
+                    children: .generate(
                       length,
                       (index) {
                         final char =
@@ -311,7 +311,7 @@ class OTPInputForm extends HookConsumerWidget {
     var characters = previous;
 
     switch (operation) {
-      case _EditOperation.delete:
+      case .delete:
         final isAllBlank = previous
             .skip(selectionStartIndex)
             .take(selectionLength)
@@ -333,7 +333,7 @@ class OTPInputForm extends HookConsumerWidget {
           TextSelection(baseOffset: nextIndex, extentOffset: nextIndex + 1),
         );
 
-      case _EditOperation.single:
+      case .single:
         final inputChar = current.elementAt(selectionStartIndex).characters;
 
         characters = characters.replaceAt(selectionStartIndex, inputChar);
@@ -362,7 +362,7 @@ class OTPInputForm extends HookConsumerWidget {
           TextSelection(baseOffset: nextIndex, extentOffset: nextIndex + 1),
         );
 
-      case _EditOperation.multiple:
+      case .multiple:
         final pastedCount = (current.length - previous.length + selectionLength)
             .clamp(0, previous.length - selectionStartIndex);
         final pasted = current.skip(selectionStartIndex).take(pastedCount);
@@ -477,19 +477,16 @@ class OTPDigitBox extends HookConsumerWidget {
     onLongPress: onLongPress,
     child: IntrinsicWidth(
       child: Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(
-          vertical: Spacing.sm.dp,
-          horizontal: Spacing.md.dp,
-        ),
+        alignment: .center,
+        padding: .symmetric(vertical: Spacing.sm.dp, horizontal: Spacing.md.dp),
         decoration: BoxDecoration(
-          border: Border.all(
+          border: .all(
             color: isActive
                 ? context.colorScheme.primary
                 : context.colorScheme.outline,
             width: isActive ? 2 : 1,
           ),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: .circular(8),
         ),
         child: Text(value, style: context.textTheme.titleLarge),
       ),

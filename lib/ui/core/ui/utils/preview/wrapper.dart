@@ -13,11 +13,11 @@ Widget wrapper(Widget child) => MaterialApp(
     ),
     breakpoints: App.breakpoints,
   ),
-  theme: ThemeData.light(
+  theme: .light(
     useMaterial3: true,
   ).copyWith(extensions: [StatusColors.fromSeed()]),
-  darkTheme: ThemeData.dark(
+  darkTheme: .dark(
     useMaterial3: true,
-  ).copyWith(extensions: [StatusColors.fromSeed(brightness: Brightness.dark)]),
+  ).copyWith(extensions: [StatusColors.fromSeed(brightness: .dark)]),
   debugShowCheckedModeBanner: false,
 );

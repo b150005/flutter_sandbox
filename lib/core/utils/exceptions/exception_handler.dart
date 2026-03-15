@@ -38,7 +38,7 @@ abstract final class ExceptionHandler {
         stackTrace: stackTrace,
       );
 
-      return const Result.error(AppException.unknown());
+      return const Result.error(.unknown());
     }
   }
 
@@ -87,7 +87,7 @@ abstract final class ExceptionHandler {
         stackTrace: stackTrace,
       );
 
-      return const Result.error(AppException.unknown());
+      return const Result.error(.unknown());
     }
   }
 

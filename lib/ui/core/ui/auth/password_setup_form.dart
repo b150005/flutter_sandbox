@@ -77,7 +77,7 @@ class PasswordSetupForm extends HookConsumerWidget {
     }
 
     return AutofillGroup(
-      onDisposeAction: AutofillContextAction.cancel,
+      onDisposeAction: .cancel,
       child: Form(
         key: WidgetKeys.passwordSetupForm,
         child: Column(
@@ -86,13 +86,13 @@ class PasswordSetupForm extends HookConsumerWidget {
             if (errorMessage.value.isNotNullAndNotEmpty)
               Callout(
                 errorMessage.value!,
-                type: CalloutType.error,
+                type: .error,
                 onDismiss: () => errorMessage.value = null,
               ),
             PasswordTextFormField(
               controller: passwordController,
               labelText: l10n.password,
-              textInputAction: TextInputAction.next,
+              textInputAction: .next,
               onChanged: (password) {
                 satisfiesMinLength.value =
                     FirebaseAuthValidator.satisfiesMinLength(
@@ -116,7 +116,7 @@ class PasswordSetupForm extends HookConsumerWidget {
             PasswordTextFormField(
               key: WidgetKeys.confirmPassword,
               labelText: l10n.confirmPassword,
-              textInputAction: TextInputAction.done,
+              textInputAction: .done,
               onFieldSubmitted: (_) => onSubmit(),
               validator: (confirmPassword) =>
                   FirebaseAuthValidator.validateConfirmPassword(

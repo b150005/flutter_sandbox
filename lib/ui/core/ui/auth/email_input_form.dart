@@ -62,7 +62,7 @@ class EmailInputForm<T> extends HookConsumerWidget {
     }
 
     return AutofillGroup(
-      onDisposeAction: AutofillContextAction.cancel,
+      onDisposeAction: .cancel,
       child: Form(
         key: WidgetKeys.emailVerificationForm,
         child: Column(
@@ -71,12 +71,12 @@ class EmailInputForm<T> extends HookConsumerWidget {
             if (errorMessage.value.isNotNullAndNotEmpty)
               Callout(
                 errorMessage.value!,
-                type: CalloutType.error,
+                type: .error,
                 onDismiss: () => errorMessage.value = null,
               ),
             EmailTextFormField(
               controller: emailController,
-              textInputAction: TextInputAction.done,
+              textInputAction: .done,
               onFieldSubmitted: (_) => onSubmit(),
             ),
             FilledButton(

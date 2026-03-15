@@ -57,7 +57,7 @@ class App extends ConsumerWidget {
   static const breakpoints = [
     Breakpoint(start: 0, end: 767, name: MOBILE),
     Breakpoint(start: 768, end: 1023, name: TABLET),
-    Breakpoint(start: 1024, end: double.infinity, name: DESKTOP),
+    Breakpoint(start: 1024, end: .infinity, name: DESKTOP),
   ];
 
   @override
@@ -74,11 +74,11 @@ class App extends ConsumerWidget {
         ),
         breakpoints: breakpoints,
       ),
-      theme: ThemeData.light(useMaterial3: true).copyWith(
+      theme: .light(useMaterial3: true).copyWith(
         extensions: [StatusColors.fromSeed()],
       ),
-      darkTheme: ThemeData.dark(useMaterial3: true).copyWith(
-        extensions: [StatusColors.fromSeed(brightness: Brightness.dark)],
+      darkTheme: .dark(useMaterial3: true).copyWith(
+        extensions: [StatusColors.fromSeed(brightness: .dark)],
       ),
       localizationsDelegates: localizationsDelegates,
       supportedLocales: supportedLocales,

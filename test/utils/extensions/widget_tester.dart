@@ -9,14 +9,14 @@ extension WidgetTesterExtension on WidgetTester {
   Rect get screenRect => Offset.zero & view.logicalSize;
 
   Future<void> pressBackspace() async {
-    await sendKeyEvent(LogicalKeyboardKey.backspace);
+    await sendKeyEvent(.backspace);
     await pump();
   }
 
   Future<void> pressArrowKey({required ArrowKeyDirection direction}) async {
     final key = switch (direction) {
-      ArrowKeyDirection.left => LogicalKeyboardKey.arrowLeft,
-      ArrowKeyDirection.right => LogicalKeyboardKey.arrowRight,
+      .left => LogicalKeyboardKey.arrowLeft,
+      .right => LogicalKeyboardKey.arrowRight,
     };
 
     await sendKeyEvent(key);
@@ -25,11 +25,11 @@ extension WidgetTesterExtension on WidgetTester {
 
   Future<void> pressTab({bool withShift = false}) async {
     if (withShift) {
-      await sendKeyDownEvent(LogicalKeyboardKey.shift);
+      await sendKeyDownEvent(.shift);
     }
-    await sendKeyEvent(LogicalKeyboardKey.tab);
+    await sendKeyEvent(.tab);
     if (withShift) {
-      await sendKeyUpEvent(LogicalKeyboardKey.shift);
+      await sendKeyUpEvent(.shift);
     }
     await pump();
   }

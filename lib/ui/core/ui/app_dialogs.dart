@@ -282,7 +282,7 @@ class _SearchableListDialog<T> extends HookConsumerWidget {
           slivers: [
             SliverToBoxAdapter(
               child: Row(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: .min,
                 spacing: Spacing.sm.dp,
                 children: [
                   if (searchFilter != null)
@@ -309,7 +309,7 @@ class _SearchableListDialog<T> extends HookConsumerWidget {
             if (multiSelectable && selectedItems.value.isNotEmpty)
               SliverToBoxAdapter(
                 child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
+                  scrollDirection: .horizontal,
                   child: Row(
                     children: selectedItems.value
                         .map(
@@ -334,7 +334,7 @@ class _SearchableListDialog<T> extends HookConsumerWidget {
                   title: itemTitleBuilder?.call(item),
                   subtitle: itemSubtitleBuilder?.call(item),
                   trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
+                    mainAxisSize: .min,
                     spacing: Spacing.sm.dp,
                     children: [
                       ?itemTrailingBuilder?.call(item),

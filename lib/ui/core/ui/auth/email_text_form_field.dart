@@ -37,7 +37,7 @@ class EmailTextFormField extends HookConsumerWidget {
         decoration: context.outlinedInputDecoration.copyWith(
           hintText: exampleEmailAddress,
         ),
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: .emailAddress,
         textInputAction: textInputAction,
         autocorrect: false,
         onFieldSubmitted: onFieldSubmitted,
@@ -45,7 +45,7 @@ class EmailTextFormField extends HookConsumerWidget {
             FirebaseAuthValidator.validateEmail(email, l10n: l10n),
         inputFormatters: [TextInputFormatters.noWhitespace],
         autofillHints: const [AutofillHints.email],
-        autovalidateMode: AutovalidateMode.onUserInteraction,
+        autovalidateMode: .onUserInteraction,
       ),
     );
   }

@@ -17,7 +17,7 @@ class PropertyTable extends StatelessWidget {
     this.defaultColumnWidth = const FlexColumnWidth(),
     this.textDirection,
     this.border,
-    this.defaultVerticalAlignment = TableCellVerticalAlignment.top,
+    this.defaultVerticalAlignment = .top,
     this.textBaseline,
   }) : assert(cellData.length > 0),
        assert(columnCount > 0);
@@ -48,7 +48,7 @@ class PropertyTable extends StatelessWidget {
             ..add(
               TableRow(
                 children:
-                    List.generate(
+                    .generate(
                       columnCount,
                       (i) => record.$1 + i,
                     ).fold<List<Widget>>([], (acc, index) {

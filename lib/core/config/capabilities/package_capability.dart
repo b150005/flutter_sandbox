@@ -8,9 +8,7 @@ final class PackageCapability {
   static bool get supportsWindowManager =>
       !kIsWeb &&
       switch (defaultTargetPlatform) {
-        TargetPlatform.linux ||
-        TargetPlatform.macOS ||
-        TargetPlatform.windows => true,
+        .linux || .macOS || .windows => true,
         _ => false,
       };
 
@@ -18,7 +16,7 @@ final class PackageCapability {
   static bool get supportsDataConnect =>
       kIsWeb ||
       switch (defaultTargetPlatform) {
-        TargetPlatform.android || TargetPlatform.iOS => true,
+        .android || .iOS => true,
         _ => false,
       };
 
@@ -26,9 +24,7 @@ final class PackageCapability {
   static bool get supportsFirebaseCloudMessaging =>
       kIsWeb ||
       switch (defaultTargetPlatform) {
-        TargetPlatform.android ||
-        TargetPlatform.iOS ||
-        TargetPlatform.macOS => true,
+        .android || .iOS || .macOS => true,
         _ => false,
       };
 
@@ -36,9 +32,7 @@ final class PackageCapability {
   static bool get supportsFirebaseAnalytics =>
       kIsWeb ||
       switch (defaultTargetPlatform) {
-        TargetPlatform.android ||
-        TargetPlatform.iOS ||
-        TargetPlatform.macOS => true,
+        .android || .iOS || .macOS => true,
         _ => false,
       };
 
@@ -46,9 +40,7 @@ final class PackageCapability {
   static bool get supportsFirebaseCrashlytics =>
       !kIsWeb &&
       switch (defaultTargetPlatform) {
-        TargetPlatform.android ||
-        TargetPlatform.iOS ||
-        TargetPlatform.macOS => true,
+        .android || .iOS || .macOS => true,
         _ => false,
       };
 
@@ -56,9 +48,7 @@ final class PackageCapability {
   static bool get supportsFirebaseRemoteConfig =>
       kIsWeb ||
       switch (defaultTargetPlatform) {
-        TargetPlatform.android ||
-        TargetPlatform.iOS ||
-        TargetPlatform.macOS => true,
+        .android || .iOS || .macOS => true,
         _ => false,
       };
 
@@ -66,9 +56,7 @@ final class PackageCapability {
   static bool get supportsCloudFunctions =>
       kIsWeb ||
       switch (defaultTargetPlatform) {
-        TargetPlatform.android ||
-        TargetPlatform.iOS ||
-        TargetPlatform.macOS => true,
+        .android || .iOS || .macOS => true,
         _ => false,
       };
 
@@ -76,7 +64,7 @@ final class PackageCapability {
   static bool get supportsFirebasePerformanceMonitoring =>
       kIsWeb ||
       switch (defaultTargetPlatform) {
-        TargetPlatform.android || TargetPlatform.iOS => true,
+        .android || .iOS => true,
         _ => false,
       };
 
@@ -84,9 +72,7 @@ final class PackageCapability {
   static bool get supportsFirebaseAppCheck =>
       kIsWeb ||
       switch (defaultTargetPlatform) {
-        TargetPlatform.android ||
-        TargetPlatform.iOS ||
-        TargetPlatform.macOS => true,
+        .android || .iOS || .macOS => true,
         _ => false,
       };
 
@@ -94,9 +80,7 @@ final class PackageCapability {
   static bool get supportsFirebaseInstallations =>
       !kIsWeb &&
       switch (defaultTargetPlatform) {
-        TargetPlatform.android ||
-        TargetPlatform.iOS ||
-        TargetPlatform.macOS => true,
+        .android || .iOS || .macOS => true,
         _ => false,
       };
 
@@ -104,7 +88,7 @@ final class PackageCapability {
   static bool get supportsFirebaseInAppMessaging =>
       !kIsWeb &&
       switch (defaultTargetPlatform) {
-        TargetPlatform.android || TargetPlatform.iOS => true,
+        .android || .iOS => true,
         _ => false,
       };
 
@@ -112,9 +96,7 @@ final class PackageCapability {
   static bool get supportsFirebaseAILogic =>
       kIsWeb ||
       switch (defaultTargetPlatform) {
-        TargetPlatform.android ||
-        TargetPlatform.iOS ||
-        TargetPlatform.macOS => true,
+        .android || .iOS || .macOS => true,
         _ => false,
       };
 
@@ -122,9 +104,7 @@ final class PackageCapability {
   static bool get supportsFirebaseRealtimeDatabase =>
       kIsWeb ||
       switch (defaultTargetPlatform) {
-        TargetPlatform.android ||
-        TargetPlatform.iOS ||
-        TargetPlatform.macOS => true,
+        .android || .iOS || .macOS => true,
         _ => false,
       };
 }

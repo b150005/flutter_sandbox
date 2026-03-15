@@ -15,9 +15,7 @@ void main() {
   }) => ProviderScope(
     child: MaterialApp(
       builder: (context, child) => Theme(
-        data: ThemeData.light(
-          useMaterial3: true,
-        ).copyWith(extensions: []),
+        data: .light(useMaterial3: true).copyWith(extensions: []),
         child: child!,
       ),
       home: Scaffold(
