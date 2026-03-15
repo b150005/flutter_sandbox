@@ -284,7 +284,6 @@ class OTPInputForm extends HookConsumerWidget {
             ),
           ),
         ),
-        SelectableText(controller.text),
       ],
     );
   }
