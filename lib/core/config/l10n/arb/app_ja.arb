@@ -250,7 +250,7 @@
 	"@noSearchResultsHint": {},
 	"sendVerificationCode": "認証コードを送信",
 	"@sendVerificationCode": {},
-	"resend": "再送信 ({seconds}s)",
+	"resend": "{seconds, plural, =0{再送信} other{再送信 ({seconds}s)}}",
 	"@resend": {
 		"description": "認証コードを再送する、カウントダウン付きのボタンラベル",
 		"placeholders": {
@@ -260,6 +260,8 @@
 			}
 		}
 	},
+	"otpVerification": "認証コードの確認",
+	"@otpVerification": {},
 	"unlinkPhoneNumber": "電話番号の連携解除",
 	"@unlinkPhoneNumber": {},
 	"cancel": "キャンセル",

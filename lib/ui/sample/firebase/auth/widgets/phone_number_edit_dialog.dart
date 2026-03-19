@@ -1,15 +1,21 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/config/constants/spacing.dart';
 import '../../../../../core/config/constants/widget_keys.dart';
+import '../../../../../core/config/l10n/app_localizations.dart'
+    show AppLocalizations;
+import '../../../../../core/routing/router.dart';
 import '../../../../../core/utils/authentications/phone_number_parser.dart';
+import '../../../../../core/utils/exceptions/app_exception.dart';
 import '../../../../../core/utils/extensions/bool.dart';
 import '../../../../../core/utils/extensions/nullable.dart';
 import '../../../../../core/utils/extensions/string.dart';
 import '../../../../../core/utils/extensions/user.dart';
-import '../../../../../core/utils/l10n/app_localizations.dart';
+import '../../../../../core/utils/l10n/app_localizations.dart'
+    hide AppLocalizations;
 import '../../../../../data/repositories/firebase/auth/auth_repository.dart';
 import '../../../../core/extensions/build_context.dart';
 import '../../../../core/extensions/navigator_state.dart';
@@ -24,6 +30,8 @@ import '../../../../core/ui/utils/app_messenger.dart';
 class PhoneNumberEditDialog extends HookConsumerWidget {
   const PhoneNumberEditDialog({super.key});
 
+  static final LabeledGlobalKey<FormState> formKey = WidgetKeys.phoneNumberForm;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
@@ -33,32 +41,18 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
     final isLoading = useState<bool>(false);
     final errorMessage = useState<String?>(null);
 
-    final currentUser = ref.watch(authRepositoryProvider).value;
-    final currentPhoneNumber = useMemoized<PhoneNumberInput>(() {
-      if (currentUser == null || currentUser.phoneNumber.isNullOrEmpty) {
-        return const PhoneNumberInput();
-      }
+    void showErrorMessage(AppException appException) =>
+        errorMessage.value = appException.message;
 
-      return PhoneNumberParser.parse(
-        phoneNumber: currentUser.phoneNumber!,
-        l10n: l10n,
-      ).when<PhoneNumberInput>(
-        (phoneNumber) => PhoneNumberInput(
-          countryCode: phoneNumber.countryCode.toString(),
-          nationalNumber: phoneNumber.nationalNumber.toString(),
-        ),
-        (appException) {
-          errorMessage.value = appException.message;
-          return const PhoneNumberInput();
-        },
-      );
-    }, [currentUser?.phoneNumber]);
+    final currentUser = ref.watch(authRepositoryProvider).value;
+    final currentPhoneNumber = useMemoized<PhoneNumberInput>(
+      () => parse(user: currentUser, l10n: l10n, onError: showErrorMessage),
+      [currentUser?.phoneNumber],
+    );
 
     final phoneNumber = useState<PhoneNumberInput>(currentPhoneNumber);
 
-    final formKey = WidgetKeys.phoneNumberForm;
-
-    Future<void> onSendVerificationCode() async {
+    Future<void> sendVerificationCode() async {
       isLoading.value = true;
 
       if (!(formKey.currentState?.validate()).orFalse(
@@ -75,7 +69,6 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
         onPhoneNumberUpdated: (phoneNumberUpdateResult) =>
             phoneNumberUpdateResult.when(
               (_) {
-                // TODO(b150005): 電話番号の更新成功時の処理
                 context.rootNavigator.safePop();
 
                 AppMessenger.showMaterialBanner(
@@ -86,27 +79,26 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
                   ),
                 );
               },
-              (appException) => errorMessage.value = appException.message,
+              showErrorMessage,
             ),
-        onVerificationFailed: (appException) =>
-            errorMessage.value = appException.message,
+        onVerificationFailed: showErrorMessage,
         onCodeSent: (verificationId, forceResendingToken) {
-          // TODO(b150005): 認証コード送信時の処理
-        },
-        onCodeAutoRetrievalTimeout: (verificationId) {
-          // TODO(b150005): 自動検証がタイムアウトした場合の処理
+          context.rootNavigator.safePop();
+
+          OTPVerificationScreenRoute(
+            verificationId: verificationId,
+            forceResendingToken: forceResendingToken,
+            $extra: phoneNumber.value,
+          ).push<void>(context);
         },
       );
 
-      verificationResult.when(
-        (_) {},
-        (appException) => errorMessage.value = appException.message,
-      );
+      verificationResult.whenError(showErrorMessage);
 
       isLoading.value = false;
     }
 
-    Future<void> onUnlinkPhoneNumber() async {
+    Future<void> unlinkPhoneNumber() async {
       final isConfirmed = await AppDialogs.showConfirmationDialog(
         context: context,
         key: WidgetKeys.unlinkPhoneAuthConfirmationDialog,
@@ -121,7 +113,7 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
 
         unlinkResult.when(
           (_) {},
-          (appException) => errorMessage.value = appException.message,
+          showErrorMessage,
         );
       }
     }
@@ -150,7 +142,7 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
               phoneNumber: phoneNumber.value,
               onChanged: (phoneNumberInput) =>
                   phoneNumber.value = phoneNumberInput,
-              onSubmitted: onSendVerificationCode,
+              onSubmitted: sendVerificationCode,
               currentPhoneNumber: currentUser?.phoneNumber,
             ),
           ],
@@ -158,7 +150,7 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
         actions: [
           if (currentUser != null && currentUser.hasPhoneAuthProvider)
             TextButton(
-              onPressed: onUnlinkPhoneNumber,
+              onPressed: isLoading.value ? null : unlinkPhoneNumber,
               child: Text(
                 l10n.unlink,
                 style: context.defaultTextStyle.copyWith(
@@ -173,13 +165,39 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
             child: Text(l10n.cancel),
           ),
           FilledButton(
-            onPressed: isLoading.value ? null : onSendVerificationCode,
+            onPressed: isLoading.value ? null : sendVerificationCode,
             child: isLoading.value
                 ? context.loadingIndicator
                 : Text(l10n.sendVerificationCode),
           ),
         ],
       ),
+    );
+  }
+
+  @visibleForTesting
+  static PhoneNumberInput parse({
+    required User? user,
+    required AppLocalizations l10n,
+    required void Function(AppException appException) onError,
+  }) {
+    if (user == null || user.phoneNumber.isNullOrEmpty) {
+      return const PhoneNumberInput();
+    }
+
+    return PhoneNumberParser.parse(
+      phoneNumber: user.phoneNumber!,
+      l10n: l10n,
+    ).when<PhoneNumberInput>(
+      (phoneNumber) => PhoneNumberInput(
+        countryCode: phoneNumber.countryCode.toString(),
+        nationalNumber: phoneNumber.nationalNumber.toString(),
+      ),
+      (appException) {
+        onError(appException);
+
+        return const PhoneNumberInput();
+      },
     );
   }
 }

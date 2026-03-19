@@ -45,6 +45,12 @@ part of '../router.dart';
                 TypedGoRoute<FirebaseAuthScreenRoute>(
                   path: FirebaseAuthScreenRoute.path,
                   name: FirebaseAuthScreenRoute.absolutePath,
+                  routes: <TypedRoute<RouteData>>[
+                    TypedGoRoute<OTPVerificationScreenRoute>(
+                      path: OTPVerificationScreenRoute.path,
+                      name: OTPVerificationScreenRoute.absolutePath,
+                    ),
+                  ],
                 ),
                 TypedGoRoute<DataConnectScreenRoute>(
                   path: DataConnectScreenRoute.path,

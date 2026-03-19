@@ -202,17 +202,15 @@ class AuthRepository extends _$AuthRepository {
   /// [nationalNumber] 国内番号(例: 9012345678)
   /// [onPhoneNumberUpdated] (Android のみ)ユーザーの電話番号の更新後のコールバック
   /// [onVerificationFailed] 認証コードの検証に失敗した場合のコールバック
-  /// [onCodeSent] 認証コード送信後のコールバック
-  /// [onCodeAutoRetrievalTimeout] (Android のみ) 電話番号の自動検証がタイムアウトした場合のコールバック
+  /// [onCodeSent] 認証コード送信後のコールバック(Android では電話番号の自動検証がタイムアウトした場合のコールバックとしても機能)
   Future<Result<void, AppException>> verifyPhoneNumber({
     required String countryCode,
     required String nationalNumber,
     required void Function(Result<User, AppException> result)
     onPhoneNumberUpdated,
     required void Function(AppException appException) onVerificationFailed,
-    required void Function(String verificationId, int? forceResendingToken)
-    onCodeSent,
-    required void Function(String verificationId) onCodeAutoRetrievalTimeout,
+    required PhoneCodeSent onCodeSent,
+    int? forceResendingToken,
   }) => _executeWithFirebaseAuth(() {
     final auth = ref.read(firebaseAuthProvider);
     final l10n = ref.read(appLocalizationsProvider);
@@ -261,7 +259,9 @@ class AuthRepository extends _$AuthRepository {
         l10n: l10n,
       ).whenError(onVerificationFailed),
       codeSent: onCodeSent,
-      codeAutoRetrievalTimeout: onCodeAutoRetrievalTimeout,
+      codeAutoRetrievalTimeout: (verificationId) =>
+          onCodeSent(verificationId, null),
+      forceResendingToken: forceResendingToken,
     );
   });
 
@@ -284,6 +284,17 @@ class AuthRepository extends _$AuthRepository {
 
     await user.reload();
   });
+
+  /// 電話番号を更新する
+  Future<Result<void, AppException>> updatePhoneNumber({
+    required String verificationId,
+    required String smsCode,
+  }) => _updatePhoneNumber(
+    phoneCredential: PhoneAuthProvider.credential(
+      verificationId: verificationId,
+      smsCode: smsCode,
+    ),
+  );
 
   /// 認証プロバイダの紐付けを解除する
   ///

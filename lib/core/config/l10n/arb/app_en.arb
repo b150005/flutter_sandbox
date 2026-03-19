@@ -250,7 +250,7 @@
 	"@noSearchResultsHint": {},
 	"sendVerificationCode": "Send Verification Code",
 	"@sendVerificationCode": {},
-	"resend": "Resend ({seconds}s)",
+	"resend": "{seconds, plural, =0{Resend} other{Resend ({seconds}s)}}",
 	"@resend": {
 		"description": "Button label to resend verification code with countdown timer",
 		"placeholders": {
@@ -260,6 +260,8 @@
 			}
 		}
 	},
+	"otpVerification": "OTP Verification",
+	"@otpVerification": {},
 	"unlinkPhoneNumber": "Unlink Phone Number",
 	"@unlinkPhoneNumber": {},
 	"cancel": "Cancel",

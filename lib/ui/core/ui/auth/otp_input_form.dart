@@ -12,6 +12,7 @@ import '../../../../core/utils/extensions/key_event.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
 import '../../extensions/build_context.dart';
 import '../../extensions/text_selection.dart';
+import '../../hooks/use_timer.dart';
 
 extension _CharactersExtension on Characters {
   static final Characters blank = OTPInputForm.placeholderChar;
@@ -51,15 +52,24 @@ class OTPInputForm extends HookConsumerWidget {
   const OTPInputForm({
     super.key,
     required this.length,
+    this.forceResendingToken,
     required this.onCompleted,
+    this.resendIntervalSeconds = 60,
+    this.onResend,
   }) : assert(length > 0);
-
-  final int length;
 
   static final Characters placeholderChar = ' '.characters;
   Characters get placeholder => (placeholderChar.string * length).characters;
 
+  final int length;
+
+  final int? forceResendingToken;
+
   final ValueChanged<String> onCompleted;
+
+  final int resendIntervalSeconds;
+
+  final VoidCallback? onResend;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -119,7 +129,11 @@ class OTPInputForm extends HookConsumerWidget {
           }
 
           return .handled;
-        default:
+        case null ||
+            .arrowLeftKeyDown ||
+            .shiftArrowLeftKeyDown ||
+            .arrowRightKeyDown ||
+            .shiftArrowRightKeyDown:
           return .ignored;
       }
     }
@@ -226,6 +240,12 @@ class OTPInputForm extends HookConsumerWidget {
       activeSelection.value = null;
     }
 
+    final resendCount = useState<int>(0);
+    final remaining = useCountdown(
+      duration: Duration(seconds: resendIntervalSeconds),
+      keys: [resendCount.value],
+    );
+
     return Column(
       spacing: Spacing.sm.dp,
       children: [
@@ -284,6 +304,18 @@ class OTPInputForm extends HookConsumerWidget {
             ),
           ),
         ),
+        if (onResend != null)
+          TextButton(
+            key: WidgetKeys.resend,
+            onPressed: remaining == Duration.zero
+                ? () {
+                    onResend!();
+
+                    resendCount.value++;
+                  }
+                : null,
+            child: Text(l10n.resend(remaining.inSeconds)),
+          ),
       ],
     );
   }

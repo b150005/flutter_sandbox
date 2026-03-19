@@ -72,6 +72,7 @@ abstract final class WidgetKeys {
   static const ValueKey<String> confirmPassword = ValueKey('confirmPassword');
   static const ValueKey<String> setupPassword = ValueKey('setupPassword');
   static const ValueKey<String> verifyEmail = ValueKey('verifyEmail');
+  static const ValueKey<String> resend = ValueKey('resend');
 
   static const ValueKey<String> editEmail = ValueKey('editEmail');
   static const ValueKey<String> editPhoneNumber = ValueKey(
