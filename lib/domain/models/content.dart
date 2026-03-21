@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 part 'content.freezed.dart';
 
 @freezed
-abstract class Content<T extends GoRouteData> with _$Content {
+abstract class Content<T extends GoRouteData> with _$Content<T> {
   const factory Content({
     required T route,
     required String title,
