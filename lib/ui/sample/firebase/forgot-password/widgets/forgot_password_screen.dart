@@ -2,7 +2,7 @@ part of '../../../../../core/routing/router.dart';
 
 class ForgotPasswordScreenRoute extends GoRouteData
     with $ForgotPasswordScreenRoute {
-  static const path = '/forgot-password';
+  static const path = 'forgot-password';
   static const absolutePath = '/sample/firebase/forgot-password';
 
   @override

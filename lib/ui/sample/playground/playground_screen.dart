@@ -1,7 +1,7 @@
 part of '../../../core/routing/router.dart';
 
 class PlaygroundScreenRoute extends GoRouteData with $PlaygroundScreenRoute {
-  static const path = '/playground';
+  static const path = 'playground';
   static const absolutePath = '/sample/playground';
 
   @override

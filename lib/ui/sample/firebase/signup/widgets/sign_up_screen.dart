@@ -1,7 +1,7 @@
 part of '../../../../../core/routing/router.dart';
 
 class SignUpScreenRoute extends GoRouteData with $SignUpScreenRoute {
-  static const path = '/signup';
+  static const path = 'signup';
   static const absolutePath = '/sample/firebase/signup';
 
   @override

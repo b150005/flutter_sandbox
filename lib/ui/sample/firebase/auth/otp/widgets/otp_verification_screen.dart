@@ -8,7 +8,7 @@ class OTPVerificationScreenRoute extends GoRouteData
     required this.$extra,
   });
 
-  static const path = '/otp';
+  static const path = 'otp';
   static const absolutePath = '/sample/firebase/auth/otp';
 
   final String verificationId;

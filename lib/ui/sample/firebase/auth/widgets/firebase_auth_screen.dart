@@ -2,7 +2,7 @@ part of '../../../../../core/routing/router.dart';
 
 class FirebaseAuthScreenRoute extends GoRouteData
     with $FirebaseAuthScreenRoute {
-  static const path = '/auth';
+  static const path = 'auth';
   static const absolutePath = '/sample/firebase/auth';
 
   @override

@@ -1,7 +1,7 @@
 part of '../../../../../../core/routing/router.dart';
 
 class VerifyEmailScreenRoute extends GoRouteData with $VerifyEmailScreenRoute {
-  static const path = '/verify-email';
+  static const path = 'verify-email';
   static const absolutePath = '/sample/firebase/signup/verify-email';
 
   @override

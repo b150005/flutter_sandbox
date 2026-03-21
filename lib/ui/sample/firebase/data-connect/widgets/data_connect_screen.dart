@@ -1,7 +1,7 @@
 part of '../../../../../core/routing/router.dart';
 
 class DataConnectScreenRoute extends GoRouteData with $DataConnectScreenRoute {
-  static const path = '/data-connect';
+  static const path = 'data-connect';
   static const absolutePath = '/sample/firebase/data-connect';
 
   @override
