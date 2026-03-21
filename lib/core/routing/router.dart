@@ -71,6 +71,7 @@ class Router extends _$Router {
   GoRouter build() => GoRouter(
     routes: $appRoutes,
     extraCodec: const AppExtraCodec(),
+    // TODO(b150005): onException でエラー画面への遷移を実装
     redirect: (_, state) => _redirect(state: state, ref: ref),
     refreshListenable: ProviderChangeNotifier(
       ref: ref,
