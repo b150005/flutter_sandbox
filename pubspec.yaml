@@ -44,6 +44,7 @@ dependencies:
   google_sign_in_mocks:
   hooks_riverpod:
   intl:
+  json_annotation:
   logger:
   logging:
   multiple_result:
@@ -67,6 +68,7 @@ dev_dependencies:
   go_router_builder:
   integration_test:
     sdk: flutter
+  json_serializable:
   mockito:
   pedantic_mono:
   riverpod_generator:
