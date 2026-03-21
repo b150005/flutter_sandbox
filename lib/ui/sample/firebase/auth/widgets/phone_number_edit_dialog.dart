@@ -1,21 +1,16 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/config/constants/spacing.dart';
 import '../../../../../core/config/constants/widget_keys.dart';
-import '../../../../../core/config/l10n/app_localizations.dart'
-    show AppLocalizations;
 import '../../../../../core/routing/router.dart';
-import '../../../../../core/utils/authentications/phone_number_parser.dart';
 import '../../../../../core/utils/exceptions/app_exception.dart';
 import '../../../../../core/utils/extensions/bool.dart';
 import '../../../../../core/utils/extensions/nullable.dart';
 import '../../../../../core/utils/extensions/string.dart';
 import '../../../../../core/utils/extensions/user.dart';
-import '../../../../../core/utils/l10n/app_localizations.dart'
-    hide AppLocalizations;
+import '../../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../../data/repositories/firebase/auth/auth_repository.dart';
 import '../../../../../domain/models/phone_number.dart';
 import '../../../../core/extensions/build_context.dart';
@@ -49,7 +44,14 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
 
     final currentUser = ref.watch(authRepositoryProvider).value;
     final currentPhoneNumber = useMemoized<PhoneNumber>(
-      () => parse(user: currentUser, l10n: l10n, onError: showErrorMessage),
+      () => .parseE164(currentUser?.phoneNumber, l10n: l10n).when(
+        (phoneNumber) => phoneNumber,
+        (appException) {
+          showErrorMessage(appException);
+
+          return const PhoneNumber();
+        },
+      ),
       [currentUser?.phoneNumber],
     );
 
@@ -175,32 +177,6 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
           ),
         ],
       ),
-    );
-  }
-
-  @visibleForTesting
-  static PhoneNumber parse({
-    required User? user,
-    required AppLocalizations l10n,
-    required void Function(AppException appException) onError,
-  }) {
-    if (user == null || user.phoneNumber.isNullOrEmpty) {
-      return const PhoneNumber();
-    }
-
-    return PhoneNumberParser.parse(
-      phoneNumber: user.phoneNumber!,
-      l10n: l10n,
-    ).when<PhoneNumber>(
-      (phoneNumber) => PhoneNumber(
-        countryCode: phoneNumber.countryCode.toString(),
-        nationalNumber: phoneNumber.nationalNumber.toString(),
-      ),
-      (appException) {
-        onError(appException);
-
-        return const PhoneNumber();
-      },
     );
   }
 }
