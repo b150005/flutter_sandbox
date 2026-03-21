@@ -156,7 +156,7 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
               onPressed: isLoading.value ? null : unlinkPhoneNumber,
               child: Text(
                 l10n.unlink,
-                style: context.defaultTextStyle.copyWith(
+                style: context.textTheme.bodyMedium?.copyWith(
                   color: context.colorScheme.error,
                 ),
               ),
