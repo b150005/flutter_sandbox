@@ -25,6 +25,7 @@ class CountryPicker<T> extends HookConsumerWidget {
     this.itemTrailingBuilder,
     required this.searchFilter,
     this.clearButtonBuilder,
+    this.enabled = true,
   });
 
   final WorldCountry? initialCountry;
@@ -47,6 +48,8 @@ class CountryPicker<T> extends HookConsumerWidget {
   searchFilter;
 
   final Widget Function(VoidCallback onClear)? clearButtonBuilder;
+
+  final bool enabled;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -79,41 +82,48 @@ class CountryPicker<T> extends HookConsumerWidget {
       mainAxisSize: .min,
       children: [
         InkWell(
-          onTap: () async {
-            final selectedCountry =
-                await AppDialogs.showSearchableListDialog<WorldCountry>(
-                  context: context,
-                  items: countryNameMap.keys.toList(),
-                  itemLeadingBuilder: (country) => itemLeadingBuilder?.call(
-                    country,
-                    countryNameMap[country]!,
-                  ),
-                  itemTitleBuilder: (country) =>
-                      itemTitleBuilder?.call(country, countryNameMap[country]!),
-                  itemSubtitleBuilder: (country) => itemSubtitleBuilder?.call(
-                    country,
-                    countryNameMap[country]!,
-                  ),
-                  itemTrailingBuilder: (country) => itemTrailingBuilder?.call(
-                    country,
-                    countryNameMap[country]!,
-                  ),
-                  initialSelection: country.value,
-                  searchFilter: (country, query) => searchFilter(
-                    country,
-                    countryNameMap[country]!,
-                    query,
-                  ),
-                );
+          onTap: enabled
+              ? () async {
+                  final selectedCountry =
+                      await AppDialogs.showSearchableListDialog<WorldCountry>(
+                        context: context,
+                        items: countryNameMap.keys.toList(),
+                        itemLeadingBuilder: (country) =>
+                            itemLeadingBuilder?.call(
+                              country,
+                              countryNameMap[country]!,
+                            ),
+                        itemTitleBuilder: (country) => itemTitleBuilder?.call(
+                          country,
+                          countryNameMap[country]!,
+                        ),
+                        itemSubtitleBuilder: (country) =>
+                            itemSubtitleBuilder?.call(
+                              country,
+                              countryNameMap[country]!,
+                            ),
+                        itemTrailingBuilder: (country) =>
+                            itemTrailingBuilder?.call(
+                              country,
+                              countryNameMap[country]!,
+                            ),
+                        initialSelection: country.value,
+                        searchFilter: (country, query) => searchFilter(
+                          country,
+                          countryNameMap[country]!,
+                          query,
+                        ),
+                      );
 
-            final value = selectedCountry == null
-                ? null
-                : valueBuilder(selectedCountry);
+                  final value = selectedCountry == null
+                      ? null
+                      : valueBuilder(selectedCountry);
 
-            country.value = selectedCountry;
+                  country.value = selectedCountry;
 
-            onChanged(value);
-          },
+                  onChanged(value);
+                }
+              : null,
           child: Padding(
             padding: .all(Spacing.xs.dp),
             child: builder(country.value),
@@ -122,7 +132,7 @@ class CountryPicker<T> extends HookConsumerWidget {
         if (country.value != null)
           clearButtonBuilder?.call(clearSelection) ??
               IconButton(
-                onPressed: clearSelection,
+                onPressed: enabled ? clearSelection : null,
                 icon: Icon(
                   Icons.clear_rounded,
                   color: context.colorScheme.outline,

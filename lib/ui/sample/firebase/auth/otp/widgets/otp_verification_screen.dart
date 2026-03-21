@@ -13,7 +13,7 @@ class OTPVerificationScreenRoute extends GoRouteData
 
   final String verificationId;
   final int? forceResendingToken;
-  final PhoneNumberInput $extra;
+  final PhoneNumber $extra;
 
   @override
   Widget build(BuildContext context, GoRouterState state) => SelectionArea(
@@ -38,7 +38,7 @@ class OtpVerificationScreen extends HookConsumerWidget {
   final String _verificationId;
   final int? _forceResendingToken;
 
-  final PhoneNumberInput phoneNumber;
+  final PhoneNumber phoneNumber;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

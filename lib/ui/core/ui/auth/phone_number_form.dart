@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sealed_countries/sealed_countries.dart';
 
@@ -12,20 +11,11 @@ import '../../../../core/utils/authentications/firebase_auth_validator.dart';
 import '../../../../core/utils/authentications/phone_number_parser.dart';
 import '../../../../core/utils/extensions/string.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
+import '../../../../domain/models/phone_number.dart';
 import '../../extensions/build_context.dart';
 import '../../hooks/use_flushable_debounced_text_editing_controller.dart';
 import '../country_picker.dart';
 import '../label.dart';
-
-part 'phone_number_form.freezed.dart';
-
-@freezed
-abstract class PhoneNumberInput with _$PhoneNumberInput {
-  const factory PhoneNumberInput({
-    String? countryCode,
-    @Default('') String nationalNumber,
-  }) = _PhoneNumberInput;
-}
 
 @immutable
 class PhoneNumberForm extends HookConsumerWidget {
@@ -38,27 +28,30 @@ class PhoneNumberForm extends HookConsumerWidget {
     this.onChanged,
     this.onSubmitted,
     required this.currentPhoneNumber,
+    this.enabled = true,
   });
 
   final GlobalKey<FormState>? formKey;
 
   final String? labelText;
 
-  final PhoneNumberInput phoneNumber;
+  final PhoneNumber phoneNumber;
 
   final TextInputAction? textInputAction;
 
-  final ValueChanged<PhoneNumberInput>? onChanged;
+  final ValueChanged<PhoneNumber>? onChanged;
 
   final VoidCallback? onSubmitted;
 
   final String? currentPhoneNumber;
 
+  final bool enabled;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsProvider);
 
-    final stateRef = useRef<FormFieldState<PhoneNumberInput>?>(null);
+    final stateRef = useRef<FormFieldState<PhoneNumber>?>(null);
 
     final nationalNumberManager = useFlushableDebouncedTextEditingController(
       text: phoneNumber.nationalNumber,
@@ -86,7 +79,7 @@ class PhoneNumberForm extends HookConsumerWidget {
       key: formKey,
       child: Label(
         labelText ?? l10n.phoneNumber,
-        child: FormField<PhoneNumberInput>(
+        child: FormField<PhoneNumber>(
           builder: (state) {
             stateRef.value = state;
 
@@ -124,6 +117,7 @@ class PhoneNumberForm extends HookConsumerWidget {
                                   onChanged?.call(newValue);
                                   state.didChange(newValue);
                                 },
+                                enabled: enabled,
                               ),
                               VerticalDivider(
                                 color: outlineColor,
@@ -162,6 +156,7 @@ class PhoneNumberForm extends HookConsumerWidget {
                               inputFormatters: [
                                 TextInputFormatters.nationalNumber,
                               ],
+                              enabled: enabled,
                               autofillHints: const [
                                 AutofillHints.telephoneNumberNational,
                               ],
@@ -203,11 +198,14 @@ class _CountryCodePicker extends HookConsumerWidget {
     required super.key,
     required this.initialCountryCode,
     required this.onChanged,
+    required this.enabled,
   });
 
   final String? initialCountryCode;
 
   final ValueChanged<String?> onChanged;
+
+  final bool enabled;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -237,6 +235,7 @@ class _CountryCodePicker extends HookConsumerWidget {
       itemTrailingBuilder: (country, _) => Text(country.idd.phoneCode()),
       searchFilter: (country, commonName, query) =>
           commonName.contains(query) || country.idd.phoneCode().contains(query),
+      enabled: enabled,
     );
   }
 }
