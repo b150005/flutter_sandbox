@@ -15,19 +15,19 @@ class SampleScreen extends HookConsumerWidget {
 
   static List<Content> _contents(l10n.AppLocalizations l10n) => [
     Content(
-      path: FirebaseScreenRoute.absolutePath,
+      route: FirebaseScreenRoute(),
       title: 'Firebase',
       description: l10n.signInScreenDescription,
       subtitle: 'Firebase Sign-In',
     ),
     Content(
-      path: LocalStorageScreenRoute.absolutePath,
+      route: LocalStorageScreenRoute(),
       title: 'Local Storage',
       description: l10n.localStorageScreenDescription,
       subtitle: 'Local Storage Sandbox',
     ),
     Content(
-      path: PlaygroundScreenRoute.absolutePath,
+      route: PlaygroundScreenRoute(),
       title: 'Playground',
       description: l10n.playgroundScreenDescription,
       subtitle: 'Playground',

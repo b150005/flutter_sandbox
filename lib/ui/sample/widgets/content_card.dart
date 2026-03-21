@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../core/config/constants/assets.dart';
 import '../../../core/config/constants/spacing.dart';
@@ -17,7 +16,7 @@ class ContentCard extends StatelessWidget {
   Widget build(BuildContext context) => Card.outlined(
     clipBehavior: .antiAlias,
     child: InkWell(
-      onTap: () => context.go(content.path),
+      onTap: () => content.route.go(context),
       child: Column(
         children: [
           Flexible(

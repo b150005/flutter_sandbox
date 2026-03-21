@@ -14,19 +14,19 @@ class FirebaseScreen extends HookConsumerWidget {
   const FirebaseScreen({super.key});
 
   static List<Content> _contents(l10n.AppLocalizations l10n) => [
-        Content(
-          path: FirebaseAuthScreenRoute.absolutePath,
-          title: 'Auth',
-          description: l10n.authScreenDescription,
-          subtitle: 'Firebase Auth',
-        ),
-        Content(
-          path: DataConnectScreenRoute.absolutePath,
-          title: 'Data Connect',
-          description: l10n.dataConnectScreenDescription,
-          subtitle: 'Firebase Data Connect',
-        ),
-      ];
+    Content(
+      route: FirebaseAuthScreenRoute(),
+      title: 'Auth',
+      description: l10n.authScreenDescription,
+      subtitle: 'Firebase Auth',
+    ),
+    Content(
+      route: DataConnectScreenRoute(),
+      title: 'Data Connect',
+      description: l10n.dataConnectScreenDescription,
+      subtitle: 'Firebase Data Connect',
+    ),
+  ];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

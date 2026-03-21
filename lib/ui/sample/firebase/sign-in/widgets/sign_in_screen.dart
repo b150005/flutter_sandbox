@@ -31,7 +31,7 @@ class SignInScreen extends HookConsumerWidget {
             const SignInForm(),
             OutlinedButton(
               key: WidgetKeys.signUp,
-              onPressed: () => context.go(SignUpScreenRoute.absolutePath),
+              onPressed: () => SignUpScreenRoute().go(context),
               style: OutlinedButton.styleFrom(minimumSize: ButtonSize.lg.size),
               child: Text(l10n.signUp),
             ),

@@ -29,7 +29,7 @@ class ForgotPasswordScreen extends HookConsumerWidget {
             EmailInputForm(
               submitAction: (email) =>
                   authRepository.sendPasswordResetEmail(email: email),
-              onSuccess: (_) => context.go(EmailSentScreenRoute.absolutePath),
+              onSuccess: (_) => EmailSentScreenRoute().go(context),
             ),
           ],
         ),

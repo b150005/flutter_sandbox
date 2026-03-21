@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/config/constants/button_size.dart';
@@ -55,7 +54,7 @@ class SignInForm extends HookConsumerWidget {
         (_) {
           TextInput.finishAutofillContext();
 
-          context.go(FirebaseScreenRoute.absolutePath);
+          FirebaseScreenRoute().go(context);
         },
         (appException) => errorMessage.value = appException.message,
       );
@@ -89,8 +88,7 @@ class SignInForm extends HookConsumerWidget {
               alignment: .centerRight,
               child: TextButton(
                 key: WidgetKeys.forgotPassword,
-                onPressed: () =>
-                    context.go(ForgotPasswordScreenRoute.absolutePath),
+                onPressed: () => ForgotPasswordScreenRoute().go(context),
                 child: Text(l10n.forgotPassword),
               ),
             ),

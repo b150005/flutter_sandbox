@@ -1,11 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:go_router/go_router.dart';
 
 part 'content.freezed.dart';
 
 @freezed
-abstract class Content with _$Content {
+abstract class Content<T extends GoRouteData> with _$Content {
   const factory Content({
-    required String path,
+    required T route,
     required String title,
     required String description,
     String? subtitle,
