@@ -220,11 +220,15 @@ class AuthRepository extends _$AuthRepository {
     }
 
     return auth.verifyPhoneNumber(
-      phoneNumber: PhoneNumberParser.formatToE164(
-        countryCode: countryCode,
-        nationalNumber: nationalNumber,
-        l10n: l10n,
-      ).whenError((appException) => throw appException),
+      phoneNumber:
+          PhoneNumberParser.formatToE164(
+            countryCode: countryCode,
+            nationalNumber: nationalNumber,
+            l10n: l10n,
+          ).when(
+            (phoneNumber) => phoneNumber,
+            (appException) => throw appException,
+          ),
       verificationCompleted: (phoneAuthCredential) async {
         if (currentUser.hasPhoneAuthProvider) {
           final updatePhoneNumberResult = await _updatePhoneNumber(
