@@ -12,4 +12,6 @@ abstract class PhoneNumber with _$PhoneNumber {
 
   factory PhoneNumber.fromJson(Map<String, dynamic> json) =>
       _$PhoneNumberFromJson(json);
+
+  static const extraKey = 'PhoneNumber';
 }

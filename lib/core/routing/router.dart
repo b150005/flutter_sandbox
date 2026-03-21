@@ -42,6 +42,7 @@ import '../utils/extensions/string.dart';
 import '../utils/l10n/app_localizations.dart';
 import '../utils/logging/route_logging_observer.dart';
 import '../utils/riverpod/provider_change_notifier.dart';
+import 'routes/app_extra_codec.dart';
 
 part '../../ui/home/widgets/home_screen.dart';
 part '../../ui/sample/firebase/auth/otp/widgets/otp_verification_screen.dart';
@@ -69,6 +70,7 @@ class Router extends _$Router {
   @override
   GoRouter build() => GoRouter(
     routes: $appRoutes,
+    extraCodec: const AppExtraCodec(),
     redirect: (_, state) => _redirect(state: state, ref: ref),
     refreshListenable: ProviderChangeNotifier(
       ref: ref,

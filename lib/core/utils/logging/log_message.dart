@@ -29,4 +29,7 @@ final class LogMessage {
       '⚠️ Unimplemented Firebase Auth error code: $code';
 
   static String failedToFetch(Uri uri) => 'Data fetch failed: ${uri.path}';
+
+  static String unsupportedExtraType(Object? extra) =>
+      'Unsupported extra type: ${extra.runtimeType}';
 }
