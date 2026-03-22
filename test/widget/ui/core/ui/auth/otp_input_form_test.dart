@@ -631,7 +631,7 @@ void main() {
     testWidgets(
       'Pressing ⇧ + Tab with an active digit box on the first digit'
       ' should deactivate all digit boxes'
-      ' and move focus to the previos focusable widget.',
+      ' and move focus to the previous focusable widget.',
       (tester) async {
         final prevFocusNode = FocusNode();
         addTearDown(prevFocusNode.dispose);
