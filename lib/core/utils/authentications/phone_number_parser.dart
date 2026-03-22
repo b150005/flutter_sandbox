@@ -10,9 +10,6 @@ import '../extensions/string.dart';
 abstract final class PhoneNumberParser {
   const PhoneNumberParser._();
 
-  /// @see [Country codes (ISO 3166-1 and ISO 3166-3)](https://www.iso.org/glossary-for-iso-3166.html)
-  static const unknownRegion = 'ZZ';
-
   static Result<PhoneNumber, AppException> parse({
     required String phoneNumber,
     required AppLocalizations l10n,
