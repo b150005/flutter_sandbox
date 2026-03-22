@@ -36,11 +36,11 @@ abstract final class FirebaseAuthValidator {
     String? password, {
     required AppLocalizations l10n,
   }) {
-    if (password == null) {
+    if (password.isNullOrEmpty) {
       return l10n.requiredField;
     }
 
-    if (password.contains(Regexes.whitespace.regExp)) {
+    if (password!.contains(Regexes.whitespace.regExp)) {
       throw ArgumentError.value(
         password,
         'password',
