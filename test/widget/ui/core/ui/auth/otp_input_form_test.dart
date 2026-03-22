@@ -5,7 +5,7 @@ import 'package:flutter_sandbox/ui/core/ui/auth/otp_input_form.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../utils/extensions/widget_tester.dart';
+import '../../../../../../testing/utils/extensions/widget_tester.dart';
 
 void _noOp(String _) {}
 
