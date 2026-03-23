@@ -8,6 +8,12 @@ enum ArrowKeyDirection { left, right }
 extension WidgetTesterExtension on WidgetTester {
   Rect get screenRect => Offset.zero & view.logicalSize;
 
+  Offset outsideOf(Rect rect) {
+    final screenRect = this.screenRect;
+
+    return Offset(screenRect.center.dx, (rect.bottom + screenRect.bottom) / 2);
+  }
+
   Future<void> pressBackspace() async {
     await sendKeyEvent(.backspace);
     await pump();
