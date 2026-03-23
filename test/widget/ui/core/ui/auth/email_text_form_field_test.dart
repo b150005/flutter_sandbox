@@ -194,6 +194,24 @@ void main() {
         expect(tester.textField.controller?.text, nonWhitespaceEmail);
       },
     );
+
+    testWidgets(
+      'onFieldSubmitted should be called with the whitespace-stripped email'
+      ' when the field is submitted after entering text with whitespace.',
+      (tester) async {
+        String? result;
+
+        await tester.pumpTestApp(
+          textInputAction: .done,
+          onFieldSubmitted: (value) => result = value,
+        );
+
+        await tester.enter(' test @ example . com ');
+        await tester.submit();
+
+        expect(result, 'test@example.com');
+      },
+    );
   });
 
   group('👆 User interaction', () {
