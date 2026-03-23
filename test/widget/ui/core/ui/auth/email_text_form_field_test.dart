@@ -1,165 +1,267 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sandbox/core/config/constants/text_input_formatters.dart';
+import 'package:flutter_sandbox/core/config/constants/widget_keys.dart';
 import 'package:flutter_sandbox/ui/core/ui/auth/email_text_form_field.dart';
 import 'package:flutter_sandbox/ui/core/ui/label.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../testing/utils/app_localization_utils.dart';
-import '../../../../../../testing/utils/widget_key_finder.dart';
+import '../../../../../../testing/utils/widgets/test_app.dart';
 
-void main() {
-  Widget emailTextFormFieldApp({
+extension _CommonFindersExtension on CommonFinders {
+  Finder get textFormField => byKey(WidgetKeys.email);
+}
+
+extension _WidgetTesterExtension on WidgetTester {
+  Future<void> pumpTestApp({
+    String? labelText,
     TextEditingController? controller,
     TextInputAction? textInputAction,
-  }) => ProviderScope(
-    child: MaterialApp(
-      builder: (context, child) => Theme(
-        data: .light(useMaterial3: true).copyWith(extensions: []),
-        child: child!,
-      ),
-      home: Scaffold(
-        body: EmailTextFormField(
-          controller: controller,
-          textInputAction: textInputAction,
-        ),
+    ValueChanged<String>? onFieldSubmitted,
+  }) => pumpWidget(
+    TestApp(
+      child: EmailTextFormField(
+        labelText: labelText,
+        controller: controller,
+        textInputAction: textInputAction,
+        onFieldSubmitted: onFieldSubmitted,
       ),
     ),
   );
 
-  const invalidEmail = 'invalid@example.c';
-  const validEmail = 'valid@example.com';
+  Label get label => widget<Label>(find.byType(Label));
 
-  TextFormField findEmailTextFormField(WidgetTester tester) =>
-      tester.widget<TextFormField>(WidgetKeyFinder.email);
-
-  TextField findEmailTextField(WidgetTester tester) => tester.widget<TextField>(
-    find.descendant(
-      of: WidgetKeyFinder.email,
-      matching: find.byType(TextField),
-    ),
+  TextField get textField => widget<TextField>(
+    find.descendant(of: find.textFormField, matching: find.byType(TextField)),
   );
+}
 
-  group('🎨 UI elements', () {
-    testWidgets('EmailTextFormField should have a label'
-        ' and an email TextFormField.', (tester) async {
-      await tester.pumpWidget(emailTextFormFieldApp());
+extension _EmailTextFormFieldInteraction on WidgetTester {
+  Future<void> enter(String email) async {
+    await enterText(find.textFormField, email);
+    await pump();
+  }
 
-      expect(find.byType(Label), findsOneWidget);
-      expect(WidgetKeyFinder.email, findsOneWidget);
-      expect(find.byType(TextFormField), findsOneWidget);
-    });
+  Future<void> submit() async {
+    await testTextInput.receiveAction(.done);
+    await pump();
+  }
+}
+
+void main() {
+  final l10n = AppLocalizationUtils.en;
+
+  group('🎨 UI structure', () {
+    testWidgets(
+      'Label should display the default email text'
+      ' when labelText is not provided.',
+      (tester) async {
+        await tester.pumpTestApp();
+
+        expect(tester.label.text, l10n.email);
+      },
+    );
 
     testWidgets(
-      'Email textfield should have correct properties with default values.',
+      'Label should display the custom text when labelText is provided.',
       (tester) async {
-        await tester.pumpWidget(emailTextFormFieldApp());
+        const labelText = 'Sample';
 
-        final l10n = AppLocalizationUtils.readL10n(tester);
+        await tester.pumpTestApp(labelText: labelText);
 
-        final label = tester.widget<Label>(find.byType(Label));
+        expect(tester.label.text, labelText);
+      },
+    );
 
-        expect(label.text, l10n.email);
+    testWidgets(
+      'TextFormField should display the example email address as hint text.',
+      (tester) async {
+        await tester.pumpTestApp();
 
-        final emailTextFormField = findEmailTextFormField(tester);
-        final emailTextField = findEmailTextField(tester);
-
-        expect(emailTextFormField.controller, isNull);
         expect(
-          emailTextField.decoration?.hintText,
+          tester.textField.decoration?.hintText,
           EmailTextFormField.exampleEmailAddress,
-        );
-        expect(emailTextField.keyboardType, TextInputType.emailAddress);
-        expect(emailTextField.textInputAction, isNull);
-        expect(emailTextField.autocorrect, isFalse);
-        expect(emailTextField.inputFormatters, [
-          TextInputFormatters.noWhitespace,
-        ]);
-        expect(
-          emailTextFormField.autovalidateMode,
-          AutovalidateMode.onUserInteraction,
         );
       },
     );
 
     testWidgets(
-      'Email textfield should have correct properties'
-      ' when parameters are provided.',
+      'TextFormField should use the email keyboard type.',
       (tester) async {
-        final textEditingController = TextEditingController();
-        const textInputAction = TextInputAction.done;
+        await tester.pumpTestApp();
 
-        await tester.pumpWidget(
-          emailTextFormFieldApp(
-            controller: textEditingController,
-            textInputAction: textInputAction,
-          ),
-        );
+        expect(tester.textField.keyboardType, TextInputType.emailAddress);
+      },
+    );
 
-        final emailTextFormField = findEmailTextFormField(tester);
-        final emailTextField = findEmailTextField(tester);
+    testWidgets(
+      'TextFormField should have autocorrect disabled.',
+      (tester) async {
+        await tester.pumpTestApp();
 
-        expect(emailTextFormField.controller, textEditingController);
-        expect(emailTextField.textInputAction, textInputAction);
+        expect(tester.textField.autocorrect, isFalse);
       },
     );
   });
 
   group('🔍 Input validation', () {
     testWidgets(
-      'Email textfield should display error message for invalid input.',
+      'No error should be displayed before the user interacts with the field.',
       (tester) async {
-        await tester.pumpWidget(emailTextFormFieldApp());
+        await tester.pumpTestApp();
 
-        var emailTextField = findEmailTextField(tester);
+        expect(tester.textField.decoration?.errorText, isNull);
+      },
+    );
 
-        expect(emailTextField.controller?.text, isEmpty);
-        expect(emailTextField.decoration?.errorText, isNull);
+    testWidgets(
+      'An error should be displayed'
+      ' when the field is left empty after interaction.',
+      (tester) async {
+        await tester.pumpTestApp();
 
-        await tester.enterText(WidgetKeyFinder.email, invalidEmail);
-        await tester.pump();
+        await tester.enter('a');
+        await tester.enter('');
 
-        emailTextField = findEmailTextField(tester);
+        expect(tester.textField.decoration?.errorText, l10n.requiredField);
+      },
+    );
 
-        expect(emailTextField.controller?.text, invalidEmail);
-        expect(emailTextField.decoration?.errorText, isNotNull);
+    testWidgets(
+      'An error should be displayed when an invalid email format is entered.',
+      (tester) async {
+        await tester.pumpTestApp();
 
-        await tester.enterText(WidgetKeyFinder.email, validEmail);
-        await tester.pump();
+        const invalidEmail = 'invalid@example.c';
 
-        emailTextField = findEmailTextField(tester);
+        await tester.enter(invalidEmail);
 
-        expect(emailTextField.controller?.text, validEmail);
-        expect(emailTextField.decoration?.errorText, isNull);
+        expect(tester.textField.decoration?.errorText, l10n.invalidEmailFormat);
+      },
+    );
+
+    testWidgets(
+      'An error should be cleared'
+      ' when a valid email address is entered after an invalid one.',
+      (tester) async {
+        await tester.pumpTestApp();
+
+        const invalidEmail = 'invalid@example.c';
+        const validEmail = 'valid@example.com';
+
+        await tester.enter(invalidEmail);
+        await tester.enter(validEmail);
+
+        expect(tester.textField.decoration?.errorText, isNull);
       },
     );
   });
 
   group('♻️ Input formatting', () {
     testWidgets(
-      'Email textfield should not allow whitespace input.',
+      'A whitespace character entered into the field'
+      ' should not be reflected in the text.',
       (tester) async {
-        const whitespace = ' ';
+        await tester.pumpTestApp();
 
-        await tester.pumpWidget(emailTextFormFieldApp());
+        await tester.enter(' ');
 
-        var emailTextField = findEmailTextField(tester);
+        expect(tester.textField.controller?.text, '');
+      },
+    );
 
-        expect(emailTextField.controller?.text, isEmpty);
+    testWidgets(
+      'Multiple whitespace characters entered into the field'
+      ' should be all removed.',
+      (tester) async {
+        await tester.pumpTestApp();
 
-        await tester.enterText(WidgetKeyFinder.email, whitespace);
-        await tester.pump();
+        await tester.enter(' valid @ example . com ');
 
-        emailTextField = findEmailTextField(tester);
+        expect(tester.textField.controller?.text, 'valid@example.com');
+      },
+    );
 
-        expect(emailTextField.controller?.text, isEmpty);
+    testWidgets(
+      'Non-whitespace characters'
+      ' should be entered into the field without modification.',
+      (tester) async {
+        await tester.pumpTestApp();
+
+        const nonWhitespaceEmail = 'non-white_space@example.com';
+
+        await tester.enter(nonWhitespaceEmail);
+
+        expect(tester.textField.controller?.text, nonWhitespaceEmail);
       },
     );
   });
 
-  group('👆 User interaction', () {});
+  group('👆 User interaction', () {
+    testWidgets(
+      'onFieldSubmitted should be called with the entered email'
+      ' when the field is submitted.',
+      (tester) async {
+        String? result;
 
-  group('♿️ Accessibility', () {});
+        await tester.pumpTestApp(
+          textInputAction: .done,
+          onFieldSubmitted: (value) => result = value,
+        );
+
+        const email = 'test@example.com';
+
+        await tester.enter(email);
+        await tester.submit();
+
+        expect(result, email);
+      },
+    );
+
+    testWidgets(
+      'onFieldSubmitted should not be called'
+      ' when the field has not been submitted.',
+      (tester) async {
+        String? result;
+
+        await tester.pumpTestApp(
+          textInputAction: .done,
+          onFieldSubmitted: (value) => result = value,
+        );
+
+        const email = 'test@example.com';
+
+        await tester.enter(email);
+
+        expect(result, isNull);
+      },
+    );
+
+    testWidgets(
+      'The field should not throw when onFieldSubmitted is not provided'
+      ' and the field is submitted.',
+      (tester) async {
+        await tester.pumpTestApp(textInputAction: .done);
+
+        const email = 'test@example.com';
+
+        await tester.enter(email);
+        await tester.submit();
+
+        expect(tester.takeException(), isNull);
+      },
+    );
+  });
+
+  group('♿️ Accessibility', () {
+    testWidgets(
+      'The email autofill hint should be set on the TextFormField.',
+      (tester) async {
+        await tester.pumpTestApp();
+
+        expect(tester.textField.autofillHints, contains(AutofillHints.email));
+      },
+    );
+  });
 
   group('⚡️ Performance', () {});
 }
