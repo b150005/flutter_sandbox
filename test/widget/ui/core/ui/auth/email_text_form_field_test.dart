@@ -175,9 +175,9 @@ void main() {
       (tester) async {
         await tester.pumpTestApp();
 
-        await tester.enter(' valid @ example . com ');
+        await tester.enter(' test @ example . com ');
 
-        expect(tester.textField.controller?.text, 'valid@example.com');
+        expect(tester.textField.controller?.text, 'test@example.com');
       },
     );
 
