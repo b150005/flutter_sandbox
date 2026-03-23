@@ -1,11 +1,19 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sandbox/core/config/constants/widget_keys.dart';
+import 'package:flutter_sandbox/ui/core/extensions/render_box.dart';
 import 'package:flutter_sandbox/ui/core/ui/auth/otp_input_form.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../../../testing/utils/extensions/widget_tester.dart';
 import '../../../../../../testing/utils/widgets/test_app.dart';
+
+extension _CommonFindersExtension on CommonFinders {
+  Finder get digitBoxes => descendant(
+    of: byType(OTPDigitBox),
+    matching: byType(GestureDetector),
+  );
+}
 
 void _noOp(String _) {}
 
@@ -30,20 +38,14 @@ extension _WidgetTesterExtension on WidgetTester {
 
 extension _UserInteraction on WidgetTester {
   Future<void> tapDigitBoxAt(int index) async {
-    final digitBoxes = find.descendant(
-      of: find.byType(OTPDigitBox),
-      matching: find.byType(GestureDetector),
-    );
+    final digitBoxes = find.digitBoxes;
 
     await tap(digitBoxes.at(index));
     await pump(kDoubleTapTimeout);
   }
 
   Future<void> doubleTapDigitBox([int index = 0]) async {
-    final digitBoxes = find.descendant(
-      of: find.byType(OTPDigitBox),
-      matching: find.byType(GestureDetector),
-    );
+    final digitBoxes = find.digitBoxes;
 
     await tap(digitBoxes.at(index));
     await pump(kDoubleTapMinTime);
@@ -52,10 +54,7 @@ extension _UserInteraction on WidgetTester {
   }
 
   Future<void> longPressDigitBox([int index = 0]) async {
-    final digitBoxes = find.descendant(
-      of: find.byType(OTPDigitBox),
-      matching: find.byType(GestureDetector),
-    );
+    final digitBoxes = find.digitBoxes;
 
     await longPress(digitBoxes.at(index));
     await pumpAndSettle();
@@ -66,26 +65,17 @@ extension _UserInteraction on WidgetTester {
         .byType(OTPDigitBox)
         .evaluate()
         .map((digitBox) => digitBox.renderObject! as RenderBox)
-        .map(
-          (renderBox) => renderBox.localToGlobal(Offset.zero) & renderBox.size,
-        )
+        .map((renderBox) => renderBox.globalRect)
         .reduce((a, b) => a.expandToInclude(b));
 
-    final screenRect = this.screenRect;
-
-    final outside = Offset(
-      screenRect.center.dx,
-      (digitBoxesRect.bottom + screenRect.bottom) / 2,
-    );
-
-    await tapAt(outside);
+    await tapAt(outsideOf(digitBoxesRect));
     await pump();
   }
 
   Iterable<OTPDigitBox> get digitBoxes =>
       widgetList<OTPDigitBox>(find.byType(OTPDigitBox));
 
-  Future<void> enterCode(int code) async {
+  Future<void> enter(int code) async {
     final controller =
         WidgetKeys.otpEditableText.currentState!.widget.controller;
     final selection = controller.selection;
@@ -235,7 +225,7 @@ void main() {
         final (tappedIndex, code) = (1, 2);
 
         await tester.tapDigitBoxAt(tappedIndex);
-        await tester.enterCode(code);
+        await tester.enter(code);
 
         final boxes = tester.digitBoxes;
 
@@ -257,7 +247,7 @@ void main() {
         await tester.pumpTestApp(onCompleted: (value) => result = value);
 
         await tester.tapDigitBoxAt(0);
-        await tester.enterCode(123);
+        await tester.enter(123);
 
         final boxes = tester.digitBoxes;
 
@@ -268,7 +258,7 @@ void main() {
           );
         }
 
-        await tester.enterCode(4);
+        await tester.enter(4);
 
         expect(result, '1234');
       },
@@ -280,7 +270,7 @@ void main() {
       (tester) async {
         await tester.pumpTestApp();
 
-        await tester.enterCode(1);
+        await tester.enter(1);
 
         for (final box in tester.digitBoxes) {
           expect(box.value.characters, OTPInputForm.placeholderChar);
@@ -298,9 +288,9 @@ void main() {
         final (tappedIndex, code) = (1, 2);
 
         await tester.tapDigitBoxAt(tappedIndex);
-        await tester.enterCode(code);
+        await tester.enter(code);
         await tester.tapDigitBoxAt(tappedIndex);
-        await tester.enterCode(code);
+        await tester.enter(code);
 
         final boxes = tester.digitBoxes;
 
@@ -322,10 +312,10 @@ void main() {
         await tester.pumpTestApp(onCompleted: (value) => result = value);
 
         await tester.tapDigitBoxAt(1);
-        await tester.enterCode(234);
-        await tester.enterCode(1);
+        await tester.enter(234);
+        await tester.enter(1);
         await tester.tapDigitBoxAt(3);
-        await tester.enterCode(4);
+        await tester.enter(4);
 
         final boxes = tester.digitBoxes;
 
@@ -345,7 +335,7 @@ void main() {
         final (tappedIndex, code) = (1, 23);
 
         await tester.tapDigitBoxAt(tappedIndex);
-        await tester.enterCode(code);
+        await tester.enter(code);
 
         final boxes = tester.digitBoxes;
 
@@ -366,8 +356,8 @@ void main() {
         await tester.pumpTestApp(onCompleted: (value) => result = value);
 
         await tester.tapDigitBoxAt(0);
-        await tester.enterCode(12);
-        await tester.enterCode(34);
+        await tester.enter(12);
+        await tester.enter(34);
 
         final boxes = tester.digitBoxes;
 
@@ -387,7 +377,7 @@ void main() {
         const firstIndex = 0;
 
         await tester.tapDigitBoxAt(1);
-        await tester.enterCode(234);
+        await tester.enter(234);
         await tester.tapDigitBoxAt(firstIndex);
         await tester.pressBackspace();
 
@@ -414,7 +404,7 @@ void main() {
         final (tappedIndex, code) = (1, 2);
 
         await tester.tapDigitBoxAt(tappedIndex);
-        await tester.enterCode(code);
+        await tester.enter(code);
         await tester.tapDigitBoxAt(tappedIndex);
         await tester.pressBackspace();
 
@@ -439,7 +429,7 @@ void main() {
         final codeChar = code.toString().characters;
 
         await tester.tapDigitBoxAt(tappedIndex);
-        await tester.enterCode(code);
+        await tester.enter(code);
         await tester.pressBackspace();
 
         final boxes = tester.digitBoxes;
