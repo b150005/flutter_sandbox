@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sandbox/core/config/constants/widget_keys.dart';
 import 'package:flutter_sandbox/ui/core/ui/auth/otp_input_form.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../testing/utils/extensions/widget_tester.dart';
+import '../../../../../../testing/utils/widgets/test_app.dart';
 
 void _noOp(String _) {}
 
-Widget _otpInputFormApp({
-  int length = 4,
-  ValueChanged<String> onCompleted = _noOp,
-  Widget? prev,
-  Widget? next,
-}) => ProviderScope(
-  child: MaterialApp(
-    home: Scaffold(
-      body: Column(
+extension _WidgetTesterExtension on WidgetTester {
+  Future<void> pumpTestApp({
+    int length = 4,
+    ValueChanged<String> onCompleted = _noOp,
+    Widget? prev,
+    Widget? next,
+  }) => pumpWidget(
+    TestApp(
+      child: Column(
         children: [
           ?prev,
           OTPInputForm(length: length, onCompleted: onCompleted),
@@ -25,10 +25,10 @@ Widget _otpInputFormApp({
         ],
       ),
     ),
-  ),
-);
+  );
+}
 
-extension _OTPInputFormInteraction on WidgetTester {
+extension _UserInteraction on WidgetTester {
   Future<void> tapDigitBoxAt(int index) async {
     final digitBoxes = find.descendant(
       of: find.byType(OTPDigitBox),
@@ -114,9 +114,7 @@ void main() {
       (tester) async {
         const length = 6;
 
-        await tester.pumpWidget(
-          _otpInputFormApp(length: length),
-        );
+        await tester.pumpTestApp(length: length);
 
         expect(find.byType(OTPDigitBox), findsNWidgets(length));
       },
@@ -125,7 +123,7 @@ void main() {
     testWidgets(
       'Displaying blank placeholders in all digit boxes before any input.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         for (final box in tester.digitBoxes) {
           expect(box.value.characters, OTPInputForm.placeholderChar);
@@ -136,7 +134,7 @@ void main() {
     testWidgets(
       'Displaying all digit boxes as inactive before any interaction.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         for (final box in tester.digitBoxes) {
           expect(box.isActive, isFalse);
@@ -151,7 +149,7 @@ void main() {
     testWidgets(
       'Tapping a digit box should activate it.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         const tappedIndex = 1;
         await tester.tapDigitBoxAt(tappedIndex);
@@ -170,7 +168,7 @@ void main() {
     testWidgets(
       'Tapping a digit box should deactivate the previously active digit box.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         final (firstTappedIndex, secondTappedIndex) = (1, 3);
 
@@ -191,7 +189,7 @@ void main() {
     testWidgets(
       'Tapping outside the digit boxes should activate all digit boxes.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         await tester.tapDigitBoxAt(1);
         await tester.tapOutsideDigitBox();
@@ -205,7 +203,7 @@ void main() {
     testWidgets(
       'Double-tapping a digit box should activate all digit boxes.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         await tester.doubleTapDigitBox();
 
@@ -218,7 +216,7 @@ void main() {
     testWidgets(
       'Long-pressing a digit box should activate all digit boxes.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         await tester.longPressDigitBox();
 
@@ -232,7 +230,7 @@ void main() {
       'Typing a digit into an active digit box should fill it and'
       ' move focus to the next digit box.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         final (tappedIndex, code) = (1, 2);
 
@@ -256,11 +254,7 @@ void main() {
       (tester) async {
         String? result;
 
-        await tester.pumpWidget(
-          _otpInputFormApp(
-            onCompleted: (value) => result = value,
-          ),
-        );
+        await tester.pumpTestApp(onCompleted: (value) => result = value);
 
         await tester.tapDigitBoxAt(0);
         await tester.enterCode(123);
@@ -284,7 +278,7 @@ void main() {
       'Typing a digit without an active digit box (no focus)'
       ' should change nothing.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         await tester.enterCode(1);
 
@@ -299,7 +293,7 @@ void main() {
       'Typing the same digit as the currently active digit box'
       ' should move focus to the next digit box.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         final (tappedIndex, code) = (1, 2);
 
@@ -325,9 +319,7 @@ void main() {
       (tester) async {
         String? result;
 
-        await tester.pumpWidget(
-          _otpInputFormApp(onCompleted: (value) => result = value),
-        );
+        await tester.pumpTestApp(onCompleted: (value) => result = value);
 
         await tester.tapDigitBoxAt(1);
         await tester.enterCode(234);
@@ -348,7 +340,7 @@ void main() {
       'Pasting digits into an active digit box should fill from that position'
       ' and move focus after the last pasted digit.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         final (tappedIndex, code) = (1, 23);
 
@@ -371,9 +363,7 @@ void main() {
       (tester) async {
         String? result;
 
-        await tester.pumpWidget(
-          _otpInputFormApp(onCompleted: (value) => result = value),
-        );
+        await tester.pumpTestApp(onCompleted: (value) => result = value);
 
         await tester.tapDigitBoxAt(0);
         await tester.enterCode(12);
@@ -392,7 +382,7 @@ void main() {
       'Deleting with an active digit box on the first blank digit'
       ' should keep focus on the first digit box and change nothing.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         const firstIndex = 0;
 
@@ -419,7 +409,7 @@ void main() {
       'Deleting with an active digit box on a filled digit should clear it'
       ' and keep focus on the same digit box.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         final (tappedIndex, code) = (1, 2);
 
@@ -443,7 +433,7 @@ void main() {
       'Deleting with an active digit box on a blank digit'
       ' should move focus to the previous digit box and clear it.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         final (tappedIndex, code) = (1, 23);
         final codeChar = code.toString().characters;
@@ -468,7 +458,7 @@ void main() {
       'Pressing ← with an active digit box on a non-first digit'
       ' should move focus to the previous digit box.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         const tappedIndex = 1;
 
@@ -490,7 +480,7 @@ void main() {
       'Pressing ← with an active digit box on the first digit'
       ' should keep focus on the first digit box.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         const tappedIndex = 0;
 
@@ -512,7 +502,7 @@ void main() {
       'Pressing → with an active digit box on a non-last digit'
       ' should move focus to the next digit box.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         const tappedIndex = 1;
 
@@ -534,7 +524,7 @@ void main() {
       'Pressing → with an active digit box on the last digit'
       ' with blank digits remaining should keep focus on the last digit box.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         const tappedIndex = 3;
 
@@ -556,7 +546,7 @@ void main() {
       'Pressing → with an active digit box on the last digit'
       ' with no blank digits should call onCompleted.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         const tappedIndex = 3;
 
@@ -580,7 +570,7 @@ void main() {
       'Pressing Tab with an active digit box on a non-last digit'
       ' should move focus to the next digit box.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         const tappedIndex = 1;
 
@@ -610,9 +600,7 @@ void main() {
         final nextFocusNode = FocusNode();
         addTearDown(nextFocusNode.dispose);
 
-        await tester.pumpWidget(
-          _otpInputFormApp(next: TextField(focusNode: nextFocusNode)),
-        );
+        await tester.pumpTestApp(next: TextField(focusNode: nextFocusNode));
 
         await tester.tapDigitBoxAt(3);
         await tester.pressTab();
@@ -636,13 +624,7 @@ void main() {
         final prevFocusNode = FocusNode();
         addTearDown(prevFocusNode.dispose);
 
-        await tester.pumpWidget(
-          _otpInputFormApp(
-            prev: TextField(
-              focusNode: prevFocusNode,
-            ),
-          ),
-        );
+        await tester.pumpTestApp(prev: TextField(focusNode: prevFocusNode));
 
         await tester.tapDigitBoxAt(0);
         await tester.pressTab(withShift: true);
@@ -662,7 +644,7 @@ void main() {
       'Pressing ⇧ + Tab with an active digit box on a non-first digit'
       ' should move focus to the previous digit box.',
       (tester) async {
-        await tester.pumpWidget(_otpInputFormApp());
+        await tester.pumpTestApp();
 
         const tappedIndex = 2;
 
