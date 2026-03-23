@@ -19,8 +19,11 @@ class EmailTextFormField extends HookConsumerWidget {
   });
 
   final String? labelText;
+
   final TextEditingController? controller;
+
   final TextInputAction? textInputAction;
+
   final void Function(String email)? onFieldSubmitted;
 
   static const exampleEmailAddress = 'user@example.com';
