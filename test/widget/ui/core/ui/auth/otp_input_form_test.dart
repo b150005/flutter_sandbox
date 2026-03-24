@@ -98,7 +98,7 @@ extension _UserInteraction on WidgetTester {
 }
 
 void main() {
-  group('🎨 UI elements', () {
+  group('🎨 UI Structure', () {
     testWidgets(
       'Displaying the correct number of digit boxes for the given length.',
       (tester) async {

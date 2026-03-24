@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('🎨 UI elements', () {
+  group('🎨 UI Structure', () {
     /// - Expected widgets are present and visible.
     /// - Initial state displays correct content.
     /// - Conditional UI renders correctly per state.

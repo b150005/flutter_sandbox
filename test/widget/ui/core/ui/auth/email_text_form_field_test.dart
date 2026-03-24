@@ -50,7 +50,7 @@ extension _EmailTextFormFieldInteraction on WidgetTester {
 void main() {
   final l10n = AppLocalizationUtils.en;
 
-  group('🎨 UI structure', () {
+  group('🎨 UI Structure', () {
     testWidgets(
       'Label should display the default email text'
       ' when labelText is not provided.',
@@ -103,7 +103,7 @@ void main() {
     );
   });
 
-  group('🔍 Input validation', () {
+  group('🔍 Input Validation', () {
     testWidgets(
       'No error should be displayed before the user interacts with the field.',
       (tester) async {
@@ -156,7 +156,7 @@ void main() {
     );
   });
 
-  group('♻️ Input formatting', () {
+  group('♻️ Input Formatting', () {
     testWidgets(
       'A whitespace character entered into the field'
       ' should not be reflected in the text.',
@@ -214,7 +214,7 @@ void main() {
     );
   });
 
-  group('👆 User interaction', () {
+  group('👆 User Interaction', () {
     testWidgets(
       'onFieldSubmitted should be called with the entered email'
       ' when the field is submitted.',
