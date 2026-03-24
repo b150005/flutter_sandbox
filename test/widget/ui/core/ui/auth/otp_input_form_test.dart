@@ -106,7 +106,7 @@ void main() {
 
         await tester.pumpTestApp(length: length);
 
-        expect(find.byType(OTPDigitBox), findsNWidgets(length));
+        expect(find.byType(OTPDigitBox), findsExactly(length));
       },
     );
 
