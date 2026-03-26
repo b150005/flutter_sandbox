@@ -56,8 +56,8 @@ class PasswordTextFormField extends HookConsumerWidget {
             onPressed: () => obscureText.value = !obscureText.value,
             icon: Icon(
               obscureText.value
-                  ? Icons.visibility_rounded
-                  : Icons.visibility_off_rounded,
+                  ? Icons.visibility_outlined
+                  : Icons.visibility_off_outlined,
             ),
           ),
         ),
