@@ -8,7 +8,9 @@ import '../../../../../../testing/utils/app_localization_utils.dart';
 import '../../../../../../testing/utils/widgets/test_app.dart';
 
 extension _CommonFindersExtension on CommonFinders {
-  Finder get textFormField => byKey(WidgetKeys.email);
+  Finder get textFormField => byWidgetPredicate(
+    (widget) => widget is TextFormField && widget.key == WidgetKeys.email,
+  );
 }
 
 extension _WidgetTesterExtension on WidgetTester {
