@@ -282,6 +282,4 @@ void main() {
       },
     );
   });
-
-  group('⚡️ Performance', () {});
 }
