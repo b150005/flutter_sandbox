@@ -1,189 +1,386 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sandbox/core/config/constants/text_input_formatters.dart';
-import 'package:flutter_sandbox/core/utils/authentications/firebase_auth_validator.dart';
+import 'package:flutter_sandbox/core/config/constants/widget_keys.dart';
 import 'package:flutter_sandbox/ui/core/ui/auth/password_text_form_field.dart';
 import 'package:flutter_sandbox/ui/core/ui/label.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../../testing/fixtures/lorem_ipsum.dart';
 import '../../../../../../testing/utils/app_localization_utils.dart';
-import '../../../../../../testing/utils/widget_key_finder.dart';
+import '../../../../../../testing/utils/widgets/test_app.dart';
 
-void main() {
-  Widget passwordTextFormFieldApp({
+extension _CommonFindersExtension on CommonFinders {
+  Finder get textFormField => byWidgetPredicate(
+    (widget) => widget is TextFormField && widget.key == WidgetKeys.password,
+  );
+
+  Finder get visibilityToggleButton => descendant(
+    of: textFormField,
+    matching: byWidgetPredicate(
+      (widget) =>
+          widget is IconButton &&
+          widget.key == WidgetKeys.togglePasswordVisibility,
+    ),
+  );
+}
+
+extension _WidgetTesterExtension on WidgetTester {
+  Future<void> pumpTestApp({
+    String? labelText,
     TextEditingController? controller,
-    String? hintText,
     TextInputAction? textInputAction,
     ValueChanged<String>? onChanged,
+    ValueChanged<String>? onFieldSubmitted,
     String? Function(String? password)? validator,
-  }) => ProviderScope(
-    child: MaterialApp(
-      home: Scaffold(
-        body: PasswordTextFormField(
-          controller: controller,
-          labelText: hintText,
-          textInputAction: textInputAction,
-          onChanged: onChanged,
-          validator: validator,
-        ),
-      ),
+    Iterable<String>? autofillHints,
+  }) => pumpWidget(
+    TestApp(
+      child: autofillHints == null
+          ? PasswordTextFormField(
+              labelText: labelText,
+              controller: controller,
+              textInputAction: textInputAction,
+              onChanged: onChanged,
+              onFieldSubmitted: onFieldSubmitted,
+              validator: validator,
+            )
+          : PasswordTextFormField(
+              labelText: labelText,
+              controller: controller,
+              textInputAction: textInputAction,
+              onChanged: onChanged,
+              onFieldSubmitted: onFieldSubmitted,
+              validator: validator,
+              autofillHints: autofillHints,
+            ),
     ),
   );
 
-  const invalidPassword = 'invalidPassword';
-  const validPassword = 'validPassw0rd';
+  Label get label => widget<Label>(find.byType(Label));
 
-  TextFormField findPasswordTextFormField(WidgetTester tester) =>
-      tester.widget<TextFormField>(WidgetKeyFinder.password);
+  TextField get textField => widget<TextField>(
+    find.descendant(of: find.textFormField, matching: find.byType(TextField)),
+  );
 
-  TextField findPasswordTextField(WidgetTester tester) =>
-      tester.widget<TextField>(
-        find.descendant(
-          of: WidgetKeyFinder.password,
-          matching: find.byType(TextField),
-        ),
-      );
+  Icon get visibilityIcon => widget<Icon>(
+    find.descendant(
+      of: find.visibilityToggleButton,
+      matching: find.byType(Icon),
+    ),
+  );
+}
 
-  group('🎨 UI elements', () {
+extension _PasswordTextFormFieldInteraction on WidgetTester {
+  Future<void> enter(String password) async {
+    await enterText(find.textFormField, password);
+    await pump();
+  }
+
+  Future<void> submit() async {
+    await testTextInput.receiveAction(.done);
+    await pump();
+  }
+
+  Future<void> toggleVisibility() async {
+    await tap(find.visibilityToggleButton);
+    await pump();
+  }
+}
+
+void main() {
+  final l10n = AppLocalizationUtils.en;
+
+  group('🎨 UI Structure', () {
     testWidgets(
-      'PasswordTextFormField should have a label, a password TextFormField,'
-      ' and a visibility toggle IconButton.',
+      'Label should display the default password text'
+      ' when labelText is not provided.',
       (tester) async {
-        await tester.pumpWidget(passwordTextFormFieldApp());
+        await tester.pumpTestApp();
 
-        expect(find.byType(Label), findsOneWidget);
-        expect(WidgetKeyFinder.password, findsOneWidget);
-        expect(find.byType(TextFormField), findsOneWidget);
-        expect(WidgetKeyFinder.togglePasswordVisibility, findsOneWidget);
+        expect(tester.label.text, l10n.password);
       },
     );
 
     testWidgets(
-      'Password textfield should have correct properties with default values.',
+      'Label should display the custom text when labelText is provided.',
       (tester) async {
-        await tester.pumpWidget(passwordTextFormFieldApp());
+        const labelText = LoremIpsum.tiny;
 
-        final l10n = AppLocalizationUtils.readL10n(tester);
+        await tester.pumpTestApp(labelText: labelText);
 
-        final label = tester.widget<Label>(find.byType(Label));
-
-        expect(label.text, l10n.password);
-
-        final passwordTextFormField = findPasswordTextFormField(tester);
-        final passwordTextField = findPasswordTextField(tester);
-
-        expect(passwordTextFormField.controller, isNull);
-        expect(passwordTextField.decoration?.hintText, l10n.password);
-        expect(passwordTextField.keyboardType, TextInputType.visiblePassword);
-        expect(passwordTextField.textInputAction, isNull);
-        expect(passwordTextField.autocorrect, isFalse);
-        expect(passwordTextField.enableSuggestions, isFalse);
-        expect(
-          passwordTextField.maxLength,
-          FirebaseAuthValidator.passwordMaxLength,
-        );
-        expect(passwordTextField.inputFormatters, [
-          TextInputFormatters.noWhitespace,
-        ]);
-        expect(
-          passwordTextFormField.autovalidateMode,
-          AutovalidateMode.onUserInteraction,
-        );
+        expect(tester.label.text, labelText);
       },
     );
 
     testWidgets(
-      'Password textfield should have correct properties'
-      ' when parameters are provided.',
+      'TextFormField should use the visiblePassword keyboard type.',
       (tester) async {
-        final textEditingController = TextEditingController();
-        const hintText = 'hint';
-        const textInputAction = TextInputAction.done;
+        await tester.pumpTestApp();
 
-        await tester.pumpWidget(
-          passwordTextFormFieldApp(
-            controller: textEditingController,
-            hintText: hintText,
-            textInputAction: textInputAction,
-          ),
-        );
-
-        final passwordTextFormField = findPasswordTextFormField(tester);
-        final passwordTextField = findPasswordTextField(tester);
-
-        expect(passwordTextFormField.controller, textEditingController);
-        expect(passwordTextField.decoration?.hintText, hintText);
-        expect(passwordTextField.textInputAction, textInputAction);
+        expect(tester.textField.keyboardType, TextInputType.visiblePassword);
       },
     );
 
     testWidgets(
-      'Password visibility toggle button should change state'
-      ' when tapped.',
+      'TextFormField should have autocorrect disabled.',
       (tester) async {
-        await tester.pumpWidget(passwordTextFormFieldApp());
+        await tester.pumpTestApp();
 
-        var passwordTextField = findPasswordTextField(tester);
-        var icon = tester.widget<Icon>(find.byType(Icon));
+        expect(tester.textField.autocorrect, isFalse);
+      },
+    );
 
-        expect(passwordTextField.obscureText, isTrue);
-        expect(icon.icon, Icons.visibility_rounded);
+    testWidgets(
+      'TextFormField should have suggestions disabled.',
+      (tester) async {
+        await tester.pumpTestApp();
 
-        await tester.tap(WidgetKeyFinder.togglePasswordVisibility);
+        expect(tester.textField.enableSuggestions, isFalse);
+      },
+    );
 
-        await tester.pump();
+    testWidgets(
+      'TextFormField should obscure text by default.',
+      (tester) async {
+        await tester.pumpTestApp();
 
-        passwordTextField = findPasswordTextField(tester);
-        icon = tester.widget<Icon>(find.byType(Icon));
+        expect(tester.textField.obscureText, isTrue);
+      },
+    );
 
-        expect(passwordTextField.obscureText, isFalse);
-        expect(icon.icon, Icons.visibility_off_rounded);
+    testWidgets(
+      'Visibility toggle icon should be visibility_outlined'
+      ' when text is obscured.',
+      (tester) async {
+        await tester.pumpTestApp();
+
+        expect(tester.visibilityIcon.icon, Icons.visibility_outlined);
+      },
+    );
+
+    testWidgets(
+      'Text should be revealed'
+      ' and icon should change to visibility_off_outlined'
+      ' when the toggle is tapped.',
+      (tester) async {
+        await tester.pumpTestApp();
+
+        await tester.toggleVisibility();
+
+        expect(tester.textField.obscureText, isFalse);
+        expect(tester.visibilityIcon.icon, Icons.visibility_off_outlined);
+      },
+    );
+
+    testWidgets(
+      'Text should be re-obscured and icon should revert'
+      ' when the toggle is tapped again.',
+      (tester) async {
+        await tester.pumpTestApp();
+
+        final defaultIcon = tester.visibilityIcon.icon;
+
+        await tester.toggleVisibility();
+        await tester.toggleVisibility();
+
+        expect(tester.textField.obscureText, isTrue);
+        expect(tester.visibilityIcon.icon, defaultIcon);
+      },
+    );
+
+    testWidgets(
+      'TextFormField should have no textInputAction'
+      ' when textInputAction is not provided.',
+      (tester) async {
+        await tester.pumpTestApp();
+
+        expect(tester.textField.textInputAction, isNull);
+      },
+    );
+
+    testWidgets(
+      'TextFormField should use the provided textInputAction'
+      ' when textInputAction is specified.',
+      (tester) async {
+        const textInputAction = TextInputAction.next;
+
+        await tester.pumpTestApp(textInputAction: textInputAction);
+
+        expect(tester.textField.textInputAction, textInputAction);
       },
     );
   });
 
-  group('🔍 Input validation', () {
+  group('🔍 Input Validation', () {
     testWidgets(
-      'Password textfield should display error message for invalid input.',
+      'No error should be displayed before the user interacts with the field.',
       (tester) async {
-        await tester.pumpWidget(passwordTextFormFieldApp());
+        await tester.pumpTestApp();
 
-        var passwordTextField = findPasswordTextField(tester);
+        expect(tester.textField.decoration?.errorText, isNull);
+      },
+    );
 
-        expect(passwordTextField.controller?.text, isEmpty);
-        expect(passwordTextField.decoration?.errorText, isNull);
+    testWidgets(
+      'An error should be displayed'
+      ' when the field is left empty after interaction.',
+      (tester) async {
+        await tester.pumpTestApp();
 
-        await tester.enterText(WidgetKeyFinder.password, invalidPassword);
-        await tester.pump();
+        await tester.enter('a');
+        await tester.enter('');
 
-        passwordTextField = findPasswordTextField(tester);
+        expect(tester.textField.decoration?.errorText, l10n.requiredField);
+      },
+    );
 
-        expect(passwordTextField.controller?.text, invalidPassword);
-        expect(passwordTextField.decoration?.errorText, isNotNull);
+    testWidgets(
+      'An error should be displayed'
+      ' when the password does not meet the requirements.',
+      (tester) async {
+        await tester.pumpTestApp();
 
-        await tester.enterText(WidgetKeyFinder.password, validPassword);
-        await tester.pump();
+        const invalidPassword = 'invalidPassword';
 
-        passwordTextField = findPasswordTextField(tester);
+        await tester.enter(invalidPassword);
 
-        expect(passwordTextField.controller?.text, validPassword);
-        expect(passwordTextField.decoration?.errorText, isNull);
+        expect(
+          tester.textField.decoration?.errorText,
+          l10n.nonCompliantPassword,
+        );
+      },
+    );
+
+    testWidgets(
+      'An error should be cleared'
+      ' when a valid password is entered after an invalid one.',
+      (tester) async {
+        await tester.pumpTestApp();
+
+        const invalidPassword = 'invalidPassword';
+        const validPassword = 'validPassw0rd';
+
+        await tester.enter(invalidPassword);
+        await tester.enter(validPassword);
+
+        expect(tester.textField.decoration?.errorText, isNull);
+      },
+    );
+
+    testWidgets(
+      'A custom validator error message should be displayed'
+      ' when a custom validator is provided and validation fails.',
+      (tester) async {
+        const customError = 'Custom validation error';
+
+        await tester.pumpTestApp(validator: (_) => customError);
+
+        await tester.enter('anyInput');
+
+        expect(tester.textField.decoration?.errorText, customError);
       },
     );
   });
 
-  group('♻️ Input formatting', () {
-    testWidgets('Password textfield should not allow whitespace input.', (
-      tester,
-    ) async {
-      await tester.pumpWidget(passwordTextFormFieldApp());
+  group('♻️ Input Formatting', () {
+    testWidgets(
+      'A whitespace character entered into the field'
+      ' should not be reflected in the text.',
+      (tester) async {
+        await tester.pumpTestApp();
 
-      await tester.enterText(WidgetKeyFinder.password, ' ');
-      await tester.pump();
+        await tester.enter(' validPassw 0 rd ');
 
-      final passwordTextField = findPasswordTextField(tester);
+        expect(tester.textField.controller?.text, 'validPassw0rd');
+      },
+    );
 
-      expect(passwordTextField.controller?.text, isEmpty);
-    });
+    testWidgets(
+      'Non-whitespace characters'
+      ' should be entered into the field without modification.',
+      (tester) async {
+        await tester.pumpTestApp();
+
+        const nonWhitespacePassword = 'v@lid-Passw0rd_';
+
+        await tester.enter(nonWhitespacePassword);
+
+        expect(tester.textField.controller?.text, nonWhitespacePassword);
+      },
+    );
+  });
+
+  group('👆 User Interaction', () {
+    testWidgets(
+      'The field should use the custom controller'
+      ' when a controller is provided.',
+      (tester) async {
+        final controller = TextEditingController();
+        addTearDown(controller.dispose);
+
+        await tester.pumpTestApp(controller: controller);
+
+        expect(tester.textField.controller, controller);
+      },
+    );
+
+    testWidgets(
+      'onChanged should be called with the entered text'
+      ' when the field value changes.',
+      (tester) async {
+        String? result;
+
+        await tester.pumpTestApp(onChanged: (value) => result = value);
+
+        const password = 'P@sssw0rd';
+
+        await tester.enter(password);
+
+        expect(result, password);
+      },
+    );
+
+    testWidgets(
+      'onFieldSubmitted should be called with the entered password'
+      ' when the field is submitted.',
+      (tester) async {
+        String? result;
+
+        await tester.pumpTestApp(
+          textInputAction: .done,
+          onFieldSubmitted: (value) => result = value,
+        );
+
+        const password = 'P@sssw0rd';
+
+        await tester.enter(password);
+        await tester.submit();
+
+        expect(result, password);
+      },
+    );
+  });
+
+  group('♿️ Accessibility', () {
+    testWidgets(
+      'The password autofill hint'
+      ' should be set on the TextFormField by default.',
+      (tester) async {
+        await tester.pumpTestApp();
+
+        expect(tester.textField.autofillHints, const [AutofillHints.password]);
+      },
+    );
+
+    testWidgets(
+      'Custom autofill hints should override the default'
+      ' when autofillHints is provided.',
+      (tester) async {
+        const autofillHints = [AutofillHints.newPassword];
+
+        await tester.pumpTestApp(autofillHints: autofillHints);
+
+        expect(tester.textField.autofillHints, autofillHints);
+      },
+    );
   });
 }
