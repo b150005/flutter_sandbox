@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/config/constants/border_radii.dart';
 import '../../../core/config/constants/icon_size.dart';
 import '../../../core/config/constants/spacing.dart';
 import '../../../core/config/constants/widget_keys.dart';
-import '../../../core/config/l10n/app_localizations.dart';
+import '../../../core/config/l10n/app_localizations.dart' as l10n;
+import '../../../core/utils/l10n/app_localizations.dart';
 import '../extensions/build_context.dart';
 
 enum CalloutType {
@@ -20,7 +22,7 @@ enum CalloutType {
 
   final MaterialColor color;
 
-  String semanticsLabel(AppLocalizations l10n) => switch (this) {
+  String semanticsLabel(l10n.AppLocalizations l10n) => switch (this) {
     info => l10n.info,
     success => l10n.success,
     warning => l10n.warning,
@@ -40,7 +42,7 @@ enum CalloutType {
 }
 
 @immutable
-class Callout extends StatelessWidget {
+class Callout extends ConsumerWidget {
   const Callout(
     this.message, {
     super.key,
@@ -58,49 +60,54 @@ class Callout extends StatelessWidget {
   final Widget? child;
 
   @override
-  Widget build(BuildContext context) => Container(
-    key: WidgetKeys.callout,
-    padding: .all(Spacing.sm.dp),
-    decoration: BoxDecoration(
-      color: type.backgroundColor,
-      border: .all(color: type.borderColor),
-      borderRadius: .circular(BorderRadii.sm.value),
-    ),
-    child: Column(
-      spacing: Spacing.xxs.dp,
-      children: [
-        Row(
-          spacing: Spacing.xs.dp,
-          children: [
-            Icon(
-              key: WidgetKeys.icon,
-              type.icon,
-              size: IconSize.sm.iconSize,
-              color: type.iconColor,
-            ),
-            Expanded(
-              child: Text(
-                key: WidgetKeys.message,
-                message,
-                style: context.textTheme.bodyLarge?.copyWith(
-                  color: type.foregroundColor,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = ref.watch(appLocalizationsProvider);
+
+    return Container(
+      key: WidgetKeys.callout,
+      padding: .all(Spacing.sm.dp),
+      decoration: BoxDecoration(
+        color: type.backgroundColor,
+        border: .all(color: type.borderColor),
+        borderRadius: .circular(BorderRadii.sm.value),
+      ),
+      child: Column(
+        spacing: Spacing.xxs.dp,
+        children: [
+          Row(
+            spacing: Spacing.xs.dp,
+            children: [
+              Icon(
+                key: WidgetKeys.icon,
+                type.icon,
+                size: IconSize.sm.iconSize,
+                color: type.iconColor,
+                semanticLabel: type.semanticsLabel(l10n),
+              ),
+              Expanded(
+                child: Text(
+                  key: WidgetKeys.message,
+                  message,
+                  style: context.textTheme.bodyLarge?.copyWith(
+                    color: type.foregroundColor,
+                  ),
                 ),
               ),
-            ),
-            if (onDismiss != null)
-              IconButton(
-                key: WidgetKeys.dismiss,
-                onPressed: onDismiss!.call,
-                icon: Icon(
-                  Icons.close,
-                  color: type.iconColor,
-                  size: IconSize.lg.iconSize,
+              if (onDismiss != null)
+                IconButton(
+                  key: WidgetKeys.dismiss,
+                  onPressed: onDismiss!.call,
+                  icon: Icon(
+                    Icons.close,
+                    color: type.iconColor,
+                    size: IconSize.lg.iconSize,
+                  ),
                 ),
-              ),
-          ],
-        ),
-        ?child,
-      ],
-    ),
-  );
+            ],
+          ),
+          ?child,
+        ],
+      ),
+    );
+  }
 }
