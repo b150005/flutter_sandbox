@@ -9,8 +9,10 @@ import '../../../../../../testing/utils/extensions/widget_tester.dart';
 import '../../../../../../testing/utils/widgets/test_app.dart';
 
 extension _CommonFindersExtension on CommonFinders {
+  Finder get digitBox => byType(OTPDigitBox);
+
   Finder get digitBoxes => descendant(
-    of: byType(OTPDigitBox),
+    of: digitBox,
     matching: byType(GestureDetector),
   );
 }
@@ -61,8 +63,7 @@ extension _UserInteraction on WidgetTester {
   }
 
   Future<void> tapOutsideDigitBox() async {
-    final digitBoxesRect = find
-        .byType(OTPDigitBox)
+    final digitBoxesRect = find.digitBox
         .evaluate()
         .map((digitBox) => digitBox.renderObject! as RenderBox)
         .map((renderBox) => renderBox.globalRect)
@@ -73,7 +74,7 @@ extension _UserInteraction on WidgetTester {
   }
 
   Iterable<OTPDigitBox> get digitBoxes =>
-      widgetList<OTPDigitBox>(find.byType(OTPDigitBox));
+      widgetList<OTPDigitBox>(find.digitBox);
 
   Future<void> enter(int code) async {
     final controller =
@@ -106,7 +107,7 @@ void main() {
 
         await tester.pumpTestApp(length: length);
 
-        expect(find.byType(OTPDigitBox), findsExactly(length));
+        expect(find.digitBox, findsExactly(length));
       },
     );
 
