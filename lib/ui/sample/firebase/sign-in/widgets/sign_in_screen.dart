@@ -28,7 +28,11 @@ class SignInScreen extends HookConsumerWidget {
               width: IconSize.xxxl.dp,
               child: Image.asset(Assets.firebase.path),
             ),
-            const SignInForm(),
+            SignInForm(
+              onSuccess: () => FirebaseScreenRoute().go(context),
+              onForgotPasswordPressed: () =>
+                  ForgotPasswordScreenRoute().go(context),
+            ),
             OutlinedButton(
               key: WidgetKeys.signUp,
               onPressed: () => SignUpScreenRoute().go(context),

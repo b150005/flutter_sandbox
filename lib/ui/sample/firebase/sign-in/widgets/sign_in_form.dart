@@ -6,7 +6,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../core/config/constants/button_size.dart';
 import '../../../../../core/config/constants/spacing.dart';
 import '../../../../../core/config/constants/widget_keys.dart';
-import '../../../../../core/routing/router.dart';
 import '../../../../../core/utils/extensions/string.dart';
 import '../../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../../data/repositories/firebase/auth/auth_repository.dart';
@@ -17,7 +16,15 @@ import '../../../../core/ui/callout.dart';
 
 @immutable
 class SignInForm extends HookConsumerWidget {
-  const SignInForm({super.key});
+  const SignInForm({
+    super.key,
+    required this.onSuccess,
+    required this.onForgotPasswordPressed,
+  });
+
+  final VoidCallback onSuccess;
+
+  final VoidCallback onForgotPasswordPressed;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,7 +37,7 @@ class SignInForm extends HookConsumerWidget {
 
     final l10n = ref.watch(appLocalizationsProvider);
 
-    Future<void> onSubmit() async {
+    Future<void> submit() async {
       if (isLoading.value) {
         return;
       }
@@ -54,7 +61,7 @@ class SignInForm extends HookConsumerWidget {
         (_) {
           TextInput.finishAutofillContext();
 
-          FirebaseScreenRoute().go(context);
+          onSuccess();
         },
         (appException) => errorMessage.value = appException.message,
       );
@@ -82,19 +89,19 @@ class SignInForm extends HookConsumerWidget {
             PasswordTextFormField(
               controller: passwordController,
               textInputAction: .done,
-              onFieldSubmitted: (_) => onSubmit(),
+              onFieldSubmitted: (_) => submit(),
             ),
             Align(
               alignment: .centerRight,
               child: TextButton(
                 key: WidgetKeys.forgotPassword,
-                onPressed: () => ForgotPasswordScreenRoute().go(context),
+                onPressed: onForgotPasswordPressed,
                 child: Text(l10n.forgotPassword),
               ),
             ),
             FilledButton(
               key: WidgetKeys.signIn,
-              onPressed: onSubmit,
+              onPressed: submit,
               style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
               child: isLoading.value
                   ? context.loadingIndicator
