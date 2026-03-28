@@ -104,7 +104,7 @@ class AuthRepository extends _$AuthRepository {
   /// メールリンク認証を用いてサインインを行う
   ///
   /// @see [Complete sign in with the email link](https://firebase.google.com/docs/auth/flutter/email-link-auth#complete_sign_in_with_the_email_link)
-  Future<Result<UserCredential, AppException>> signInWithEmailLink({
+  Future<Result<void, AppException>> signInWithEmailLink({
     String? email,
     required Uri emailLink,
   }) => _executeWithFirebaseAuth(() async {
@@ -137,7 +137,7 @@ class AuthRepository extends _$AuthRepository {
       throw AppException.notFound(l10n.notFound);
     }
 
-    return auth.signInWithEmailLink(
+    await auth.signInWithEmailLink(
       email: storedEmail,
       emailLink: emailLink.toString(),
     );
@@ -153,13 +153,13 @@ class AuthRepository extends _$AuthRepository {
   /// メールアドレスとパスワードを用いてサインインを行う
   ///
   /// @see [Sign in a user with an email address and password](https://firebase.google.com/docs/auth/flutter/password-auth#sign_in_a_user_with_an_email_address_and_password)
-  Future<Result<UserCredential, AppException>> signInWithEmailAndPassword({
+  Future<Result<void, AppException>> signInWithEmailAndPassword({
     required String email,
     required String password,
-  }) => _executeWithFirebaseAuth(() {
+  }) => _executeWithFirebaseAuth(() async {
     final auth = ref.read(firebaseAuthProvider);
 
-    return auth.signInWithEmailAndPassword(email: email, password: password);
+    await auth.signInWithEmailAndPassword(email: email, password: password);
   });
 
   /// パスワード再設定のメールを送信する

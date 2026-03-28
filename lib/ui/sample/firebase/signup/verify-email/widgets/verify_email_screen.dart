@@ -29,7 +29,7 @@ class VerifyEmailScreen extends HookConsumerWidget {
           .signInWithEmailLink(emailLink: emailLink)
           .then(
             (result) => result.when(
-              (credential) {
+              (_) {
                 screenState.value = .success;
               },
               (appException) {
