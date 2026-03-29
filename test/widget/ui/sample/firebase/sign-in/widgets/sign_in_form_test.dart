@@ -203,7 +203,7 @@ void main() {
 
     testWidgets(
       'onSuccess should not be called'
-      ' when the sign-in button is tapped with an empty passowrd.',
+      ' when the sign-in button is tapped with an empty password.',
       (tester) async {
         var count = 0;
 
