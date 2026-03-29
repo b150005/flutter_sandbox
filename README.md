@@ -481,6 +481,11 @@ Flutter をアップグレードした場合、 `dart pub global activate flutte
 
 `test/unit`, `test/widget` 配下にテストコードを配置してください。
 
+## 💄 ゴールデンテスト
+
+- `flutter test --update-goldens` コマンドを実行し、 Golden Image を生成
+- `test/golden` 配下にテストコードを配置してください。
+
 ## 🔗 統合テスト
 
 `test/integration/` 配下にテストコードを配置してください。
