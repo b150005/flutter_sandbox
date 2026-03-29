@@ -426,7 +426,7 @@ Xcode の Runner > TARGETS > Runner > Build Phases > New Run Script Phase で以
 
 以下のファイルを参照してください。
 
-> [!WARN]
+> [!WARNING]
 > macOS の場合は追加で以下の対応が必要です。
 > Xcode の Runner > TARGETS > Runner > General > Minimum Deployments を `macos/Podfile` の `MACOS_DEPLOYMENT_TARGET` と同じバージョンに設定する
 
