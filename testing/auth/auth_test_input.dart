@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_sandbox/core/utils/authentications/firebase_auth_validator.dart';
 
 extension _StringExtension on String {
@@ -37,6 +38,7 @@ extension _StringExtension on String {
   }
 }
 
+@visibleForTesting
 abstract final class AuthTestInput {
   const AuthTestInput._();
 
