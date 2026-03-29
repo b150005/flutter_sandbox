@@ -3,23 +3,27 @@ import 'package:flutter_sandbox/core/utils/authentications/firebase_auth_validat
 import 'package:flutter_sandbox/core/utils/logging/log_message.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../../../testing/auth/auth_test_input.dart';
+
 void main() {
   final l10n = AppLocalizationsEn();
 
   group('✉️ Email Validation', () {
     group('✅ Valid Input', () {
       test('A standard email address should return null.', () {
-        const email = 'test@example.com';
-
-        final result = FirebaseAuthValidator.validateEmail(email, l10n: l10n);
+        final result = FirebaseAuthValidator.validateEmail(
+          AuthTestInput.validEmail,
+          l10n: l10n,
+        );
 
         expect(result, isNull);
       });
 
       test('An email address with a subdomain should return null.', () {
-        const email = 'test@example.co.jp';
-
-        final result = FirebaseAuthValidator.validateEmail(email, l10n: l10n);
+        final result = FirebaseAuthValidator.validateEmail(
+          AuthTestInput.emailWithSubdomain,
+          l10n: l10n,
+        );
 
         expect(result, isNull);
       });
@@ -27,9 +31,10 @@ void main() {
       test(
         'An email address with a minimum-length TLD should return null.',
         () {
-          const email = 'test@example.jp';
-
-          final result = FirebaseAuthValidator.validateEmail(email, l10n: l10n);
+          final result = FirebaseAuthValidator.validateEmail(
+            AuthTestInput.emailWithMinLengthTld,
+            l10n: l10n,
+          );
 
           expect(result, isNull);
         },
@@ -40,9 +45,7 @@ void main() {
       test(
         'A null email should return the required-field error message.',
         () {
-          const String? email = null;
-
-          final result = FirebaseAuthValidator.validateEmail(email, l10n: l10n);
+          final result = FirebaseAuthValidator.validateEmail(null, l10n: l10n);
 
           expect(result, l10n.requiredField);
         },
@@ -51,9 +54,10 @@ void main() {
       test(
         'An empty string should return the required-field error message.',
         () {
-          const email = '';
-
-          final result = FirebaseAuthValidator.validateEmail(email, l10n: l10n);
+          final result = FirebaseAuthValidator.validateEmail(
+            AuthTestInput.empty,
+            l10n: l10n,
+          );
 
           expect(result, l10n.requiredField);
         },
@@ -63,10 +67,11 @@ void main() {
         'An email containing a whitespace character'
         ' should throw an ArgumentError.',
         () {
-          const email = ' test@example.com';
-
           expect(
-            () => FirebaseAuthValidator.validateEmail(email, l10n: l10n),
+            () => FirebaseAuthValidator.validateEmail(
+              AuthTestInput.emailWithWhitespace,
+              l10n: l10n,
+            ),
             throwsArgumentError,
           );
         },
@@ -76,9 +81,10 @@ void main() {
         'An email without on "@" symbol'
         ' should return the invalid-format error message.',
         () {
-          const email = 'testexample.com';
-
-          final result = FirebaseAuthValidator.validateEmail(email, l10n: l10n);
+          final result = FirebaseAuthValidator.validateEmail(
+            AuthTestInput.emailWithoutAtSign,
+            l10n: l10n,
+          );
 
           expect(result, l10n.invalidEmailFormat);
         },
@@ -88,21 +94,23 @@ void main() {
         'An email with a TLD shorter than the minimum length'
         ' should return the invalid-format error message.',
         () {
-          const email = 'test@example.c';
-
-          final result = FirebaseAuthValidator.validateEmail(email, l10n: l10n);
+          final result = FirebaseAuthValidator.validateEmail(
+            AuthTestInput.emailWithTooShortTld,
+            l10n: l10n,
+          );
 
           expect(result, l10n.invalidEmailFormat);
         },
       );
 
       test(
-        'An email missing a domain'
+        'An email with no dot in the domain'
         ' should return the invalid-format error message.',
         () {
-          const email = 'test@jp';
-
-          final result = FirebaseAuthValidator.validateEmail(email, l10n: l10n);
+          final result = FirebaseAuthValidator.validateEmail(
+            AuthTestInput.emailWithNoDotInDomain,
+            l10n: l10n,
+          );
 
           expect(result, l10n.invalidEmailFormat);
         },
@@ -276,10 +284,8 @@ void main() {
   group('🔑 Password Validation', () {
     group('✅ Valid Input', () {
       test('A password meeting all requirements should return null.', () {
-        const password = 'Passw0rd';
-
         final result = FirebaseAuthValidator.validatePassword(
-          password,
+          AuthTestInput.validPassword,
           l10n: l10n,
         );
 
@@ -291,10 +297,8 @@ void main() {
       test(
         'A null password should return the required-field error message.',
         () {
-          const String? password = null;
-
           final result = FirebaseAuthValidator.validatePassword(
-            password,
+            null,
             l10n: l10n,
           );
 
@@ -305,10 +309,8 @@ void main() {
       test(
         'An empty string should return the required-field error message.',
         () {
-          const password = '';
-
           final result = FirebaseAuthValidator.validatePassword(
-            password,
+            AuthTestInput.empty,
             l10n: l10n,
           );
 
@@ -320,11 +322,9 @@ void main() {
         'A password containing a whitespace character'
         ' should throw an ArgumentError.',
         () {
-          const password = 'Pass w0rd';
-
           expect(
             () => FirebaseAuthValidator.validatePassword(
-              password,
+              AuthTestInput.passwordWithWhitespace,
               l10n: l10n,
             ),
             throwsArgumentError,
@@ -336,10 +336,8 @@ void main() {
         'A password shorter than the minimum length'
         ' should return the non-compliant error message.',
         () {
-          const password = 'Passw0r';
-
           final result = FirebaseAuthValidator.validatePassword(
-            password,
+            AuthTestInput.tooShortPassword,
             l10n: l10n,
           );
 
@@ -351,10 +349,8 @@ void main() {
         'A password without an uppercase letter'
         ' should return the non-compliant error message.',
         () {
-          const password = 'passw0rd';
-
           final result = FirebaseAuthValidator.validatePassword(
-            password,
+            AuthTestInput.passwordWithoutUppercase,
             l10n: l10n,
           );
 
@@ -366,10 +362,8 @@ void main() {
         'A password without an lowercase letter'
         ' should return the non-compliant error message.',
         () {
-          const password = 'PASSW0RD';
-
           final result = FirebaseAuthValidator.validatePassword(
-            password,
+            AuthTestInput.passwordWithoutLowercase,
             l10n: l10n,
           );
 
@@ -381,10 +375,8 @@ void main() {
         'A password without a digit'
         ' should return the non-compliant error message.',
         () {
-          const password = 'Password';
-
           final result = FirebaseAuthValidator.validatePassword(
-            password,
+            AuthTestInput.passwordWithoutDigit,
             l10n: l10n,
           );
 
@@ -398,11 +390,9 @@ void main() {
         test(
           'A confirm password that matches the password should return null.',
           () {
-            const password = 'Passw0rd';
-
             final result = FirebaseAuthValidator.validateConfirmPassword(
-              password,
-              password: password,
+              AuthTestInput.validPassword,
+              password: AuthTestInput.validPassword,
               l10n: l10n,
             );
 
@@ -415,12 +405,9 @@ void main() {
         test(
           'An empty password should return the required-field error message.',
           () {
-            const password = '';
-            const confirmPassword = 'Passw0rd';
-
             final result = FirebaseAuthValidator.validateConfirmPassword(
-              confirmPassword,
-              password: password,
+              AuthTestInput.validPassword,
+              password: AuthTestInput.empty,
               l10n: l10n,
             );
 
@@ -432,12 +419,9 @@ void main() {
           'A null confirm password'
           ' should return the required-field error message.',
           () {
-            const password = 'Passw0rd';
-            const String? confirmPassword = null;
-
             final result = FirebaseAuthValidator.validateConfirmPassword(
-              confirmPassword,
-              password: password,
+              null,
+              password: AuthTestInput.validPassword,
               l10n: l10n,
             );
 
@@ -449,12 +433,9 @@ void main() {
           'An empty confirm password'
           ' should return the required-field error message.',
           () {
-            const password = 'Passw0rd';
-            const confirmPassword = '';
-
             final result = FirebaseAuthValidator.validateConfirmPassword(
-              confirmPassword,
-              password: password,
+              AuthTestInput.empty,
+              password: AuthTestInput.validPassword,
               l10n: l10n,
             );
 
@@ -466,13 +447,10 @@ void main() {
           'A password containing a whitespace character'
           ' should throw an ArgumentError.',
           () {
-            const password = 'Pass w0rd';
-            const confirmPassword = 'Passw0rd';
-
             expect(
               () => FirebaseAuthValidator.validateConfirmPassword(
-                confirmPassword,
-                password: password,
+                AuthTestInput.validPassword,
+                password: AuthTestInput.passwordWithWhitespace,
                 l10n: l10n,
               ),
               throwsArgumentError,
@@ -484,13 +462,10 @@ void main() {
           'A confirm password containing a whitespace character'
           ' should throw an ArgumentError.',
           () {
-            const password = 'Passw0rd';
-            const confirmPassword = 'Pass w0rd';
-
             expect(
               () => FirebaseAuthValidator.validateConfirmPassword(
-                confirmPassword,
-                password: password,
+                AuthTestInput.passwordWithWhitespace,
+                password: AuthTestInput.validPassword,
                 l10n: l10n,
               ),
               throwsArgumentError,
@@ -502,12 +477,9 @@ void main() {
           'A confirm password that does not match the password'
           ' should return the password-mismatch error message.',
           () {
-            const password = 'Passw0rd';
-            const confirmPassword = 'Passw0rd!';
-
             final result = FirebaseAuthValidator.validateConfirmPassword(
-              confirmPassword,
-              password: password,
+              '${AuthTestInput.validPassword}!',
+              password: AuthTestInput.validPassword,
               l10n: l10n,
             );
 
