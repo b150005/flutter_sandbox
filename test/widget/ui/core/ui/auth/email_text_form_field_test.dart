@@ -5,6 +5,7 @@ import 'package:flutter_sandbox/ui/core/ui/auth/email_text_form_field.dart';
 import 'package:flutter_sandbox/ui/core/ui/label.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../../../../testing/auth/auth_test_input.dart';
 import '../../../../../../testing/fixtures/lorem_ipsum.dart';
 import '../../../../../../testing/widgets/test_app.dart';
 
@@ -124,7 +125,7 @@ void main() {
       (tester) async {
         await tester.pumpTestApp();
 
-        await tester.enter('');
+        await tester.enter(AuthTestInput.empty);
 
         expect(tester.textField.decoration?.errorText, l10n.requiredField);
       },
@@ -135,9 +136,7 @@ void main() {
       (tester) async {
         await tester.pumpTestApp();
 
-        const invalidEmail = 'invalid@example.c';
-
-        await tester.enter(invalidEmail);
+        await tester.enter(AuthTestInput.tooShortTldEmail);
 
         expect(tester.textField.decoration?.errorText, l10n.invalidEmailFormat);
       },
@@ -149,11 +148,8 @@ void main() {
       (tester) async {
         await tester.pumpTestApp();
 
-        const invalidEmail = 'invalid@example.c';
-        const validEmail = 'valid@example.com';
-
-        await tester.enter(invalidEmail);
-        await tester.enter(validEmail);
+        await tester.enter(AuthTestInput.tooShortTldEmail);
+        await tester.enter(AuthTestInput.validEmail);
 
         expect(tester.textField.decoration?.errorText, isNull);
       },
@@ -167,9 +163,9 @@ void main() {
       (tester) async {
         await tester.pumpTestApp();
 
-        await tester.enter(' ');
+        await tester.enter(AuthTestInput.whitespaces);
 
-        expect(tester.textField.controller?.text, '');
+        expect(tester.textField.controller?.text, isEmpty);
       },
     );
 
@@ -179,9 +175,9 @@ void main() {
       (tester) async {
         await tester.pumpTestApp();
 
-        await tester.enter(' test @ example . com ');
+        await tester.enter(AuthTestInput.whitespaceEmail);
 
-        expect(tester.textField.controller?.text, 'test@example.com');
+        expect(tester.textField.controller?.text, AuthTestInput.validEmail);
       },
     );
 
@@ -191,7 +187,7 @@ void main() {
       (tester) async {
         await tester.pumpTestApp();
 
-        const nonWhitespaceEmail = 'non-white_space@example.com';
+        const nonWhitespaceEmail = AuthTestInput.validEmail;
 
         await tester.enter(nonWhitespaceEmail);
 
@@ -210,10 +206,10 @@ void main() {
           onFieldSubmitted: (value) => result = value,
         );
 
-        await tester.enter(' test @ example . com ');
+        await tester.enter(AuthTestInput.whitespaceEmail);
         await tester.submit();
 
-        expect(result, 'test@example.com');
+        expect(result, AuthTestInput.validEmail);
       },
     );
   });
@@ -230,7 +226,7 @@ void main() {
           onFieldSubmitted: (value) => result = value,
         );
 
-        const email = 'test@example.com';
+        const email = AuthTestInput.validEmail;
 
         await tester.enter(email);
         await tester.submit();
@@ -250,9 +246,7 @@ void main() {
           onFieldSubmitted: (value) => result = value,
         );
 
-        const email = 'test@example.com';
-
-        await tester.enter(email);
+        await tester.enter(AuthTestInput.validEmail);
 
         expect(result, isNull);
       },
@@ -264,9 +258,7 @@ void main() {
       (tester) async {
         await tester.pumpTestApp(textInputAction: .done);
 
-        const email = 'test@example.com';
-
-        await tester.enter(email);
+        await tester.enter(AuthTestInput.validEmail);
         await tester.submit();
 
         expect(tester.takeException(), isNull);

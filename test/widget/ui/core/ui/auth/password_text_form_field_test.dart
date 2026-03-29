@@ -5,6 +5,7 @@ import 'package:flutter_sandbox/ui/core/ui/auth/password_text_form_field.dart';
 import 'package:flutter_sandbox/ui/core/ui/label.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../../../../testing/auth/auth_test_input.dart';
 import '../../../../../../testing/fixtures/lorem_ipsum.dart';
 import '../../../../../../testing/widgets/test_app.dart';
 
@@ -71,6 +72,10 @@ extension _WidgetTesterExtension on WidgetTester {
 
 extension _PasswordTextFormFieldInteraction on WidgetTester {
   Future<void> enter(String password) async {
+    if (password.isEmpty) {
+      await enter('a');
+    }
+
     await enterText(find.textFormField, password);
     await pump();
   }
@@ -226,8 +231,7 @@ void main() {
       (tester) async {
         await tester.pumpTestApp();
 
-        await tester.enter('a');
-        await tester.enter('');
+        await tester.enter(AuthTestInput.empty);
 
         expect(tester.textField.decoration?.errorText, l10n.requiredField);
       },
@@ -239,9 +243,7 @@ void main() {
       (tester) async {
         await tester.pumpTestApp();
 
-        const invalidPassword = 'invalidPassword';
-
-        await tester.enter(invalidPassword);
+        await tester.enter(AuthTestInput.tooShortPassword);
 
         expect(
           tester.textField.decoration?.errorText,
@@ -256,11 +258,8 @@ void main() {
       (tester) async {
         await tester.pumpTestApp();
 
-        const invalidPassword = 'invalidPassword';
-        const validPassword = 'validPassw0rd';
-
-        await tester.enter(invalidPassword);
-        await tester.enter(validPassword);
+        await tester.enter(AuthTestInput.tooShortPassword);
+        await tester.enter(AuthTestInput.validPassword);
 
         expect(tester.textField.decoration?.errorText, isNull);
       },
@@ -274,7 +273,7 @@ void main() {
 
         await tester.pumpTestApp(validator: (_) => customError);
 
-        await tester.enter('anyInput');
+        await tester.enter(AuthTestInput.validPassword);
 
         expect(tester.textField.decoration?.errorText, customError);
       },
@@ -288,9 +287,9 @@ void main() {
       (tester) async {
         await tester.pumpTestApp();
 
-        await tester.enter(' validPassw 0 rd ');
+        await tester.enter(AuthTestInput.whitespacePassword);
 
-        expect(tester.textField.controller?.text, 'validPassw0rd');
+        expect(tester.textField.controller?.text, AuthTestInput.validPassword);
       },
     );
 
@@ -300,7 +299,7 @@ void main() {
       (tester) async {
         await tester.pumpTestApp();
 
-        const nonWhitespacePassword = 'v@lid-Passw0rd_';
+        const nonWhitespacePassword = AuthTestInput.validPassword;
 
         await tester.enter(nonWhitespacePassword);
 
@@ -331,7 +330,7 @@ void main() {
 
         await tester.pumpTestApp(onChanged: (value) => result = value);
 
-        const password = 'P@sssw0rd';
+        const password = AuthTestInput.validPassword;
 
         await tester.enter(password);
 
@@ -350,7 +349,7 @@ void main() {
           onFieldSubmitted: (value) => result = value,
         );
 
-        const password = 'P@sssw0rd';
+        const password = AuthTestInput.validPassword;
 
         await tester.enter(password);
         await tester.submit();
