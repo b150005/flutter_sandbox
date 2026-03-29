@@ -5,8 +5,8 @@ import 'package:flutter_sandbox/ui/core/ui/label.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../../../testing/fixtures/lorem_ipsum.dart';
-import '../../../../../../testing/utils/app_localization_utils.dart';
-import '../../../../../../testing/utils/widgets/test_app.dart';
+import '../../../../../../testing/l10n/app_localization_utils.dart';
+import '../../../../../../testing/widgets/test_app.dart';
 
 extension _CommonFindersExtension on CommonFinders {
   Finder get textFormField => byWidgetPredicate(

@@ -11,8 +11,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../../../../testing/auth/fake_auth_repository.dart';
 import '../../../../../../../testing/auth/test_user.dart';
-import '../../../../../../../testing/utils/app_localization_utils.dart';
-import '../../../../../../../testing/utils/widgets/test_app.dart';
+import '../../../../../../../testing/l10n/app_localization_utils.dart';
+import '../../../../../../../testing/widgets/test_app.dart';
 
 extension _CommonFindersExtension on CommonFinders {
   Finder get autoFillGroup =>

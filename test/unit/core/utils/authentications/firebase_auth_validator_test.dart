@@ -2,7 +2,7 @@ import 'package:flutter_sandbox/core/utils/authentications/firebase_auth_validat
 import 'package:flutter_sandbox/core/utils/logging/log_message.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../../../testing/utils/app_localization_utils.dart';
+import '../../../../../testing/l10n/app_localization_utils.dart';
 
 void main() {
   final l10n = AppLocalizationUtils.en;

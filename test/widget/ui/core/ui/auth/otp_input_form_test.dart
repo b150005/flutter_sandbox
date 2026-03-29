@@ -5,8 +5,8 @@ import 'package:flutter_sandbox/ui/core/extensions/render_box.dart';
 import 'package:flutter_sandbox/ui/core/ui/auth/otp_input_form.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../../../../testing/utils/extensions/widget_tester.dart';
-import '../../../../../../testing/utils/widgets/test_app.dart';
+import '../../../../../../testing/extensions/widget_tester.dart';
+import '../../../../../../testing/widgets/test_app.dart';
 
 extension _CommonFindersExtension on CommonFinders {
   Finder get digitBox => byType(OTPDigitBox);

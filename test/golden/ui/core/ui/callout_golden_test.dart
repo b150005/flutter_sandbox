@@ -3,7 +3,7 @@ import 'package:flutter_sandbox/ui/core/ui/callout.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../../testing/golden/golden_test_utils.dart';
-import '../../../../../testing/utils/widgets/test_app.dart';
+import '../../../../../testing/widgets/test_app.dart';
 
 extension _CommonFindersExtension on CommonFinders {
   Finder get callout => byType(Callout);

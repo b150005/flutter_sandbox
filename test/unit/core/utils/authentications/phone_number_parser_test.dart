@@ -2,7 +2,7 @@ import 'package:flutter_sandbox/core/utils/authentications/phone_number_parser.d
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sealed_countries/sealed_countries.dart';
 
-import '../../../../../testing/utils/app_localization_utils.dart';
+import '../../../../../testing/l10n/app_localization_utils.dart';
 
 void main() {
   final l10n = AppLocalizationUtils.en;
