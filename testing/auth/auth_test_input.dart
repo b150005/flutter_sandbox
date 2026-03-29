@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_sandbox/core/utils/authentications/firebase_auth_validator.dart';
 
 extension _StringExtension on String {
-  static const _whitespaces = [
+  static const whitespaces = [
     ' ', // U+0020 space
     '\t', // U+0009 tab
     '\n', // U+000A newline
@@ -16,12 +16,12 @@ extension _StringExtension on String {
     final head = substring(0, mid);
     final tail = substring(mid);
 
-    final middleWhitespaces = _whitespaces
-        .sublist(1, _whitespaces.length - 1)
+    final middleWhitespaces = whitespaces
+        .sublist(1, whitespaces.length - 1)
         .join();
 
-    return '${_whitespaces.first}$head'
-        '$middleWhitespaces$tail${_whitespaces.last}';
+    return '${whitespaces.first}$head'
+        '$middleWhitespaces$tail${whitespaces.last}';
   }
 
   String get withWhitespaceForEmail {
@@ -32,9 +32,9 @@ extension _StringExtension on String {
     final domain = substring(atIndex + 1, dotIndex);
     final tld = substring(dotIndex + 1);
 
-    return '${_whitespaces[0]}$local${_whitespaces[1]}'
-        '@${_whitespaces[2]}$domain${_whitespaces[3]}'
-        '.${_whitespaces[4]}$tld${_whitespaces[5]}';
+    return '${whitespaces[0]}$local${whitespaces[1]}'
+        '@${whitespaces[2]}$domain${whitespaces[3]}'
+        '.${whitespaces[4]}$tld${whitespaces[5]}';
   }
 
   String clamped(int length) => this.length >= length
@@ -47,6 +47,8 @@ abstract final class AuthTestInput {
   const AuthTestInput._();
 
   static const empty = '';
+
+  static final String whitespaces = _StringExtension.whitespaces.join();
 
   static const validEmail = 'test@example.com';
 
