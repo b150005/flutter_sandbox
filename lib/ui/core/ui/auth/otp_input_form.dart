@@ -269,7 +269,7 @@ class OTPInputForm extends HookConsumerWidget {
                     onChanged: onChanged,
                     onSelectionChanged: onSelectionChanged,
                     inputFormatters: [
-                      TextInputFormatters.digitOrWhitespace,
+                      TextInputFormatters.digitOrSpace,
                     ],
                     selectAllOnFocus: false,
                     autofillHints: const [AutofillHints.oneTimeCode],

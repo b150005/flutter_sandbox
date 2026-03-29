@@ -5,7 +5,8 @@ enum Regexes {
   uppercase(r'[A-Z]'),
   lowercase(r'[a-z]'),
   digit(r'[0-9]'),
-  digitOrWhitespace(r'[0-9 ]');
+  digitOrSpace(r'[0-9 ]')
+  ;
 
   const Regexes(this.source);
 

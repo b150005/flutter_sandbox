@@ -13,7 +13,7 @@ abstract final class TextInputFormatters {
     Regexes.nationalNumberCharacter.regExp,
   );
 
-  static final digitOrWhitespace = FilteringTextInputFormatter.allow(
-    Regexes.digitOrWhitespace.regExp,
+  static final digitOrSpace = FilteringTextInputFormatter.allow(
+    Regexes.digitOrSpace.regExp,
   );
 }
