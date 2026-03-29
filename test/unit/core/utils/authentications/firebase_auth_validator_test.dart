@@ -21,7 +21,7 @@ void main() {
 
       test('An email address with a subdomain should return null.', () {
         final result = FirebaseAuthValidator.validateEmail(
-          AuthTestInput.emailWithSubdomain,
+          AuthTestInput.subdomainEmail,
           l10n: l10n,
         );
 
@@ -32,7 +32,7 @@ void main() {
         'An email address with a minimum-length TLD should return null.',
         () {
           final result = FirebaseAuthValidator.validateEmail(
-            AuthTestInput.emailWithMinLengthTld,
+            AuthTestInput.minLengthTldEmail,
             l10n: l10n,
           );
 
@@ -69,7 +69,7 @@ void main() {
         () {
           expect(
             () => FirebaseAuthValidator.validateEmail(
-              AuthTestInput.emailWithWhitespace,
+              AuthTestInput.whitespaceEmail,
               l10n: l10n,
             ),
             throwsArgumentError,
@@ -78,11 +78,24 @@ void main() {
       );
 
       test(
+        'An email with multiple "@" symbols'
+        ' should return the invalid-format error message.',
+        () {
+          final result = FirebaseAuthValidator.validateEmail(
+            AuthTestInput.multipleAtSignEmail,
+            l10n: l10n,
+          );
+
+          expect(result, l10n.invalidEmailFormat);
+        },
+      );
+
+      test(
         'An email without on "@" symbol'
         ' should return the invalid-format error message.',
         () {
           final result = FirebaseAuthValidator.validateEmail(
-            AuthTestInput.emailWithoutAtSign,
+            AuthTestInput.noAtSignEmail,
             l10n: l10n,
           );
 
@@ -95,7 +108,7 @@ void main() {
         ' should return the invalid-format error message.',
         () {
           final result = FirebaseAuthValidator.validateEmail(
-            AuthTestInput.emailWithTooShortTld,
+            AuthTestInput.tooShortTldEmail,
             l10n: l10n,
           );
 
@@ -108,7 +121,20 @@ void main() {
         ' should return the invalid-format error message.',
         () {
           final result = FirebaseAuthValidator.validateEmail(
-            AuthTestInput.emailWithNoDotInDomain,
+            AuthTestInput.noDotInDomainEmail,
+            l10n: l10n,
+          );
+
+          expect(result, l10n.invalidEmailFormat);
+        },
+      );
+
+      test(
+        'An email with an empty local part'
+        ' should return the invalid-format error message.',
+        () {
+          final result = FirebaseAuthValidator.validateEmail(
+            AuthTestInput.emptyLocalPartEmail,
             l10n: l10n,
           );
 
@@ -125,9 +151,9 @@ void main() {
           'A password with exactly the minimum number of characters'
           ' should return true.',
           () {
-            final password = 'a' * FirebaseAuthValidator.passwordMinLength;
-
-            final result = FirebaseAuthValidator.satisfiesMinLength(password);
+            final result = FirebaseAuthValidator.satisfiesMinLength(
+              AuthTestInput.minLengthPassword,
+            );
 
             expect(result, isTrue);
           },
@@ -136,42 +162,39 @@ void main() {
         test(
           'A password longer than the minimum length should return true.',
           () {
-            final password =
-                'a' * (FirebaseAuthValidator.passwordMinLength + 1);
-
-            final result = FirebaseAuthValidator.satisfiesMinLength(password);
+            final result = FirebaseAuthValidator.satisfiesMinLength(
+              AuthTestInput.longerThanMinLengthPassword,
+            );
 
             expect(result, isTrue);
           },
         );
+      });
 
-        group('❌ Invalid Input', () {
-          test(
-            'A password one character shorter than the minimum length'
-            ' should return false.',
-            () {
-              final password =
-                  'a' * (FirebaseAuthValidator.passwordMinLength - 1);
+      group('❌ Invalid Input', () {
+        test(
+          'A password one character shorter than the minimum length'
+          ' should return false.',
+          () {
+            final result = FirebaseAuthValidator.satisfiesMinLength(
+              AuthTestInput.tooShortPassword,
+            );
 
-              final result = FirebaseAuthValidator.satisfiesMinLength(password);
+            expect(result, isFalse);
+          },
+        );
 
-              expect(result, isFalse);
-            },
-          );
+        test(
+          'A password that meets the minimum characters before trimming'
+          ' but falls short after trimming should return false.',
+          () {
+            final result = FirebaseAuthValidator.satisfiesMinLength(
+              AuthTestInput.paddedToMinLengthPassword,
+            );
 
-          test(
-            'A password that meets the minimum characters before trimming'
-            ' but falls short after trimming should return false.',
-            () {
-              final password =
-                  ' ${'a' * (FirebaseAuthValidator.passwordMinLength - 1)}';
-
-              final result = FirebaseAuthValidator.satisfiesMinLength(password);
-
-              expect(result, isFalse);
-            },
-          );
-        });
+            expect(result, isFalse);
+          },
+        );
       });
     });
 
@@ -180,9 +203,9 @@ void main() {
         test(
           'A password with exactly the maximum characters should return true.',
           () {
-            final password = 'a' * FirebaseAuthValidator.passwordMaxLength;
-
-            final result = FirebaseAuthValidator.satisfiesMaxLength(password);
+            final result = FirebaseAuthValidator.satisfiesMaxLength(
+              AuthTestInput.maxLengthPassword,
+            );
 
             expect(result, isTrue);
           },
@@ -191,10 +214,9 @@ void main() {
         test(
           'A password with shorter than the maximum length should return true.',
           () {
-            final password =
-                'a' * (FirebaseAuthValidator.passwordMaxLength - 1);
-
-            final result = FirebaseAuthValidator.satisfiesMaxLength(password);
+            final result = FirebaseAuthValidator.satisfiesMaxLength(
+              AuthTestInput.shorterThanMaxLengthPassword,
+            );
 
             expect(result, isTrue);
           },
@@ -206,10 +228,22 @@ void main() {
           'A password one character longer than the maximum length'
           ' should return false.',
           () {
-            final password =
-                'a' * (FirebaseAuthValidator.passwordMaxLength + 1);
+            final result = FirebaseAuthValidator.satisfiesMaxLength(
+              AuthTestInput.tooLongPassword,
+            );
 
-            final result = FirebaseAuthValidator.satisfiesMaxLength(password);
+            expect(result, isFalse);
+          },
+        );
+
+        test(
+          'A password one character longer than the maximum length'
+          ' that would fit within the maximum length after trimming'
+          ' should still return false.',
+          () {
+            final result = FirebaseAuthValidator.satisfiesMaxLength(
+              AuthTestInput.paddedToOverMaxLengthPassword,
+            );
 
             expect(result, isFalse);
           },
@@ -221,20 +255,26 @@ void main() {
       test(
         'A string containing an uppercase letter should return true.',
         () {
-          const password = 'aBc';
-
-          final result = FirebaseAuthValidator.hasUppercase(password);
+          final result = FirebaseAuthValidator.hasUppercase(
+            AuthTestInput.validPassword,
+          );
 
           expect(result, isTrue);
         },
       );
 
+      test('An empty string should return false.', () {
+        final result = FirebaseAuthValidator.hasUppercase(AuthTestInput.empty);
+
+        expect(result, isFalse);
+      });
+
       test(
         'A string without any uppercase letters should return false.',
         () {
-          const password = 'abc';
-
-          final result = FirebaseAuthValidator.hasUppercase(password);
+          final result = FirebaseAuthValidator.hasUppercase(
+            AuthTestInput.lowercasePassword,
+          );
 
           expect(result, isFalse);
         },
@@ -243,19 +283,25 @@ void main() {
 
     group('🔡 Lowercase', () {
       test('A string containing a lowercase letter should return true.', () {
-        const password = 'AbC';
-
-        final result = FirebaseAuthValidator.hasLowercase(password);
+        final result = FirebaseAuthValidator.hasLowercase(
+          AuthTestInput.validPassword,
+        );
 
         expect(result, isTrue);
+      });
+
+      test('An empty string should return false.', () {
+        final result = FirebaseAuthValidator.hasLowercase(AuthTestInput.empty);
+
+        expect(result, isFalse);
       });
 
       test(
         'A string without any lowercase letters should return false.',
         () {
-          const password = 'ABC';
-
-          final result = FirebaseAuthValidator.hasLowercase(password);
+          final result = FirebaseAuthValidator.hasLowercase(
+            AuthTestInput.uppercasePassword,
+          );
 
           expect(result, isFalse);
         },
@@ -264,17 +310,23 @@ void main() {
 
     group('🔢 Digit', () {
       test('A string containing a digit should return true.', () {
-        const password = '1bc';
-
-        final result = FirebaseAuthValidator.hasDigit(password);
+        final result = FirebaseAuthValidator.hasDigit(
+          AuthTestInput.validPassword,
+        );
 
         expect(result, isTrue);
       });
 
-      test('A string without any digits should return false.', () {
-        const password = 'abc';
+      test('An empty string should return false.', () {
+        final result = FirebaseAuthValidator.hasDigit(AuthTestInput.empty);
 
-        final result = FirebaseAuthValidator.hasDigit(password);
+        expect(result, isFalse);
+      });
+
+      test('A string without any digits should return false.', () {
+        final result = FirebaseAuthValidator.hasDigit(
+          AuthTestInput.noDigitPassword,
+        );
 
         expect(result, isFalse);
       });
@@ -324,7 +376,7 @@ void main() {
         () {
           expect(
             () => FirebaseAuthValidator.validatePassword(
-              AuthTestInput.passwordWithWhitespace,
+              AuthTestInput.whitespacePassword,
               l10n: l10n,
             ),
             throwsArgumentError,
@@ -346,11 +398,24 @@ void main() {
       );
 
       test(
+        'A password longer than the maximum length'
+        ' should return the non-compliant error message.',
+        () {
+          final result = FirebaseAuthValidator.validatePassword(
+            AuthTestInput.tooLongPassword,
+            l10n: l10n,
+          );
+
+          expect(result, l10n.nonCompliantPassword);
+        },
+      );
+
+      test(
         'A password without an uppercase letter'
         ' should return the non-compliant error message.',
         () {
           final result = FirebaseAuthValidator.validatePassword(
-            AuthTestInput.passwordWithoutUppercase,
+            AuthTestInput.lowercasePassword,
             l10n: l10n,
           );
 
@@ -363,7 +428,7 @@ void main() {
         ' should return the non-compliant error message.',
         () {
           final result = FirebaseAuthValidator.validatePassword(
-            AuthTestInput.passwordWithoutLowercase,
+            AuthTestInput.uppercasePassword,
             l10n: l10n,
           );
 
@@ -376,7 +441,7 @@ void main() {
         ' should return the non-compliant error message.',
         () {
           final result = FirebaseAuthValidator.validatePassword(
-            AuthTestInput.passwordWithoutDigit,
+            AuthTestInput.noDigitPassword,
             l10n: l10n,
           );
 
@@ -450,7 +515,7 @@ void main() {
             expect(
               () => FirebaseAuthValidator.validateConfirmPassword(
                 AuthTestInput.validPassword,
-                password: AuthTestInput.passwordWithWhitespace,
+                password: AuthTestInput.whitespacePassword,
                 l10n: l10n,
               ),
               throwsArgumentError,
@@ -464,7 +529,7 @@ void main() {
           () {
             expect(
               () => FirebaseAuthValidator.validateConfirmPassword(
-                AuthTestInput.passwordWithWhitespace,
+                AuthTestInput.whitespacePassword,
                 password: AuthTestInput.validPassword,
                 l10n: l10n,
               ),

@@ -36,6 +36,10 @@ extension _StringExtension on String {
         '@${_whitespaces[2]}$domain${_whitespaces[3]}'
         '.${_whitespaces[4]}$tld${_whitespaces[5]}';
   }
+
+  String clamped(int length) => this.length >= length
+      ? substring(0, length)
+      : this * (length ~/ this.length) + substring(0, length % this.length);
 }
 
 @visibleForTesting
@@ -46,36 +50,72 @@ abstract final class AuthTestInput {
 
   static const validEmail = 'test@example.com';
 
-  static const emailWithSubdomain = 'test@example.co.jp';
+  static const subdomainEmail = 'test@example.co.jp';
 
-  static const emailWithMinLengthTld = 'ex@mp.le';
+  static const minLengthTldEmail = 'ex@mp.le';
 
-  static const emailWithTooShortTld = 'test@example.c';
+  static const tooShortTldEmail = 'test@example.c';
 
-  static final String emailWithoutAtSign = validEmail.replaceAll(
+  static final String noAtSignEmail = validEmail.replaceAll(
     RegExp(r'@'),
     '',
   );
 
-  static final String emailWithNoDotInDomain = validEmail.replaceFirst(
+  static final String multipleAtSignEmail = validEmail.replaceFirst(
+    RegExp(r'@'),
+    '@@',
+  );
+
+  static final String emptyLocalPartEmail = validEmail.replaceFirst(
+    RegExp(r'^[^@]+'),
+    '',
+  );
+
+  static final String noDotInDomainEmail = validEmail.replaceFirst(
     RegExp(r'\.[^.@]+$'),
     '',
   );
 
-  static final String emailWithWhitespace = validEmail.withWhitespaceForEmail;
+  static final String whitespaceEmail = validEmail.withWhitespaceForEmail;
 
   static const validPassword = 'P@ssw0rd';
 
-  static final String passwordWithoutUppercase = validPassword.toLowerCase();
-
-  static final String passwordWithoutLowercase = validPassword.toUpperCase();
-
-  static const passwordWithoutDigit = 'P@ssword';
-
-  static final String tooShortPassword = validPassword.substring(
-    0,
+  static final String tooShortPassword = validPassword.clamped(
     FirebaseAuthValidator.passwordMinLength - 1,
   );
 
-  static final String passwordWithWhitespace = validPassword.withWhitespace;
+  static final String paddedToMinLengthPassword = tooShortPassword.padRight(
+    FirebaseAuthValidator.passwordMinLength,
+  );
+
+  static final String minLengthPassword = validPassword.clamped(
+    FirebaseAuthValidator.passwordMinLength,
+  );
+
+  static final String longerThanMinLengthPassword = validPassword.clamped(
+    FirebaseAuthValidator.passwordMinLength + 1,
+  );
+
+  static final String shorterThanMaxLengthPassword = validPassword.clamped(
+    FirebaseAuthValidator.passwordMaxLength - 1,
+  );
+
+  static final String maxLengthPassword = validPassword.clamped(
+    FirebaseAuthValidator.passwordMaxLength,
+  );
+
+  static final String paddedToOverMaxLengthPassword = maxLengthPassword
+      .padRight(FirebaseAuthValidator.passwordMaxLength + 1);
+
+  static final String tooLongPassword = validPassword.clamped(
+    FirebaseAuthValidator.passwordMaxLength + 1,
+  );
+
+  static final String lowercasePassword = validPassword.toLowerCase();
+
+  static final String uppercasePassword = validPassword.toUpperCase();
+
+  static const noDigitPassword = 'P@ssword';
+
+  static final String whitespacePassword = validPassword.withWhitespace;
 }
