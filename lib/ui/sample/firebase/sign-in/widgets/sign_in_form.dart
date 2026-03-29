@@ -61,6 +61,8 @@ class SignInForm extends HookConsumerWidget {
         (_) {
           TextInput.finishAutofillContext();
 
+          errorMessage.value = null;
+
           onSuccess();
         },
         (appException) => errorMessage.value = appException.message,
