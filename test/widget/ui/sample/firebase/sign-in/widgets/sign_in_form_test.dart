@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_sandbox/core/config/constants/widget_keys.dart';
+import 'package:flutter_sandbox/core/config/l10n/app_localizations_en.dart';
 import 'package:flutter_sandbox/data/repositories/firebase/auth/auth_repository.dart';
 import 'package:flutter_sandbox/ui/core/ui/auth/email_text_form_field.dart';
 import 'package:flutter_sandbox/ui/core/ui/auth/password_text_form_field.dart';
@@ -11,7 +12,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../../../../testing/auth/fake_auth_repository.dart';
 import '../../../../../../../testing/auth/test_user.dart';
-import '../../../../../../../testing/l10n/app_localization_utils.dart';
 import '../../../../../../../testing/widgets/test_app.dart';
 
 extension _CommonFindersExtension on CommonFinders {
@@ -106,7 +106,7 @@ extension _UserInteraction on WidgetTester {
 }
 
 void main() {
-  final l10n = AppLocalizationUtils.en;
+  final l10n = AppLocalizationsEn();
 
   group('🎨 UI Structure', () {
     testWidgets('EmailTextFormField should be rendered.', (tester) async {

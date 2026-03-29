@@ -1,11 +1,10 @@
+import 'package:flutter_sandbox/core/config/l10n/app_localizations_en.dart';
 import 'package:flutter_sandbox/core/utils/authentications/phone_number_parser.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sealed_countries/sealed_countries.dart';
 
-import '../../../../../testing/l10n/app_localization_utils.dart';
-
 void main() {
-  final l10n = AppLocalizationUtils.en;
+  final l10n = AppLocalizationsEn();
 
   group('🌐 Formatting to E.164 phone number', () {
     group('✅ Valid Input', () {

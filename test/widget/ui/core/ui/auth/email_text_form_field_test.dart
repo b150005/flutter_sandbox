@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sandbox/core/config/constants/widget_keys.dart';
+import 'package:flutter_sandbox/core/config/l10n/app_localizations_en.dart';
 import 'package:flutter_sandbox/ui/core/ui/auth/email_text_form_field.dart';
 import 'package:flutter_sandbox/ui/core/ui/label.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../../../../testing/l10n/app_localization_utils.dart';
 import '../../../../../../testing/widgets/test_app.dart';
 
 extension _CommonFindersExtension on CommonFinders {
@@ -50,7 +50,7 @@ extension _EmailTextFormFieldInteraction on WidgetTester {
 }
 
 void main() {
-  final l10n = AppLocalizationUtils.en;
+  final l10n = AppLocalizationsEn();
 
   group('🎨 UI Structure', () {
     testWidgets(

@@ -1,11 +1,10 @@
+import 'package:flutter_sandbox/core/config/l10n/app_localizations_en.dart';
 import 'package:flutter_sandbox/core/utils/authentications/firebase_auth_validator.dart';
 import 'package:flutter_sandbox/core/utils/logging/log_message.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../../../testing/l10n/app_localization_utils.dart';
-
 void main() {
-  final l10n = AppLocalizationUtils.en;
+  final l10n = AppLocalizationsEn();
 
   group('✉️ Email Validation', () {
     group('✅ Valid Input', () {
