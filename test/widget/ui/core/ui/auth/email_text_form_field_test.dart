@@ -5,6 +5,7 @@ import 'package:flutter_sandbox/ui/core/ui/auth/email_text_form_field.dart';
 import 'package:flutter_sandbox/ui/core/ui/label.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../../../../testing/fixtures/lorem_ipsum.dart';
 import '../../../../../../testing/widgets/test_app.dart';
 
 extension _CommonFindersExtension on CommonFinders {
@@ -39,6 +40,10 @@ extension _WidgetTesterExtension on WidgetTester {
 
 extension _EmailTextFormFieldInteraction on WidgetTester {
   Future<void> enter(String email) async {
+    if (email.isEmpty) {
+      await enter('a');
+    }
+
     await enterText(find.textFormField, email);
     await pump();
   }
@@ -66,11 +71,9 @@ void main() {
     testWidgets(
       'Label should display the custom text when labelText is provided.',
       (tester) async {
-        const labelText = 'Sample';
+        await tester.pumpTestApp(labelText: LoremIpsum.tiny);
 
-        await tester.pumpTestApp(labelText: labelText);
-
-        expect(tester.label.text, labelText);
+        expect(tester.label.text, LoremIpsum.tiny);
       },
     );
 
@@ -121,7 +124,6 @@ void main() {
       (tester) async {
         await tester.pumpTestApp();
 
-        await tester.enter('a');
         await tester.enter('');
 
         expect(tester.textField.decoration?.errorText, l10n.requiredField);
