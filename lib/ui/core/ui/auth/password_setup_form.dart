@@ -70,6 +70,8 @@ class PasswordSetupForm extends HookConsumerWidget {
         (_) async {
           TextInput.finishAutofillContext();
 
+          errorMessage.value = null;
+
           await onSubmit();
         },
         (appException) => errorMessage.value = appException.message,
