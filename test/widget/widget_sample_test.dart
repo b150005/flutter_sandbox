@@ -8,10 +8,17 @@ void main() {
     /// - Layout and style match design specifications.
   });
 
+  group('🔍 Input Validation', () {
+    /// - Invalid characters or patterns are rejected with appropriate feedback.
+    /// - Input length is constrained within allowed boundaries.
+    /// - Required fields prevent submission when empty.
+    /// - Boundary and edge case values are handled correctly.
+  });
+
   group('♻️ Input Formatting', () {
-    /// - Only allowed characters are accepted; others are rejected.
-    /// - Input length is constrained to the expected maximum.
-    /// - Formatted output matches the expected pattern.
+    /// - Input is automatically formatted to the expected patterns.
+    /// - Formatting is applied incrementally as the user types.
+    /// - Formatted output matches the expected display string.
   });
 
   group('👆 User Interactions', () {
