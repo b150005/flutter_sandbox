@@ -24,7 +24,7 @@ class EmailInputForm<T> extends HookConsumerWidget {
     required this.onSuccess,
   });
 
-  final Future<Result<T, AppException>> Function(String email) onSubmit;
+  final FutureOr<Result<T, AppException>> Function(String email) onSubmit;
 
   final void Function(T result) onSuccess;
 
