@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -6,7 +8,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../core/config/constants/button_size.dart';
 import '../../../../core/config/constants/spacing.dart';
 import '../../../../core/config/constants/widget_keys.dart';
-import '../../../../core/routing/router.dart';
 import '../../../../core/utils/authentications/firebase_auth_validator.dart';
 import '../../../../core/utils/extensions/string.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
@@ -18,7 +19,9 @@ import 'password_text_form_field.dart';
 
 @immutable
 class PasswordSetupForm extends HookConsumerWidget {
-  const PasswordSetupForm({super.key});
+  const PasswordSetupForm({super.key, this.onSubmit});
+
+  final Future<void> Function()? onSubmit;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -50,7 +53,7 @@ class PasswordSetupForm extends HookConsumerWidget {
 
     final isLoading = useState<bool>(false);
 
-    Future<void> onSubmit() async {
+    Future<void> submit() async {
       isLoading.value = true;
 
       if (WidgetKeys.passwordSetupForm.currentState == null ||
@@ -64,10 +67,10 @@ class PasswordSetupForm extends HookConsumerWidget {
           .updatePassword(password: passwordController.text.trim());
 
       passwordUpdateResult.when(
-        (_) {
+        (_) async {
           TextInput.finishAutofillContext();
 
-          FirebaseScreenRoute().go(context);
+          await onSubmit?.call();
         },
         (appException) => errorMessage.value = appException.message,
       );
@@ -109,14 +112,14 @@ class PasswordSetupForm extends HookConsumerWidget {
                 );
                 hasDigit.value = FirebaseAuthValidator.hasDigit(password);
               },
-              onFieldSubmitted: (_) => onSubmit(),
+              onFieldSubmitted: (_) => submit(),
               autofillHints: const [AutofillHints.newPassword],
             ),
             PasswordTextFormField(
               key: WidgetKeys.confirmPassword,
               labelText: l10n.confirmPassword,
               textInputAction: .done,
-              onFieldSubmitted: (_) => onSubmit(),
+              onFieldSubmitted: (_) => submit(),
               validator: (confirmPassword) =>
                   FirebaseAuthValidator.validateConfirmPassword(
                     confirmPassword,
@@ -152,7 +155,7 @@ class PasswordSetupForm extends HookConsumerWidget {
             ),
             FilledButton(
               key: WidgetKeys.setupPassword,
-              onPressed: isLoading.value ? null : onSubmit,
+              onPressed: isLoading.value ? null : submit,
               style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
               child: isLoading.value
                   ? context.loadingIndicator
