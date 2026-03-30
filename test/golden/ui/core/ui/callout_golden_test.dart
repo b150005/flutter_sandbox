@@ -33,8 +33,6 @@ extension _WidgetTesterExtension on WidgetTester {
   );
 }
 
-// FIXME(b150005): 生成時のゴールデンファイルのデフォルトフォントの設定
-
 void main() {
   testWidgets(
     'Callout should use the info icon for CalloutType.info.',
