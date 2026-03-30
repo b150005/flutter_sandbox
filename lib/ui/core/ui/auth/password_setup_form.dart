@@ -19,9 +19,9 @@ import 'password_text_form_field.dart';
 
 @immutable
 class PasswordSetupForm extends HookConsumerWidget {
-  const PasswordSetupForm({super.key, this.onSubmit});
+  const PasswordSetupForm({super.key, required this.onSubmit});
 
-  final Future<void> Function()? onSubmit;
+  final Future<void> Function() onSubmit;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -70,7 +70,7 @@ class PasswordSetupForm extends HookConsumerWidget {
         (_) async {
           TextInput.finishAutofillContext();
 
-          await onSubmit?.call();
+          await onSubmit();
         },
         (appException) => errorMessage.value = appException.message,
       );

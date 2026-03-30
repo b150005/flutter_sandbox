@@ -62,7 +62,9 @@ class VerifyEmailScreen extends HookConsumerWidget {
                 l10n.signInWithEmailLinkSuccessfully,
                 type: .success,
               ),
-              const PasswordSetupForm(),
+              PasswordSetupForm(
+                onSubmit: () async => FirebaseScreenRoute().go(context),
+              ),
             ],
           ),
         ),
