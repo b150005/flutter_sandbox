@@ -27,7 +27,7 @@ class ForgotPasswordScreen extends HookConsumerWidget {
           children: [
             Text(l10n.enterEmailForPasswordReset),
             EmailInputForm(
-              submitAction: (email) =>
+              onSubmit: (email) =>
                   authRepository.sendPasswordResetEmail(email: email),
               onSuccess: (_) => EmailSentScreenRoute().go(context),
             ),

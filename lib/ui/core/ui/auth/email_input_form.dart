@@ -20,11 +20,11 @@ import 'email_text_form_field.dart';
 class EmailInputForm<T> extends HookConsumerWidget {
   const EmailInputForm({
     super.key,
-    required this.submitAction,
+    required this.onSubmit,
     required this.onSuccess,
   });
 
-  final Future<Result<T, AppException>> Function(String email) submitAction;
+  final Future<Result<T, AppException>> Function(String email) onSubmit;
 
   final void Function(T result) onSuccess;
 
@@ -38,7 +38,7 @@ class EmailInputForm<T> extends HookConsumerWidget {
 
     final isLoading = useState<bool>(false);
 
-    Future<void> onSubmit() async {
+    Future<void> submit() async {
       isLoading.value = true;
 
       if (!(WidgetKeys.emailVerificationForm.currentState?.validate()).orFalse(
@@ -48,7 +48,7 @@ class EmailInputForm<T> extends HookConsumerWidget {
         return;
       }
 
-      final actionResult = await submitAction(emailController.text);
+      final actionResult = await onSubmit(emailController.text);
       actionResult.when(
         (result) {
           TextInput.finishAutofillContext();
@@ -77,11 +77,11 @@ class EmailInputForm<T> extends HookConsumerWidget {
             EmailTextFormField(
               controller: emailController,
               textInputAction: .done,
-              onFieldSubmitted: (_) => onSubmit(),
+              onFieldSubmitted: (_) => submit(),
             ),
             FilledButton(
               key: WidgetKeys.verifyEmail,
-              onPressed: isLoading.value ? null : onSubmit,
+              onPressed: isLoading.value ? null : submit,
               style: FilledButton.styleFrom(fixedSize: ButtonSize.lg.fullWidth),
               child: isLoading.value
                   ? context.loadingIndicator
