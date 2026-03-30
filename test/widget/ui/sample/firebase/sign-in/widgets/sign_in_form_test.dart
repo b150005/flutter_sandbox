@@ -15,7 +15,7 @@ import '../../../../../../../testing/auth/test_user.dart';
 import '../../../../../../../testing/widgets/test_app.dart';
 
 extension _CommonFindersExtension on CommonFinders {
-  Finder get autoFillGroup =>
+  Finder get autofillGroup =>
       ancestor(of: byType(Form), matching: byType(AutofillGroup));
 
   Finder get callout => byType(Callout);
@@ -390,7 +390,7 @@ void main() {
       (tester) async {
         await tester.pumpTestApp();
 
-        expect(find.autoFillGroup, findsOne);
+        expect(find.autofillGroup, findsOne);
       },
     );
   });
