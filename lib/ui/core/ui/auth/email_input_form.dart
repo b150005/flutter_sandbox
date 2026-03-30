@@ -53,6 +53,8 @@ class EmailInputForm<T> extends HookConsumerWidget {
         (result) {
           TextInput.finishAutofillContext();
 
+          errorMessage.value = null;
+
           onSuccess(result);
         },
         (appException) => errorMessage.value = appException.message,
