@@ -21,7 +21,7 @@ import 'password_text_form_field.dart';
 class PasswordSetupForm extends HookConsumerWidget {
   const PasswordSetupForm({super.key, required this.onSubmit});
 
-  final Future<void> Function() onSubmit;
+  final Future<void>? Function() onSubmit;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
