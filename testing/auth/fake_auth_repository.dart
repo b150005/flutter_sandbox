@@ -12,17 +12,38 @@ import 'test_user.dart';
 @visibleForTesting
 class FakeAuthRepository extends AuthRepository {
   FakeAuthRepository({
+    bool isAuthenticated = true,
     Set<TestUser> registeredUsers = const {.valid},
     Completer<void>? signInCompleter,
-  }) : _registeredUsers = registeredUsers,
+    Completer<void>? updatePasswordCompleter,
+  }) : _isAuthenticated = isAuthenticated,
+       _registeredUsers = registeredUsers,
+       _updatePasswordCompleter = updatePasswordCompleter,
        _signInCompleter = signInCompleter;
+
+  final bool _isAuthenticated;
 
   final Set<TestUser> _registeredUsers;
 
+  final Completer<void>? _updatePasswordCompleter;
   final Completer<void>? _signInCompleter;
 
   @override
   Stream<User?> build() => Stream.value(null);
+
+  @override
+  Future<Result<void, AppException>> updatePassword({
+    required String password,
+  }) async {
+    await (_updatePasswordCompleter?.future ?? Future<void>.value());
+
+    if (!_isAuthenticated) {
+      final l10n = ref.read(appLocalizationsProvider);
+      return .error(.unauthorized(l10n.authenticationFailed));
+    }
+
+    return const .success(null);
+  }
 
   @override
   Future<Result<void, AppException>> signInWithEmailAndPassword({

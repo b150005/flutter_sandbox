@@ -71,6 +71,23 @@ abstract final class WidgetKeys {
 
   static const ValueKey<String> confirmPassword = ValueKey('confirmPassword');
   static const ValueKey<String> setupPassword = ValueKey('setupPassword');
+
+  static const ValueKey<String> passwordMinLengthStatus = ValueKey(
+    'passwordMinLengthStatus',
+  );
+  static const ValueKey<String> passwordMaxLengthStatus = ValueKey(
+    'passwordMaxLengthStatus',
+  );
+  static const ValueKey<String> passwordUppercaseStatus = ValueKey(
+    'passwordUppercaseStatus',
+  );
+  static const ValueKey<String> passwordLowercaseStatus = ValueKey(
+    'passwordLowercaseStatus',
+  );
+  static const ValueKey<String> passwordDigitStatus = ValueKey(
+    'passwordDigitStatus',
+  );
+
   static const ValueKey<String> verifyEmail = ValueKey('verifyEmail');
   static const ValueKey<String> resend = ValueKey('resend');
 

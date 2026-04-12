@@ -94,6 +94,7 @@ class PasswordSetupForm extends HookConsumerWidget {
                 onDismiss: () => errorMessage.value = null,
               ),
             PasswordTextFormField(
+              key: WidgetKeys.password,
               controller: passwordController,
               labelText: l10n.password,
               textInputAction: .next,
@@ -134,22 +135,27 @@ class PasswordSetupForm extends HookConsumerWidget {
               spacing: Spacing.xs.dp,
               children: [
                 StatusIndicator(
+                  key: WidgetKeys.passwordMinLengthStatus,
                   isValid: satisfiesMinLength.value,
                   message: l10n.passwordMinLength,
                 ),
                 StatusIndicator(
+                  key: WidgetKeys.passwordMaxLengthStatus,
                   isValid: satisfiesMaxLength.value,
                   message: l10n.passwordMaxLength,
                 ),
                 StatusIndicator(
+                  key: WidgetKeys.passwordUppercaseStatus,
                   isValid: hasUppercase.value,
                   message: l10n.atLeastOneUppercaseLetter,
                 ),
                 StatusIndicator(
+                  key: WidgetKeys.passwordLowercaseStatus,
                   isValid: hasLowercase.value,
                   message: l10n.atLeastOneLowercaseLetter,
                 ),
                 StatusIndicator(
+                  key: WidgetKeys.passwordDigitStatus,
                   isValid: hasDigit.value,
                   message: l10n.atLeastOneDigit,
                 ),
