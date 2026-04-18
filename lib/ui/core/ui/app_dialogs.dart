@@ -10,6 +10,8 @@ import '../extensions/navigator_state.dart';
 import '../hooks/use_debounced_text_editing_controller.dart';
 import 'search_text_field.dart';
 
+typedef ItemKeyBuilder<T> = Key? Function(T item);
+
 typedef ItemBuilder<T> = Widget? Function(T item);
 
 abstract final class AppDialogs {
@@ -47,6 +49,7 @@ abstract final class AppDialogs {
     String? searchHintText,
     bool showCloseButton = true,
     required List<T> items,
+    ItemKeyBuilder<T>? itemKeyBuilder,
     ItemBuilder<T>? itemLeadingBuilder,
     ItemBuilder<T>? itemTitleBuilder,
     ItemBuilder<T>? itemSubtitleBuilder,
@@ -64,6 +67,7 @@ abstract final class AppDialogs {
         searchHintText: searchHintText,
         showCloseButton: showCloseButton,
         items: items,
+        itemKeyBuilder: itemKeyBuilder,
         itemLeadingBuilder: itemLeadingBuilder,
         itemTitleBuilder: itemTitleBuilder,
         itemSubtitleBuilder: itemSubtitleBuilder,
@@ -92,6 +96,7 @@ abstract final class AppDialogs {
     String? searchHintText,
     bool showCloseButton = true,
     required List<T> items,
+    ItemKeyBuilder<T>? itemKeyBuilder,
     ItemBuilder<T>? itemLeadingBuilder,
     ItemBuilder<T>? itemTitleBuilder,
     ItemBuilder<T>? itemSubtitleBuilder,
@@ -110,6 +115,7 @@ abstract final class AppDialogs {
         searchHintText: searchHintText,
         showCloseButton: showCloseButton,
         items: items,
+        itemKeyBuilder: itemKeyBuilder,
         itemLeadingBuilder: itemLeadingBuilder,
         itemTitleBuilder: itemTitleBuilder,
         itemSubtitleBuilder: itemSubtitleBuilder,
@@ -183,6 +189,7 @@ class _SearchableListDialog<T> extends HookConsumerWidget {
     super.key,
     required this.showCloseButton,
     required this.items,
+    this.itemKeyBuilder,
     this.itemLeadingBuilder,
     this.itemTitleBuilder,
     this.itemSubtitleBuilder,
@@ -202,6 +209,8 @@ class _SearchableListDialog<T> extends HookConsumerWidget {
   final bool showCloseButton;
 
   final List<T> items;
+
+  final ItemKeyBuilder<T>? itemKeyBuilder;
 
   final ItemBuilder<T>? itemLeadingBuilder;
 
@@ -330,6 +339,7 @@ class _SearchableListDialog<T> extends HookConsumerWidget {
                 final isSelected = selectedItems.value.contains(item);
 
                 return ListTile(
+                  key: itemKeyBuilder?.call(item),
                   leading: itemLeadingBuilder?.call(item),
                   title: itemTitleBuilder?.call(item),
                   subtitle: itemSubtitleBuilder?.call(item),
