@@ -558,17 +558,14 @@ void main() {
   group('📞 Phone Number Validation', () {
     group('✅ Valid Input', () {
       test(
-        'A valid phone number with a valid country code'
-        ' that differs from the current phone number should return null.',
+        'A valid phone number with a valid country code should return null.',
         () {
-          const currentPhoneNumber = '+819012345678';
           const countryCode = '+1';
           const nationalNumber = '2025551234';
 
           final result = FirebaseAuthValidator.validatePhoneNumber(
             countryCode: countryCode,
             nationalNumber: nationalNumber,
-            currentPhoneNumber: currentPhoneNumber,
             l10n: l10n,
           );
 
@@ -582,14 +579,12 @@ void main() {
         'A null country code'
         ' should return the country-code-required error message.',
         () {
-          const currentPhoneNumber = '+819012345678';
           const String? countryCode = null;
           const nationalNumber = '2025551234';
 
           final result = FirebaseAuthValidator.validatePhoneNumber(
             countryCode: countryCode,
             nationalNumber: nationalNumber,
-            currentPhoneNumber: currentPhoneNumber,
             l10n: l10n,
           );
 
@@ -601,14 +596,12 @@ void main() {
         'An empty country code'
         ' should return the country-code-required error message.',
         () {
-          const currentPhoneNumber = '+819012345678';
           const countryCode = '';
           const nationalNumber = '2025551234';
 
           final result = FirebaseAuthValidator.validatePhoneNumber(
             countryCode: countryCode,
             nationalNumber: nationalNumber,
-            currentPhoneNumber: currentPhoneNumber,
             l10n: l10n,
           );
 
@@ -620,14 +613,12 @@ void main() {
         'An empty national number'
         ' should return the national-number-required error message.',
         () {
-          const currentPhoneNumber = '+819012345678';
           const countryCode = '+1';
           const nationalNumber = '';
 
           final result = FirebaseAuthValidator.validatePhoneNumber(
             countryCode: countryCode,
             nationalNumber: nationalNumber,
-            currentPhoneNumber: currentPhoneNumber,
             l10n: l10n,
           );
 
@@ -639,14 +630,12 @@ void main() {
         'An invalid national number for the given country code'
         ' should return the invalid-format error message.',
         () {
-          const currentPhoneNumber = '+819012345678';
           const countryCode = '+1';
           const nationalNumber = '0000000000';
 
           final result = FirebaseAuthValidator.validatePhoneNumber(
             countryCode: countryCode,
             nationalNumber: nationalNumber,
-            currentPhoneNumber: currentPhoneNumber,
             l10n: l10n,
           );
 
@@ -655,38 +644,17 @@ void main() {
       );
 
       test('An unparsable country code should return an error message.', () {
-        const currentPhoneNumber = '+819012345678';
         const countryCode = '??';
         const nationalNumber = '2025551234';
 
         final result = FirebaseAuthValidator.validatePhoneNumber(
           countryCode: countryCode,
           nationalNumber: nationalNumber,
-          currentPhoneNumber: currentPhoneNumber,
           l10n: l10n,
         );
 
         expect(result, LogMessage.internalError);
       });
-
-      test(
-        'A phone number that matches the current phone number'
-        ' should return the unchanged-phone-number error message.',
-        () {
-          const currentPhoneNumber = '+819012345678';
-          const countryCode = '+81';
-          const nationalNumber = '9012345678';
-
-          final result = FirebaseAuthValidator.validatePhoneNumber(
-            countryCode: countryCode,
-            nationalNumber: nationalNumber,
-            currentPhoneNumber: currentPhoneNumber,
-            l10n: l10n,
-          );
-
-          expect(result, l10n.unchangedPhoneNumber);
-        },
-      );
     });
   });
 }

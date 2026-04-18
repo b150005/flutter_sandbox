@@ -63,12 +63,10 @@ abstract final class FirebaseAuthValidator {
   ///
   /// [countryCode] 国番号(例: +81)
   /// [nationalNumber] 国際番号(例: 9012345678)
-  /// [currentPhoneNumber] E.164 形式で表現されるユーザーの現在の電話番号(例: +819012345678)
   /// [l10n] ロケールごとのメッセージを保持するローカライゼーション
   static String? validatePhoneNumber({
     required String? countryCode,
     required String nationalNumber,
-    required String? currentPhoneNumber,
     required AppLocalizations l10n,
   }) {
     if (countryCode.isNullOrEmpty) {
@@ -89,14 +87,6 @@ abstract final class FirebaseAuthValidator {
       (phoneNumber) {
         if (!PhoneNumberUtil.instance.isValidNumber(phoneNumber)) {
           return l10n.invalidPhoneNumberFormat;
-        }
-
-        final e164InputPhoneNumber = PhoneNumberUtil.instance.format(
-          phoneNumber,
-          .e164,
-        );
-        if (currentPhoneNumber == e164InputPhoneNumber) {
-          return l10n.unchangedPhoneNumber;
         }
 
         return null;
