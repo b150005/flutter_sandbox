@@ -88,6 +88,8 @@ class CountryPicker<T> extends HookConsumerWidget {
                       await AppDialogs.showSearchableListDialog<WorldCountry>(
                         context: context,
                         items: countryNameMap.keys.toList(),
+                        itemKeyBuilder: (country) =>
+                            ValueKey<String>(country.idd.phoneCode()),
                         itemLeadingBuilder: (country) =>
                             itemLeadingBuilder?.call(
                               country,
