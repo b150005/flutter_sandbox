@@ -287,78 +287,82 @@ class _SearchableListDialog<T> extends HookConsumerWidget {
       content: SizedBox(
         width: context.windowSize.width * 0.7,
         height: context.windowSize.height * 0.7,
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Row(
-                mainAxisSize: .min,
-                spacing: Spacing.sm.dp,
-                children: [
-                  if (searchFilter != null)
-                    Flexible(
-                      child: SearchTextField(
-                        controller: controller,
-                        hintText: searchHintText,
-                      ),
+        child: Column(
+          spacing: Spacing.sm.dp,
+          children: [
+            Row(
+              mainAxisSize: .min,
+              spacing: Spacing.sm.dp,
+              children: [
+                if (searchFilter != null)
+                  Flexible(
+                    child: SearchTextField(
+                      controller: controller,
+                      hintText: searchHintText,
                     ),
-                  if (multiSelectable)
-                    TextButton(
-                      onPressed: () =>
-                          context.rootNavigator.safePop((selectedItems.value,)),
-                      child: Text(l10n.done),
-                    ),
-                  if (showCloseButton)
-                    IconButton(
-                      onPressed: () => context.rootNavigator.safePop(null),
-                      icon: const Icon(Icons.close_rounded),
-                    ),
-                ],
-              ),
+                  ),
+                if (multiSelectable)
+                  TextButton(
+                    onPressed: () =>
+                        context.rootNavigator.safePop((selectedItems.value,)),
+                    child: Text(l10n.done),
+                  ),
+                if (showCloseButton)
+                  IconButton(
+                    onPressed: () => context.rootNavigator.safePop(null),
+                    icon: const Icon(Icons.close_rounded),
+                  ),
+              ],
             ),
             if (multiSelectable && selectedItems.value.isNotEmpty)
-              SliverToBoxAdapter(
-                child: SingleChildScrollView(
-                  scrollDirection: .horizontal,
-                  child: Row(
-                    children: selectedItems.value
-                        .map(
-                          (selectedItem) => InputChip(
-                            label: Text(chipLabel!(selectedItem)),
-                            onDeleted: () =>
-                                selectedItems.value.remove(selectedItem),
-                          ),
-                        )
-                        .toList(),
-                  ),
+              SingleChildScrollView(
+                scrollDirection: .horizontal,
+                child: Row(
+                  children: selectedItems.value
+                      .map(
+                        (selectedItem) => InputChip(
+                          label: Text(chipLabel!(selectedItem)),
+                          onDeleted: () =>
+                              selectedItems.value.remove(selectedItem),
+                        ),
+                      )
+                      .toList(),
                 ),
               ),
-            SliverList.builder(
-              itemCount: filteredItems.value.length,
-              itemBuilder: (context, index) {
-                final item = filteredItems.value[index];
-                final isSelected = selectedItems.value.contains(item);
+            Expanded(
+              child: CustomScrollView(
+                slivers: [
+                  SliverList.builder(
+                    key: WidgetKeys.searchableItemSliverList,
+                    itemCount: filteredItems.value.length,
+                    itemBuilder: (context, index) {
+                      final item = filteredItems.value[index];
+                      final isSelected = selectedItems.value.contains(item);
 
-                return ListTile(
-                  key: itemKeyBuilder?.call(item),
-                  leading: itemLeadingBuilder?.call(item),
-                  title: itemTitleBuilder?.call(item),
-                  subtitle: itemSubtitleBuilder?.call(item),
-                  trailing: Row(
-                    mainAxisSize: .min,
-                    spacing: Spacing.sm.dp,
-                    children: [
-                      ?itemTrailingBuilder?.call(item),
-                      if (multiSelectable)
-                        Icon(
-                          isSelected
-                              ? Icons.check_circle_rounded
-                              : Icons.circle_outlined,
+                      return ListTile(
+                        key: itemKeyBuilder?.call(item),
+                        leading: itemLeadingBuilder?.call(item),
+                        title: itemTitleBuilder?.call(item),
+                        subtitle: itemSubtitleBuilder?.call(item),
+                        trailing: Row(
+                          mainAxisSize: .min,
+                          spacing: Spacing.sm.dp,
+                          children: [
+                            ?itemTrailingBuilder?.call(item),
+                            if (multiSelectable)
+                              Icon(
+                                isSelected
+                                    ? Icons.check_circle_rounded
+                                    : Icons.circle_outlined,
+                              ),
+                          ],
                         ),
-                    ],
+                        onTap: () => onItemTapped(item),
+                      );
+                    },
                   ),
-                  onTap: () => onItemTapped(item),
-                );
-              },
+                ],
+              ),
             ),
           ],
         ),
