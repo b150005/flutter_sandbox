@@ -45,7 +45,7 @@ abstract final class WidgetKeys {
   );
 
   static const ValueKey<String> searchableItemSliverList = ValueKey(
-    'searchables',
+    'searchableItemSliverList',
   );
 
   static const ValueKey<String> countryCodePicker = ValueKey(
