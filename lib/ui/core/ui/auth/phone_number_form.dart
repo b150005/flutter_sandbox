@@ -8,7 +8,7 @@ import '../../../../core/config/constants/spacing.dart';
 import '../../../../core/config/constants/text_input_formatters.dart';
 import '../../../../core/config/constants/widget_keys.dart';
 import '../../../../core/utils/authentications/firebase_auth_validator.dart';
-import '../../../../core/utils/authentications/phone_number_parser.dart';
+import '../../../../core/utils/authentications/phone_number_generator.dart';
 import '../../../../core/utils/extensions/string.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../domain/models/phone_number.dart';
@@ -23,11 +23,10 @@ class PhoneNumberForm extends HookConsumerWidget {
     super.key,
     this.formKey,
     this.labelText,
-    required this.phoneNumber,
+    this.initialValue = const PhoneNumber(),
     this.textInputAction,
     this.onChanged,
     this.onSubmitted,
-    required this.currentPhoneNumber,
     this.enabled = true,
   });
 
@@ -35,15 +34,13 @@ class PhoneNumberForm extends HookConsumerWidget {
 
   final String? labelText;
 
-  final PhoneNumber phoneNumber;
+  final PhoneNumber initialValue;
 
   final TextInputAction? textInputAction;
 
   final ValueChanged<PhoneNumber>? onChanged;
 
   final VoidCallback? onSubmitted;
-
-  final String? currentPhoneNumber;
 
   final bool enabled;
 
@@ -54,9 +51,10 @@ class PhoneNumberForm extends HookConsumerWidget {
     final stateRef = useRef<FormFieldState<PhoneNumber>?>(null);
 
     final nationalNumberManager = useFlushableDebouncedTextEditingController(
-      text: phoneNumber.nationalNumber,
+      text: initialValue.nationalNumber,
       onDebounced: (nationalNumber) {
         final state = stateRef.value;
+
         if (state == null || state.value == null) {
           return;
         }
@@ -68,13 +66,6 @@ class PhoneNumberForm extends HookConsumerWidget {
       },
     );
 
-    final exampleNationalNumber = useMemoized(
-      () => PhoneNumberParser.examplePhoneNumber(
-        countryCode: phoneNumber.countryCode,
-      ).nationalNumber.toString(),
-      [phoneNumber.countryCode],
-    );
-
     return Form(
       key: formKey,
       child: Label(
@@ -83,15 +74,22 @@ class PhoneNumberForm extends HookConsumerWidget {
           builder: (state) {
             stateRef.value = state;
 
+            final currentValue = state.value!;
+
             final outlineColor = state.hasError
                 ? context.colorScheme.error
                 : context.colorScheme.outline;
+
+            final exampleNationalNumber = PhoneNumberGenerator.example(
+              countryCode: currentValue.countryCode,
+            ).nationalNumber.toString();
 
             return Column(
               mainAxisSize: .min,
               crossAxisAlignment: .start,
               children: [
                 DecoratedBox(
+                  key: WidgetKeys.outlineBox,
                   decoration: context.outlinedBoxDecoration(
                     borderColor: outlineColor,
                   ),
@@ -106,11 +104,11 @@ class PhoneNumberForm extends HookConsumerWidget {
                           Row(
                             mainAxisSize: .min,
                             children: [
-                              _CountryCodePicker(
+                              CountryCodePicker(
                                 key: WidgetKeys.countryCodePicker,
-                                initialCountryCode: phoneNumber.countryCode,
+                                initialCountryCode: initialValue.countryCode,
                                 onChanged: (countryCode) {
-                                  final newValue = state.value!.copyWith(
+                                  final newValue = currentValue.copyWith(
                                     countryCode: countryCode,
                                   );
 
@@ -137,9 +135,12 @@ class PhoneNumberForm extends HookConsumerWidget {
                                 border: .none,
                                 contentPadding: .all(Spacing.xs.dp),
                                 prefixIcon:
-                                    phoneNumber.countryCode.isNotNullAndNotEmpty
+                                    currentValue
+                                        .countryCode
+                                        .isNotNullAndNotEmpty
                                     ? Text(
-                                        phoneNumber.countryCode!,
+                                        key: WidgetKeys.countryCodeText,
+                                        currentValue.countryCode!,
                                         style: context.textTheme.titleMedium,
                                       )
                                     : null,
@@ -169,6 +170,7 @@ class PhoneNumberForm extends HookConsumerWidget {
                 ),
                 if (state.hasError)
                   Text(
+                    key: WidgetKeys.errorText,
                     state.errorText!,
                     style: context.textTheme.labelSmall?.copyWith(
                       color: outlineColor,
@@ -181,20 +183,20 @@ class PhoneNumberForm extends HookConsumerWidget {
             return FirebaseAuthValidator.validatePhoneNumber(
               countryCode: phoneNumber!.countryCode,
               nationalNumber: phoneNumber.nationalNumber,
-              currentPhoneNumber: currentPhoneNumber,
               l10n: l10n,
             );
           },
-          initialValue: phoneNumber,
+          initialValue: initialValue,
         ),
       ),
     );
   }
 }
 
+@visibleForTesting
 @immutable
-class _CountryCodePicker extends HookConsumerWidget {
-  const _CountryCodePicker({
+class CountryCodePicker extends HookConsumerWidget {
+  const CountryCodePicker({
     required super.key,
     required this.initialCountryCode,
     required this.onChanged,

@@ -55,14 +55,15 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
       [currentUser?.phoneNumber],
     );
 
-    final phoneNumber = useState<PhoneNumber>(currentPhoneNumber);
+    final phoneNumber = useRef<PhoneNumber>(currentPhoneNumber);
 
     Future<void> sendVerificationCode() async {
       isLoading.value = true;
 
       if (!(formKey.currentState?.validate()).orFalse(
-        objectName: 'WidgetKeys.phoneNumberEditForm.currentState',
-      )) {
+            objectName: 'WidgetKeys.phoneNumberEditForm.currentState',
+          ) ||
+          phoneNumber.value == currentPhoneNumber) {
         isLoading.value = false;
 
         return;
@@ -144,10 +145,9 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
             ),
             PhoneNumberForm(
               formKey: formKey,
-              phoneNumber: phoneNumber.value,
+              initialValue: phoneNumber.value,
               onChanged: (number) => phoneNumber.value = number,
               onSubmitted: sendVerificationCode,
-              currentPhoneNumber: currentUser?.phoneNumber,
               enabled: !isLoading.value,
             ),
           ],
