@@ -135,6 +135,10 @@ abstract final class AuthTestInput {
         countryCode: usaCountryCode,
       );
 
+  static const PhoneNumber emptyCountryCodePhoneNumber = PhoneNumber(
+    countryCode: '',
+  );
+
   static final PhoneNumber validUsaPhoneNumber = PhoneNumber(
     countryCode: usaCountryCode,
     nationalNumber: _validUsaPhoneNumber.nationalNumber.toString(),
