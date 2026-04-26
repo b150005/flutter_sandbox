@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_sandbox/core/config/constants/scroll_alignment.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'test_flutter_view.dart';
@@ -37,6 +39,17 @@ extension WidgetTesterExtension on WidgetTester {
     if (withShift) {
       await sendKeyUpEvent(.shift);
     }
+    await pump();
+  }
+
+  Future<void> scrollInto(
+    FinderBase<Element> finder,
+    double delta, {
+    FinderBase<Element>? scrollable,
+    double alignment = ScrollAlignment.center,
+  }) async {
+    await scrollUntilVisible(finder, delta, scrollable: scrollable);
+    await Scrollable.ensureVisible(element(finder), alignment: alignment);
     await pump();
   }
 }
