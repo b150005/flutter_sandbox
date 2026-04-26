@@ -44,12 +44,21 @@ abstract final class WidgetKeys {
     'unlinkPhoneNumberConfirmationDialog',
   );
 
+  static const ValueKey<String> searchableItemSliverList = ValueKey(
+    'searchables',
+  );
+
   static const ValueKey<String> countryCodePicker = ValueKey(
     'countryCodePicker',
   );
   static const ValueKey<String> countryPicker = ValueKey(
     'countryPicker',
   );
+  static const ValueKey<String> countryCodeText = ValueKey('countryCode');
+
+  static const ValueKey<String> outlineBox = ValueKey('outlineBox');
+
+  static const ValueKey<String> errorText = ValueKey('errorText');
 
   static const ValueKey<String> back = ValueKey('back');
   static const ValueKey<String> dismiss = ValueKey('dismiss');
