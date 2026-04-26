@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+import '../../../core/config/constants/durations.dart';
+
 @immutable
 class DebouncedTextFieldManager {
   const DebouncedTextFieldManager({
@@ -17,7 +19,7 @@ DebouncedTextFieldManager useFlushableDebouncedTextEditingController({
   String? text,
   List<Object?>? keys,
   ValueChanged<String>? onDebounced,
-  Duration timeout = const Duration(milliseconds: 300),
+  Duration timeout = kDefaultDebounceTimeout,
 }) {
   final controller = useTextEditingController(text: text, keys: keys);
   final currentText = useListenableSelector(controller, () => controller.text);
