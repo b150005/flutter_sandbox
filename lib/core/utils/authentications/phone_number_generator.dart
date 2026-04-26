@@ -1,14 +1,14 @@
 import 'package:dlibphonenumber/dlibphonenumber.dart';
 
 import '../extensions/nullable.dart';
-import 'phone_number_parser.dart';
+import 'phone_number_resolver.dart';
 
 abstract final class PhoneNumberGenerator {
   const PhoneNumberGenerator._();
 
   static PhoneNumber example({String? countryCode}) => PhoneNumberUtil.instance
       .getExampleNumberForType(
-        regionCode: PhoneNumberParser.regionCodeFromCountryCode(
+        regionCode: PhoneNumberResolver.regionCodeFromCountryCode(
           countryCode,
         ),
         type: PhoneNumberType.mobile,

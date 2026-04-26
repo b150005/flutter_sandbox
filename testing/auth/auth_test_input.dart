@@ -1,5 +1,9 @@
+import 'package:dlibphonenumber/dlibphonenumber.dart' as dlib;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_sandbox/core/utils/authentications/firebase_auth_validator.dart';
+import 'package:flutter_sandbox/core/utils/authentications/phone_number_generator.dart';
+import 'package:flutter_sandbox/domain/models/phone_number.dart';
+import 'package:sealed_countries/sealed_countries.dart';
 
 extension _StringExtension on String {
   static const whitespaces = [
@@ -120,4 +124,27 @@ abstract final class AuthTestInput {
   static const noDigitPassword = 'P@ssword';
 
   static final String whitespacePassword = validPassword.withWhitespace;
+
+  static final String usaCountryCode = const WorldCountry.usa().idd.phoneCode();
+
+  static final String usaNationalNumber = _validUsaPhoneNumber.nationalNumber
+      .toString();
+
+  static final dlib.PhoneNumber _validUsaPhoneNumber =
+      PhoneNumberGenerator.example(
+        countryCode: usaCountryCode,
+      );
+
+  static final PhoneNumber validUsaPhoneNumber = PhoneNumber(
+    countryCode: usaCountryCode,
+    nationalNumber: _validUsaPhoneNumber.nationalNumber.toString(),
+  );
+
+  static final usaCountryCodeOnlyPhoneNumber = PhoneNumber(
+    countryCode: usaCountryCode,
+  );
+
+  static final usaNationalNumberOnlyPhoneNumber = PhoneNumber(
+    nationalNumber: _validUsaPhoneNumber.nationalNumber.toString(),
+  );
 }

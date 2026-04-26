@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../core/config/env/env.dart';
 import '../../../../core/routing/router.dart';
-import '../../../../core/utils/authentications/phone_number_parser.dart';
+import '../../../../core/utils/authentications/phone_number_formatter.dart';
 import '../../../../core/utils/exceptions/app_exception.dart';
 import '../../../../core/utils/exceptions/exception_handler.dart';
 import '../../../../core/utils/extensions/string.dart';
@@ -221,7 +221,7 @@ class AuthRepository extends _$AuthRepository {
 
     return auth.verifyPhoneNumber(
       phoneNumber:
-          PhoneNumberParser.formatToE164(
+          PhoneNumberFormatter.formatToE164(
             countryCode: countryCode,
             nationalNumber: nationalNumber,
             l10n: l10n,

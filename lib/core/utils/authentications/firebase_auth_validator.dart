@@ -77,7 +77,7 @@ abstract final class FirebaseAuthValidator {
       return l10n.nationalNumberRequired;
     }
 
-    final parseResult = PhoneNumberParser.format(
+    final parseResult = PhoneNumberParser.parseFromParts(
       countryCode: countryCode!,
       nationalNumber: nationalNumber,
       l10n: l10n,

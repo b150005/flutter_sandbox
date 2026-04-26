@@ -4,10 +4,8 @@ import 'package:multiple_result/multiple_result.dart';
 import '../../config/l10n/app_localizations.dart';
 import '../exceptions/app_exception.dart';
 import '../exceptions/exception_handler.dart';
-import '../extensions/nullable.dart';
-import '../extensions/string.dart';
 
-abstract final class PhoneNumberParser {
+abstract class PhoneNumberParser {
   const PhoneNumberParser._();
 
   static Result<PhoneNumber, AppException> parse({
@@ -18,61 +16,9 @@ abstract final class PhoneNumberParser {
     l10n: l10n,
   );
 
-  static Result<PhoneNumber, AppException> format({
+  static Result<PhoneNumber, AppException> parseFromParts({
     required String countryCode,
     required String nationalNumber,
     required AppLocalizations l10n,
   }) => parse(phoneNumber: countryCode + nationalNumber, l10n: l10n);
-
-  static Result<String, AppException> formatToE164({
-    required String countryCode,
-    required String nationalNumber,
-    required AppLocalizations l10n,
-  }) {
-    final parseResult = format(
-      countryCode: countryCode,
-      nationalNumber: nationalNumber,
-      l10n: l10n,
-    );
-
-    return parseResult.when(
-      (phoneNumber) => .success(
-        PhoneNumberUtil.instance.format(phoneNumber, .e164),
-      ),
-      Result.error,
-    );
-  }
-
-  static String? regionCodeFromCountryCode(String? countryCode) {
-    if (countryCode.isNullOrEmpty) {
-      return null;
-    }
-
-    final parsed = int.tryParse(
-      countryCode!.startsWith('+') ? countryCode.substring(1) : countryCode,
-    );
-    if (parsed == null) {
-      return null;
-    }
-
-    return PhoneNumberUtil.instance.getRegionCodeForCountryCode(parsed);
-  }
-
-  static PhoneNumber examplePhoneNumber({String? countryCode}) =>
-      PhoneNumberUtil.instance
-          .getExampleNumberForType(
-            regionCode: PhoneNumberParser.regionCodeFromCountryCode(
-              countryCode,
-            ),
-            type: PhoneNumberType.mobile,
-          )
-          .orElse(
-            PhoneNumberUtil.instance.getExampleNumberForType(
-              type: PhoneNumberType.mobile,
-            )!,
-            objectName:
-                'PhoneNumberUtil.instance.getExampleNumberForType('
-                'regionCode: $countryCode, '
-                'type: PhoneNumberType.mobile)',
-          );
 }
