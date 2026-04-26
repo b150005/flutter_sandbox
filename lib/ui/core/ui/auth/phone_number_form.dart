@@ -24,7 +24,7 @@ class PhoneNumberForm extends HookConsumerWidget {
     this.formKey,
     this.labelText,
     this.initialValue = const PhoneNumber(),
-    this.textInputAction,
+    this.textInputAction = .done,
     this.onChanged,
     this.onSubmitted,
     this.enabled = true,
@@ -36,7 +36,7 @@ class PhoneNumberForm extends HookConsumerWidget {
 
   final PhoneNumber initialValue;
 
-  final TextInputAction? textInputAction;
+  final TextInputAction textInputAction;
 
   final ValueChanged<PhoneNumber>? onChanged;
 
@@ -147,7 +147,7 @@ class PhoneNumberForm extends HookConsumerWidget {
                                 prefixIconConstraints: const BoxConstraints(),
                               ),
                               keyboardType: .phone,
-                              textInputAction: textInputAction ?? .done,
+                              textInputAction: textInputAction,
                               autocorrect: false,
                               onSubmitted: (_) {
                                 nationalNumberManager.flush();
