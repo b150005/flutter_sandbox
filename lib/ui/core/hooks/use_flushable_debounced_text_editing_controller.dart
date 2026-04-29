@@ -23,10 +23,7 @@ DebouncedTextFieldManager useFlushableDebouncedTextEditingController({
 }) {
   final controller = useTextEditingController(text: text, keys: keys);
   final currentText = useListenableSelector(controller, () => controller.text);
-  final debouncedText = useDebounced(
-    currentText,
-    timeout,
-  );
+  final debouncedText = useDebounced(currentText, timeout);
 
   final skipNextDebounceRef = useRef<bool>(false);
 
