@@ -17,12 +17,10 @@ extension _CommonFindersExtension on CommonFinders {
   );
 }
 
-void _noOp(String _) {}
-
 extension _WidgetTesterExtension on WidgetTester {
   Future<void> pumpTestApp({
     int length = 4,
-    ValueChanged<String> onCompleted = _noOp,
+    ValueChanged<String>? onCompleted,
     Widget? prev,
     Widget? next,
   }) => pumpWidget(
@@ -30,7 +28,7 @@ extension _WidgetTesterExtension on WidgetTester {
       child: Column(
         children: [
           ?prev,
-          OTPInputForm(length: length, onCompleted: onCompleted),
+          OTPInputForm(length: length, onCompleted: onCompleted ?? (_) {}),
           ?next,
         ],
       ),

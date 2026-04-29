@@ -45,13 +45,11 @@ extension _CommonFindersExtension on CommonFinders {
   );
 }
 
-Future<void>? _noOp() => null;
-
 extension _WidgetTesterExtension on WidgetTester {
   Future<void> pumpTestApp({
     bool isAuthenticated = true,
     Completer<void>? updatePasswordCompleter,
-    Future<void>? Function() onSubmit = _noOp,
+    Future<void>? Function()? onSubmit,
   }) => pumpWidget(
     TestApp(
       overrides: [
@@ -62,7 +60,7 @@ extension _WidgetTesterExtension on WidgetTester {
           ),
         ),
       ],
-      child: PasswordSetupForm(onSubmit: onSubmit),
+      child: PasswordSetupForm(onSubmit: onSubmit ?? () => null),
     ),
   );
 

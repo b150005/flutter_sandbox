@@ -33,19 +33,16 @@ extension _CommonFindersExtension on CommonFinders {
   );
 }
 
-Future<Result<void, AppException>> _noOpOnSubmit(String email) async =>
-    const .success(null);
-
-void _noOpOnSuccess(_) {}
-
 extension _WidgetTesterExtension on WidgetTester {
   Future<void> pumpTestApp({
-    FutureOr<Result<void, AppException>> Function(String email) onSubmit =
-        _noOpOnSubmit,
-    void Function(void) onSuccess = _noOpOnSuccess,
+    FutureOr<Result<void, AppException>> Function(String email)? onSubmit,
+    void Function(void)? onSuccess,
   }) => pumpWidget(
     TestApp(
-      child: EmailInputForm(onSubmit: onSubmit, onSuccess: onSuccess),
+      child: EmailInputForm(
+        onSubmit: onSubmit ?? (_) => const .success(null),
+        onSuccess: onSuccess ?? (_) {},
+      ),
     ),
   );
 

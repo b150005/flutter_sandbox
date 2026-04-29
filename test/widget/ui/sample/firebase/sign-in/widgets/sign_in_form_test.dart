@@ -40,13 +40,11 @@ extension _CommonFindersExtension on CommonFinders {
   );
 }
 
-void _noOp() {}
-
 extension _WidgetTesterExtension on WidgetTester {
   Future<void> pumpTestApp({
     Completer<void>? signInCompleter,
-    VoidCallback onSuccess = _noOp,
-    VoidCallback onForgotPasswordPressed = _noOp,
+    VoidCallback? onSuccess,
+    VoidCallback? onForgotPasswordPressed,
   }) => pumpWidget(
     TestApp(
       overrides: [
@@ -55,8 +53,8 @@ extension _WidgetTesterExtension on WidgetTester {
         ),
       ],
       child: SignInForm(
-        onSuccess: onSuccess,
-        onForgotPasswordPressed: onForgotPasswordPressed,
+        onSuccess: onSuccess ?? () {},
+        onForgotPasswordPressed: onForgotPasswordPressed ?? () {},
       ),
     ),
   );
