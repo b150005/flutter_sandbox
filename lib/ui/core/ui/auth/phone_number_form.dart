@@ -9,6 +9,7 @@ import '../../../../core/config/constants/text_input_formatters.dart';
 import '../../../../core/config/constants/widget_keys.dart';
 import '../../../../core/utils/authentications/firebase_auth_validator.dart';
 import '../../../../core/utils/authentications/phone_number_generator.dart';
+import '../../../../core/utils/authentications/phone_number_parser.dart';
 import '../../../../core/utils/extensions/string.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../domain/models/phone_number.dart';
@@ -40,7 +41,7 @@ class PhoneNumberForm extends HookConsumerWidget {
 
   final ValueChanged<PhoneNumber>? onChanged;
 
-  final VoidCallback? onSubmitted;
+  final ValueChanged<PhoneNumber>? onSubmitted;
 
   final bool enabled;
 
@@ -53,6 +54,10 @@ class PhoneNumberForm extends HookConsumerWidget {
     final nationalNumberManager = useFlushableDebouncedTextEditingController(
       text: initialValue.nationalNumber,
       onDebounced: (nationalNumber) {
+        if (nationalNumber == stateRef.value?.value?.nationalNumber) {
+          return;
+        }
+
         final state = stateRef.value;
 
         if (state == null || state.value == null) {
@@ -112,8 +117,8 @@ class PhoneNumberForm extends HookConsumerWidget {
                                     countryCode: countryCode,
                                   );
 
-                                  onChanged?.call(newValue);
                                   state.didChange(newValue);
+                                  onChanged?.call(newValue);
                                 },
                                 enabled: enabled,
                               ),
@@ -152,7 +157,11 @@ class PhoneNumberForm extends HookConsumerWidget {
                               onSubmitted: (_) {
                                 nationalNumberManager.flush();
 
-                                onSubmitted?.call();
+                                if (!state.validate()) {
+                                  return;
+                                }
+
+                                onSubmitted?.call(state.value!);
                               },
                               inputFormatters: [
                                 TextInputFormatters.nationalNumber,

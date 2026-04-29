@@ -6,7 +6,6 @@ import '../../../../../core/config/constants/spacing.dart';
 import '../../../../../core/config/constants/widget_keys.dart';
 import '../../../../../core/routing/router.dart';
 import '../../../../../core/utils/exceptions/app_exception.dart';
-import '../../../../../core/utils/extensions/bool.dart';
 import '../../../../../core/utils/extensions/nullable.dart';
 import '../../../../../core/utils/extensions/string.dart';
 import '../../../../../core/utils/extensions/user.dart';
@@ -57,21 +56,12 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
 
     final phoneNumber = useRef<PhoneNumber>(currentPhoneNumber);
 
-    Future<void> sendVerificationCode() async {
+    Future<void> sendVerificationCode(PhoneNumber phoneNumber) async {
       isLoading.value = true;
 
-      if (!(formKey.currentState?.validate()).orFalse(
-            objectName: 'WidgetKeys.phoneNumberEditForm.currentState',
-          ) ||
-          phoneNumber.value == currentPhoneNumber) {
-        isLoading.value = false;
-
-        return;
-      }
-
       final verificationResult = await authRepository.verifyPhoneNumber(
-        countryCode: phoneNumber.value.countryCode!,
-        nationalNumber: phoneNumber.value.nationalNumber,
+        countryCode: phoneNumber.countryCode!,
+        nationalNumber: phoneNumber.nationalNumber,
         onPhoneNumberUpdated: (phoneNumberUpdateResult) =>
             phoneNumberUpdateResult.when(
               (_) {
@@ -94,7 +84,7 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
           OTPVerificationScreenRoute(
             verificationId: verificationId,
             forceResendingToken: forceResendingToken,
-            $extra: phoneNumber.value,
+            $extra: phoneNumber,
           ).push<void>(context);
         },
       );
@@ -145,7 +135,7 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
             ),
             PhoneNumberForm(
               formKey: formKey,
-              initialValue: phoneNumber.value,
+              initialValue: currentPhoneNumber,
               onChanged: (number) => phoneNumber.value = number,
               onSubmitted: sendVerificationCode,
               enabled: !isLoading.value,
@@ -170,7 +160,9 @@ class PhoneNumberEditDialog extends HookConsumerWidget {
             child: Text(l10n.cancel),
           ),
           FilledButton(
-            onPressed: isLoading.value ? null : sendVerificationCode,
+            onPressed: isLoading.value
+                ? null
+                : () => sendVerificationCode(phoneNumber.value),
             child: isLoading.value
                 ? context.loadingIndicator
                 : Text(l10n.sendVerificationCode),
