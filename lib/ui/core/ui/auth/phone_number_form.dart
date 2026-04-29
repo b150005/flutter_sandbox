@@ -9,7 +9,6 @@ import '../../../../core/config/constants/text_input_formatters.dart';
 import '../../../../core/config/constants/widget_keys.dart';
 import '../../../../core/utils/authentications/firebase_auth_validator.dart';
 import '../../../../core/utils/authentications/phone_number_generator.dart';
-import '../../../../core/utils/authentications/phone_number_parser.dart';
 import '../../../../core/utils/extensions/string.dart';
 import '../../../../core/utils/l10n/app_localizations.dart';
 import '../../../../domain/models/phone_number.dart';
