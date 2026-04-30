@@ -82,14 +82,16 @@ class CountryPicker<T> extends HookConsumerWidget {
       mainAxisSize: .min,
       children: [
         InkWell(
+          key: WidgetKeys.countryPickerTrigger,
           onTap: enabled
               ? () async {
                   final selectedCountry =
                       await AppDialogs.showSearchableListDialog<WorldCountry>(
+                        key: WidgetKeys.countryPickerDialog,
                         context: context,
                         items: countryNameMap.keys.toList(),
                         itemKeyBuilder: (country) =>
-                            ValueKey<String>(country.idd.phoneCode()),
+                            ValueKey<String>(country.code),
                         itemLeadingBuilder: (country) =>
                             itemLeadingBuilder?.call(
                               country,
@@ -134,6 +136,7 @@ class CountryPicker<T> extends HookConsumerWidget {
         if (country.value != null)
           clearButtonBuilder?.call(clearSelection) ??
               IconButton(
+                key: WidgetKeys.clear,
                 onPressed: enabled ? clearSelection : null,
                 icon: Icon(
                   Icons.clear_rounded,
