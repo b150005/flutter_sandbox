@@ -96,8 +96,8 @@ extension _WidgetTesterExtension on WidgetTester {
 }
 
 extension _UserInteraction on WidgetTester {
-  Future<void> select(String countryCode) async {
-    final itemFinder = find.byKey(ValueKey<String>(countryCode));
+  Future<void> select(WorldCountry country) async {
+    final itemFinder = find.byKey(ValueKey<String>(country.code));
 
     await tap(find.countryCodePicker);
     await pump();
@@ -106,7 +106,7 @@ extension _UserInteraction on WidgetTester {
       200,
       scrollable: find.countryCodePickerScrollable,
     );
-    await tap(find.byKey(ValueKey<String>(countryCode)));
+    await tap(itemFinder);
     await pump();
   }
 
