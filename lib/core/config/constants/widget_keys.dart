@@ -54,6 +54,12 @@ abstract final class WidgetKeys {
   static const ValueKey<String> countryPicker = ValueKey(
     'countryPicker',
   );
+  static const ValueKey<String> countryPickerTrigger = ValueKey(
+    'countryPickerTrigger',
+  );
+  static const ValueKey<String> countryPickerDialog = ValueKey(
+    'countryPickerDialog',
+  );
   static const ValueKey<String> countryCodeText = ValueKey('countryCode');
 
   static const ValueKey<String> outlineBox = ValueKey('outlineBox');
@@ -61,6 +67,7 @@ abstract final class WidgetKeys {
   static const ValueKey<String> errorText = ValueKey('errorText');
 
   static const ValueKey<String> back = ValueKey('back');
+  static const ValueKey<String> clear = ValueKey('clear');
   static const ValueKey<String> dismiss = ValueKey('dismiss');
   static const ValueKey<String> save = ValueKey('save');
 
