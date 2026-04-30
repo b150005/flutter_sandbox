@@ -309,6 +309,7 @@ class _SearchableListDialog<T> extends HookConsumerWidget {
                   ),
                 if (showCloseButton)
                   IconButton(
+                    key: WidgetKeys.dismiss,
                     onPressed: () => context.rootNavigator.safePop(null),
                     icon: const Icon(Icons.close_rounded),
                   ),
